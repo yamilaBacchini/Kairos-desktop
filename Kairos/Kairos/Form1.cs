@@ -15,10 +15,21 @@ namespace Kairos
         public Form1()
         {
             InitializeComponent();
+
+
             using (var db = new EventoContexto())
             {
                 db.Database.EnsureCreated();
+
+                var resultado = (from datos in db.Origenes select new { datos.nombreOrigen }).ToList();
+
+                foreach (var item in resultado)
+                {
+                    lbOrigenes.Items.Add(item.nombreOrigen);
+                }
+             
             }
+
         }
 
         private void btnImportar_Click(object sender, EventArgs e)
@@ -29,5 +40,7 @@ namespace Kairos
                 db.SaveChanges();
             }
         }
+
+
     }
 }
