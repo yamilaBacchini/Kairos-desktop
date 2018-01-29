@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace Kairos
 {
-    public partial class Form1 : Form
+    public partial class frmPantallaPrincipal : Form
     {
-        public Form1()
+
+        public frmPantallaPrincipal()
         {
             InitializeComponent();
-
 
             using (var db = new EventoContexto())
             {
@@ -25,22 +25,23 @@ namespace Kairos
 
                 foreach (var item in resultado)
                 {
-                    lbOrigenes.Items.Add(item.nombreOrigen);
+                    lbProyectosRecientes.Items.Add(item.nombreOrigen);
                 }
-             
-            }
 
+            }
         }
 
-        private void btnImportar_Click(object sender, EventArgs e)
+        private void btnProcesarDatos_Click(object sender, EventArgs e)
         {
-            using (var db = new EventoContexto())
+            if (lbProyectosRecientes.SelectedIndex == -1)
             {
-                db.Origenes.Add(new Entidades.Origen { fechaCreacion = DateTime.Now , nombreOrigen= "test", activo = true });
-                db.SaveChanges();
+                MessageBox.Show("Seleccione un proyecto de la lista", "Falta selección", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                frmProcesamiento frm = new frmProcesamiento(Convert.ToString(lbProyectosRecientes.SelectedItem));
+                frm.ShowDialog();
             }
         }
-
-
     }
 }

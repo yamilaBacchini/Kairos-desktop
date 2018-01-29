@@ -131,11 +131,23 @@
   <ItemGroup>
     <Compile Include="Entidades\Evento.cs" />
     <Compile Include="EventoContexto.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="frmAgregarRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmAgregarRegistro.Designer.cs">
+      <DependentUpon>frmAgregarRegistro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPantallaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPantallaPrincipal.Designer.cs">
+      <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProcesamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProcesamiento.Designer.cs">
+      <DependentUpon>frmProcesamiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Origen.cs" />
     <Compile Include="Migrations\20180125003607_MyFirstMigration.cs" />
@@ -145,8 +157,14 @@
     <Compile Include="Migrations\EventoContextoModelSnapshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmAgregarRegistro.resx">
+      <DependentUpon>frmAgregarRegistro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPantallaPrincipal.resx">
+      <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProcesamiento.resx">
+      <DependentUpon>frmProcesamiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
