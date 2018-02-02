@@ -27,6 +27,7 @@ namespace Kairos
                                     join o in db.Origenes
                                     on e.idOrigen equals o.Id
                                     where e.activo==true && o.nombreOrigen==this.nombreProyecto
+                                    orderby e.fecha ascending
                                  select new { TimeStamps=e.fecha }).ToList();
 
                 dgwEventos.DataSource = listaEventos;
@@ -38,7 +39,22 @@ namespace Kairos
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
             frmAgregarRegistro frm = new frmAgregarRegistro(this.nombreProyecto);
+            Visible = false;
             frm.ShowDialog();
+            Close();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            frmPantallaPrincipal frm = new frmPantallaPrincipal();
+            Visible = false;
+            frm.ShowDialog();
+            Close();
+        }
+
+        private void btnModificarRegistro_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Seleccione el evento que desea modificar","Falta Selección",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
         }
     }
 }

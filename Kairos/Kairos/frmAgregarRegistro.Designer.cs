@@ -40,19 +40,20 @@
             this.lblHora = new System.Windows.Forms.Label();
             this.lblMinuto = new System.Windows.Forms.Label();
             this.lblSegundo = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbHora = new System.Windows.Forms.TextBox();
+            this.tbMinuto = new System.Windows.Forms.TextBox();
+            this.tbSegundo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tbDia = new System.Windows.Forms.TextBox();
+            this.tbMes = new System.Windows.Forms.TextBox();
+            this.tbAnio = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btmAgregarOtro = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             lblProyectosGuardados = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -189,26 +190,26 @@
             this.lblSegundo.TabIndex = 26;
             this.lblSegundo.Text = "Segundo";
             // 
-            // textBox1
+            // tbHora
             // 
-            this.textBox1.Location = new System.Drawing.Point(255, 316);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(49, 20);
-            this.textBox1.TabIndex = 27;
+            this.tbHora.Location = new System.Drawing.Point(255, 316);
+            this.tbHora.Name = "tbHora";
+            this.tbHora.Size = new System.Drawing.Size(49, 20);
+            this.tbHora.TabIndex = 27;
             // 
-            // textBox2
+            // tbMinuto
             // 
-            this.textBox2.Location = new System.Drawing.Point(374, 316);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(49, 20);
-            this.textBox2.TabIndex = 28;
+            this.tbMinuto.Location = new System.Drawing.Point(374, 316);
+            this.tbMinuto.Name = "tbMinuto";
+            this.tbMinuto.Size = new System.Drawing.Size(49, 20);
+            this.tbMinuto.TabIndex = 28;
             // 
-            // textBox3
+            // tbSegundo
             // 
-            this.textBox3.Location = new System.Drawing.Point(494, 316);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(49, 20);
-            this.textBox3.TabIndex = 29;
+            this.tbSegundo.Location = new System.Drawing.Point(494, 316);
+            this.tbSegundo.Name = "tbSegundo";
+            this.tbSegundo.Size = new System.Drawing.Size(49, 20);
+            this.tbSegundo.TabIndex = 29;
             // 
             // label1
             // 
@@ -237,26 +238,26 @@
             this.label4.TabIndex = 32;
             this.label4.Text = "ss";
             // 
-            // textBox4
+            // tbDia
             // 
-            this.textBox4.Location = new System.Drawing.Point(256, 218);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(49, 20);
-            this.textBox4.TabIndex = 33;
+            this.tbDia.Location = new System.Drawing.Point(256, 218);
+            this.tbDia.Name = "tbDia";
+            this.tbDia.Size = new System.Drawing.Size(49, 20);
+            this.tbDia.TabIndex = 33;
             // 
-            // textBox5
+            // tbMes
             // 
-            this.textBox5.Location = new System.Drawing.Point(375, 218);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(49, 20);
-            this.textBox5.TabIndex = 34;
+            this.tbMes.Location = new System.Drawing.Point(375, 218);
+            this.tbMes.Name = "tbMes";
+            this.tbMes.Size = new System.Drawing.Size(49, 20);
+            this.tbMes.TabIndex = 34;
             // 
-            // textBox6
+            // tbAnio
             // 
-            this.textBox6.Location = new System.Drawing.Point(494, 218);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(49, 20);
-            this.textBox6.TabIndex = 35;
+            this.tbAnio.Location = new System.Drawing.Point(494, 218);
+            this.tbAnio.Name = "tbAnio";
+            this.tbAnio.Size = new System.Drawing.Size(49, 20);
+            this.tbAnio.TabIndex = 35;
             // 
             // label5
             // 
@@ -296,6 +297,20 @@
             this.btmAgregarOtro.TabIndex = 39;
             this.btmAgregarOtro.Text = "Aceptar y Agregar Otro";
             this.btmAgregarOtro.UseVisualStyleBackColor = false;
+            this.btmAgregarOtro.Click += new System.EventHandler(this.btmAgregarOtro_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.BackColor = System.Drawing.Color.DarkRed;
+            this.btnVolver.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolver.ForeColor = System.Drawing.Color.White;
+            this.btnVolver.Location = new System.Drawing.Point(12, 558);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(134, 28);
+            this.btnVolver.TabIndex = 40;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = false;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // frmAgregarRegistro
             // 
@@ -303,19 +318,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(782, 598);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btmAgregarOtro);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.tbAnio);
+            this.Controls.Add(this.tbMes);
+            this.Controls.Add(this.tbDia);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbSegundo);
+            this.Controls.Add(this.tbMinuto);
+            this.Controls.Add(this.tbHora);
             this.Controls.Add(this.lblSegundo);
             this.Controls.Add(this.lblMinuto);
             this.Controls.Add(this.lblHora);
@@ -348,18 +364,19 @@
         private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.Label lblMinuto;
         private System.Windows.Forms.Label lblSegundo;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbHora;
+        private System.Windows.Forms.TextBox tbMinuto;
+        private System.Windows.Forms.TextBox tbSegundo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tbDia;
+        private System.Windows.Forms.TextBox tbMes;
+        private System.Windows.Forms.TextBox tbAnio;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btmAgregarOtro;
+        private System.Windows.Forms.Button btnVolver;
     }
 }
