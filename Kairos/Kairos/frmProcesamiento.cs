@@ -28,10 +28,13 @@ namespace Kairos
                                     on e.idOrigen equals o.Id
                                     where e.activo==true && o.nombreOrigen==this.nombreProyecto
                                     orderby e.fecha ascending
-                                 select new { TimeStamps=e.fecha }).ToList();
+                                 select new { e.Id, TimeStamps=e.fecha }).ToList();
 
                 dgwEventos.DataSource = listaEventos;
-                dgwEventos.Columns[0].Width = 235;
+                dgwEventos.Columns[1].Width = 235;
+                dgwEventos.Columns[0].Visible = false;
+                dgwEventos.ClearSelection();
+
 
             }
         }
@@ -54,7 +57,22 @@ namespace Kairos
 
         private void btnModificarRegistro_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Seleccione el evento que desea modificar","Falta Selección",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+            if (dgwEventos.CurrentRow.Index == -1)
+            {
+                MessageBox.Show("Seleccione el evento que desea modificar", "Falta Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }//falta terminar
+            /*else if (dgwEventos.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Seleccione un solo evento para modificar", "Error de Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else*/
+            {
+                int idEvento = Convert.ToInt32(dgwEventos.SelectedCells[0].Value);
+                frmModificarRegistro frm = new frmModificarRegistro(this.nombreProyecto, idEvento);
+                Visible = false;
+                frm.ShowDialog();
+                Close();
+            }
         }
     }
 }

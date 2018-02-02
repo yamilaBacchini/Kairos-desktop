@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label lblProyectosGuardados;
+            System.Windows.Forms.Label lblTitulo;
             this.btnTerminar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lblNombreProyecto = new System.Windows.Forms.Label();
@@ -54,19 +54,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btmAgregarOtro = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            lblProyectosGuardados = new System.Windows.Forms.Label();
+            lblTitulo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lblProyectosGuardados
+            // lblTitulo
             // 
-            lblProyectosGuardados.AutoSize = true;
-            lblProyectosGuardados.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lblProyectosGuardados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            lblProyectosGuardados.Location = new System.Drawing.Point(290, 121);
-            lblProyectosGuardados.Name = "lblProyectosGuardados";
-            lblProyectosGuardados.Size = new System.Drawing.Size(223, 23);
-            lblProyectosGuardados.TabIndex = 11;
-            lblProyectosGuardados.Text = "Inserte el nuevo registro";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            lblTitulo.Location = new System.Drawing.Point(290, 121);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new System.Drawing.Size(223, 23);
+            lblTitulo.TabIndex = 11;
+            lblTitulo.Text = "Inserte el nuevo registro";
             // 
             // btnTerminar
             // 
@@ -343,7 +343,7 @@
             this.Controls.Add(this.lblNombreProyecto);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnTerminar);
-            this.Controls.Add(lblProyectosGuardados);
+            this.Controls.Add(lblTitulo);
             this.Name = "frmAgregarRegistro";
             this.Text = "Agregar Registro";
             this.ResumeLayout(false);

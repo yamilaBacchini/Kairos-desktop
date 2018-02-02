@@ -55,6 +55,7 @@
             this.dgwEventos.Location = new System.Drawing.Point(274, 114);
             this.dgwEventos.Name = "dgwEventos";
             this.dgwEventos.ReadOnly = true;
+            this.dgwEventos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwEventos.Size = new System.Drawing.Size(280, 460);
             this.dgwEventos.TabIndex = 2;
             // 
