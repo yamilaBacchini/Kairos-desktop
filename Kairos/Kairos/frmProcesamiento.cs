@@ -12,7 +12,7 @@ namespace Kairos
 {
     public partial class frmProcesamiento : Form
     {
-        string nombreProyecto="";
+        string nombreProyecto = "";
 
         public frmProcesamiento(string nombreProyecto)
         {
@@ -20,22 +20,26 @@ namespace Kairos
             this.nombreProyecto = nombreProyecto;
             lblNombreProyecto.Text = nombreProyecto;
 
+            cargarEventos();
+        }
+
+        private void cargarEventos()
+        {
             //lleno la grilla con los eventos
+            //dgwEventos.DataBindings.Clear();
             using (var db = new EventoContexto())
             {
                 var listaEventos = (from e in db.Eventos
                                     join o in db.Origenes
                                     on e.idOrigen equals o.Id
-                                    where e.activo==true && o.nombreOrigen==this.nombreProyecto
+                                    where e.activo == true && o.nombreOrigen == this.nombreProyecto
                                     orderby e.fecha ascending
-                                 select new { e.Id, TimeStamps=e.fecha }).ToList();
+                                    select new { e.Id, TimeStamps = e.fecha }).ToList();
 
                 dgwEventos.DataSource = listaEventos;
                 dgwEventos.Columns[1].Width = 235;
                 dgwEventos.Columns[0].Visible = false;
-                dgwEventos.ClearSelection();
-
-
+                dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
             }
         }
 
@@ -44,14 +48,11 @@ namespace Kairos
             frmAgregarRegistro frm = new frmAgregarRegistro(this.nombreProyecto);
             Visible = false;
             frm.ShowDialog();
-            Close();
+            Visible = true;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            frmPantallaPrincipal frm = new frmPantallaPrincipal();
-            Visible = false;
-            frm.ShowDialog();
             Close();
         }
 
@@ -66,13 +67,19 @@ namespace Kairos
                 MessageBox.Show("Seleccione un solo evento para modificar", "Error de Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else*/
+            else
             {
                 int idEvento = Convert.ToInt32(dgwEventos.SelectedCells[0].Value);
-                frmModificarRegistro frm = new frmModificarRegistro(this.nombreProyecto, idEvento);
+                frmModificarRegistro frm = new frmModificarRegistro(this.nombreProyecto, idEvento, Convert.ToDateTime(dgwEventos.SelectedCells[1].Value));
                 Visible = false;
                 frm.ShowDialog();
-                Close();
+                Visible = true;
             }
+        }
+
+        private void frmProcesamiento_Activated(object sender, EventArgs e)
+        {
+            cargarEventos();
         }
     }
 }

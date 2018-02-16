@@ -224,6 +224,7 @@
             this.Controls.Add(this.dgwEventos);
             this.Name = "frmProcesamiento";
             this.Text = "Procesar Datos";
+            this.Activated += new System.EventHandler(this.frmProcesamiento_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
