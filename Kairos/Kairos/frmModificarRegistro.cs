@@ -43,6 +43,9 @@ namespace Kairos
                     db.SaveChanges();
                     Close();
                 }
+                else
+                    MessageBox.Show("No se encontro el registro a modificar", "Error al buscar registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
     }

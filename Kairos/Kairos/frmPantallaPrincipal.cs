@@ -42,7 +42,7 @@ namespace Kairos
                 frmProcesamiento frm = new frmProcesamiento(Convert.ToString(lbProyectosRecientes.SelectedItem));
                 Visible = false;
                 frm.ShowDialog();
-                Close();
+                Visible = true;
             }
         }
     }
