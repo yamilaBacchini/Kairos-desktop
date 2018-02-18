@@ -22,12 +22,11 @@ namespace Kairos
         }
 
         private void btnTerminar_Click(object sender, EventArgs e)
-        {//falta agregar validaciones de que los campos no esten vacios y esten en el formato correcto que se pide
-            string fecha = tbDia.Text + "/" + tbMes.Text + "/" + tbAnio.Text + " " + tbHora.Text + ":" + tbMinuto.Text + ":" + tbSegundo.Text;
-            //inserto el nuevo evento
+        {   //inserto el nuevo evento
             using (var db = new EventoContexto())
             {//falta buscar el idorigen en la tabla por el nombre de origen
-                db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(fecha), idOrigen=2, activo = true });
+                DateTime fecha= new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
+                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen=2, activo = true });
                 db.SaveChanges();
             }
             MessageBox.Show("Registro Insertado con Exito!","Insertar Registro",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
@@ -45,18 +44,14 @@ namespace Kairos
         }
 
         private void btmAgregarOtro_Click(object sender, EventArgs e)
-        {//falta agregar validaciones de que los campos no esten vacios y esten en el formato correcto que se pide
-            string fecha = tbDia.Text + "/" + tbMes.Text + "/" + tbAnio.Text + " " + tbHora.Text + ":" + tbMinuto.Text + ":" + tbSegundo.Text;
-            //inserto el nuevo evento
+        {   //inserto el nuevo evento
             using (var db = new EventoContexto())
             {//falta buscar el idorigen en la tabla por el nombre de origen
-                db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(fecha), idOrigen = 2, activo = true });
+                DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
+                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen = 2, activo = true });
                 db.SaveChanges();
             }
             MessageBox.Show("Registro Insertado con Exito!", "Insertar Registro", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            tbHora.Text = "";
-            tbMinuto.Text = "";
-            tbSegundo.Text = "";
         }
     }
 }
