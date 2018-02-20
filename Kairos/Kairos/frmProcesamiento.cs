@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kairos.Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,12 @@ namespace Kairos
     public partial class frmProcesamiento : Form
     {
         string nombreProyecto = "";
+        int idOrigen = -1;
 
-        public frmProcesamiento(string nombreProyecto)
+        public frmProcesamiento(int idOrigen, string nombreProyecto)
         {
             InitializeComponent();
+            this.idOrigen = idOrigen;
             this.nombreProyecto = nombreProyecto;
             lblNombreProyecto.Text = nombreProyecto;
 
@@ -45,7 +48,7 @@ namespace Kairos
 
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
-            frmAgregarRegistro frm = new frmAgregarRegistro(this.nombreProyecto);
+            frmAgregarRegistro frm = new frmAgregarRegistro(this.idOrigen, this.nombreProyecto);
             Visible = false;
             frm.ShowDialog();
             Visible = true;
@@ -80,6 +83,30 @@ namespace Kairos
         private void frmProcesamiento_Activated(object sender, EventArgs e)
         {
             cargarEventos();
+        }
+
+        private void btnBorrarSeleccion_Click(object sender, EventArgs e)
+        {
+            if (dgwEventos.SelectedRows.Count > 0)
+            {
+                using (var db = new EventoContexto())
+                {
+                    foreach (DataGridViewRow item in dgwEventos.SelectedRows)
+                    {
+                        int idEventoAEliminar = Convert.ToInt32(item.Cells[0].Value);
+                        db.Remove<Evento>(db.Find<Evento>(idEventoAEliminar));
+                    }
+                    db.SaveChanges();
+                }
+                cargarEventos();
+            }
+            else
+                MessageBox.Show("Seleccione la/s fila/s a borrar",  "Error de Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void btnSelecionarTodo_Click(object sender, EventArgs e)
+        {
+            dgwEventos.SelectAll();
         }
     }
 }

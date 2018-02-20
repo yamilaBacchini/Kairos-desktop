@@ -21,13 +21,9 @@ namespace Kairos
             {
                 db.Database.EnsureCreated();
 
-                var resultado = (from datos in db.Origenes select new { datos.nombreOrigen }).ToList();
-
-                foreach (var item in resultado)
-                {
-                    lbProyectosRecientes.Items.Add(item.nombreOrigen);
-                }
-
+                var resultado = (from o in db.Origenes select new { o.nombreOrigen, o.Id }).ToList();
+                lbProyectosRecientes.ValueMember = "nombreOrigen";
+                lbProyectosRecientes.Items.AddRange(resultado.ToArray());
             }
         }
 
@@ -39,11 +35,21 @@ namespace Kairos
             }
             else
             {
-                frmProcesamiento frm = new frmProcesamiento(Convert.ToString(lbProyectosRecientes.SelectedItem));
+                var seleccionado = lbProyectosRecientes.SelectedItem;
+                var a = new { nombreOrigen = "", Id=0 };
+                a = Cast(a, seleccionado);
+                frmProcesamiento frm = new frmProcesamiento(a.Id, a.nombreOrigen);
                 Visible = false;
                 frm.ShowDialog();
                 Visible = true;
             }
+        }
+
+        private static T Cast<T>(T typeHolder, Object x)
+        {
+            // typeHolder above is just for compiler magic
+            // to infer the type to cast x to
+            return (T)x;
         }
     }
 }

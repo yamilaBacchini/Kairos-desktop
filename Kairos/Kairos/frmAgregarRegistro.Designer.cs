@@ -36,7 +36,6 @@
             this.lblHorario = new System.Windows.Forms.Label();
             this.btmAgregarOtro = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.dtpHora = new System.Windows.Forms.DateTimePicker();
             lblTitulo = new System.Windows.Forms.Label();
@@ -135,13 +134,6 @@
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 41;
-            // 
             // dtpFecha
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -152,9 +144,11 @@
             // 
             // dtpHora
             // 
-            this.dtpHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHora.CustomFormat = "HH:mm:ss";
+            this.dtpHora.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHora.Location = new System.Drawing.Point(269, 309);
             this.dtpHora.Name = "dtpHora";
+            this.dtpHora.ShowUpDown = true;
             this.dtpHora.Size = new System.Drawing.Size(200, 20);
             this.dtpHora.TabIndex = 43;
             // 
@@ -166,7 +160,6 @@
             this.ClientSize = new System.Drawing.Size(782, 598);
             this.Controls.Add(this.dtpHora);
             this.Controls.Add(this.dtpFecha);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btmAgregarOtro);
             this.Controls.Add(this.lblHorario);
@@ -191,7 +184,6 @@
         private System.Windows.Forms.Label lblHorario;
         private System.Windows.Forms.Button btmAgregarOtro;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dtpFecha;
         private System.Windows.Forms.DateTimePicker dtpHora;
     }

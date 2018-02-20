@@ -36,7 +36,7 @@
             this.btnBorrarSeleccion = new System.Windows.Forms.Button();
             this.btnAgregarRegistro = new System.Windows.Forms.Button();
             this.btnModificarRegistro = new System.Windows.Forms.Button();
-            this.btnBorrarFiltrados = new System.Windows.Forms.Button();
+            this.btnSelecionarTodo = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.lblNombreProyecto = new System.Windows.Forms.Label();
             this.btnGuardarProyecto = new System.Windows.Forms.Button();
@@ -87,7 +87,7 @@
             this.btnFiltrar.BackColor = System.Drawing.Color.DarkGray;
             this.btnFiltrar.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFiltrar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnFiltrar.Location = new System.Drawing.Point(41, 473);
+            this.btnFiltrar.Location = new System.Drawing.Point(41, 326);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(176, 36);
             this.btnFiltrar.TabIndex = 7;
@@ -117,6 +117,7 @@
             this.btnBorrarSeleccion.TabIndex = 9;
             this.btnBorrarSeleccion.Text = "Borrar Selección";
             this.btnBorrarSeleccion.UseVisualStyleBackColor = false;
+            this.btnBorrarSeleccion.Click += new System.EventHandler(this.btnBorrarSeleccion_Click);
             // 
             // btnAgregarRegistro
             // 
@@ -145,17 +146,18 @@
             this.btnModificarRegistro.UseVisualStyleBackColor = false;
             this.btnModificarRegistro.Click += new System.EventHandler(this.btnModificarRegistro_Click);
             // 
-            // btnBorrarFiltrados
+            // btnSelecionarTodo
             // 
-            this.btnBorrarFiltrados.BackColor = System.Drawing.Color.DarkGray;
-            this.btnBorrarFiltrados.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBorrarFiltrados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnBorrarFiltrados.Location = new System.Drawing.Point(41, 327);
-            this.btnBorrarFiltrados.Name = "btnBorrarFiltrados";
-            this.btnBorrarFiltrados.Size = new System.Drawing.Size(176, 36);
-            this.btnBorrarFiltrados.TabIndex = 12;
-            this.btnBorrarFiltrados.Text = "Borrar Filtrados";
-            this.btnBorrarFiltrados.UseVisualStyleBackColor = false;
+            this.btnSelecionarTodo.BackColor = System.Drawing.Color.DarkGray;
+            this.btnSelecionarTodo.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelecionarTodo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSelecionarTodo.Location = new System.Drawing.Point(579, 114);
+            this.btnSelecionarTodo.Name = "btnSelecionarTodo";
+            this.btnSelecionarTodo.Size = new System.Drawing.Size(115, 50);
+            this.btnSelecionarTodo.TabIndex = 12;
+            this.btnSelecionarTodo.Text = "Seleccionar todo";
+            this.btnSelecionarTodo.UseVisualStyleBackColor = false;
+            this.btnSelecionarTodo.Click += new System.EventHandler(this.btnSelecionarTodo_Click);
             // 
             // btnVolver
             // 
@@ -213,7 +215,7 @@
             this.Controls.Add(this.btnGuardarProyecto);
             this.Controls.Add(this.lblNombreProyecto);
             this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.btnBorrarFiltrados);
+            this.Controls.Add(this.btnSelecionarTodo);
             this.Controls.Add(this.btnModificarRegistro);
             this.Controls.Add(this.btnAgregarRegistro);
             this.Controls.Add(this.btnBorrarSeleccion);
@@ -240,7 +242,7 @@
         private System.Windows.Forms.Button btnBorrarSeleccion;
         private System.Windows.Forms.Button btnAgregarRegistro;
         private System.Windows.Forms.Button btnModificarRegistro;
-        private System.Windows.Forms.Button btnBorrarFiltrados;
+        private System.Windows.Forms.Button btnSelecionarTodo;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label lblNombreProyecto;
         private System.Windows.Forms.Button btnGuardarProyecto;

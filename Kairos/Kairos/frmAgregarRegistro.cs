@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kairos.Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,12 @@ namespace Kairos
     public partial class frmAgregarRegistro : Form
     {
         string nombreProyecto = "";
+        int idOrigen = -1;
 
-        public frmAgregarRegistro(string nombreProyecto)
+        public frmAgregarRegistro(int idOrigen, string nombreProyecto)
         {
             InitializeComponent();
+            this.idOrigen = idOrigen;
             this.nombreProyecto = nombreProyecto;
             lblNombreProyecto.Text = nombreProyecto;
         }
@@ -24,22 +27,17 @@ namespace Kairos
         private void btnTerminar_Click(object sender, EventArgs e)
         {   //inserto el nuevo evento
             using (var db = new EventoContexto())
-            {//falta buscar el idorigen en la tabla por el nombre de origen
-                DateTime fecha= new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
-                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen=2, activo = true });
+            {
+                DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
+                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen = this.idOrigen, activo = true });
                 db.SaveChanges();
             }
-            MessageBox.Show("Registro Insertado con Exito!","Insertar Registro",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
-            frmProcesamiento frm = new frmProcesamiento(this.nombreProyecto);
-            frm.ShowDialog();
+            MessageBox.Show("Registro Insertado con Exito!", "Insertar Registro", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            frmProcesamiento frm = new frmProcesamiento(this.nombreProyecto);
-            Visible = false;
-            frm.ShowDialog();
             Close();
         }
 
@@ -48,7 +46,7 @@ namespace Kairos
             using (var db = new EventoContexto())
             {//falta buscar el idorigen en la tabla por el nombre de origen
                 DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
-                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen = 2, activo = true });
+                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen = this.idOrigen, activo = true });
                 db.SaveChanges();
             }
             MessageBox.Show("Registro Insertado con Exito!", "Insertar Registro", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
