@@ -51,5 +51,13 @@ namespace Kairos
             // to infer the type to cast x to
             return (T)x;
         }
+
+        private void btnNuevoProyecto_Click(object sender, EventArgs e)
+        {
+            frmAgregarRegistro frm = new frmAgregarRegistro(0, "sarasa");
+            Visible = false;
+            frm.ShowDialog();
+            Visible = true;
+        }
     }
 }
