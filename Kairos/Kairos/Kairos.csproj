@@ -129,6 +129,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Captura Arduino\ClassEscrituraTxt.cs" />
+    <Compile Include="Captura Arduino\FrmCapturaDatosArduino.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Captura Arduino\FrmCapturaDatosArduino.Designer.cs">
+      <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\Evento.cs" />
     <Compile Include="EventoContexto.cs" />
     <Compile Include="frmAgregarRegistro.cs">
@@ -163,6 +170,9 @@
     <Compile Include="Migrations\EventoContextoModelSnapshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Captura Arduino\FrmCapturaDatosArduino.resx">
+      <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAgregarRegistro.resx">
       <DependentUpon>frmAgregarRegistro.cs</DependentUpon>
     </EmbeddedResource>

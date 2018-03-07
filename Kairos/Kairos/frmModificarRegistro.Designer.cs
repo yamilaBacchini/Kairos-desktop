@@ -54,10 +54,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Vivaldi", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(613, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 57);
+            this.label2.Size = new System.Drawing.Size(166, 55);
             this.label2.TabIndex = 18;
             this.label2.Text = "Kairós";
             // 
@@ -155,6 +155,7 @@
             this.Controls.Add(this.label2);
             this.Name = "frmModificarRegistro";
             this.Text = "frmModificarRegistro";
+            this.Load += new System.EventHandler(this.frmModificarRegistro_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

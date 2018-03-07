@@ -48,5 +48,10 @@ namespace Kairos
 
             }
         }
+
+        private void frmModificarRegistro_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
