@@ -55,6 +55,7 @@ namespace Kairos
         private void btnNuevoProyecto_Click(object sender, EventArgs e)
         {
             //ejemplo
+            //asdasrasedad
         }
     }
 }
