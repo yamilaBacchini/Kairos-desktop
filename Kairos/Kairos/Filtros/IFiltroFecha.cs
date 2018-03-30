@@ -9,6 +9,6 @@ namespace Kairos.Filtros
 {
     interface IFiltroFecha
     {
-        List<Evento> aplicarFiltroFecha(int idOrigen, DateTime fecha1, DateTime fecha2);
+        List<Evento> aplicarFiltroFecha(List<Evento> eventos, DateTime fecha1, DateTime fecha2);
     }
 }

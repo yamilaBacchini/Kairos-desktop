@@ -18,6 +18,7 @@ namespace Kairos
     {
         string nombreProyecto = "";
         int idOrigen = -1;
+        private List<Evento> eventos = null;
 
         public frmProcesamiento(int idOrigen, string nombreProyecto)
         {
@@ -125,12 +126,12 @@ namespace Kairos
             //dgwEventos.DataBindings.Clear();
             using (var db = new EventoContexto())
             {
-                var listaEventos = (from e in db.Eventos
+                eventos = (from e in db.Eventos
                                     where e.activo == true && e.idOrigen == idOrigen
                                     orderby e.fecha ascending
-                                    select new { e.Id, TimeStamps = e.fecha }).ToList();
+                                    select e).ToList();
 
-                dgwEventos.DataSource = listaEventos;
+                dgwEventos.DataSource = eventos;
                 dgwEventos.Columns[1].Width = 235;
                 dgwEventos.Columns[0].Visible = false;
                 dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
@@ -233,7 +234,7 @@ namespace Kairos
                         filtro = null;
                         break;
                 }
-                filtrado = filtro.aplicarFiltroFecha(idOrigen, fecha1, fecha2);
+                filtrado = filtro.aplicarFiltroFecha(eventos, fecha1, fecha2);
             }
             else {
                 IFiltroHora filtro;
@@ -254,10 +255,11 @@ namespace Kairos
                         filtro = null;
                         break;
                 }
-                filtrado = filtro.aplicarFiltroHora(idOrigen, hora1, hora2);
+                filtrado = filtro.aplicarFiltroHora(eventos, hora1, hora2);
             }
             if (filtrado != null)
             {
+                eventos = filtrado;
                 dgwEventos.DataSource = filtrado;
                 dgwEventos.Columns[1].Width = 235;
                 dgwEventos.Columns[0].Visible = false;

@@ -9,6 +9,6 @@ namespace Kairos.Filtros
 {
     interface IFiltroHora
     {
-        List<Evento> aplicarFiltroHora(int idOrigen, TimeSpan hora1, TimeSpan hora2);
+        List<Evento> aplicarFiltroHora(List<Evento> eventos, TimeSpan hora1, TimeSpan hora2);
     }
 }
