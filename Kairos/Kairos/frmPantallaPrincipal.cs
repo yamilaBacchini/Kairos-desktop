@@ -23,11 +23,14 @@ namespace Kairos
             using (var db = new EventoContexto())
             {
                 db.Database.EnsureCreated();
-
-                var resultado = (from o in db.Origenes select new { o.nombreOrigen, o.Id }).ToList();
-                lbProyectosRecientes.ValueMember = "nombreOrigen";
-                lbProyectosRecientes.Items.AddRange(resultado.ToArray());
+                cargarLista(db);
             }
+        }
+
+        private void cargarLista(EventoContexto db) {
+            var resultado = (from o in db.Origenes select new { o.nombreOrigen, o.Id }).ToList();
+            lbProyectosRecientes.ValueMember = "nombreOrigen";
+            lbProyectosRecientes.Items.AddRange(resultado.ToArray());
         }
 
         private void btnProcesarDatos_Click(object sender, EventArgs e)
@@ -101,22 +104,20 @@ namespace Kairos
             //checkear que no exista el nombre que se desea ingresar
             using (var db = new EventoContexto())
             {
-                db.Origenes.Add(new Entidades.Origen { fechaCreacion = DateTime.Now, nombreOrigen = "nombre automatico", activo = true });
+                string nombre = "Importacion automatica_" + DateTime.Now.ToLongDateString();
+                Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombre, activo = true };
+                db.Origenes.Add(nuevoOrigen);
                 db.SaveChanges();
-
-                var idOrigenes = (from o in db.Origenes
-                                  where o.nombreOrigen == "nombre automatico"
-                                  select o.Id).ToList();
-                int idOrigenInsertado = idOrigenes.First();
+                int idOrigenInsertado = nuevoOrigen.Id;
 
                 foreach (string item in arrText)
                 {
                     db.Eventos.Add(new Entidades.Evento { fecha =Convert.ToDateTime(item), idOrigen = idOrigenInsertado, activo = true });
 
                 }
+                db.SaveChanges();
+                cargarLista(db);
             }
-            //busco el id origen por el nombre unico
-
         }
 
     }
