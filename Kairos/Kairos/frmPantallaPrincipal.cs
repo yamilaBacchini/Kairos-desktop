@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kairos.Entidades;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -55,7 +57,6 @@ namespace Kairos
 
         private void btnImportarProyecto_Click(object sender, EventArgs e)
         {
-            string pathImportar = "";
             Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
@@ -72,7 +73,7 @@ namespace Kairos
                     {
                         using (myStream)
                         {
-                            pathImportar = openFileDialog1.FileName;
+                            this.leerArchivo(openFileDialog1.FileName);
                         }
                     }
                 }
@@ -82,5 +83,41 @@ namespace Kairos
                 }
             }
         }
+
+        private void leerArchivo(string fileName)
+        {
+            StreamReader objReader = new StreamReader(fileName);
+            string sLine = "";
+            ArrayList arrText = new ArrayList();
+
+            while (sLine != null)
+            {
+                sLine = objReader.ReadLine();
+                if (sLine != null)
+                    arrText.Add(sLine);
+            }
+            objReader.Close();
+            //creo el proyecto en la tabla origenes
+            //checkear que no exista el nombre que se desea ingresar
+            using (var db = new EventoContexto())
+            {
+                db.Origenes.Add(new Entidades.Origen { fechaCreacion = DateTime.Now, nombreOrigen = "nombre automatico", activo = true });
+                db.SaveChanges();
+
+                var idOrigenes = (from o in db.Origenes
+                                  where o.nombreOrigen == "nombre automatico"
+                                  select o.Id).ToList();
+                int idOrigenInsertado = idOrigenes.First();
+
+                foreach (string item in arrText)
+                {
+                    db.Eventos.Add(new Entidades.Evento { fecha =Convert.ToDateTime(item), idOrigen = idOrigenInsertado, activo = true });
+
+                }
+            }
+            //busco el id origen por el nombre unico
+
+        }
+
     }
 }
