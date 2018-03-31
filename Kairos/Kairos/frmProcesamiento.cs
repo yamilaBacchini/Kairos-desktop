@@ -43,9 +43,11 @@ namespace Kairos
         {
             if (valorSeleccionado > 3)
             {
-                dtpFiltro.Format = DateTimePickerFormat.Time;
+                dtpFiltro.Format = DateTimePickerFormat.Custom;
+                dtpFiltro.CustomFormat = "HH:mm:ss";
                 dtpFiltro.ShowUpDown = true;
-                dtpFiltroHasta.Format = DateTimePickerFormat.Time;
+                dtpFiltroHasta.Format = DateTimePickerFormat.Custom;
+                dtpFiltroHasta.CustomFormat = "HH:mm:ss";
                 dtpFiltroHasta.ShowUpDown = true;
             }   
             else
@@ -63,6 +65,7 @@ namespace Kairos
                     dtpFiltro.Visible = false;
                     dtpFiltroHasta.Visible = false;
                     btnAplicarFiltro.Visible = false;
+                    btnLimpiarFiltros.Visible = false;
                     break;
                 case 1:
                     btnAplicarFiltro.Visible = true;
@@ -71,6 +74,7 @@ namespace Kairos
                     dtpFiltro.Visible = true;
                     lblHasta.Visible = false;
                     dtpFiltroHasta.Visible = false;
+                    btnLimpiarFiltros.Visible = true;
                     break;
                 case 2:
                     btnAplicarFiltro.Visible = true;
@@ -79,6 +83,7 @@ namespace Kairos
                     dtpFiltro.Visible = true;
                     lblHasta.Visible = false;
                     dtpFiltroHasta.Visible = false;
+                    btnLimpiarFiltros.Visible = true;
                     break;
                 case 3:
                     btnAplicarFiltro.Visible = true;
@@ -88,6 +93,7 @@ namespace Kairos
                     lblHasta.Visible = true;
                     lblHasta.Text = "Fecha hasta";
                     dtpFiltroHasta.Visible = true;
+                    btnLimpiarFiltros.Visible = true;
                     break;
                 case 4:
                     btnAplicarFiltro.Visible = true;
@@ -96,6 +102,7 @@ namespace Kairos
                     dtpFiltro.Visible = true;
                     lblHasta.Visible = false;
                     dtpFiltroHasta.Visible = false;
+                    btnLimpiarFiltros.Visible = true;
                     break;
                 case 5:
                     btnAplicarFiltro.Visible = true;
@@ -104,6 +111,7 @@ namespace Kairos
                     dtpFiltro.Visible = true;
                     lblHasta.Visible = false;
                     dtpFiltroHasta.Visible = false;
+                    btnLimpiarFiltros.Visible = true;
                     break;
                 case 6:
                     btnAplicarFiltro.Visible = true;
@@ -113,6 +121,7 @@ namespace Kairos
                     lblHasta.Visible = true;
                     lblHasta.Text = "Hora hasta";
                     dtpFiltroHasta.Visible = true;
+                    btnLimpiarFiltros.Visible = true;
                     break;
                 default:
                     break;
@@ -123,7 +132,6 @@ namespace Kairos
         private void cargarEventos()
         {
             //lleno la grilla con los eventos
-            //dgwEventos.DataBindings.Clear();
             using (var db = new EventoContexto())
             {
                 eventos = (from e in db.Eventos

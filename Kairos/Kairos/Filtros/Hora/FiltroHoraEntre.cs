@@ -13,7 +13,7 @@ namespace Kairos.Filtros.Hora
         {
             List<Evento> resultado = null;
             resultado = (from e in eventos
-                         where e.activo == true && e.fecha.TimeOfDay > hora1 && e.fecha.TimeOfDay < hora2
+                         where e.activo == true && e.fecha.TimeOfDay >= hora1 && e.fecha.TimeOfDay <= hora2
                          orderby e.fecha ascending
                          select e).ToList();
             return resultado;
