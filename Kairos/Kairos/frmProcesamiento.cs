@@ -144,6 +144,8 @@ namespace Kairos
                 dgwEventos.Columns[0].Visible = false;
                 dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
             }
+            if(eventos!=null)
+                filtrar();
         }
 
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
@@ -152,6 +154,7 @@ namespace Kairos
             Visible = false;
             frm.ShowDialog();
             Visible = true;
+            cargarEventos();
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -177,31 +180,8 @@ namespace Kairos
                 Visible = false;
                 frm.ShowDialog();
                 Visible = true;
-            }
-        }
-
-        private void frmProcesamiento_Activated(object sender, EventArgs e)
-        {
-            cargarEventos();
-        }
-
-        private void btnBorrarSeleccion_Click(object sender, EventArgs e)
-        {
-            if (dgwEventos.SelectedRows.Count > 0)
-            {
-                using (var db = new EventoContexto())
-                {
-                    foreach (DataGridViewRow item in dgwEventos.SelectedRows)
-                    {
-                        int idEventoAEliminar = Convert.ToInt32(item.Cells[0].Value);
-                        db.Remove<Evento>(db.Find<Evento>(idEventoAEliminar));
-                    }
-                    db.SaveChanges();
-                }
                 cargarEventos();
             }
-            else
-                MessageBox.Show("Seleccione la/s fila/s a borrar", "Error de Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnSelecionarTodo_Click(object sender, EventArgs e)
@@ -217,16 +197,23 @@ namespace Kairos
 
         private void btnAplicarFiltro_Click(object sender, EventArgs e)
         {
+            filtrar();
+        }
+
+        private void filtrar()
+        {
             List<Evento> filtrado = null;
             int selectedValue = Convert.ToInt32(cmbTipoFiltro.SelectedValue);
+            if (selectedValue == 0)
+                return;
             bool filtroHora = false;
             if (selectedValue >= 4)
                 filtroHora = true;
             if (!filtroHora)
             {
                 IFiltroFecha filtro;
-                DateTime fecha1 = dtpFiltro.Value;
-                DateTime fecha2 = dtpFiltroHasta.Value;
+                DateTime fecha1 = dtpFiltro.Value.Date;
+                DateTime fecha2 = dtpFiltroHasta.Value.Date;
                 switch (selectedValue)
                 {
                     case 1:
@@ -244,7 +231,8 @@ namespace Kairos
                 }
                 filtrado = filtro.aplicarFiltroFecha(eventos, fecha1, fecha2);
             }
-            else {
+            else
+            {
                 IFiltroHora filtro;
                 TimeSpan hora1 = dtpFiltro.Value.TimeOfDay;
                 TimeSpan hora2 = dtpFiltroHasta.Value.TimeOfDay;
@@ -273,12 +261,31 @@ namespace Kairos
                 dgwEventos.Columns[0].Visible = false;
                 dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
             }
-                
         }
 
         private void btnLimpiarFiltros_Click(object sender, EventArgs e)
         {
+            cmbTipoFiltro.SelectedIndex = 0;
             cargarEventos();
+        }
+
+        private void btnBorrarSeleccionados_Click(object sender, EventArgs e)
+        {
+            if (dgwEventos.SelectedRows.Count > 0)
+            {
+                using (var db = new EventoContexto())
+                {
+                    foreach (DataGridViewRow item in dgwEventos.SelectedRows)
+                    {
+                        int idEventoAEliminar = Convert.ToInt32(item.Cells[0].Value);
+                        db.Remove<Evento>(db.Find<Evento>(idEventoAEliminar));
+                    }
+                    db.SaveChanges();
+                }
+                cargarEventos();
+            }
+            else
+                MessageBox.Show("Seleccione la/s fila/s a borrar", "Error de Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 

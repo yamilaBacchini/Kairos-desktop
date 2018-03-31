@@ -13,7 +13,7 @@ namespace Kairos.Filtros.Fecha
         {
             List<Evento> resultado = null;
             resultado = (from e in eventos
-                         where e.activo == true && e.fecha >= fecha1 && e.fecha <= fecha2
+                         where e.activo == true && e.fecha >= fecha1 && e.fecha < fecha2.AddDays(1)
                          orderby e.fecha ascending
                          select e).ToList();
             return resultado;
