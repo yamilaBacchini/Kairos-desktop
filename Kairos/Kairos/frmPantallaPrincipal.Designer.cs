@@ -105,6 +105,7 @@
             this.btnImportarProyecto.TabIndex = 11;
             this.btnImportarProyecto.Text = "Importar Proyecto";
             this.btnImportarProyecto.UseVisualStyleBackColor = false;
+            this.btnImportarProyecto.Click += new System.EventHandler(this.btnImportarProyecto_Click);
             // 
             // btnProcesarDatos
             // 

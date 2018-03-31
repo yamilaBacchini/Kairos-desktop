@@ -144,6 +144,12 @@
     <Compile Include="frmAgregarProyecto.Designer.cs">
       <DependentUpon>frmAgregarProyecto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filtros\Fecha\FiltroFechaEntre.cs" />
+    <Compile Include="Filtros\Fecha\FiltroFechaMayor.cs" />
+    <Compile Include="Filtros\Fecha\FiltroFechaMenor.cs" />
+    <Compile Include="Filtros\Hora\FiltroHoraEntre.cs" />
+    <Compile Include="Filtros\Hora\FiltroHoraMayor.cs" />
+    <Compile Include="Filtros\Hora\FiltroHoraMenor.cs" />
     <Compile Include="frmAgregarRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,8 @@
       <DependentUpon>frmProcesamiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Origen.cs" />
+    <Compile Include="Filtros\IFiltroFecha.cs" />
+    <Compile Include="Filtros\IFiltroHora.cs" />
     <Compile Include="Migrations\20180125003607_MyFirstMigration.cs" />
     <Compile Include="Migrations\20180125003607_MyFirstMigration.designer.cs">
       <DependentUpon>20180125003607_MyFirstMigration.cs</DependentUpon>
