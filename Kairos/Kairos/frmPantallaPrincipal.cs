@@ -23,13 +23,15 @@ namespace Kairos
             using (var db = new EventoContexto())
             {
                 db.Database.EnsureCreated();
-                cargarLista(db);
+                cargarLista();
             }
         }
 
-        private void cargarLista(EventoContexto db) {
-            var resultado = (from o in db.Origenes select new { o.nombreOrigen, o.Id }).ToList();
+        private void cargarLista()
+        {
+            var resultado = (from o in new EventoContexto().Origenes select new { o.nombreOrigen, o.Id }).ToList();
             lbProyectosRecientes.ValueMember = "nombreOrigen";
+            lbProyectosRecientes.Items.Clear();
             lbProyectosRecientes.Items.AddRange(resultado.ToArray());
         }
 
@@ -64,6 +66,7 @@ namespace Kairos
             Visible = false;
             frm.ShowDialog();
             Visible = true;
+            cargarLista();
         }
         
         private void btnImportarProyecto_Click(object sender, EventArgs e)
@@ -124,8 +127,20 @@ namespace Kairos
 
                 }
                 db.SaveChanges();
-                cargarLista(db);
+                cargarLista();
             }
+        }
+
+        private void btnAdministrarProyectos_Click(object sender, EventArgs e)
+        {
+            var seleccionado = lbProyectosRecientes.SelectedItem;
+            var a = new { nombreOrigen = "", Id = 0 };
+            a = Cast(a, seleccionado);
+            frmAdministrarProyecto frm = new frmAdministrarProyecto(a.Id, a.nombreOrigen);
+            Visible = false;
+            frm.ShowDialog();
+            Visible = true;
+            cargarLista();
         }
     }
 }

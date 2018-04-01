@@ -138,6 +138,12 @@
     </Compile>
     <Compile Include="Entidades\Evento.cs" />
     <Compile Include="EventoContexto.cs" />
+    <Compile Include="frmAdministrarProyecto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdministrarProyecto.Designer.cs">
+      <DependentUpon>frmAdministrarProyecto.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAgregarProyecto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     <Compile Include="Services\ProyectoService.cs" />
     <EmbeddedResource Include="Captura Arduino\FrmCapturaDatosArduino.resx">
       <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdministrarProyecto.resx">
+      <DependentUpon>frmAdministrarProyecto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAgregarProyecto.resx">
       <DependentUpon>frmAgregarProyecto.cs</DependentUpon>
