@@ -70,6 +70,7 @@
             this.btnAdministrarProyectos.TabIndex = 8;
             this.btnAdministrarProyectos.Text = "Administrar Proyectos";
             this.btnAdministrarProyectos.UseVisualStyleBackColor = false;
+            this.btnAdministrarProyectos.Click += new System.EventHandler(this.btnAdministrarProyectos_Click);
             // 
             // label1
             // 
@@ -92,6 +93,7 @@
             this.btnNuevoProyecto.TabIndex = 10;
             this.btnNuevoProyecto.Text = "Nuevo Proyecto";
             this.btnNuevoProyecto.UseVisualStyleBackColor = false;
+            this.btnNuevoProyecto.Click += new System.EventHandler(this.btnNuevoProyecto_Click);
             // 
             // btnImportarProyecto
             // 
