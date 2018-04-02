@@ -1,4 +1,6 @@
 ﻿using Kairos.Entidades;
+using Kairos.Services;
+using Kairos.Services.Implementaciones;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -68,68 +70,49 @@ namespace Kairos
             Visible = true;
             cargarLista();
         }
-        
+
         private void btnImportarProyecto_Click(object sender, EventArgs e)
         {
             Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "txt files (*.txt)|*.txt";
+            openFileDialog1.Filter = "All supported files (*.txt, *.xls, *xlsx)|*.txt;*.xls;*.xlsx|Text files (*.txt)|*.txt|Excel files (*.xls,*.xlsx)|*.xls; *.xlsx*";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                try
+                int indice = openFileDialog1.FileName.LastIndexOf(".");
+                string extencion = openFileDialog1.FileName.Substring(indice + 1);
+                IImportarService importador = null;
+                switch (extencion)
                 {
-                    if ((myStream = openFileDialog1.OpenFile()) != null)
-                    {
-                        using (myStream)
-                        {
-                            this.leerArchivo(openFileDialog1.FileName);
-                        }
-                    }
+                    case "txt":
+                        importador = new ImportarTxtFile();
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        importador = new ImportarExcelFile();
+                        break;
+                    default:
+                        break;
                 }
-                catch (Exception ex)
+                bool resultado = importador.importarArchivo(openFileDialog1.FileName);
+                if (resultado == true)
                 {
-                    MessageBox.Show("Error: No se puede abrir el archivo " + ex.Message);
+                    MessageBox.Show("El archivo se importó correctamente", "Importar Archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cargarLista();
+                }
+                else
+                {
+                    MessageBox.Show(" No se puede abrir el archivo", "Error de importación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private void leerArchivo(string fileName)
-        {
-            StreamReader objReader = new StreamReader(fileName);
-            string sLine = "";
-            ArrayList arrText = new ArrayList();
 
-            while (sLine != null)
-            {
-                sLine = objReader.ReadLine();
-                if (sLine != null)
-                    arrText.Add(sLine);
-            }
-            objReader.Close();
-            //creo el proyecto en la tabla origenes
-            //checkear que no exista el nombre que se desea ingresar
-            using (var db = new EventoContexto())
-            {
-                string nombre = "Importacion automatica_" + DateTime.Now.ToLongDateString();
-                Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombre, activo = true };
-                db.Origenes.Add(nuevoOrigen);
-                db.SaveChanges();
-                int idOrigenInsertado = nuevoOrigen.Id;
 
-                foreach (string item in arrText)
-                {
-                    db.Eventos.Add(new Entidades.Evento { fecha =Convert.ToDateTime(item), idOrigen = idOrigenInsertado, activo = true });
-
-                }
-                db.SaveChanges();
-                cargarLista();
-            }
-        }
 
         private void btnAdministrarProyectos_Click(object sender, EventArgs e)
         {
