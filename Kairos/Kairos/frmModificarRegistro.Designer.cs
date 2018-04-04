@@ -155,7 +155,6 @@
             this.Controls.Add(this.label2);
             this.Name = "frmModificarRegistro";
             this.Text = "frmModificarRegistro";
-            this.Load += new System.EventHandler(this.frmModificarRegistro_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

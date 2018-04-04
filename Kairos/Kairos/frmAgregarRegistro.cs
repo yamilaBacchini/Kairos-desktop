@@ -1,4 +1,5 @@
 ﻿using Kairos.Entidades;
+using Kairos.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,33 +24,30 @@ namespace Kairos
             this.nombreProyecto = nombreProyecto;
             lblNombreProyecto.Text = nombreProyecto;
         }
-
+        
         private void btnTerminar_Click(object sender, EventArgs e)
-        {   //inserto el nuevo evento
-            using (var db = new EventoContexto())
-            {
-                DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
-                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen = this.idOrigen, activo = true });
-                db.SaveChanges();
-            }
+        {
+            DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
+            EventoService.nuevo(fecha, this.idOrigen);
             MessageBox.Show("Registro Insertado con Exito!", "Insertar Registro", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();
         }
+
+
+
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             Close();
         }
-
+        
         private void btmAgregarOtro_Click(object sender, EventArgs e)
-        {   //inserto el nuevo evento
-            using (var db = new EventoContexto())
-            {//falta buscar el idorigen en la tabla por el nombre de origen
-                DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
-                db.Eventos.Add(new Entidades.Evento { fecha = fecha, idOrigen = this.idOrigen, activo = true });
-                db.SaveChanges();
-            }
+        {
+            DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
+            EventoService.nuevo(fecha, this.idOrigen);
             MessageBox.Show("Registro Insertado con Exito!", "Insertar Registro", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
         }
+
     }
 }
