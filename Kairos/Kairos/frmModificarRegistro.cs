@@ -1,4 +1,5 @@
 ﻿using Kairos.Entidades;
+using Kairos.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,25 +34,9 @@ namespace Kairos
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            using (var db = new EventoContexto())
-            {
-                Evento toUpdate = db.Find<Evento>(idEvento);
-                if (toUpdate != null)
-                {
-                    toUpdate.fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
-                    db.Update(toUpdate);
-                    db.SaveChanges();
-                    Close();
-                }
-                else
-                    MessageBox.Show("No se encontro el registro a modificar", "Error al buscar registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }
-
-        private void frmModificarRegistro_Load(object sender, EventArgs e)
-        {
-
+            DateTime fecha = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, dtpFecha.Value.Day, dtpHora.Value.Hour, dtpHora.Value.Minute, dtpHora.Value.Second);
+            EventoService.modificar(idEvento,fecha);
+            Close();
         }
     }
 }

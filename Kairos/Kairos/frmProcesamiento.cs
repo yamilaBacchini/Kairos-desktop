@@ -2,6 +2,7 @@
 using Kairos.Filtros;
 using Kairos.Filtros.Fecha;
 using Kairos.Filtros.Hora;
+using Kairos.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -132,21 +133,16 @@ namespace Kairos
         private void cargarEventos()
         {
             //lleno la grilla con los eventos
-            using (var db = new EventoContexto())
-            {
-                eventos = (from e in db.Eventos
-                                    where e.activo == true && e.idOrigen == idOrigen
-                                    orderby e.fecha ascending
-                                    select e).ToList();
-
-                dgwEventos.DataSource = eventos;
+            List<Evento> eventos = EventoService.cargarEventos(idOrigen);
+            dgwEventos.DataSource = eventos;
                 dgwEventos.Columns[1].Width = 235;
                 dgwEventos.Columns[0].Visible = false;
                 dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
-            }
-            if(eventos!=null)
+            
+            if (eventos != null)
                 filtrar();
         }
+
 
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
         {
@@ -269,24 +265,22 @@ namespace Kairos
             cargarEventos();
         }
 
+
         private void btnBorrarSeleccionados_Click(object sender, EventArgs e)
         {
             if (dgwEventos.SelectedRows.Count > 0)
             {
-                using (var db = new EventoContexto())
-                {
                     foreach (DataGridViewRow item in dgwEventos.SelectedRows)
                     {
                         int idEventoAEliminar = Convert.ToInt32(item.Cells[0].Value);
-                        db.Remove<Evento>(db.Find<Evento>(idEventoAEliminar));
+                        EventoService.borrar(idEventoAEliminar);
                     }
-                    db.SaveChanges();
-                }
                 cargarEventos();
             }
             else
                 MessageBox.Show("Seleccione la/s fila/s a borrar", "Error de Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
     }
 
     class ComboItem

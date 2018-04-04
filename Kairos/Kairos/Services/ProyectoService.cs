@@ -24,6 +24,7 @@ namespace Kairos.Services
             {
                 Origen proyecto = db.Origenes.Find(id);
                 proyecto.nombreOrigen = nombre;
+                //falta db.Update(proyecto);
                 db.SaveChanges();
             }
         }
