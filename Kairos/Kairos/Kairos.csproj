@@ -158,6 +158,12 @@
     </Compile>
     <Compile Include="Entidades\Evento.cs" />
     <Compile Include="EventoContexto.cs" />
+    <Compile Include="formImportacionExcelFormato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formImportacionExcelFormato.Designer.cs">
+      <DependentUpon>formImportacionExcelFormato.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAdministrarProyecto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     <Compile Include="Services\ProyectoService.cs" />
     <EmbeddedResource Include="Captura Arduino\FrmCapturaDatosArduino.resx">
       <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formImportacionExcelFormato.resx">
+      <DependentUpon>formImportacionExcelFormato.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAdministrarProyecto.resx">
       <DependentUpon>frmAdministrarProyecto.cs</DependentUpon>

@@ -11,6 +11,17 @@ namespace Kairos.Services.Implementaciones
 {
     class ImportarExcelFile : IImportarService
     {
+        private int hoja = -1;
+        private int columna = -1;
+        private int filaInicial = -1;
+
+        public ImportarExcelFile(int hoja, int columna, int filaInicial)
+        {
+            this.hoja = hoja;
+            this.columna = columna;
+            this.filaInicial = filaInicial;
+        }
+
         public bool importarArchivo(string pathArchivo)
         {
             bool resultado = false;
@@ -21,9 +32,9 @@ namespace Kairos.Services.Implementaciones
                 List<Evento> eventos = new List<Evento>();
                 using (var archivo = new XLWorkbook(pathArchivo))
                 {
-                    var hoja = archivo.Worksheet(1);
-                    int numeroFila = 1;
-                    int columna = 1;
+                    var hoja = archivo.Worksheet(this.hoja);
+                    int numeroFila = this.filaInicial;
+                    int columna = this.columna;
                     while (!hoja.Cell(numeroFila, columna).IsEmpty())
                     {
                         DateTime auxFecha = hoja.Cell(numeroFila, columna).GetDateTime();

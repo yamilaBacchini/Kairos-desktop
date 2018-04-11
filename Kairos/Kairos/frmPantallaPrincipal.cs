@@ -93,21 +93,29 @@ namespace Kairos
                         break;
                     case "xls":
                     case "xlsx":
-                        importador = new ImportarExcelFile();
+                        formImportacionExcelFormato frmxls = new formImportacionExcelFormato();
+                        if (frmxls.ShowDialog() == DialogResult.OK)
+                        {
+                            importador = new ImportarExcelFile(frmxls.hoja,frmxls.columna,frmxls.filaIncial);
+                        }
                         break;
                     default:
                         break;
                 }
-                bool resultado = importador.importarArchivo(openFileDialog1.FileName);
-                if (resultado == true)
+                if (importador != null)
                 {
-                    MessageBox.Show("El archivo se importó correctamente", "Importar Archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cargarLista();
+                    bool resultado = importador.importarArchivo(openFileDialog1.FileName);
+                    if (resultado == true)
+                    {
+                        MessageBox.Show("El archivo se importó correctamente", "Importar Archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cargarLista();
+                    }
+                    else
+                    {
+                        MessageBox.Show(" No se puede abrir el archivo", "Error de importación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show(" No se puede abrir el archivo", "Error de importación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+               
             }
         }
 
