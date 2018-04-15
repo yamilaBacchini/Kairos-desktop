@@ -12,21 +12,23 @@ namespace Kairos.Services.Implementaciones
 {
     class ImportarTxtFile : IImportarService
     {
+        private string delimitador;
+
+        public ImportarTxtFile(string delimitador)
+        {
+            this.delimitador = delimitador;
+        }
+
         public bool importarArchivo(string pathArchivo)
         {
             try
-            {
-                StreamReader objReader = new StreamReader(pathArchivo);
-                string sLine = "";
+            {   
                 List<string> eventos = new List<string>();
 
-                while (sLine != null)
-                {
-                    sLine = objReader.ReadLine();
-                    if (sLine != null)
-                        eventos.Add(sLine);
-                }
-                objReader.Close();
+                if (delimitador=="enter")
+                    eventos= leerDelimitadorEnter(pathArchivo);
+               
+                
                 //creo el proyecto en la tabla origenes
                 //checkear que no exista el nombre que se desea ingresar
                 using (var db = new EventoContexto())
@@ -53,6 +55,21 @@ namespace Kairos.Services.Implementaciones
                 return false;
             }
 
+        }
+
+        public List<string> leerDelimitadorEnter(string pathArchivo)
+        {
+            StreamReader objReader = new StreamReader(pathArchivo);
+            string sLine = "";
+            List<string> eventosLeidos = new List<string>();
+            while (sLine != null)
+            {
+                sLine = objReader.ReadLine();
+                if (sLine != null)
+                    eventosLeidos.Add(sLine);
+            }
+            objReader.Close();
+            return eventosLeidos;
         }
 
     }

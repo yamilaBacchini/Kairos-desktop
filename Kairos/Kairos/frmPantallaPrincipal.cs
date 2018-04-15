@@ -73,7 +73,7 @@ namespace Kairos
 
         private void btnImportarProyecto_Click(object sender, EventArgs e)
         {
-            Stream myStream = null;
+           // Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = "c:\\";
@@ -89,7 +89,11 @@ namespace Kairos
                 switch (extencion)
                 {
                     case "txt":
-                        importador = new ImportarTxtFile();
+                        formImportacionTxtFormato frmtxt = new formImportacionTxtFormato();
+                        if (frmtxt.ShowDialog() == DialogResult.OK)
+                        {
+                            importador = new ImportarTxtFile(frmtxt.delimitador);
+                        }
                         break;
                     case "xls":
                     case "xlsx":
