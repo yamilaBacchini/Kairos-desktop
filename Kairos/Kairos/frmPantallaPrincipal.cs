@@ -89,7 +89,11 @@ namespace Kairos
                 switch (extencion)
                 {
                     case "txt":
-                        importador = new ImportarTxtFile();
+                        formImportacionTxtFormato frmtxt = new formImportacionTxtFormato();
+                        if (frmtxt.ShowDialog() == DialogResult.OK)
+                        {
+                            importador = new ImportarTxtFile(frmtxt.delimitador);
+                        }
                         break;
                     case "xls":
                     case "xlsx":

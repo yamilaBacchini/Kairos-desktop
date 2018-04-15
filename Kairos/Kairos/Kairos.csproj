@@ -164,6 +164,12 @@
     <Compile Include="formImportacionExcelFormato.Designer.cs">
       <DependentUpon>formImportacionExcelFormato.cs</DependentUpon>
     </Compile>
+    <Compile Include="formImportacionTxtFormato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formImportacionTxtFormato.Designer.cs">
+      <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAdministrarProyecto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formImportacionExcelFormato.resx">
       <DependentUpon>formImportacionExcelFormato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formImportacionTxtFormato.resx">
+      <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAdministrarProyecto.resx">
       <DependentUpon>frmAdministrarProyecto.cs</DependentUpon>

@@ -12,6 +12,13 @@ namespace Kairos.Services.Implementaciones
 {
     class ImportarTxtFile : IImportarService
     {
+        private string delimitador;
+
+        public ImportarTxtFile(string delimitador)
+        {
+            this.delimitador = delimitador;
+        }
+
         public bool importarArchivo(string pathArchivo)
         {
             try
