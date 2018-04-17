@@ -57,7 +57,7 @@ namespace Kairos.Services.Implementaciones
             }
 
         }
-
+        //lL
         public List<string> leerDelimitadorEnter(string pathArchivo)
         {
             StreamReader objReader = new StreamReader(pathArchivo);
