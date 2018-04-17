@@ -65,7 +65,7 @@ namespace Kairos
             else if (rbPipe.Checked == true)
                 resultado = "|";
             else if (rbTab.Checked == true)
-                resultado = "tab";
+                resultado = "\t";
             else if (rbOtro.Checked == true)
                 resultado = txtOtro.Text;
             return resultado;

@@ -25,9 +25,10 @@ namespace Kairos.Services.Implementaciones
             {   
                 List<string> eventos = new List<string>();
 
-                if (delimitador=="enter")
-                    eventos= leerDelimitadorEnter(pathArchivo);
-               
+                if (delimitador == "enter")
+                    eventos = leerDelimitadorEnter(pathArchivo);
+                else
+                    eventos = leerDelimitadorCaracter(pathArchivo, this.delimitador);
                 
                 //creo el proyecto en la tabla origenes
                 //checkear que no exista el nombre que se desea ingresar
@@ -72,6 +73,25 @@ namespace Kairos.Services.Implementaciones
             return eventosLeidos;
         }
 
+
+        public List<string> leerDelimitadorCaracter(string pathArchivo,string caracter)
+        {
+            StreamReader objReader = new StreamReader(pathArchivo);
+            string sLine = "";
+            List<string> eventosLeidos = new List<string>();
+            string[] eventosTemp = null;
+            while ((sLine = objReader.ReadLine()) != null)
+            {
+                eventosTemp = (sLine.Split(Convert.ToChar(caracter)));
+            }
+            objReader.Close();
+            for (int i = 0; i < eventosTemp.Length; i++)
+            {
+                eventosLeidos.Add(eventosTemp[i]);
+            }
+            return eventosLeidos;
+        }
+        
     }
 
 
