@@ -34,7 +34,7 @@
             this.nudHoja = new System.Windows.Forms.NumericUpDown();
             this.nudColumna = new System.Windows.Forms.NumericUpDown();
             this.nudFilaInicial = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btncancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudHoja)).BeginInit();
@@ -111,15 +111,15 @@
             0,
             0});
             // 
-            // label4
+            // lblTitulo
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Book Antiqua", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(120, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(320, 25);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Indique la ubicación de los datos";
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Book Antiqua", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Location = new System.Drawing.Point(120, 46);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(320, 25);
+            this.lblTitulo.TabIndex = 7;
+            this.lblTitulo.Text = "Indique la ubicación de los datos";
             // 
             // btnAceptar
             // 
@@ -156,7 +156,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.btncancelar);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.nudFilaInicial);
             this.Controls.Add(this.nudColumna);
             this.Controls.Add(this.nudHoja);
@@ -180,7 +180,7 @@
         private System.Windows.Forms.NumericUpDown nudHoja;
         private System.Windows.Forms.NumericUpDown nudColumna;
         private System.Windows.Forms.NumericUpDown nudFilaInicial;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btncancelar;
     }
