@@ -144,9 +144,9 @@ namespace Kairos
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
 
-                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text);
+                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text+".prk");
                 //MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                lblMensaje.Text = "Se modifico el proyecto "+txtNombreProyecto.Text+" correctamente";
+                lblMensaje.Text = "Se modifico el proyecto "+txtNombreProyecto.Text+".prk correctamente";
                 lblMensaje.Visible = true;
                 if (this.timerActivo)
                     timerMensaje.Stop();
@@ -156,9 +156,9 @@ namespace Kairos
 
             } else
             {
-                ProyectoService.nuevoProyecto(txtNombreProyecto.Text);
+                ProyectoService.nuevoProyecto(txtNombreProyecto.Text+".prk");//le agrega la extension
                 //MessageBox.Show("Proyecto creado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+" correctamente";
+                lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+".prk correctamente";
                 lblMensaje.Visible = true;
                 if (this.timerActivo)
                     timerMensaje.Stop();
@@ -210,7 +210,7 @@ namespace Kairos
             {
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
-                txtNombreProyecto.Text = a.nombreOrigen;
+                txtNombreProyecto.Text = a.nombreOrigen.Substring(0,a.nombreOrigen.Length-4); //le saco la extension
 
                 lblNombreProyecto.Visible = true;
                 txtNombreProyecto.Visible = true;
