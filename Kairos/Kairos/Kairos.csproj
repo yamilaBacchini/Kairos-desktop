@@ -170,18 +170,6 @@
     <Compile Include="formImportacionTxtFormato.Designer.cs">
       <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAdministrarProyecto.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAdministrarProyecto.Designer.cs">
-      <DependentUpon>frmAdministrarProyecto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmAgregarProyecto.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAgregarProyecto.Designer.cs">
-      <DependentUpon>frmAgregarProyecto.cs</DependentUpon>
-    </Compile>
     <Compile Include="Filtros\Fecha\FiltroFechaEntre.cs" />
     <Compile Include="Filtros\Fecha\FiltroFechaMayor.cs" />
     <Compile Include="Filtros\Fecha\FiltroFechaMenor.cs" />
@@ -235,12 +223,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formImportacionTxtFormato.resx">
       <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAdministrarProyecto.resx">
-      <DependentUpon>frmAdministrarProyecto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAgregarProyecto.resx">
-      <DependentUpon>frmAgregarProyecto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAgregarRegistro.resx">
       <DependentUpon>frmAgregarRegistro.cs</DependentUpon>

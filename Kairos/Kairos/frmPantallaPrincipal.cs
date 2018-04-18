@@ -17,6 +17,7 @@ namespace Kairos
 {
     public partial class frmPantallaPrincipal : Form
     {
+        bool timerActivo = false;
 
         public frmPantallaPrincipal()
         {
@@ -118,15 +119,15 @@ namespace Kairos
         {
             if (txtNombreProyecto.Text!="")
             {
-                btnAceptarModificacion.Enabled = true;
-                btnAceptarModificacion.BackColor = Color.DarkRed;
-                btnAceptarModificacion.ForeColor = Color.White;
+                btnAceptarModificar.Enabled = true;
+                btnAceptarModificar.BackColor = Color.DarkRed;
+                btnAceptarModificar.ForeColor = Color.White;
             }
             else
             {
-                btnAceptarModificacion.Enabled = false;
-                btnAceptarModificacion.BackColor = Color.Silver;
-                btnAceptarModificacion.ForeColor = Color.Black;
+                btnAceptarModificar.Enabled = false;
+                btnAceptarModificar.BackColor = Color.Silver;
+                btnAceptarModificar.ForeColor = Color.Black;
             }
         }
 
@@ -137,18 +138,33 @@ namespace Kairos
 
         private void btnAceptarModificacion_Click(object sender, EventArgs e)
         {
-            if(btnAceptarModificacion.Text != "Crear")
+            if (btnAceptarModificar.Text != "Crear")
             {
                 var seleccionado = lbProyectosRecientes.SelectedItem;
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
 
                 ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text);
-                MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                //MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                lblMensaje.Text = "Se modifico el proyecto "+txtNombreProyecto.Text+" correctamente";
+                lblMensaje.Visible = true;
+                if (this.timerActivo)
+                    timerMensaje.Stop();
+
+                timerMensaje.Start();
+                this.timerActivo = true;
+
             } else
             {
                 ProyectoService.nuevoProyecto(txtNombreProyecto.Text);
-                MessageBox.Show("Proyecto creado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                //MessageBox.Show("Proyecto creado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+" correctamente";
+                lblMensaje.Visible = true;
+                if (this.timerActivo)
+                    timerMensaje.Stop();
+
+                timerMensaje.Start();
+                this.timerActivo = true;
             }
             
             modificacionInvisible();
@@ -160,9 +176,9 @@ namespace Kairos
             lblNombreProyecto.Visible = true;
             txtNombreProyecto.Clear();
             txtNombreProyecto.Visible = true;
-            btnAceptarModificacion.Text = "Crear";
-            btnAceptarModificacion.Enabled = false;
-            btnAceptarModificacion.Visible = true;
+            btnAceptarModificar.Text = "Crear";
+            btnAceptarModificar.Enabled = false;
+            btnAceptarModificar.Visible = true;
             btnCancelarModificacion.Visible = true;
         }
 
@@ -174,7 +190,14 @@ namespace Kairos
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
                 ProyectoService.borrarProyecto(a.Id);
-                MessageBox.Show("Proyecto borrado con Exito!", "Borrar Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                //MessageBox.Show("Proyecto borrado con Exito!", "Borrar Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                lblMensaje.Text = "Se elimino el proyecto "+a.nombreOrigen+" correctamente";
+                lblMensaje.Visible = true;
+                if (this.timerActivo)
+                    timerMensaje.Stop();
+
+                timerMensaje.Start();
+                this.timerActivo = true;
                 cargarLista();
             }
     }
@@ -191,9 +214,9 @@ namespace Kairos
 
                 lblNombreProyecto.Visible = true;
                 txtNombreProyecto.Visible = true;
-                btnAceptarModificacion.Text = "Modificar";
-                btnAceptarModificacion.Enabled = true;
-                btnAceptarModificacion.Visible = true;
+                btnAceptarModificar.Text = "Modificar";
+                btnAceptarModificar.Enabled = true;
+                btnAceptarModificar.Visible = true;
                 btnCancelarModificacion.Visible = true;
             }
         }
@@ -202,8 +225,15 @@ namespace Kairos
         {
             lblNombreProyecto.Visible = false;
             txtNombreProyecto.Visible = false;
-            btnAceptarModificacion.Visible = false;
+            btnAceptarModificar.Visible = false;
             btnCancelarModificacion.Visible = false;
+        }
+
+        private void timerMensaje_Tick(object sender, EventArgs e)
+        {
+            lblMensaje.Visible = false;
+            timerMensaje.Stop();
+            this.timerActivo = false;
         }
     }
 }
