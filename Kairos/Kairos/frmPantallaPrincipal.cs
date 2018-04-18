@@ -62,15 +62,6 @@ namespace Kairos
             return (T)x;
         }
 
-        private void btnNuevoProyecto_Click(object sender, EventArgs e)
-        {
-            frmAgregarProyecto frm = new frmAgregarProyecto();
-            Visible = false;
-            frm.ShowDialog();
-            Visible = true;
-            cargarLista();
-        }
-
         private void btnImportarProyecto_Click(object sender, EventArgs e)
         {
            // Stream myStream = null;
@@ -123,25 +114,9 @@ namespace Kairos
             }
         }
 
-
-
-
-        private void btnAdministrarProyectos_Click(object sender, EventArgs e)
-        {
-            var seleccionado = lbProyectosRecientes.SelectedItem;
-            var a = new { nombreOrigen = "", Id = 0 };
-            a = Cast(a, seleccionado);
-            frmAdministrarProyecto frm = new frmAdministrarProyecto(a.Id, a.nombreOrigen);
-            Visible = false;
-            frm.ShowDialog();
-            Visible = true;
-            cargarLista();
-        }
-
-
         private void txtNombreModificado_TextChanged(object sender, EventArgs e)
         {
-            if (txtNombreModificado.Text!="")
+            if (txtNombreProyecto.Text!="")
             {
                 btnAceptarModificacion.Enabled = true;
                 btnAceptarModificacion.BackColor = Color.DarkRed;
@@ -162,24 +137,33 @@ namespace Kairos
 
         private void btnAceptarModificacion_Click(object sender, EventArgs e)
         {
-            var seleccionado = lbProyectosRecientes.SelectedItem;
-            var a = new { nombreOrigen = "", Id = 0 };
-            a = Cast(a, seleccionado);
+            if(btnAceptarModificacion.Text != "Crear")
+            {
+                var seleccionado = lbProyectosRecientes.SelectedItem;
+                var a = new { nombreOrigen = "", Id = 0 };
+                a = Cast(a, seleccionado);
 
-            ProyectoService.modificarProyecto(a.Id, txtNombreModificado.Text);
-            MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text);
+                MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            } else
+            {
+                ProyectoService.nuevoProyecto(txtNombreProyecto.Text);
+                MessageBox.Show("Proyecto creado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            
             modificacionInvisible();
-            txtNombreModificado.Clear();
             cargarLista();
         }
 
         private void imgAgregar_Click(object sender, EventArgs e)
         {
-            frmAgregarProyecto frm = new frmAgregarProyecto();
-            Visible = false;
-            frm.ShowDialog();
-            Visible = true;
-            cargarLista();
+            lblNombreProyecto.Visible = true;
+            txtNombreProyecto.Clear();
+            txtNombreProyecto.Visible = true;
+            btnAceptarModificacion.Text = "Crear";
+            btnAceptarModificacion.Enabled = false;
+            btnAceptarModificacion.Visible = true;
+            btnCancelarModificacion.Visible = true;
         }
 
         private void imgBorrar_Click(object sender, EventArgs e)
@@ -201,21 +185,25 @@ namespace Kairos
 
             if (seleccionado != null)
             {
-                lblNuevoNombre.Visible = true;
-                txtNombreModificado.Visible = true;
+                var a = new { nombreOrigen = "", Id = 0 };
+                a = Cast(a, seleccionado);
+                txtNombreProyecto.Text = a.nombreOrigen;
+
+                lblNombreProyecto.Visible = true;
+                txtNombreProyecto.Visible = true;
+                btnAceptarModificacion.Text = "Modificar";
+                btnAceptarModificacion.Enabled = true;
                 btnAceptarModificacion.Visible = true;
-                btnAceptarModificacion.Enabled = false;
                 btnCancelarModificacion.Visible = true;
             }
         }
 
         private void modificacionInvisible()
         {
-            lblNuevoNombre.Visible = false;
-            txtNombreModificado.Visible = false;
+            lblNombreProyecto.Visible = false;
+            txtNombreProyecto.Visible = false;
             btnAceptarModificacion.Visible = false;
             btnCancelarModificacion.Visible = false;
-            txtNombreModificado.Clear();
         }
     }
 }
