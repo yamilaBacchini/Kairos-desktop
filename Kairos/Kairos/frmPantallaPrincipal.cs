@@ -17,6 +17,7 @@ namespace Kairos
 {
     public partial class frmPantallaPrincipal : Form
     {
+        bool timerActivo = false;
 
         public frmPantallaPrincipal()
         {
@@ -60,15 +61,6 @@ namespace Kairos
             // typeHolder above is just for compiler magic
             // to infer the type to cast x to
             return (T)x;
-        }
-
-        private void btnNuevoProyecto_Click(object sender, EventArgs e)
-        {
-            frmAgregarProyecto frm = new frmAgregarProyecto();
-            Visible = false;
-            frm.ShowDialog();
-            Visible = true;
-            cargarLista();
         }
 
         private void btnImportarProyecto_Click(object sender, EventArgs e)
@@ -123,19 +115,125 @@ namespace Kairos
             }
         }
 
+        private void txtNombreModificado_TextChanged(object sender, EventArgs e)
+        {
+            if (txtNombreProyecto.Text!="")
+            {
+                btnAceptarModificar.Enabled = true;
+                btnAceptarModificar.BackColor = Color.DarkRed;
+                btnAceptarModificar.ForeColor = Color.White;
+            }
+            else
+            {
+                btnAceptarModificar.Enabled = false;
+                btnAceptarModificar.BackColor = Color.Silver;
+                btnAceptarModificar.ForeColor = Color.Black;
+            }
+        }
 
+        private void btnCancelarModificacion_Click(object sender, EventArgs e)
+        {
+            modificacionInvisible();
+        }
 
+        private void btnAceptarModificacion_Click(object sender, EventArgs e)
+        {
+            if (btnAceptarModificar.Text != "Crear")
+            {
+                var seleccionado = lbProyectosRecientes.SelectedItem;
+                var a = new { nombreOrigen = "", Id = 0 };
+                a = Cast(a, seleccionado);
 
-        private void btnAdministrarProyectos_Click(object sender, EventArgs e)
+                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text+".prk");
+                //MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                lblMensaje.Text = "Se modifico el proyecto "+txtNombreProyecto.Text+".prk correctamente";
+                lblMensaje.Visible = true;
+                if (this.timerActivo)
+                    timerMensaje.Stop();
+
+                timerMensaje.Start();
+                this.timerActivo = true;
+
+            } else
+            {
+                ProyectoService.nuevoProyecto(txtNombreProyecto.Text+".prk");//le agrega la extension
+                //MessageBox.Show("Proyecto creado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+".prk correctamente";
+                lblMensaje.Visible = true;
+                if (this.timerActivo)
+                    timerMensaje.Stop();
+
+                timerMensaje.Start();
+                this.timerActivo = true;
+            }
+            
+            modificacionInvisible();
+            cargarLista();
+        }
+
+        private void imgAgregar_Click(object sender, EventArgs e)
+        {
+            lblNombreProyecto.Visible = true;
+            txtNombreProyecto.Clear();
+            txtNombreProyecto.Visible = true;
+            btnAceptarModificar.Text = "Crear";
+            btnAceptarModificar.Enabled = false;
+            btnAceptarModificar.Visible = true;
+            btnCancelarModificacion.Visible = true;
+        }
+
+        private void imgBorrar_Click(object sender, EventArgs e)
         {
             var seleccionado = lbProyectosRecientes.SelectedItem;
-            var a = new { nombreOrigen = "", Id = 0 };
-            a = Cast(a, seleccionado);
-            frmAdministrarProyecto frm = new frmAdministrarProyecto(a.Id, a.nombreOrigen);
-            Visible = false;
-            frm.ShowDialog();
-            Visible = true;
-            cargarLista();
+            if(seleccionado!=null)
+            {
+                var a = new { nombreOrigen = "", Id = 0 };
+                a = Cast(a, seleccionado);
+                ProyectoService.borrarProyecto(a.Id);
+                //MessageBox.Show("Proyecto borrado con Exito!", "Borrar Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                lblMensaje.Text = "Se elimino el proyecto "+a.nombreOrigen+" correctamente";
+                lblMensaje.Visible = true;
+                if (this.timerActivo)
+                    timerMensaje.Stop();
+
+                timerMensaje.Start();
+                this.timerActivo = true;
+                cargarLista();
+            }
+    }
+
+        private void imgEditar_Click(object sender, EventArgs e)
+        {
+            var seleccionado = lbProyectosRecientes.SelectedItem;
+
+            if (seleccionado != null)
+            {
+                var a = new { nombreOrigen = "", Id = 0 };
+                a = Cast(a, seleccionado);
+                txtNombreProyecto.Text = a.nombreOrigen.Substring(0,a.nombreOrigen.Length-4); //le saco la extension
+
+                lblNombreProyecto.Visible = true;
+                txtNombreProyecto.Visible = true;
+                btnAceptarModificar.Text = "Modificar";
+                btnAceptarModificar.Enabled = true;
+                btnAceptarModificar.Visible = true;
+                btnCancelarModificacion.Visible = true;
+            }
+        }
+
+        private void modificacionInvisible()
+        {
+            lblNombreProyecto.Visible = false;
+            txtNombreProyecto.Visible = false;
+            btnAceptarModificar.Visible = false;
+            btnCancelarModificacion.Visible = false;
+        }
+
+        private void timerMensaje_Tick(object sender, EventArgs e)
+        {
+            lblMensaje.Visible = false;
+            timerMensaje.Stop();
+            this.timerActivo = false;
         }
     }
 }
