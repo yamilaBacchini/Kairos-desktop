@@ -137,5 +137,85 @@ namespace Kairos
             Visible = true;
             cargarLista();
         }
+
+
+        private void txtNombreModificado_TextChanged(object sender, EventArgs e)
+        {
+            if (txtNombreModificado.Text!="")
+            {
+                btnAceptarModificacion.Enabled = true;
+                btnAceptarModificacion.BackColor = Color.DarkRed;
+                btnAceptarModificacion.ForeColor = Color.White;
+            }
+            else
+            {
+                btnAceptarModificacion.Enabled = false;
+                btnAceptarModificacion.BackColor = Color.Silver;
+                btnAceptarModificacion.ForeColor = Color.Black;
+            }
+        }
+
+        private void btnCancelarModificacion_Click(object sender, EventArgs e)
+        {
+            modificacionInvisible();
+        }
+
+        private void btnAceptarModificacion_Click(object sender, EventArgs e)
+        {
+            var seleccionado = lbProyectosRecientes.SelectedItem;
+            var a = new { nombreOrigen = "", Id = 0 };
+            a = Cast(a, seleccionado);
+
+            ProyectoService.modificarProyecto(a.Id, txtNombreModificado.Text);
+            MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            modificacionInvisible();
+            txtNombreModificado.Clear();
+            cargarLista();
+        }
+
+        private void imgAgregar_Click(object sender, EventArgs e)
+        {
+            frmAgregarProyecto frm = new frmAgregarProyecto();
+            Visible = false;
+            frm.ShowDialog();
+            Visible = true;
+            cargarLista();
+        }
+
+        private void imgBorrar_Click(object sender, EventArgs e)
+        {
+            var seleccionado = lbProyectosRecientes.SelectedItem;
+            if(seleccionado!=null)
+            {
+                var a = new { nombreOrigen = "", Id = 0 };
+                a = Cast(a, seleccionado);
+                ProyectoService.borrarProyecto(a.Id);
+                MessageBox.Show("Proyecto borrado con Exito!", "Borrar Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                cargarLista();
+            }
+    }
+
+        private void imgEditar_Click(object sender, EventArgs e)
+        {
+            var seleccionado = lbProyectosRecientes.SelectedItem;
+
+            if (seleccionado != null)
+            {
+                lblNuevoNombre.Visible = true;
+                txtNombreModificado.Visible = true;
+                btnAceptarModificacion.Visible = true;
+                btnAceptarModificacion.Enabled = false;
+                btnCancelarModificacion.Visible = true;
+            }
+        }
+
+        private void modificacionInvisible()
+        {
+            lblNuevoNombre.Visible = false;
+            txtNombreModificado.Visible = false;
+            btnAceptarModificacion.Visible = false;
+            btnCancelarModificacion.Visible = false;
+            txtNombreModificado.Clear();
+        }
     }
 }
