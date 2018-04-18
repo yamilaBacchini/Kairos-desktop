@@ -25,7 +25,7 @@ namespace Kairos
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Close();
+            Close(); 
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
