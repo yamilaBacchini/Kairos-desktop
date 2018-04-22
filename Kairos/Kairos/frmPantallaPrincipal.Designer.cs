@@ -32,7 +32,7 @@
             System.Windows.Forms.Label lblProyectosGuardados;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPantallaPrincipal));
             this.lbProyectosRecientes = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.btnImportarProyecto = new System.Windows.Forms.Button();
             this.btnProcesarDatos = new System.Windows.Forms.Button();
             this.imgAgregar = new System.Windows.Forms.PictureBox();
@@ -45,19 +45,18 @@
             this.panelTitulo = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.timerMensaje = new System.Windows.Forms.Timer(this.components);
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.nombreProyectoUC1 = new Kairos.NombreProyectoUC();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.flowPanelBotones = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnProyectos = new System.Windows.Forms.Button();
+            this.btnArduino = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.panelNotificaciones = new System.Windows.Forms.Panel();
             lblProyectosGuardados = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).BeginInit();
             this.panelTitulo.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.flowPanelBotones.SuspendLayout();
+            this.panelNotificaciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProyectosGuardados
@@ -88,29 +87,30 @@
             this.lbProyectosRecientes.Size = new System.Drawing.Size(400, 528);
             this.lbProyectosRecientes.TabIndex = 7;
             // 
-            // label1
+            // lblTitulo
             // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Vivaldi", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(420, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(267, 100);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Kairós";
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTitulo.Font = new System.Drawing.Font("Vivaldi", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.ForeColor = System.Drawing.Color.Black;
+            this.lblTitulo.Location = new System.Drawing.Point(420, 0);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(267, 100);
+            this.lblTitulo.TabIndex = 9;
+            this.lblTitulo.Text = "Kairós";
             // 
             // btnImportarProyecto
             // 
             this.btnImportarProyecto.BackColor = System.Drawing.Color.Transparent;
             this.btnImportarProyecto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnImportarProyecto.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnImportarProyecto.FlatAppearance.BorderColor = System.Drawing.Color.LightPink;
             this.btnImportarProyecto.FlatAppearance.BorderSize = 0;
-            this.btnImportarProyecto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.btnImportarProyecto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightPink;
+            this.btnImportarProyecto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LavenderBlush;
             this.btnImportarProyecto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImportarProyecto.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImportarProyecto.ForeColor = System.Drawing.Color.White;
+            this.btnImportarProyecto.ForeColor = System.Drawing.Color.DeepPink;
             this.btnImportarProyecto.Location = new System.Drawing.Point(0, 248);
             this.btnImportarProyecto.Margin = new System.Windows.Forms.Padding(0);
             this.btnImportarProyecto.Name = "btnImportarProyecto";
@@ -124,12 +124,13 @@
             // 
             this.btnProcesarDatos.BackColor = System.Drawing.Color.Transparent;
             this.btnProcesarDatos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnProcesarDatos.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnProcesarDatos.FlatAppearance.BorderColor = System.Drawing.Color.Pink;
             this.btnProcesarDatos.FlatAppearance.BorderSize = 0;
-            this.btnProcesarDatos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.btnProcesarDatos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightPink;
+            this.btnProcesarDatos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LavenderBlush;
             this.btnProcesarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProcesarDatos.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProcesarDatos.ForeColor = System.Drawing.Color.White;
+            this.btnProcesarDatos.ForeColor = System.Drawing.Color.DeepPink;
             this.btnProcesarDatos.Location = new System.Drawing.Point(0, 124);
             this.btnProcesarDatos.Margin = new System.Windows.Forms.Padding(0);
             this.btnProcesarDatos.Name = "btnProcesarDatos";
@@ -176,7 +177,7 @@
             // 
             this.lblNombreProyecto.AutoSize = true;
             this.lblNombreProyecto.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreProyecto.Location = new System.Drawing.Point(1019, 204);
+            this.lblNombreProyecto.Location = new System.Drawing.Point(788, 228);
             this.lblNombreProyecto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombreProyecto.Name = "lblNombreProyecto";
             this.lblNombreProyecto.Size = new System.Drawing.Size(145, 22);
@@ -186,7 +187,7 @@
             // 
             // txtNombreProyecto
             // 
-            this.txtNombreProyecto.Location = new System.Drawing.Point(1020, 231);
+            this.txtNombreProyecto.Location = new System.Drawing.Point(789, 255);
             this.txtNombreProyecto.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreProyecto.Name = "txtNombreProyecto";
             this.txtNombreProyecto.Size = new System.Drawing.Size(227, 22);
@@ -203,7 +204,7 @@
             this.btnAceptarModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptarModificar.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptarModificar.ForeColor = System.Drawing.Color.Black;
-            this.btnAceptarModificar.Location = new System.Drawing.Point(1020, 263);
+            this.btnAceptarModificar.Location = new System.Drawing.Point(789, 287);
             this.btnAceptarModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAceptarModificar.Name = "btnAceptarModificar";
             this.btnAceptarModificar.Size = new System.Drawing.Size(84, 34);
@@ -220,7 +221,7 @@
             this.btnCancelarModificacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelarModificacion.Font = new System.Drawing.Font("Book Antiqua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelarModificacion.ForeColor = System.Drawing.Color.Black;
-            this.btnCancelarModificacion.Location = new System.Drawing.Point(1152, 263);
+            this.btnCancelarModificacion.Location = new System.Drawing.Point(921, 287);
             this.btnCancelarModificacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelarModificacion.Name = "btnCancelarModificacion";
             this.btnCancelarModificacion.Size = new System.Drawing.Size(95, 37);
@@ -233,7 +234,7 @@
             // panelTitulo
             // 
             this.panelTitulo.BackColor = System.Drawing.Color.LavenderBlush;
-            this.panelTitulo.Controls.Add(this.label1);
+            this.panelTitulo.Controls.Add(this.lblTitulo);
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
             this.panelTitulo.Margin = new System.Windows.Forms.Padding(0);
             this.panelTitulo.Name = "panelTitulo";
@@ -243,106 +244,101 @@
             // lblMensaje
             // 
             this.lblMensaje.AutoSize = true;
-            this.lblMensaje.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.lblMensaje.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMensaje.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblMensaje.BackColor = System.Drawing.Color.Transparent;
+            this.lblMensaje.Font = new System.Drawing.Font("Arial Narrow", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMensaje.ForeColor = System.Drawing.Color.ForestGreen;
             this.lblMensaje.Location = new System.Drawing.Point(0, 0);
             this.lblMensaje.Margin = new System.Windows.Forms.Padding(0);
             this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(72, 24);
+            this.lblMensaje.Size = new System.Drawing.Size(312, 24);
             this.lblMensaje.TabIndex = 21;
-            this.lblMensaje.Text = "Mensaje";
-            this.lblMensaje.Visible = false;
+            this.lblMensaje.Text = "Este es un mensaje de error de prueba";
             // 
             // timerMensaje
             // 
             this.timerMensaje.Interval = 3000;
             this.timerMensaje.Tick += new System.EventHandler(this.timerMensaje_Tick);
             // 
-            // flowLayoutPanel1
+            // flowPanelBotones
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.DarkGray;
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.btnProcesarDatos);
-            this.flowLayoutPanel1.Controls.Add(this.btnImportarProyecto);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Controls.Add(this.button3);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 100);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(280, 620);
-            this.flowLayoutPanel1.TabIndex = 22;
+            this.flowPanelBotones.BackColor = System.Drawing.Color.Pink;
+            this.flowPanelBotones.Controls.Add(this.btnProyectos);
+            this.flowPanelBotones.Controls.Add(this.btnProcesarDatos);
+            this.flowPanelBotones.Controls.Add(this.btnImportarProyecto);
+            this.flowPanelBotones.Controls.Add(this.btnArduino);
+            this.flowPanelBotones.Controls.Add(this.btnSalir);
+            this.flowPanelBotones.Location = new System.Drawing.Point(0, 100);
+            this.flowPanelBotones.Margin = new System.Windows.Forms.Padding(0);
+            this.flowPanelBotones.Name = "flowPanelBotones";
+            this.flowPanelBotones.Size = new System.Drawing.Size(280, 620);
+            this.flowPanelBotones.TabIndex = 22;
             // 
-            // panel1
+            // btnProyectos
             // 
-            this.panel1.BackColor = System.Drawing.Color.GreenYellow;
-            this.panel1.Controls.Add(this.lblMensaje);
-            this.panel1.Location = new System.Drawing.Point(280, 100);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 25);
-            this.panel1.TabIndex = 23;
-            this.panel1.Visible = false;
+            this.btnProyectos.BackColor = System.Drawing.Color.Transparent;
+            this.btnProyectos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProyectos.FlatAppearance.BorderColor = System.Drawing.Color.Pink;
+            this.btnProyectos.FlatAppearance.BorderSize = 0;
+            this.btnProyectos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightPink;
+            this.btnProyectos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LavenderBlush;
+            this.btnProyectos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProyectos.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProyectos.ForeColor = System.Drawing.Color.DeepPink;
+            this.btnProyectos.Location = new System.Drawing.Point(0, 0);
+            this.btnProyectos.Margin = new System.Windows.Forms.Padding(0);
+            this.btnProyectos.Name = "btnProyectos";
+            this.btnProyectos.Size = new System.Drawing.Size(280, 124);
+            this.btnProyectos.TabIndex = 13;
+            this.btnProyectos.Text = "Proyectos";
+            this.btnProyectos.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btnArduino
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(280, 124);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Proyectos";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnArduino.BackColor = System.Drawing.Color.Transparent;
+            this.btnArduino.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnArduino.FlatAppearance.BorderColor = System.Drawing.Color.LightPink;
+            this.btnArduino.FlatAppearance.BorderSize = 0;
+            this.btnArduino.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightPink;
+            this.btnArduino.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LavenderBlush;
+            this.btnArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnArduino.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnArduino.ForeColor = System.Drawing.Color.DeepPink;
+            this.btnArduino.Location = new System.Drawing.Point(0, 372);
+            this.btnArduino.Margin = new System.Windows.Forms.Padding(0);
+            this.btnArduino.Name = "btnArduino";
+            this.btnArduino.Size = new System.Drawing.Size(280, 124);
+            this.btnArduino.TabIndex = 14;
+            this.btnArduino.Text = "Módulo Arduino";
+            this.btnArduino.UseVisualStyleBackColor = false;
             // 
-            // nombreProyectoUC1
+            // btnSalir
             // 
-            this.nombreProyectoUC1.Location = new System.Drawing.Point(397, 339);
-            this.nombreProyectoUC1.Name = "nombreProyectoUC1";
-            this.nombreProyectoUC1.Size = new System.Drawing.Size(717, 548);
-            this.nombreProyectoUC1.TabIndex = 24;
+            this.btnSalir.BackColor = System.Drawing.Color.LightPink;
+            this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSalir.FlatAppearance.BorderColor = System.Drawing.Color.LightPink;
+            this.btnSalir.FlatAppearance.BorderSize = 10;
+            this.btnSalir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightPink;
+            this.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LavenderBlush;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.DeepPink;
+            this.btnSalir.Location = new System.Drawing.Point(0, 496);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(280, 124);
+            this.btnSalir.TabIndex = 15;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // panelNotificaciones
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(0, 372);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(280, 124);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Módulo Arduino";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Book Antiqua", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(0, 496);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(280, 124);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Salir";
-            this.button3.UseVisualStyleBackColor = false;
+            this.panelNotificaciones.BackColor = System.Drawing.Color.GreenYellow;
+            this.panelNotificaciones.Controls.Add(this.lblMensaje);
+            this.panelNotificaciones.Location = new System.Drawing.Point(280, 100);
+            this.panelNotificaciones.Name = "panelNotificaciones";
+            this.panelNotificaciones.Size = new System.Drawing.Size(1000, 25);
+            this.panelNotificaciones.TabIndex = 23;
+            this.panelNotificaciones.Visible = false;
             // 
             // frmPantallaPrincipal
             // 
@@ -350,9 +346,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Controls.Add(this.nombreProyectoUC1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panelNotificaciones);
+            this.Controls.Add(this.flowPanelBotones);
             this.Controls.Add(this.panelTitulo);
             this.Controls.Add(this.btnCancelarModificacion);
             this.Controls.Add(this.btnAceptarModificar);
@@ -375,9 +370,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).EndInit();
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.flowPanelBotones.ResumeLayout(false);
+            this.panelNotificaciones.ResumeLayout(false);
+            this.panelNotificaciones.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,7 +381,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox lbProyectosRecientes;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnImportarProyecto;
         private System.Windows.Forms.Button btnProcesarDatos;
         private System.Windows.Forms.PictureBox imgAgregar;
@@ -399,11 +394,10 @@
         private System.Windows.Forms.Panel panelTitulo;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Timer timerMensaje;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private NombreProyectoUC nombreProyectoUC1;
+        private System.Windows.Forms.FlowLayoutPanel flowPanelBotones;
+        private System.Windows.Forms.Panel panelNotificaciones;
+        private System.Windows.Forms.Button btnProyectos;
+        private System.Windows.Forms.Button btnArduino;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

@@ -147,7 +147,7 @@ namespace Kairos
                 ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text+".prk");
                 //MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 lblMensaje.Text = "Se modifico el proyecto "+txtNombreProyecto.Text+".prk correctamente";
-                lblMensaje.Visible = true;
+                panelNotificaciones.Visible = true;
                 if (this.timerActivo)
                     timerMensaje.Stop();
 
@@ -159,7 +159,7 @@ namespace Kairos
                 ProyectoService.nuevoProyecto(txtNombreProyecto.Text+".prk");//le agrega la extension
                 //MessageBox.Show("Proyecto creado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+".prk correctamente";
-                lblMensaje.Visible = true;
+                panelNotificaciones.Visible = true;
                 if (this.timerActivo)
                     timerMensaje.Stop();
 
@@ -192,7 +192,7 @@ namespace Kairos
                 ProyectoService.borrarProyecto(a.Id);
                 //MessageBox.Show("Proyecto borrado con Exito!", "Borrar Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 lblMensaje.Text = "Se elimino el proyecto "+a.nombreOrigen+" correctamente";
-                lblMensaje.Visible = true;
+                panelNotificaciones.Visible = true;
                 if (this.timerActivo)
                     timerMensaje.Stop();
 
@@ -231,7 +231,7 @@ namespace Kairos
 
         private void timerMensaje_Tick(object sender, EventArgs e)
         {
-            lblMensaje.Visible = false;
+            panelNotificaciones.Visible = false;
             timerMensaje.Stop();
             this.timerActivo = false;
         }

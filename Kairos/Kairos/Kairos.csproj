@@ -214,6 +214,12 @@
     <Compile Include="NombreProyectoUC.Designer.cs">
       <DependentUpon>NombreProyectoUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="procesamientoUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="procesamientoUC.Designer.cs">
+      <DependentUpon>procesamientoUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EventoService.cs" />
@@ -244,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NombreProyectoUC.resx">
       <DependentUpon>NombreProyectoUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procesamientoUC.resx">
+      <DependentUpon>procesamientoUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
