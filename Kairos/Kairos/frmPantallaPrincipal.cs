@@ -49,7 +49,7 @@ namespace Kairos
                 var seleccionado = lbProyectosRecientes.SelectedItem;
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
-                frmProcesamiento frm = new frmProcesamiento(a.Id, a.nombreOrigen);
+                FrmProcesmientoDatos frm = new FrmProcesmientoDatos(a.nombreOrigen, a.Id);
                 Visible = false;
                 frm.ShowDialog();
                 Visible = true;

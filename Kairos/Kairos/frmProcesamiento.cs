@@ -280,7 +280,6 @@ namespace Kairos
             else
                 MessageBox.Show("Seleccione la/s fila/s a borrar", "Error de Selección", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-
     }
 
     class ComboItem
