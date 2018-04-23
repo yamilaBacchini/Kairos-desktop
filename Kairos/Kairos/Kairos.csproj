@@ -124,6 +124,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
@@ -176,38 +177,27 @@
     <Compile Include="Filtros\Hora\FiltroHoraEntre.cs" />
     <Compile Include="Filtros\Hora\FiltroHoraMayor.cs" />
     <Compile Include="Filtros\Hora\FiltroHoraMenor.cs" />
-    <Compile Include="frmAgregarRegistro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAgregarRegistro.Designer.cs">
-      <DependentUpon>frmAgregarRegistro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmModificarRegistro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmModificarRegistro.Designer.cs">
-      <DependentUpon>frmModificarRegistro.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPantallaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPantallaPrincipal.Designer.cs">
       <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmProcesamiento.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProcesamiento.Designer.cs">
-      <DependentUpon>frmProcesamiento.cs</DependentUpon>
-    </Compile>
     <Compile Include="Entidades\Origen.cs" />
     <Compile Include="Filtros\IFiltroFecha.cs" />
     <Compile Include="Filtros\IFiltroHora.cs" />
+    <Compile Include="FrmProcesmientoDatos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProcesmientoDatos.Designer.cs">
+      <DependentUpon>FrmProcesmientoDatos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20180125003607_MyFirstMigration.cs" />
     <Compile Include="Migrations\20180125003607_MyFirstMigration.designer.cs">
       <DependentUpon>20180125003607_MyFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EventoContextoModelSnapshot.cs" />
+    <Compile Include="Modelo\TipoAccionProcesamiento.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EventoService.cs" />
@@ -224,17 +214,11 @@
     <EmbeddedResource Include="formImportacionTxtFormato.resx">
       <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAgregarRegistro.resx">
-      <DependentUpon>frmAgregarRegistro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmModificarRegistro.resx">
-      <DependentUpon>frmModificarRegistro.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPantallaPrincipal.resx">
       <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmProcesamiento.resx">
-      <DependentUpon>frmProcesamiento.cs</DependentUpon>
+    <EmbeddedResource Include="FrmProcesmientoDatos.resx">
+      <DependentUpon>FrmProcesmientoDatos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

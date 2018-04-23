@@ -42,14 +42,14 @@
             this.txtNombreProyecto = new System.Windows.Forms.TextBox();
             this.btnAceptarModificar = new System.Windows.Forms.Button();
             this.btnCancelarModificacion = new System.Windows.Forms.Button();
-            this.panelTitulo = new System.Windows.Forms.Panel();
+            this.pnlTitulo = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.timerMensaje = new System.Windows.Forms.Timer(this.components);
             lblProyectosGuardados = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).BeginInit();
-            this.panelTitulo.SuspendLayout();
+            this.pnlTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProyectosGuardados
@@ -195,15 +195,15 @@
             this.btnCancelarModificacion.Visible = false;
             this.btnCancelarModificacion.Click += new System.EventHandler(this.btnCancelarModificacion_Click);
             // 
-            // panelTitulo
+            // pnlTitulo
             // 
-            this.panelTitulo.BackColor = System.Drawing.Color.LavenderBlush;
-            this.panelTitulo.Controls.Add(this.label1);
-            this.panelTitulo.Location = new System.Drawing.Point(0, 0);
-            this.panelTitulo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(960, 81);
-            this.panelTitulo.TabIndex = 20;
+            this.pnlTitulo.BackColor = System.Drawing.Color.LavenderBlush;
+            this.pnlTitulo.Controls.Add(this.label1);
+            this.pnlTitulo.Location = new System.Drawing.Point(0, 0);
+            this.pnlTitulo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlTitulo.Name = "pnlTitulo";
+            this.pnlTitulo.Size = new System.Drawing.Size(960, 81);
+            this.pnlTitulo.TabIndex = 20;
             // 
             // lblMensaje
             // 
@@ -229,7 +229,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(782, 598);
             this.Controls.Add(this.lblMensaje);
-            this.Controls.Add(this.panelTitulo);
+            this.Controls.Add(this.pnlTitulo);
             this.Controls.Add(this.btnCancelarModificacion);
             this.Controls.Add(this.btnAceptarModificar);
             this.Controls.Add(this.txtNombreProyecto);
@@ -246,8 +246,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).EndInit();
-            this.panelTitulo.ResumeLayout(false);
-            this.panelTitulo.PerformLayout();
+            this.pnlTitulo.ResumeLayout(false);
+            this.pnlTitulo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,7 +266,7 @@
         private System.Windows.Forms.TextBox txtNombreProyecto;
         private System.Windows.Forms.Button btnAceptarModificar;
         private System.Windows.Forms.Button btnCancelarModificacion;
-        private System.Windows.Forms.Panel panelTitulo;
+        private System.Windows.Forms.Panel pnlTitulo;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Timer timerMensaje;
     }
