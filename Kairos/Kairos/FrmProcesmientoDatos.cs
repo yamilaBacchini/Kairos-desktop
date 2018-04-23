@@ -23,6 +23,7 @@ namespace Kairos
         private int idOrigen = -1;
         private List<Evento> eventos = null;
         private List<Evento> eventosSeleccionados = new List<Evento>();
+        private bool timerActivo = false;
 
         public FrmProcesmientoDatos(string nombreProyecto, int idOrigen)
         {
@@ -55,23 +56,33 @@ namespace Kairos
         {
             tipoAccion = TipoAccionProcesamiento.AGREGAR_REGISTRO;
             modificarLayout(tipoAccion);
+            botonSeleccionado(btnAgregarRegistro);
         }
 
         private void btnModificarRegistro_Click(object sender, EventArgs e)
         {
             tipoAccion = TipoAccionProcesamiento.MODIFICAR_REGISTRO;
             modificarLayout(tipoAccion);
+            botonSeleccionado(btnModificarRegistro);
         }
 
         private void btnBorrarSeleccionados_Click(object sender, EventArgs e)
         {
             tipoAccion = TipoAccionProcesamiento.BORRAR_SELECCIONADOS;
             modificarLayout(tipoAccion);
+            botonSeleccionado(btnBorrarSeleccionados);
+            int cant = eventosSeleccionados.Count;
+            
             foreach (var item in eventosSeleccionados)
             {
                 EventoService.borrar(item.Id);
             }
             cargarEventos();
+
+            if (eventosSeleccionados.Count > 1)
+                mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
+            else if (eventosSeleccionados.Count == 1)
+                mostrarMensaje("Registro eliminado correctamente", Color.FromArgb(128, 255, 128));
         }
 
         private void btnSeleccionarTodos_Click(object sender, EventArgs e)
@@ -79,12 +90,14 @@ namespace Kairos
             tipoAccion = TipoAccionProcesamiento.SELECCIONAR_TODOS;
             modificarLayout(tipoAccion);
             dgwEventos.SelectAll();
+            botonSeleccionado(btnSeleccionarTodos);
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             tipoAccion = TipoAccionProcesamiento.FILTRAR;
             modificarLayout(tipoAccion);
+            botonSeleccionado(btnFiltrar);
         }
 
         private void modificarLayout(TipoAccionProcesamiento tipoAccion)
@@ -133,7 +146,7 @@ namespace Kairos
                     pnlModificable.Visible = true;
                     foreach (Control control in pnlModificable.Controls)
                     {
-                        control.Visible = true;// Codigo de control para el componente
+                        control.Visible = true;
                     }
                     lblTipoFiltro.Visible = false;
                     cmbTipoFiltro.Visible = false;
@@ -147,7 +160,7 @@ namespace Kairos
                     pnlModificable.Visible = true;
                     foreach (Control control in pnlModificable.Controls)
                     {
-                        control.Visible = true;// Codigo de control para el componente
+                        control.Visible = true;
                     }
                     lblTipoFiltro.Visible = true;
                     cmbTipoFiltro.Visible = true;
@@ -158,6 +171,30 @@ namespace Kairos
             }
         }
 
+        private void botonSeleccionado(Control boton)
+        {
+            btnBorrarSeleccionados.BackColor = Color.FromArgb(187, 0, 4);
+            foreach (Control control in pnlAcciones.Controls)
+            {
+                if (control != btnBorrarSeleccionados)
+                {
+                    control.BackColor = Color.Black;
+                    control.ForeColor = Color.White;
+                }
+
+ 
+           }
+
+            if (boton!=btnBorrarSeleccionados)
+            {
+                boton.BackColor = Color.FromArgb(38, 38, 38);
+            }
+
+
+
+
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             DateTime fecha;
@@ -166,6 +203,7 @@ namespace Kairos
                 case TipoAccionProcesamiento.AGREGAR_REGISTRO:
                     fecha = new DateTime(dtp1.Value.Year, dtp1.Value.Month, dtp1.Value.Day, dtp2.Value.Hour, dtp2.Value.Minute, dtp2.Value.Second);
                     EventoService.nuevo(fecha, this.idOrigen);
+                    mostrarMensaje("Registro agregado correctamente",Color.FromArgb(128, 255, 128));
                     cargarEventos();
                     break;
                 case TipoAccionProcesamiento.MODIFICAR_REGISTRO:
@@ -174,16 +212,38 @@ namespace Kairos
                     {
                         EventoService.modificar(eventosSeleccionados[0].Id, fecha);
                         cargarEventos();
+                        mostrarMensaje("Registro modificado correctamente", Color.FromArgb(128, 255, 128));
                     }
                     else
-                        MessageBox.Show("No seas forro, se edita de a 1");
+                        mostrarMensaje("Seleccione solo un registro", Color.FromArgb(255, 89, 89));
                     break;
                 case TipoAccionProcesamiento.FILTRAR:
                     filtrar();
+                    mostrarMensaje("Filtro aplicado correctamente", Color.FromArgb(128, 255, 128));
                     break;
                 default:
                     break;
             }
+        }
+
+        private void mostrarMensaje(string mensaje, Color color)
+        {
+            lblMensaje.Text = mensaje;
+            lblMensaje.Visible = true;
+            pnlMensaje.Visible = true;
+            pnlMensaje.BackColor = color;
+            if (this.timerActivo)
+                timerMensaje.Stop();
+
+            timerMensaje.Start();
+            this.timerActivo = true;
+        }
+
+        private void timerMensaje_Tick(object sender, EventArgs e)
+        {
+            pnlMensaje.Visible = false;
+            timerMensaje.Stop();
+            this.timerActivo = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -410,5 +470,7 @@ namespace Kairos
             cmbTipoFiltro.SelectedIndex = 0;
             cargarEventos();
         }
+
+
     }
 }
