@@ -208,18 +208,6 @@
       <DependentUpon>20180125003607_MyFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EventoContextoModelSnapshot.cs" />
-    <Compile Include="NombreProyectoUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="NombreProyectoUC.Designer.cs">
-      <DependentUpon>NombreProyectoUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="procesamientoUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="procesamientoUC.Designer.cs">
-      <DependentUpon>procesamientoUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EventoService.cs" />
@@ -247,12 +235,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProcesamiento.resx">
       <DependentUpon>frmProcesamiento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NombreProyectoUC.resx">
-      <DependentUpon>NombreProyectoUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="procesamientoUC.resx">
-      <DependentUpon>procesamientoUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
