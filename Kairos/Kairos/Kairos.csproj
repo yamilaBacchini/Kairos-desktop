@@ -183,12 +183,6 @@
     <Compile Include="frmPantallaPrincipal.Designer.cs">
       <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmProcesamiento.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProcesamiento.Designer.cs">
-      <DependentUpon>frmProcesamiento.cs</DependentUpon>
-    </Compile>
     <Compile Include="Entidades\Origen.cs" />
     <Compile Include="Filtros\IFiltroFecha.cs" />
     <Compile Include="Filtros\IFiltroHora.cs" />
@@ -222,9 +216,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPantallaPrincipal.resx">
       <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProcesamiento.resx">
-      <DependentUpon>frmProcesamiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProcesmientoDatos.resx">
       <DependentUpon>FrmProcesmientoDatos.cs</DependentUpon>

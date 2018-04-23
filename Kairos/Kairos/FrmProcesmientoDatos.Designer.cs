@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.pnlAcciones = new System.Windows.Forms.Panel();
-            this.btnVolver = new System.Windows.Forms.Button();
-            this.btnFiltrar = new System.Windows.Forms.Button();
             this.btnSeleccionarTodos = new System.Windows.Forms.Button();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.btnBorrarSeleccionados = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.btnModificarRegistro = new System.Windows.Forms.Button();
             this.btnAgregarRegistro = new System.Windows.Forms.Button();
             this.pnlEventos = new System.Windows.Forms.Panel();
@@ -51,8 +51,9 @@
             this.btnGuardarProyecto = new System.Windows.Forms.Button();
             this.btnCalcularFDP = new System.Windows.Forms.Button();
             this.pnlTitulo = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlMensaje = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.pnlAcciones.SuspendLayout();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
@@ -75,22 +76,22 @@
             this.pnlAcciones.Size = new System.Drawing.Size(200, 431);
             this.pnlAcciones.TabIndex = 0;
             // 
-            // btnVolver
+            // btnSeleccionarTodos
             // 
-            this.btnVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-            this.btnVolver.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnVolver.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkGray;
-            this.btnVolver.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVolver.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolver.ForeColor = System.Drawing.Color.White;
-            this.btnVolver.Location = new System.Drawing.Point(0, 368);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(200, 63);
-            this.btnVolver.TabIndex = 6;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = false;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            this.btnSeleccionarTodos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
+            this.btnSeleccionarTodos.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnSeleccionarTodos.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkGray;
+            this.btnSeleccionarTodos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.btnSeleccionarTodos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionarTodos.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeleccionarTodos.ForeColor = System.Drawing.Color.White;
+            this.btnSeleccionarTodos.Location = new System.Drawing.Point(0, 129);
+            this.btnSeleccionarTodos.Name = "btnSeleccionarTodos";
+            this.btnSeleccionarTodos.Size = new System.Drawing.Size(200, 63);
+            this.btnSeleccionarTodos.TabIndex = 4;
+            this.btnSeleccionarTodos.Text = "Seleccionar Todos";
+            this.btnSeleccionarTodos.UseVisualStyleBackColor = false;
+            this.btnSeleccionarTodos.Click += new System.EventHandler(this.btnSeleccionarTodos_Click);
             // 
             // btnFiltrar
             // 
@@ -109,27 +110,11 @@
             this.btnFiltrar.UseVisualStyleBackColor = false;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
-            // btnSeleccionarTodos
-            // 
-            this.btnSeleccionarTodos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-            this.btnSeleccionarTodos.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnSeleccionarTodos.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkGray;
-            this.btnSeleccionarTodos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.btnSeleccionarTodos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSeleccionarTodos.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeleccionarTodos.ForeColor = System.Drawing.Color.White;
-            this.btnSeleccionarTodos.Location = new System.Drawing.Point(0, 129);
-            this.btnSeleccionarTodos.Name = "btnSeleccionarTodos";
-            this.btnSeleccionarTodos.Size = new System.Drawing.Size(200, 63);
-            this.btnSeleccionarTodos.TabIndex = 4;
-            this.btnSeleccionarTodos.Text = "Seleccionar Todos";
-            this.btnSeleccionarTodos.UseVisualStyleBackColor = false;
-            this.btnSeleccionarTodos.Click += new System.EventHandler(this.btnSeleccionarTodos_Click);
-            // 
             // btnBorrarSeleccionados
             // 
-            this.btnBorrarSeleccionados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(0)))), ((int)(((byte)(4)))));
+            this.btnBorrarSeleccionados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(0)))), ((int)(((byte)(4)))));
             this.btnBorrarSeleccionados.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnBorrarSeleccionados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(79)))), ((int)(((byte)(79)))));
             this.btnBorrarSeleccionados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrarSeleccionados.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBorrarSeleccionados.ForeColor = System.Drawing.Color.White;
@@ -140,6 +125,23 @@
             this.btnBorrarSeleccionados.Text = "Borrar Seleccionados";
             this.btnBorrarSeleccionados.UseVisualStyleBackColor = false;
             this.btnBorrarSeleccionados.Click += new System.EventHandler(this.btnBorrarSeleccionados_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
+            this.btnVolver.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnVolver.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkGray;
+            this.btnVolver.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVolver.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolver.ForeColor = System.Drawing.Color.White;
+            this.btnVolver.Location = new System.Drawing.Point(0, 368);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(200, 63);
+            this.btnVolver.TabIndex = 6;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = false;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnModificarRegistro
             // 
@@ -179,16 +181,16 @@
             // 
             this.pnlEventos.Controls.Add(this.dgwEventos);
             this.pnlEventos.Controls.Add(this.lblEventos);
-            this.pnlEventos.Location = new System.Drawing.Point(208, 86);
+            this.pnlEventos.Location = new System.Drawing.Point(208, 104);
             this.pnlEventos.Name = "pnlEventos";
-            this.pnlEventos.Size = new System.Drawing.Size(304, 418);
+            this.pnlEventos.Size = new System.Drawing.Size(304, 400);
             this.pnlEventos.TabIndex = 1;
             // 
             // dgwEventos
             // 
             this.dgwEventos.AllowUserToAddRows = false;
             this.dgwEventos.AllowUserToDeleteRows = false;
-            this.dgwEventos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgwEventos.BackgroundColor = System.Drawing.Color.White;
             this.dgwEventos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgwEventos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgwEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -213,6 +215,7 @@
             // 
             // pnlModificable
             // 
+            this.pnlModificable.Controls.Add(this.btnLimpiar);
             this.pnlModificable.Controls.Add(this.cmbTipoFiltro);
             this.pnlModificable.Controls.Add(this.lblTipoFiltro);
             this.pnlModificable.Controls.Add(this.dtp2);
@@ -221,9 +224,9 @@
             this.pnlModificable.Controls.Add(this.lblAccion2);
             this.pnlModificable.Controls.Add(this.lblAccion1);
             this.pnlModificable.Controls.Add(this.lblTituloAccion);
-            this.pnlModificable.Location = new System.Drawing.Point(519, 90);
+            this.pnlModificable.Location = new System.Drawing.Point(519, 104);
             this.pnlModificable.Name = "pnlModificable";
-            this.pnlModificable.Size = new System.Drawing.Size(282, 283);
+            this.pnlModificable.Size = new System.Drawing.Size(282, 269);
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
             // 
@@ -235,6 +238,7 @@
             this.cmbTipoFiltro.Size = new System.Drawing.Size(133, 21);
             this.cmbTipoFiltro.TabIndex = 51;
             this.cmbTipoFiltro.Text = "Seleccione";
+            this.cmbTipoFiltro.SelectedIndexChanged += new System.EventHandler(this.cmbTipoFiltro_SelectedIndexChanged);
             // 
             // lblTipoFiltro
             // 
@@ -266,9 +270,9 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
             this.btnAceptar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnAceptar.ForeColor = System.Drawing.Color.White;
             this.btnAceptar.Location = new System.Drawing.Point(165, 181);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(76, 31);
@@ -321,9 +325,9 @@
             // 
             // btnGuardarProyecto
             // 
-            this.btnGuardarProyecto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(171)))), ((int)(((byte)(245)))));
+            this.btnGuardarProyecto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnGuardarProyecto.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarProyecto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnGuardarProyecto.ForeColor = System.Drawing.Color.Black;
             this.btnGuardarProyecto.Location = new System.Drawing.Point(53, 21);
             this.btnGuardarProyecto.Name = "btnGuardarProyecto";
             this.btnGuardarProyecto.Size = new System.Drawing.Size(176, 36);
@@ -333,9 +337,9 @@
             // 
             // btnCalcularFDP
             // 
-            this.btnCalcularFDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(99)))), ((int)(((byte)(226)))));
+            this.btnCalcularFDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(10)))), ((int)(((byte)(40)))));
             this.btnCalcularFDP.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalcularFDP.ForeColor = System.Drawing.Color.Black;
+            this.btnCalcularFDP.ForeColor = System.Drawing.Color.White;
             this.btnCalcularFDP.Location = new System.Drawing.Point(53, 63);
             this.btnCalcularFDP.Name = "btnCalcularFDP";
             this.btnCalcularFDP.Size = new System.Drawing.Size(176, 36);
@@ -354,6 +358,13 @@
             this.pnlTitulo.Size = new System.Drawing.Size(800, 81);
             this.pnlTitulo.TabIndex = 21;
             // 
+            // pnlMensaje
+            // 
+            this.pnlMensaje.Location = new System.Drawing.Point(197, 79);
+            this.pnlMensaje.Name = "pnlMensaje";
+            this.pnlMensaje.Size = new System.Drawing.Size(602, 19);
+            this.pnlMensaje.TabIndex = 22;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -364,12 +375,18 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Kairós";
             // 
-            // pnlMensaje
+            // btnLimpiar
             // 
-            this.pnlMensaje.Location = new System.Drawing.Point(0, 70);
-            this.pnlMensaje.Name = "pnlMensaje";
-            this.pnlMensaje.Size = new System.Drawing.Size(799, 28);
-            this.pnlMensaje.TabIndex = 22;
+            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnLimpiar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
+            this.btnLimpiar.Location = new System.Drawing.Point(83, 181);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(76, 31);
+            this.btnLimpiar.TabIndex = 52;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // FrmProcesmientoDatos
             // 
@@ -383,7 +400,6 @@
             this.Controls.Add(this.pnlEventos);
             this.Controls.Add(this.pnlAcciones);
             this.Name = "FrmProcesmientoDatos";
-            this.Text = "FrmProcesmientoDatos";
             this.pnlAcciones.ResumeLayout(false);
             this.pnlEventos.ResumeLayout(false);
             this.pnlEventos.PerformLayout();
@@ -424,5 +440,6 @@
         private System.Windows.Forms.Label lblTituloAccion;
         private System.Windows.Forms.ComboBox cmbTipoFiltro;
         private System.Windows.Forms.Label lblTipoFiltro;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }
