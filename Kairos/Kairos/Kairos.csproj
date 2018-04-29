@@ -159,6 +159,8 @@
     </Compile>
     <Compile Include="Entidades\Evento.cs" />
     <Compile Include="EventoContexto.cs" />
+    <Compile Include="Filtros\FiltroImpl.cs" />
+    <Compile Include="Filtros\INuevoFiltro.cs" />
     <Compile Include="formImportacionExcelFormato.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,10 +173,8 @@
     <Compile Include="formImportacionTxtFormato.Designer.cs">
       <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
     </Compile>
-    <Compile Include="Filtros\Fecha\FiltroFechaEntre.cs" />
     <Compile Include="Filtros\Fecha\FiltroFechaMayor.cs" />
     <Compile Include="Filtros\Fecha\FiltroFechaMenor.cs" />
-    <Compile Include="Filtros\Hora\FiltroHoraEntre.cs" />
     <Compile Include="Filtros\Hora\FiltroHoraMayor.cs" />
     <Compile Include="Filtros\Hora\FiltroHoraMenor.cs" />
     <Compile Include="frmPantallaPrincipal.cs">
@@ -197,7 +197,9 @@
       <DependentUpon>20180125003607_MyFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EventoContextoModelSnapshot.cs" />
+    <Compile Include="Modelo\Filtro.cs" />
     <Compile Include="Modelo\TipoAccionProcesamiento.cs" />
+    <Compile Include="Modelo\TipoFiltro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EventoService.cs" />

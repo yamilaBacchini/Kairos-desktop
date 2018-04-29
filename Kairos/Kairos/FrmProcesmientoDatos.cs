@@ -24,6 +24,8 @@ namespace Kairos
         private List<Evento> eventos = null;
         private List<Evento> eventosSeleccionados = new List<Evento>();
         private bool timerActivo = false;
+        private List<Filtro> filtros = null;
+        private readonly INuevoFiltro filtrador = new FiltroImpl();
 
         public FrmProcesmientoDatos(string nombreProyecto, int idOrigen)
         {
@@ -31,9 +33,26 @@ namespace Kairos
             this.idOrigen = idOrigen;
             this.nombreProyecto = nombreProyecto;
             //lblNombreProyecto.Text = nombreProyecto;
+            filtros = new List<Filtro>();
+            setupFiltrosCheckboxList();
             cargarFiltros();
             cambiarFiltros(0);
             cargarEventos();
+        }
+
+        private void setupFiltrosCheckboxList()
+        {
+            ((ListBox)this.chlFiltros).DisplayMember = "Name";
+            ((ListBox)this.chlFiltros).ValueMember = "IsChecked";
+            for (int i = 0; i < this.filtros.Count; i++)
+            {
+                if (!chlFiltros.Items.Contains(filtros[i]))
+                {
+                    chlFiltros.Items.Add(filtros[i]);
+                    Filtro obj = (Filtro)chlFiltros.Items[i];
+                    chlFiltros.SetItemChecked(i, obj.IsChecked);
+                }
+            }
         }
 
         private void cargarEventos()
@@ -48,7 +67,7 @@ namespace Kairos
             dgwEventos.Columns[3].Visible = false;
             dgwEventos.Columns[4].Visible = false;
 
-            if (eventos != null && tipoAccion==TipoAccionProcesamiento.FILTRAR)
+            if (eventos != null && tipoAccion == TipoAccionProcesamiento.FILTRAR)
                 filtrar();
         }
 
@@ -72,7 +91,7 @@ namespace Kairos
             modificarLayout(tipoAccion);
             botonSeleccionado(btnBorrarSeleccionados);
             int cant = eventosSeleccionados.Count;
-            
+
             foreach (var item in eventosSeleccionados)
             {
                 EventoService.borrar(item.Id);
@@ -182,17 +201,13 @@ namespace Kairos
                     control.ForeColor = Color.White;
                 }
 
- 
-           }
 
-            if (boton!=btnBorrarSeleccionados)
+            }
+
+            if (boton != btnBorrarSeleccionados)
             {
                 boton.BackColor = Color.FromArgb(38, 38, 38);
             }
-
-
-
-
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -203,7 +218,7 @@ namespace Kairos
                 case TipoAccionProcesamiento.AGREGAR_REGISTRO:
                     fecha = new DateTime(dtp1.Value.Year, dtp1.Value.Month, dtp1.Value.Day, dtp2.Value.Hour, dtp2.Value.Minute, dtp2.Value.Second);
                     EventoService.nuevo(fecha, this.idOrigen);
-                    mostrarMensaje("Registro agregado correctamente",Color.FromArgb(128, 255, 128));
+                    mostrarMensaje("Registro agregado correctamente", Color.FromArgb(128, 255, 128));
                     cargarEventos();
                     break;
                 case TipoAccionProcesamiento.MODIFICAR_REGISTRO:
@@ -218,6 +233,7 @@ namespace Kairos
                         mostrarMensaje("Seleccione solo un registro", Color.FromArgb(255, 89, 89));
                     break;
                 case TipoAccionProcesamiento.FILTRAR:
+                    agregarFiltro();
                     filtrar();
                     mostrarMensaje("Filtro aplicado correctamente", Color.FromArgb(128, 255, 128));
                     break;
@@ -283,7 +299,7 @@ namespace Kairos
 
         private void cargarFiltros()
         {
-            List<ComboItem> tipos = new List<ComboItem> { new ComboItem(0, "Seleccione"), new ComboItem(1, "Fecha menor a"), new ComboItem(2, "Fecha mayor a"), new ComboItem(3, "Entre fechas"), new ComboItem(4, "Hora menor a"), new ComboItem(5, "Hora mayor a"), new ComboItem(6, "Entre horas") };
+            List<ComboItem> tipos = new List<ComboItem> { new ComboItem(0, "Fecha menor a"), new ComboItem(1, "Fecha mayor a"), new ComboItem(2, "Hora menor a"), new ComboItem(3, "Hora mayor a") };
             cmbTipoFiltro.DisplayMember = "Display";
             cmbTipoFiltro.ValueMember = "Value";
             cmbTipoFiltro.DataSource = tipos;
@@ -291,15 +307,15 @@ namespace Kairos
 
         private void cmbTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
-                if (cmbTipoFiltro.SelectedValue != null)
-                    cambiarFiltros(Convert.ToInt32(cmbTipoFiltro.SelectedValue));
+            if (cmbTipoFiltro.SelectedValue != null)
+                cambiarFiltros(Convert.ToInt32(cmbTipoFiltro.SelectedValue));
         }
 
         private void cambiarFiltros(int valorSeleccionado)
         {
-            if(tipoAccion==TipoAccionProcesamiento.FILTRAR)
+            if (tipoAccion == TipoAccionProcesamiento.FILTRAR)
             {
-                if (valorSeleccionado > 3)
+                if (valorSeleccionado > 1)
                 {
                     dtp1.Format = DateTimePickerFormat.Custom;
                     dtp1.CustomFormat = "HH:mm:ss";
@@ -318,19 +334,6 @@ namespace Kairos
                 switch (valorSeleccionado)
                 {
                     case 0:
-                        if(tipoAccion==TipoAccionProcesamiento.FILTRAR)
-                        {
-                            lblTituloAccion.Visible = false;
-                            lblAccion1.Visible = false;
-                            lblAccion2.Visible = false;
-                            dtp1.Visible = false;
-                            dtp2.Visible = false;
-                            btnAceptar.Visible = false;
-                            btnLimpiar.Visible = false;
-                            cmbTipoFiltro.SelectedIndex = 0;
-                        }
-                        break;
-                    case 1:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
@@ -342,7 +345,7 @@ namespace Kairos
                         dtp2.Visible = false;
                         btnLimpiar.Visible = true;
                         break;
-                    case 2:
+                    case 1:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
@@ -352,18 +355,7 @@ namespace Kairos
                         dtp2.Visible = false;
                         btnLimpiar.Visible = true;
                         break;
-                    case 3:
-                        btnAceptar.Visible = true;
-                        lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
-                        lblAccion1.Text = "Fecha desde";
-                        dtp1.Visible = true;
-                        lblAccion2.Visible = true;
-                        lblAccion2.Text = "Fecha hasta";
-                        dtp2.Visible = true;
-                        btnLimpiar.Visible = true;
-                        break;
-                    case 4:
+                    case 2:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
@@ -373,7 +365,7 @@ namespace Kairos
                         dtp2.Visible = false;
                         btnLimpiar.Visible = true;
                         break;
-                    case 5:
+                    case 3:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
@@ -383,78 +375,42 @@ namespace Kairos
                         dtp2.Visible = false;
                         btnLimpiar.Visible = true;
                         break;
-                    case 6:
-                        btnAceptar.Visible = true;
-                        lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
-                        lblAccion1.Text = "Hora desde";
-                        dtp1.Visible = true;
-                        lblAccion2.Visible = true;
-                        lblAccion2.Text = "Hora hasta";
-                        dtp2.Visible = true;
-                        btnLimpiar.Visible = true;
-                        break;
                     default:
                         break;
                 }
-            
             }
+        }
 
+        private void agregarFiltro()
+        {
+            int selectedValue = Convert.ToInt32(cmbTipoFiltro.SelectedValue);
+            Filtro auxFiltro = null;
+            DateTime fecha = dtp1.Value.Date;
+            switch (selectedValue)
+            {
+                case 0:
+                    auxFiltro = new Filtro(TipoFiltro.FECHA_MENOR, fecha);
+                    break;
+                case 1:
+                    auxFiltro = new Filtro(TipoFiltro.FECHA_MAYOR, fecha);
+                    break;
+                case 2:
+                    auxFiltro = new Filtro(TipoFiltro.HORA_MENOR, fecha);
+                    break;
+                case 3:
+                    auxFiltro = new Filtro(TipoFiltro.HORA_MAYOR, fecha);
+                    break;
+                default:
+                    auxFiltro = null;
+                    break;
+            }
+            filtros.Add(auxFiltro);
+            setupFiltrosCheckboxList();
         }
 
         private void filtrar()
         {
-            List<Evento> filtrado = null;
-            int selectedValue = Convert.ToInt32(cmbTipoFiltro.SelectedValue);
-            if (selectedValue == 0)
-                return;
-            bool filtroHora = false;
-            if (selectedValue >= 4)
-                filtroHora = true;
-            if (!filtroHora)
-            {
-                IFiltroFecha filtro;
-                DateTime fecha1 = dtp1.Value.Date;
-                DateTime fecha2 = dtp2.Value.Date;
-                switch (selectedValue)
-                {
-                    case 1:
-                        filtro = new FiltroFechaMenor();
-                        break;
-                    case 2:
-                        filtro = new FiltroFechaMayor();
-                        break;
-                    case 3:
-                        filtro = new FiltroFechaEntre();
-                        break;
-                    default:
-                        filtro = null;
-                        break;
-                }
-                filtrado = filtro.aplicarFiltroFecha(eventos, fecha1, fecha2);
-            }
-            else
-            {
-                IFiltroHora filtro;
-                TimeSpan hora1 = dtp1.Value.TimeOfDay;
-                TimeSpan hora2 = dtp2.Value.TimeOfDay;
-                switch (selectedValue)
-                {
-                    case 4:
-                        filtro = new FiltroHoraMenor();
-                        break;
-                    case 5:
-                        filtro = new FiltroHoraMayor();
-                        break;
-                    case 6:
-                        filtro = new FiltroHoraEntre();
-                        break;
-                    default:
-                        filtro = null;
-                        break;
-                }
-                filtrado = filtro.aplicarFiltroHora(eventos, hora1, hora2);
-            }
+            List<Evento> filtrado = filtrador.Filtrar(idOrigen, filtros);
             if (filtrado != null)
             {
                 eventos = filtrado;
@@ -468,9 +424,23 @@ namespace Kairos
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             cmbTipoFiltro.SelectedIndex = 0;
+            filtros.Clear();
             cargarEventos();
         }
 
+        private bool _updatingCheckList = false;
 
+        private void chlFiltros_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (_updatingCheckList) return;
+            _updatingCheckList = true;
+            CheckState state = e.CurrentValue;
+            if (state == CheckState.Checked)
+                this.filtros[e.Index].IsChecked = true;
+            else
+                this.filtros[e.Index].IsChecked = false;
+            filtrar();
+            _updatingCheckList = false;
+        }
     }
 }
