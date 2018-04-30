@@ -173,10 +173,6 @@
     <Compile Include="formImportacionTxtFormato.Designer.cs">
       <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
     </Compile>
-    <Compile Include="Filtros\Fecha\FiltroFechaMayor.cs" />
-    <Compile Include="Filtros\Fecha\FiltroFechaMenor.cs" />
-    <Compile Include="Filtros\Hora\FiltroHoraMayor.cs" />
-    <Compile Include="Filtros\Hora\FiltroHoraMenor.cs" />
     <Compile Include="frmPantallaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,8 +180,6 @@
       <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Origen.cs" />
-    <Compile Include="Filtros\IFiltroFecha.cs" />
-    <Compile Include="Filtros\IFiltroHora.cs" />
     <Compile Include="FrmProcesmientoDatos.cs">
       <SubType>Form</SubType>
     </Compile>

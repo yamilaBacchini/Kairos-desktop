@@ -1,7 +1,5 @@
 ﻿using Kairos.Entidades;
 using Kairos.Filtros;
-using Kairos.Filtros.Fecha;
-using Kairos.Filtros.Hora;
 using Kairos.Modelo;
 using Kairos.Services;
 using System;
