@@ -8,6 +8,6 @@ namespace Kairos.Modelo
 {
     enum TipoFiltro
     {
-        HORA_MENOR, HORA_MAYOR, FECHA_MENOR, FECHA_MAYOR
+        HORA_MENOR, HORA_MAYOR, HORA_ENTRE, FECHA_MENOR, FECHA_MAYOR, FECHA_ENTRE
     }
 }

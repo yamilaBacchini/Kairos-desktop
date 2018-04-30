@@ -18,31 +18,43 @@ namespace Kairos.Filtros
             try
             {
                 resultado = new List<Evento>();
+                List<Evento> parcial = new List<Evento>();
                 IQueryable<Evento> query = contexto.Eventos.AsQueryable();
-                resultado = query.Where(x => x.activo == true).Where(x => x.idOrigen == idOrigen).ToList();
-                foreach (var item in filtros)
-                {
-                    if (item.IsChecked)
+                parcial = query.Where(x => x.activo == true).Where(x => x.idOrigen == idOrigen).ToList();
+                if (filtros.Count == 0 || filtros.All(x => !x.IsChecked))
+                    resultado = parcial;
+                else
+                    foreach (var item in filtros)
                     {
-                        switch (item.Tipo)
+                        if (item.IsChecked)
                         {
-                            case TipoFiltro.HORA_MENOR:
-                                resultado = resultado.Where(x => x.fecha.TimeOfDay < item.Fecha.TimeOfDay).ToList();
-                                break;
-                            case TipoFiltro.HORA_MAYOR:
-                                resultado = resultado.Where(x => x.fecha.TimeOfDay > item.Fecha.TimeOfDay).ToList();
-                                break;
-                            case TipoFiltro.FECHA_MENOR:
-                                resultado = resultado.Where(x => x.fecha.Date < item.Fecha.Date).ToList();
-                                break;
-                            case TipoFiltro.FECHA_MAYOR:
-                                resultado = resultado.Where(x => x.fecha.Date < item.Fecha.Date).ToList();
-                                break;
-                            default:
-                                break;
+                            switch (item.Tipo)
+                            {
+                                case TipoFiltro.HORA_MENOR:
+                                    resultado.AddRange(parcial.Where(x => x.fecha.TimeOfDay < item.Fecha1.TimeOfDay).ToList());
+                                    break;
+                                case TipoFiltro.HORA_MAYOR:
+                                    resultado.AddRange(parcial.Where(x => x.fecha.TimeOfDay > item.Fecha1.TimeOfDay).ToList());
+                                    break;
+                                case TipoFiltro.HORA_ENTRE:
+                                    resultado.AddRange(parcial.Where(x => x.fecha.TimeOfDay > item.Fecha1.TimeOfDay && x.fecha.TimeOfDay < item.Fecha2.TimeOfDay).ToList());
+                                    break;
+                                case TipoFiltro.FECHA_MENOR:
+                                    resultado.AddRange(parcial.Where(x => x.fecha.Date < item.Fecha1.Date).ToList());
+                                    break;
+                                case TipoFiltro.FECHA_MAYOR:
+                                    resultado.AddRange(parcial.Where(x => x.fecha.Date > item.Fecha1.Date).ToList());
+                                    break;
+                                case TipoFiltro.FECHA_ENTRE:
+                                    resultado.AddRange(parcial.Where(x => x.fecha.Date > item.Fecha1.Date && x.fecha.Date < item.Fecha2.Date).ToList());
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
-                }
+                resultado = resultado.Distinct().ToList();
+                resultado = resultado.OrderBy(x => x.fecha).ToList();
             }
             catch (Exception e)
             {
