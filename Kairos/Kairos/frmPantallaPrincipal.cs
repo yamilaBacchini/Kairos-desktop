@@ -17,7 +17,6 @@ namespace Kairos
 {
     public partial class frmPantallaPrincipal : Form
     {
-        bool timerActivo = false;
 
         public frmPantallaPrincipal()
         {
@@ -119,15 +118,11 @@ namespace Kairos
         {
             if (txtNombreProyecto.Text!="")
             {
-                btnAceptarModificar.Enabled = true;
-                btnAceptarModificar.BackColor = Color.DarkRed;
-                btnAceptarModificar.ForeColor = Color.White;
+                btnAceptarModificar.Visible = true;
             }
             else
             {
-                btnAceptarModificar.Enabled = false;
-                btnAceptarModificar.BackColor = Color.Silver;
-                btnAceptarModificar.ForeColor = Color.Black;
+                btnAceptarModificar.Visible = false;
             }
         }
 
@@ -143,28 +138,18 @@ namespace Kairos
                 var seleccionado = lbProyectosRecientes.SelectedItem;
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
-
                 ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text+".prk");
-                //MessageBox.Show("Proyecto modificado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
                 lblMensaje.Text = "Se modifico el proyecto "+txtNombreProyecto.Text+".prk correctamente";
-                lblMensaje.Visible = true;
-                if (this.timerActivo)
-                    timerMensaje.Stop();
-
+                panelNotificaciones.Visible = true;
                 timerMensaje.Start();
-                this.timerActivo = true;
-
             } else
             {
                 ProyectoService.nuevoProyecto(txtNombreProyecto.Text+".prk");//le agrega la extension
-                //MessageBox.Show("Proyecto creado con Exito!", "Modificado Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+".prk correctamente";
-                lblMensaje.Visible = true;
-                if (this.timerActivo)
-                    timerMensaje.Stop();
 
+                lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+".prk correctamente";
+                panelNotificaciones.Visible = true;
                 timerMensaje.Start();
-                this.timerActivo = true;
             }
             
             modificacionInvisible();
@@ -173,13 +158,10 @@ namespace Kairos
 
         private void imgAgregar_Click(object sender, EventArgs e)
         {
-            lblNombreProyecto.Visible = true;
             txtNombreProyecto.Clear();
-            txtNombreProyecto.Visible = true;
+            txtNombreProyecto.Focus();
             btnAceptarModificar.Text = "Crear";
-            btnAceptarModificar.Enabled = false;
-            btnAceptarModificar.Visible = true;
-            btnCancelarModificacion.Visible = true;
+            panelNombreProyecto.Visible = true;
         }
 
         private void imgBorrar_Click(object sender, EventArgs e)
@@ -190,14 +172,11 @@ namespace Kairos
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
                 ProyectoService.borrarProyecto(a.Id);
-                //MessageBox.Show("Proyecto borrado con Exito!", "Borrar Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                lblMensaje.Text = "Se elimino el proyecto "+a.nombreOrigen+" correctamente";
-                lblMensaje.Visible = true;
-                if (this.timerActivo)
-                    timerMensaje.Stop();
 
+                lblMensaje.Text = "Se elimino el proyecto "+a.nombreOrigen+" correctamente";
+                panelNotificaciones.Visible = true;
                 timerMensaje.Start();
-                this.timerActivo = true;
+
                 cargarLista();
             }
     }
@@ -212,28 +191,42 @@ namespace Kairos
                 a = Cast(a, seleccionado);
                 txtNombreProyecto.Text = a.nombreOrigen.Substring(0,a.nombreOrigen.Length-4); //le saco la extension
 
-                lblNombreProyecto.Visible = true;
-                txtNombreProyecto.Visible = true;
+                txtNombreProyecto.Focus();
                 btnAceptarModificar.Text = "Modificar";
-                btnAceptarModificar.Enabled = true;
                 btnAceptarModificar.Visible = true;
-                btnCancelarModificacion.Visible = true;
+                panelNombreProyecto.Visible = true;
             }
         }
 
         private void modificacionInvisible()
         {
-            lblNombreProyecto.Visible = false;
-            txtNombreProyecto.Visible = false;
+            panelNombreProyecto.Visible = false;
             btnAceptarModificar.Visible = false;
-            btnCancelarModificacion.Visible = false;
         }
 
         private void timerMensaje_Tick(object sender, EventArgs e)
         {
-            lblMensaje.Visible = false;
+            panelNotificaciones.Visible = false;
             timerMensaje.Stop();
-            this.timerActivo = false;
+        }
+
+        private void imgAgregar_MouseHover(object sender, EventArgs e)
+        {
+            PictureBox pb = sender as PictureBox;
+            pb.BackColor = Color.LavenderBlush;
+            pb.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void imgAgregar_MouseLeave(object sender, EventArgs e)
+        {
+            PictureBox pb = sender as PictureBox;
+            pb.BackColor = Color.MistyRose;
+            pb.BorderStyle = BorderStyle.None;
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
