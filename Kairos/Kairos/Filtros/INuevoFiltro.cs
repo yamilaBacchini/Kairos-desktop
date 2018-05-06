@@ -1,4 +1,5 @@
 ﻿using Kairos.Entidades;
+using Kairos.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Kairos.Filtros
 {
-    interface IFiltroFecha
+    interface INuevoFiltro
     {
-        List<Evento> aplicarFiltroFecha(List<Evento> eventos, DateTime fecha1, DateTime fecha2);
+        List<Evento> Filtrar(int idOrigen, List<Filtro> filtros);
     }
 }

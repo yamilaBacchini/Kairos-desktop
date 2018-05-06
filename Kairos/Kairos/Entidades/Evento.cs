@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kairos.Entidades
 {
-    class Evento
+    class Evento : IEquatable<Evento>
     {
         public int Id { get; set; }
         public DateTime fecha { get; set; }
@@ -14,5 +14,10 @@ namespace Kairos.Entidades
 
         public int idOrigen { get; set; }
         public Origen origen { get; set; }
+
+        public bool Equals(Evento other)
+        {
+            return this.Id == other.Id;
+        }
     }
 }
