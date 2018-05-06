@@ -42,7 +42,7 @@
             this.txtNombreProyecto = new System.Windows.Forms.TextBox();
             this.btnAceptarModificar = new System.Windows.Forms.Button();
             this.btnCancelarModificacion = new System.Windows.Forms.Button();
-            this.pnlTitulo = new System.Windows.Forms.Panel();
+            this.panelTitulo = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.timerMensaje = new System.Windows.Forms.Timer(this.components);
             this.flowPanelBotones = new System.Windows.Forms.FlowLayoutPanel();
@@ -255,7 +255,7 @@
             this.btnCancelarModificacion.UseVisualStyleBackColor = false;
             this.btnCancelarModificacion.Click += new System.EventHandler(this.btnCancelarModificacion_Click);
             // 
-            // pnlTitulo
+            // panelTitulo
             // 
             this.panelTitulo.BackColor = System.Drawing.Color.LavenderBlush;
             this.panelTitulo.Controls.Add(this.lblTitulo);
@@ -427,7 +427,7 @@
         private System.Windows.Forms.TextBox txtNombreProyecto;
         private System.Windows.Forms.Button btnAceptarModificar;
         private System.Windows.Forms.Button btnCancelarModificacion;
-        private System.Windows.Forms.Panel pnlTitulo;
+        private System.Windows.Forms.Panel panelTitulo;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Timer timerMensaje;
         private System.Windows.Forms.FlowLayoutPanel flowPanelBotones;
