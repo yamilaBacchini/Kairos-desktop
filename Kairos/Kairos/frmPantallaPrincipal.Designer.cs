@@ -67,10 +67,10 @@
             lblProyectosGuardados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             lblProyectosGuardados.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             lblProyectosGuardados.ForeColor = System.Drawing.Color.Black;
-            lblProyectosGuardados.Location = new System.Drawing.Point(300, 140);
+            lblProyectosGuardados.Location = new System.Drawing.Point(225, 114);
             lblProyectosGuardados.Margin = new System.Windows.Forms.Padding(0);
             lblProyectosGuardados.Name = "lblProyectosGuardados";
-            lblProyectosGuardados.Size = new System.Drawing.Size(256, 29);
+            lblProyectosGuardados.Size = new System.Drawing.Size(204, 24);
             lblProyectosGuardados.TabIndex = 6;
             lblProyectosGuardados.Text = "Proyectos Guardados";
             // 
@@ -82,11 +82,11 @@
             this.lbProyectosRecientes.Font = new System.Drawing.Font("Book Antiqua", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbProyectosRecientes.ForeColor = System.Drawing.Color.Maroon;
             this.lbProyectosRecientes.FormattingEnabled = true;
-            this.lbProyectosRecientes.ItemHeight = 27;
-            this.lbProyectosRecientes.Location = new System.Drawing.Point(300, 190);
+            this.lbProyectosRecientes.ItemHeight = 22;
+            this.lbProyectosRecientes.Location = new System.Drawing.Point(225, 154);
             this.lbProyectosRecientes.Margin = new System.Windows.Forms.Padding(0);
             this.lbProyectosRecientes.Name = "lbProyectosRecientes";
-            this.lbProyectosRecientes.Size = new System.Drawing.Size(426, 513);
+            this.lbProyectosRecientes.Size = new System.Drawing.Size(320, 396);
             this.lbProyectosRecientes.TabIndex = 7;
             // 
             // lblTitulo
@@ -95,10 +95,10 @@
             this.lblTitulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTitulo.Font = new System.Drawing.Font("Vivaldi", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lblTitulo.Location = new System.Drawing.Point(420, 0);
+            this.lblTitulo.Location = new System.Drawing.Point(315, 0);
             this.lblTitulo.Margin = new System.Windows.Forms.Padding(0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(267, 100);
+            this.lblTitulo.Size = new System.Drawing.Size(214, 80);
             this.lblTitulo.TabIndex = 9;
             this.lblTitulo.Text = "Kairós";
             // 
@@ -113,10 +113,10 @@
             this.btnImportarProyecto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImportarProyecto.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImportarProyecto.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnImportarProyecto.Location = new System.Drawing.Point(0, 248);
+            this.btnImportarProyecto.Location = new System.Drawing.Point(0, 202);
             this.btnImportarProyecto.Margin = new System.Windows.Forms.Padding(0);
             this.btnImportarProyecto.Name = "btnImportarProyecto";
-            this.btnImportarProyecto.Size = new System.Drawing.Size(280, 124);
+            this.btnImportarProyecto.Size = new System.Drawing.Size(210, 101);
             this.btnImportarProyecto.TabIndex = 11;
             this.btnImportarProyecto.Text = "Importar Proyecto";
             this.btnImportarProyecto.UseVisualStyleBackColor = false;
@@ -133,10 +133,10 @@
             this.btnProcesarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProcesarDatos.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProcesarDatos.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnProcesarDatos.Location = new System.Drawing.Point(0, 124);
+            this.btnProcesarDatos.Location = new System.Drawing.Point(0, 101);
             this.btnProcesarDatos.Margin = new System.Windows.Forms.Padding(0);
             this.btnProcesarDatos.Name = "btnProcesarDatos";
-            this.btnProcesarDatos.Size = new System.Drawing.Size(280, 124);
+            this.btnProcesarDatos.Size = new System.Drawing.Size(210, 101);
             this.btnProcesarDatos.TabIndex = 12;
             this.btnProcesarDatos.Text = "Procesar Datos";
             this.btnProcesarDatos.UseVisualStyleBackColor = false;
@@ -146,10 +146,10 @@
             // 
             this.imgAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.imgAgregar.Image = ((System.Drawing.Image)(resources.GetObject("imgAgregar.Image")));
-            this.imgAgregar.Location = new System.Drawing.Point(580, 130);
+            this.imgAgregar.Location = new System.Drawing.Point(435, 106);
             this.imgAgregar.Margin = new System.Windows.Forms.Padding(0);
             this.imgAgregar.Name = "imgAgregar";
-            this.imgAgregar.Size = new System.Drawing.Size(49, 50);
+            this.imgAgregar.Size = new System.Drawing.Size(37, 41);
             this.imgAgregar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imgAgregar.TabIndex = 13;
             this.imgAgregar.TabStop = false;
@@ -161,10 +161,10 @@
             // 
             this.imgEditar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.imgEditar.Image = ((System.Drawing.Image)(resources.GetObject("imgEditar.Image")));
-            this.imgEditar.Location = new System.Drawing.Point(630, 130);
+            this.imgEditar.Location = new System.Drawing.Point(472, 106);
             this.imgEditar.Margin = new System.Windows.Forms.Padding(0);
             this.imgEditar.Name = "imgEditar";
-            this.imgEditar.Size = new System.Drawing.Size(49, 50);
+            this.imgEditar.Size = new System.Drawing.Size(37, 41);
             this.imgEditar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imgEditar.TabIndex = 14;
             this.imgEditar.TabStop = false;
@@ -176,10 +176,10 @@
             // 
             this.imgBorrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.imgBorrar.Image = ((System.Drawing.Image)(resources.GetObject("imgBorrar.Image")));
-            this.imgBorrar.Location = new System.Drawing.Point(680, 130);
+            this.imgBorrar.Location = new System.Drawing.Point(510, 106);
             this.imgBorrar.Margin = new System.Windows.Forms.Padding(0);
             this.imgBorrar.Name = "imgBorrar";
-            this.imgBorrar.Size = new System.Drawing.Size(49, 50);
+            this.imgBorrar.Size = new System.Drawing.Size(37, 41);
             this.imgBorrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imgBorrar.TabIndex = 15;
             this.imgBorrar.TabStop = false;
@@ -194,9 +194,8 @@
             this.lblNombreProyecto.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreProyecto.ForeColor = System.Drawing.Color.Black;
             this.lblNombreProyecto.Location = new System.Drawing.Point(-1, 1);
-            this.lblNombreProyecto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombreProyecto.Name = "lblNombreProyecto";
-            this.lblNombreProyecto.Size = new System.Drawing.Size(213, 29);
+            this.lblNombreProyecto.Size = new System.Drawing.Size(170, 24);
             this.lblNombreProyecto.TabIndex = 16;
             this.lblNombreProyecto.Text = "Nombre Proyecto";
             // 
@@ -205,11 +204,10 @@
             this.txtNombreProyecto.BackColor = System.Drawing.Color.LavenderBlush;
             this.txtNombreProyecto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombreProyecto.ForeColor = System.Drawing.Color.Maroon;
-            this.txtNombreProyecto.Location = new System.Drawing.Point(4, 45);
-            this.txtNombreProyecto.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNombreProyecto.Location = new System.Drawing.Point(3, 37);
             this.txtNombreProyecto.MaxLength = 32;
             this.txtNombreProyecto.Name = "txtNombreProyecto";
-            this.txtNombreProyecto.Size = new System.Drawing.Size(420, 30);
+            this.txtNombreProyecto.Size = new System.Drawing.Size(316, 26);
             this.txtNombreProyecto.TabIndex = 17;
             this.txtNombreProyecto.TextChanged += new System.EventHandler(this.txtNombreModificado_TextChanged);
             // 
@@ -225,10 +223,9 @@
             this.btnAceptarModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptarModificar.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptarModificar.ForeColor = System.Drawing.Color.Black;
-            this.btnAceptarModificar.Location = new System.Drawing.Point(4, 87);
-            this.btnAceptarModificar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAceptarModificar.Location = new System.Drawing.Point(3, 71);
             this.btnAceptarModificar.Name = "btnAceptarModificar";
-            this.btnAceptarModificar.Size = new System.Drawing.Size(112, 39);
+            this.btnAceptarModificar.Size = new System.Drawing.Size(92, 34);
             this.btnAceptarModificar.TabIndex = 18;
             this.btnAceptarModificar.Text = "Aceptar";
             this.btnAceptarModificar.UseVisualStyleBackColor = false;
@@ -246,10 +243,9 @@
             this.btnCancelarModificacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelarModificacion.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelarModificacion.ForeColor = System.Drawing.Color.Black;
-            this.btnCancelarModificacion.Location = new System.Drawing.Point(290, 86);
-            this.btnCancelarModificacion.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelarModificacion.Location = new System.Drawing.Point(218, 70);
             this.btnCancelarModificacion.Name = "btnCancelarModificacion";
-            this.btnCancelarModificacion.Size = new System.Drawing.Size(126, 41);
+            this.btnCancelarModificacion.Size = new System.Drawing.Size(100, 34);
             this.btnCancelarModificacion.TabIndex = 19;
             this.btnCancelarModificacion.Text = "Cancelar";
             this.btnCancelarModificacion.UseVisualStyleBackColor = false;
@@ -262,7 +258,7 @@
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
             this.panelTitulo.Margin = new System.Windows.Forms.Padding(0);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(1280, 100);
+            this.panelTitulo.Size = new System.Drawing.Size(960, 81);
             this.panelTitulo.TabIndex = 20;
             // 
             // lblMensaje
@@ -271,10 +267,10 @@
             this.lblMensaje.BackColor = System.Drawing.Color.Transparent;
             this.lblMensaje.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMensaje.ForeColor = System.Drawing.Color.LimeGreen;
-            this.lblMensaje.Location = new System.Drawing.Point(15, 0);
+            this.lblMensaje.Location = new System.Drawing.Point(11, 0);
             this.lblMensaje.Margin = new System.Windows.Forms.Padding(0);
             this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(322, 24);
+            this.lblMensaje.Size = new System.Drawing.Size(259, 21);
             this.lblMensaje.TabIndex = 21;
             this.lblMensaje.Text = "Esta es una notificación de prueba";
             // 
@@ -291,10 +287,10 @@
             this.flowPanelBotones.Controls.Add(this.btnImportarProyecto);
             this.flowPanelBotones.Controls.Add(this.btnArduino);
             this.flowPanelBotones.Controls.Add(this.btnSalir);
-            this.flowPanelBotones.Location = new System.Drawing.Point(0, 100);
+            this.flowPanelBotones.Location = new System.Drawing.Point(0, 81);
             this.flowPanelBotones.Margin = new System.Windows.Forms.Padding(0);
             this.flowPanelBotones.Name = "flowPanelBotones";
-            this.flowPanelBotones.Size = new System.Drawing.Size(280, 620);
+            this.flowPanelBotones.Size = new System.Drawing.Size(210, 504);
             this.flowPanelBotones.TabIndex = 22;
             // 
             // btnProyectos
@@ -311,7 +307,7 @@
             this.btnProyectos.Location = new System.Drawing.Point(0, 0);
             this.btnProyectos.Margin = new System.Windows.Forms.Padding(0);
             this.btnProyectos.Name = "btnProyectos";
-            this.btnProyectos.Size = new System.Drawing.Size(280, 124);
+            this.btnProyectos.Size = new System.Drawing.Size(210, 101);
             this.btnProyectos.TabIndex = 13;
             this.btnProyectos.Text = "Proyectos";
             this.btnProyectos.UseVisualStyleBackColor = false;
@@ -327,13 +323,14 @@
             this.btnArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnArduino.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnArduino.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnArduino.Location = new System.Drawing.Point(0, 372);
+            this.btnArduino.Location = new System.Drawing.Point(0, 303);
             this.btnArduino.Margin = new System.Windows.Forms.Padding(0);
             this.btnArduino.Name = "btnArduino";
-            this.btnArduino.Size = new System.Drawing.Size(280, 124);
+            this.btnArduino.Size = new System.Drawing.Size(210, 101);
             this.btnArduino.TabIndex = 14;
             this.btnArduino.Text = "Módulo Arduino";
             this.btnArduino.UseVisualStyleBackColor = false;
+            this.btnArduino.Click += new System.EventHandler(this.btnArduino_Click);
             // 
             // btnSalir
             // 
@@ -346,10 +343,10 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Book Antiqua", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnSalir.Location = new System.Drawing.Point(0, 496);
+            this.btnSalir.Location = new System.Drawing.Point(0, 404);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(0);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(280, 124);
+            this.btnSalir.Size = new System.Drawing.Size(210, 101);
             this.btnSalir.TabIndex = 15;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
@@ -359,9 +356,10 @@
             // 
             this.panelNotificaciones.BackColor = System.Drawing.Color.Honeydew;
             this.panelNotificaciones.Controls.Add(this.lblMensaje);
-            this.panelNotificaciones.Location = new System.Drawing.Point(280, 100);
+            this.panelNotificaciones.Location = new System.Drawing.Point(210, 81);
+            this.panelNotificaciones.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelNotificaciones.Name = "panelNotificaciones";
-            this.panelNotificaciones.Size = new System.Drawing.Size(1000, 25);
+            this.panelNotificaciones.Size = new System.Drawing.Size(750, 20);
             this.panelNotificaciones.TabIndex = 23;
             this.panelNotificaciones.Visible = false;
             // 
@@ -371,18 +369,19 @@
             this.panelNombreProyecto.Controls.Add(this.lblNombreProyecto);
             this.panelNombreProyecto.Controls.Add(this.btnAceptarModificar);
             this.panelNombreProyecto.Controls.Add(this.btnCancelarModificacion);
-            this.panelNombreProyecto.Location = new System.Drawing.Point(729, 190);
+            this.panelNombreProyecto.Location = new System.Drawing.Point(547, 154);
+            this.panelNombreProyecto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelNombreProyecto.Name = "panelNombreProyecto";
-            this.panelNombreProyecto.Size = new System.Drawing.Size(551, 530);
+            this.panelNombreProyecto.Size = new System.Drawing.Size(413, 431);
             this.panelNombreProyecto.TabIndex = 24;
             this.panelNombreProyecto.Visible = false;
             // 
             // frmPantallaPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
-            this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.ClientSize = new System.Drawing.Size(960, 585);
             this.Controls.Add(this.panelNombreProyecto);
             this.Controls.Add(this.panelNotificaciones);
             this.Controls.Add(this.flowPanelBotones);
@@ -393,7 +392,6 @@
             this.Controls.Add(this.lbProyectosRecientes);
             this.Controls.Add(lblProyectosGuardados);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmPantallaPrincipal";
             this.Opacity = 0.985D;

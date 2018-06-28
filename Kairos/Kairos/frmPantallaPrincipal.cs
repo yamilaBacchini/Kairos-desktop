@@ -1,4 +1,5 @@
-﻿using Kairos.Entidades;
+﻿using Kairos.Arduino;
+using Kairos.Entidades;
 using Kairos.Services;
 using Kairos.Services.Implementaciones;
 using System;
@@ -227,6 +228,14 @@ namespace Kairos
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnArduino_Click(object sender, EventArgs e)
+        {
+            FrmCapturaDatosArduino frm = new FrmCapturaDatosArduino();
+            Visible = false;
+            frm.ShowDialog();
+            Visible = true;
         }
     }
 }

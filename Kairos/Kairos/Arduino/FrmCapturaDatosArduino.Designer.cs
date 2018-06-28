@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApp2
+﻿namespace Kairos.Arduino
 {
-    partial class Form1
+    partial class FrmCapturaDatosArduino
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -36,6 +36,8 @@
             this.labelEstado = new System.Windows.Forms.Label();
             this.labelLectura = new System.Windows.Forms.Label();
             this.errorProviderExplorar = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxPuerto = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderExplorar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +67,7 @@
             // 
             // buttonExplorar
             // 
-            this.buttonExplorar.Location = new System.Drawing.Point(105, 46);
+            this.buttonExplorar.Location = new System.Drawing.Point(109, 70);
             this.buttonExplorar.Name = "buttonExplorar";
             this.buttonExplorar.Size = new System.Drawing.Size(60, 23);
             this.buttonExplorar.TabIndex = 4;
@@ -75,7 +77,7 @@
             // 
             // textBoxExplorar
             // 
-            this.textBoxExplorar.Location = new System.Drawing.Point(171, 48);
+            this.textBoxExplorar.Location = new System.Drawing.Point(175, 72);
             this.textBoxExplorar.Name = "textBoxExplorar";
             this.textBoxExplorar.Size = new System.Drawing.Size(159, 20);
             this.textBoxExplorar.TabIndex = 5;
@@ -105,19 +107,45 @@
             // 
             this.errorProviderExplorar.ContainerControl = this;
             // 
-            // Form1
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(108, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 18);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Puerto Serial";
+            // 
+            // comboBoxPuerto
+            // 
+            this.comboBoxPuerto.FormattingEnabled = true;
+            this.comboBoxPuerto.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5"});
+            this.comboBoxPuerto.Location = new System.Drawing.Point(204, 21);
+            this.comboBoxPuerto.Name = "comboBoxPuerto";
+            this.comboBoxPuerto.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxPuerto.TabIndex = 10;
+            // 
+            // FrmCapturaDatosArduino
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(442, 207);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBoxPuerto);
             this.Controls.Add(this.labelLectura);
             this.Controls.Add(this.labelEstado);
             this.Controls.Add(this.textBoxExplorar);
             this.Controls.Add(this.buttonExplorar);
             this.Controls.Add(this.buttonFinalizar);
             this.Controls.Add(this.buttonComenzar);
-            this.Name = "Form1";
+            this.Name = "FrmCapturaDatosArduino";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kairos - Captura de datos";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -136,6 +164,8 @@
         private System.Windows.Forms.Label labelEstado;
         private System.Windows.Forms.Label labelLectura;
         private System.Windows.Forms.ErrorProvider errorProviderExplorar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxPuerto;
     }
 }
 

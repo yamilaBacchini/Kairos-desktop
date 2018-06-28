@@ -150,13 +150,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Captura Arduino\ClassEscrituraTxt.cs" />
-    <Compile Include="Captura Arduino\FrmCapturaDatosArduino.cs">
+    <Compile Include="Arduino\EscrituraTxt.cs" />
+    <Compile Include="Arduino\FrmCapturaDatosArduino.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Captura Arduino\FrmCapturaDatosArduino.Designer.cs">
+    <Compile Include="Arduino\FrmCapturaDatosArduino.Designer.cs">
       <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
     </Compile>
+    <Compile Include="Arduino\SincroHoraArduino.cs" />
     <Compile Include="Entidades\Evento.cs" />
     <Compile Include="EventoContexto.cs" />
     <Compile Include="Filtros\FiltroImpl.cs" />
@@ -201,7 +202,7 @@
     <Compile Include="Services\Implementaciones\ImportarExcelFile.cs" />
     <Compile Include="Services\Implementaciones\ImportarTxtFile.cs" />
     <Compile Include="Services\ProyectoService.cs" />
-    <EmbeddedResource Include="Captura Arduino\FrmCapturaDatosArduino.resx">
+    <EmbeddedResource Include="Arduino\FrmCapturaDatosArduino.resx">
       <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formImportacionExcelFormato.resx">
