@@ -221,7 +221,7 @@ namespace Kairos.Forms
         private void imgAgregar_MouseLeave(object sender, EventArgs e)
         {
             PictureBox pb = sender as PictureBox;
-            pb.BackColor = Color.MistyRose;
+            pb.BackColor = Color.FromArgb(255, 192, 192);
             pb.BorderStyle = BorderStyle.None;
         }
 

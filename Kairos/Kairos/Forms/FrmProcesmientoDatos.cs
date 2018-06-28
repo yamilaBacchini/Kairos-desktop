@@ -336,7 +336,7 @@ namespace Kairos.Forms
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
                         lblAccion1.Visible = true;
-                        lblAccion1.Text = "Fecha desde";
+                        lblAccion1.Text = "Fecha";
                         lblAccion1.Text = "Fecha";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
@@ -347,7 +347,7 @@ namespace Kairos.Forms
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
-                        lblAccion1.Text = "Fecha hasta";
+                        lblAccion1.Text = "Fecha";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
                         dtp2.Visible = false;
@@ -368,7 +368,7 @@ namespace Kairos.Forms
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
-                        lblAccion1.Text = "Hora desde";
+                        lblAccion1.Text = "Hora";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
                         dtp2.Visible = false;
@@ -378,7 +378,7 @@ namespace Kairos.Forms
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
                         lblTituloAccion.Text = "Filtar";
-                        lblAccion1.Text = "Hora hasta";
+                        lblAccion1.Text = "Hora";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
                         dtp2.Visible = false;
@@ -405,8 +405,10 @@ namespace Kairos.Forms
         {
             int selectedValue = Convert.ToInt32(cmbTipoFiltro.SelectedValue);
             Filtro auxFiltro = null;
-            DateTime fecha = dtp1.Value.Date;
-            DateTime fecha2 = dtp2.Value.Date;
+            DateTime fecha = DateTime.Now;
+            DateTime fecha2 = DateTime.Now;
+            fecha = dtp1.Value;
+            fecha2 = dtp2.Value;
             switch (selectedValue)
             {
                 case 0:
