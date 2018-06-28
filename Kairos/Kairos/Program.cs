@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kairos.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Kairos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPantallaPrincipal());
+            Application.Run(new FrmPantallaPrincipal());
         }
     }
 }

@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kairos
+namespace Kairos.Forms
 {
-    public partial class formImportacionTxtFormato : Form
+    public partial class FrmImportacionTxtFormato : Form
     {
         private List<string> valoresNoPermitidos = new List<string>();
         public string delimitador = "";
-        public formImportacionTxtFormato()
+        public FrmImportacionTxtFormato()
         {
             InitializeComponent();
             this.valoresNoPermitidos.Add(" ");

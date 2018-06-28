@@ -1,4 +1,4 @@
-﻿namespace Kairos.Arduino
+﻿namespace Kairos.Forms
 {
     partial class FrmCapturaDatosArduino
     {

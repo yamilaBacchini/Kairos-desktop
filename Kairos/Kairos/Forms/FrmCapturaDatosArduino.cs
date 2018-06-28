@@ -8,8 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.IO;
+using Kairos.Arduino;
 
-namespace Kairos.Arduino
+namespace Kairos.Forms
 {
     public partial class FrmCapturaDatosArduino : Form
     {

@@ -14,12 +14,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kairos
+namespace Kairos.Forms
 {
-    public partial class frmPantallaPrincipal : Form
+    public partial class FrmPantallaPrincipal : Form
     {
 
-        public frmPantallaPrincipal()
+        public FrmPantallaPrincipal()
         {
             InitializeComponent();
 
@@ -81,7 +81,7 @@ namespace Kairos
                 switch (extencion)
                 {
                     case "txt":
-                        formImportacionTxtFormato frmtxt = new formImportacionTxtFormato();
+                        FrmImportacionTxtFormato frmtxt = new FrmImportacionTxtFormato();
                         if (frmtxt.ShowDialog() == DialogResult.OK)
                         {
                             importador = new ImportarTxtFile(frmtxt.delimitador);
@@ -89,7 +89,7 @@ namespace Kairos
                         break;
                     case "xls":
                     case "xlsx":
-                        formImportacionExcelFormato frmxls = new formImportacionExcelFormato();
+                        FrmImportacionExcelFormato frmxls = new FrmImportacionExcelFormato();
                         if (frmxls.ShowDialog() == DialogResult.OK)
                         {
                             importador = new ImportarExcelFile(frmxls.hoja,frmxls.columna,frmxls.filaIncial);

@@ -1,6 +1,6 @@
-﻿namespace Kairos
+﻿namespace Kairos.Forms
 {
-    partial class formImportacionExcelFormato
+    partial class FrmImportacionExcelFormato
     {
         /// <summary>
         /// Required designer variable.

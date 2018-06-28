@@ -151,10 +151,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arduino\EscrituraTxt.cs" />
-    <Compile Include="Arduino\FrmCapturaDatosArduino.cs">
+    <Compile Include="Forms\FrmCapturaDatosArduino.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Arduino\FrmCapturaDatosArduino.Designer.cs">
+    <Compile Include="Forms\FrmCapturaDatosArduino.Designer.cs">
       <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
     </Compile>
     <Compile Include="Arduino\SincroHoraArduino.cs" />
@@ -162,29 +162,29 @@
     <Compile Include="EventoContexto.cs" />
     <Compile Include="Filtros\FiltroImpl.cs" />
     <Compile Include="Filtros\INuevoFiltro.cs" />
-    <Compile Include="formImportacionExcelFormato.cs">
+    <Compile Include="Forms\FrmImportacionExcelFormato.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formImportacionExcelFormato.Designer.cs">
-      <DependentUpon>formImportacionExcelFormato.cs</DependentUpon>
+    <Compile Include="Forms\FrmImportacionExcelFormato.Designer.cs">
+      <DependentUpon>FrmImportacionExcelFormato.cs</DependentUpon>
     </Compile>
-    <Compile Include="formImportacionTxtFormato.cs">
+    <Compile Include="Forms\FrmImportacionTxtFormato.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formImportacionTxtFormato.Designer.cs">
-      <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
+    <Compile Include="Forms\FrmImportacionTxtFormato.Designer.cs">
+      <DependentUpon>FrmImportacionTxtFormato.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPantallaPrincipal.cs">
+    <Compile Include="Forms\FrmPantallaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPantallaPrincipal.Designer.cs">
-      <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
+    <Compile Include="Forms\FrmPantallaPrincipal.Designer.cs">
+      <DependentUpon>FrmPantallaPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Origen.cs" />
-    <Compile Include="FrmProcesmientoDatos.cs">
+    <Compile Include="Forms\FrmProcesmientoDatos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmProcesmientoDatos.Designer.cs">
+    <Compile Include="Forms\FrmProcesmientoDatos.Designer.cs">
       <DependentUpon>FrmProcesmientoDatos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\20180125003607_MyFirstMigration.cs" />
@@ -202,19 +202,19 @@
     <Compile Include="Services\Implementaciones\ImportarExcelFile.cs" />
     <Compile Include="Services\Implementaciones\ImportarTxtFile.cs" />
     <Compile Include="Services\ProyectoService.cs" />
-    <EmbeddedResource Include="Arduino\FrmCapturaDatosArduino.resx">
+    <EmbeddedResource Include="Forms\FrmCapturaDatosArduino.resx">
       <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formImportacionExcelFormato.resx">
-      <DependentUpon>formImportacionExcelFormato.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmImportacionExcelFormato.resx">
+      <DependentUpon>FrmImportacionExcelFormato.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formImportacionTxtFormato.resx">
-      <DependentUpon>formImportacionTxtFormato.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmImportacionTxtFormato.resx">
+      <DependentUpon>FrmImportacionTxtFormato.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPantallaPrincipal.resx">
-      <DependentUpon>frmPantallaPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmPantallaPrincipal.resx">
+      <DependentUpon>FrmPantallaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmProcesmientoDatos.resx">
+    <EmbeddedResource Include="Forms\FrmProcesmientoDatos.resx">
       <DependentUpon>FrmProcesmientoDatos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

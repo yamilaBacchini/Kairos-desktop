@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kairos
+namespace Kairos.Forms
 {
     public partial class FrmProcesmientoDatos : Form
     {

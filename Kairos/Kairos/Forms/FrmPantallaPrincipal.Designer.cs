@@ -1,6 +1,6 @@
-﻿namespace Kairos
+﻿namespace Kairos.Forms
 {
-    partial class frmPantallaPrincipal
+    partial class FrmPantallaPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label lblProyectosGuardados;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPantallaPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPantallaPrincipal));
             this.lbProyectosRecientes = new System.Windows.Forms.ListBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnImportarProyecto = new System.Windows.Forms.Button();

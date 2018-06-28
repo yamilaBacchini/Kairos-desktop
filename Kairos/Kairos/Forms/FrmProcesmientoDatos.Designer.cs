@@ -1,4 +1,4 @@
-﻿namespace Kairos
+﻿namespace Kairos.Forms
 {
     partial class FrmProcesmientoDatos
     {

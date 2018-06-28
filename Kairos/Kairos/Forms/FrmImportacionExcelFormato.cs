@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kairos
+namespace Kairos.Forms
 {
-    public partial class formImportacionExcelFormato : Form
+    public partial class FrmImportacionExcelFormato : Form
     {
         public int hoja = -1;
         public int columna = -1;
         public int filaIncial = -1;
         
-        public formImportacionExcelFormato()
+        public FrmImportacionExcelFormato()
         {
             InitializeComponent();
         }

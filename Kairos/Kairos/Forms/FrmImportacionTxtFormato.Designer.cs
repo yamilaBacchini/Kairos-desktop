@@ -1,6 +1,6 @@
-﻿namespace Kairos
+﻿namespace Kairos.Forms
 {
-    partial class formImportacionTxtFormato
+    partial class FrmImportacionTxtFormato
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formImportacionTxtFormato));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmImportacionTxtFormato));
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btncancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
