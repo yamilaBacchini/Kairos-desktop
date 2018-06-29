@@ -475,5 +475,11 @@ namespace Kairos.Forms
             }
             _updatingCheckList = false;
         }
+
+        private void btnCalcularFDP_Click(object sender, EventArgs e)
+        {
+            MetodologiaAjuste metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
+            //FdpService.ajustar(eventoAEvento);
+        }
     }
 }

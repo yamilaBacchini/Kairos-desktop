@@ -193,6 +193,7 @@
     </Compile>
     <Compile Include="Migrations\EventoContextoModelSnapshot.cs" />
     <Compile Include="Modelo\Filtro.cs" />
+    <Compile Include="Modelo\MetodologiaAjuste.cs" />
     <Compile Include="Modelo\TipoAccionProcesamiento.cs" />
     <Compile Include="Modelo\TipoFiltro.cs" />
     <Compile Include="Program.cs" />
