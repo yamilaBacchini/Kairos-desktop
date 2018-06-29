@@ -61,6 +61,10 @@
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.btnSeleccionarTodos = new System.Windows.Forms.Button();
             this.pnlAcciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
+            this.rbDtConstante = new System.Windows.Forms.RadioButton();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
             this.pnlModificable.SuspendLayout();
@@ -69,6 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlMensaje.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlEventos
@@ -122,7 +127,7 @@
             this.pnlModificable.Controls.Add(this.lblTituloAccion);
             this.pnlModificable.Location = new System.Drawing.Point(666, 106);
             this.pnlModificable.Name = "pnlModificable";
-            this.pnlModificable.Size = new System.Drawing.Size(282, 354);
+            this.pnlModificable.Size = new System.Drawing.Size(282, 313);
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
             // 
@@ -130,7 +135,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 204);
+            this.label2.Location = new System.Drawing.Point(7, 181);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 20);
             this.label2.TabIndex = 54;
@@ -139,7 +144,7 @@
             // chlFiltros
             // 
             this.chlFiltros.FormattingEnabled = true;
-            this.chlFiltros.Location = new System.Drawing.Point(11, 225);
+            this.chlFiltros.Location = new System.Drawing.Point(11, 202);
             this.chlFiltros.Name = "chlFiltros";
             this.chlFiltros.Size = new System.Drawing.Size(230, 49);
             this.chlFiltros.TabIndex = 53;
@@ -150,7 +155,7 @@
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnLimpiar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
-            this.btnLimpiar.Location = new System.Drawing.Point(53, 275);
+            this.btnLimpiar.Location = new System.Drawing.Point(53, 272);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(76, 31);
             this.btnLimpiar.TabIndex = 52;
@@ -201,7 +206,7 @@
             this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
             this.btnAceptar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptar.ForeColor = System.Drawing.Color.White;
-            this.btnAceptar.Location = new System.Drawing.Point(165, 276);
+            this.btnAceptar.Location = new System.Drawing.Point(153, 272);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(76, 31);
             this.btnAceptar.TabIndex = 47;
@@ -246,9 +251,9 @@
             // 
             this.pnlAccionesFinales.Controls.Add(this.btnGuardarProyecto);
             this.pnlAccionesFinales.Controls.Add(this.btnCalcularFDP);
-            this.pnlAccionesFinales.Location = new System.Drawing.Point(666, 464);
+            this.pnlAccionesFinales.Location = new System.Drawing.Point(666, 490);
             this.pnlAccionesFinales.Name = "pnlAccionesFinales";
-            this.pnlAccionesFinales.Size = new System.Drawing.Size(282, 120);
+            this.pnlAccionesFinales.Size = new System.Drawing.Size(282, 94);
             this.pnlAccionesFinales.TabIndex = 3;
             // 
             // btnGuardarProyecto
@@ -256,7 +261,7 @@
             this.btnGuardarProyecto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnGuardarProyecto.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardarProyecto.ForeColor = System.Drawing.Color.Black;
-            this.btnGuardarProyecto.Location = new System.Drawing.Point(53, 21);
+            this.btnGuardarProyecto.Location = new System.Drawing.Point(53, 11);
             this.btnGuardarProyecto.Name = "btnGuardarProyecto";
             this.btnGuardarProyecto.Size = new System.Drawing.Size(176, 36);
             this.btnGuardarProyecto.TabIndex = 17;
@@ -268,12 +273,13 @@
             this.btnCalcularFDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(10)))), ((int)(((byte)(40)))));
             this.btnCalcularFDP.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalcularFDP.ForeColor = System.Drawing.Color.White;
-            this.btnCalcularFDP.Location = new System.Drawing.Point(53, 63);
+            this.btnCalcularFDP.Location = new System.Drawing.Point(53, 47);
             this.btnCalcularFDP.Name = "btnCalcularFDP";
             this.btnCalcularFDP.Size = new System.Drawing.Size(176, 36);
             this.btnCalcularFDP.TabIndex = 16;
             this.btnCalcularFDP.Text = "Calcular FDP";
             this.btnCalcularFDP.UseVisualStyleBackColor = false;
+            this.btnCalcularFDP.Click += new System.EventHandler(this.btnCalcularFDP_Click);
             // 
             // pnlTitulo
             // 
@@ -449,12 +455,59 @@
             this.pnlAcciones.Size = new System.Drawing.Size(210, 447);
             this.pnlAcciones.TabIndex = 22;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rbDtConstante);
+            this.panel1.Controls.Add(this.rbEventoAEvento);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(666, 425);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(282, 59);
+            this.panel1.TabIndex = 23;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(7, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 23);
+            this.label3.TabIndex = 55;
+            this.label3.Text = "Metodologia";
+            // 
+            // rbEventoAEvento
+            // 
+            this.rbEventoAEvento.AutoSize = true;
+            this.rbEventoAEvento.Checked = true;
+            this.rbEventoAEvento.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.rbEventoAEvento.Location = new System.Drawing.Point(11, 33);
+            this.rbEventoAEvento.Name = "rbEventoAEvento";
+            this.rbEventoAEvento.Size = new System.Drawing.Size(129, 22);
+            this.rbEventoAEvento.TabIndex = 56;
+            this.rbEventoAEvento.TabStop = true;
+            this.rbEventoAEvento.Text = "Evento a evento";
+            this.rbEventoAEvento.UseVisualStyleBackColor = true;
+            // 
+            // rbDtConstante
+            // 
+            this.rbDtConstante.AutoSize = true;
+            this.rbDtConstante.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.rbDtConstante.Location = new System.Drawing.Point(146, 33);
+            this.rbDtConstante.Name = "rbDtConstante";
+            this.rbDtConstante.Size = new System.Drawing.Size(104, 22);
+            this.rbDtConstante.TabIndex = 57;
+            this.rbDtConstante.TabStop = true;
+            this.rbDtConstante.Text = "Δt constante";
+            this.rbDtConstante.UseVisualStyleBackColor = true;
+            // 
             // FrmProcesmientoDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(960, 585);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlTitulo);
             this.Controls.Add(this.pnlAcciones);
             this.Controls.Add(this.pnlMensaje);
@@ -478,6 +531,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlMensaje.ResumeLayout(false);
             this.pnlAcciones.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -514,5 +569,9 @@
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Button btnSeleccionarTodos;
         private System.Windows.Forms.FlowLayoutPanel pnlAcciones;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rbDtConstante;
+        private System.Windows.Forms.RadioButton rbEventoAEvento;
+        private System.Windows.Forms.Label label3;
     }
 }
