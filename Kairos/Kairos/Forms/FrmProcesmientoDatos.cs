@@ -480,6 +480,10 @@ namespace Kairos.Forms
         {
             MetodologiaAjuste metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
             //FdpService.ajustar(eventoAEvento);
+            FrmAjusteFunciones frm = new FrmAjusteFunciones();
+            this.Visible = false;
+            frm.ShowDialog();
+            this.Visible = true;
         }
     }
 }

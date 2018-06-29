@@ -62,9 +62,9 @@
             this.btnSeleccionarTodos = new System.Windows.Forms.Button();
             this.pnlAcciones = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.rbDtConstante = new System.Windows.Forms.RadioButton();
+            this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
             this.pnlModificable.SuspendLayout();
@@ -127,24 +127,25 @@
             this.pnlModificable.Controls.Add(this.lblTituloAccion);
             this.pnlModificable.Location = new System.Drawing.Point(666, 106);
             this.pnlModificable.Name = "pnlModificable";
-            this.pnlModificable.Size = new System.Drawing.Size(282, 313);
+            this.pnlModificable.Size = new System.Drawing.Size(282, 328);
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 181);
+            this.label2.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(7, 211);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 20);
+            this.label2.Size = new System.Drawing.Size(132, 20);
             this.label2.TabIndex = 54;
             this.label2.Text = "Filtros Aplicados";
             // 
             // chlFiltros
             // 
             this.chlFiltros.FormattingEnabled = true;
-            this.chlFiltros.Location = new System.Drawing.Point(11, 202);
+            this.chlFiltros.Location = new System.Drawing.Point(11, 239);
             this.chlFiltros.Name = "chlFiltros";
             this.chlFiltros.Size = new System.Drawing.Size(230, 49);
             this.chlFiltros.TabIndex = 53;
@@ -155,7 +156,7 @@
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnLimpiar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
-            this.btnLimpiar.Location = new System.Drawing.Point(53, 272);
+            this.btnLimpiar.Location = new System.Drawing.Point(165, 291);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(76, 31);
             this.btnLimpiar.TabIndex = 52;
@@ -166,9 +167,9 @@
             // cmbTipoFiltro
             // 
             this.cmbTipoFiltro.FormattingEnabled = true;
-            this.cmbTipoFiltro.Location = new System.Drawing.Point(108, 42);
+            this.cmbTipoFiltro.Location = new System.Drawing.Point(112, 42);
             this.cmbTipoFiltro.Name = "cmbTipoFiltro";
-            this.cmbTipoFiltro.Size = new System.Drawing.Size(133, 21);
+            this.cmbTipoFiltro.Size = new System.Drawing.Size(129, 21);
             this.cmbTipoFiltro.TabIndex = 51;
             this.cmbTipoFiltro.Text = "Seleccione";
             this.cmbTipoFiltro.SelectedIndexChanged += new System.EventHandler(this.cmbTipoFiltro_SelectedIndexChanged);
@@ -176,10 +177,11 @@
             // lblTipoFiltro
             // 
             this.lblTipoFiltro.AutoSize = true;
-            this.lblTipoFiltro.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoFiltro.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.lblTipoFiltro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTipoFiltro.Location = new System.Drawing.Point(7, 40);
             this.lblTipoFiltro.Name = "lblTipoFiltro";
-            this.lblTipoFiltro.Size = new System.Drawing.Size(95, 20);
+            this.lblTipoFiltro.Size = new System.Drawing.Size(104, 20);
             this.lblTipoFiltro.TabIndex = 50;
             this.lblTipoFiltro.Text = "Tipo de filtro";
             // 
@@ -206,7 +208,7 @@
             this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
             this.btnAceptar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptar.ForeColor = System.Drawing.Color.White;
-            this.btnAceptar.Location = new System.Drawing.Point(153, 272);
+            this.btnAceptar.Location = new System.Drawing.Point(165, 165);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(76, 31);
             this.btnAceptar.TabIndex = 47;
@@ -251,9 +253,9 @@
             // 
             this.pnlAccionesFinales.Controls.Add(this.btnGuardarProyecto);
             this.pnlAccionesFinales.Controls.Add(this.btnCalcularFDP);
-            this.pnlAccionesFinales.Location = new System.Drawing.Point(666, 490);
+            this.pnlAccionesFinales.Location = new System.Drawing.Point(666, 502);
             this.pnlAccionesFinales.Name = "pnlAccionesFinales";
-            this.pnlAccionesFinales.Size = new System.Drawing.Size(282, 94);
+            this.pnlAccionesFinales.Size = new System.Drawing.Size(282, 82);
             this.pnlAccionesFinales.TabIndex = 3;
             // 
             // btnGuardarProyecto
@@ -261,7 +263,7 @@
             this.btnGuardarProyecto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnGuardarProyecto.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardarProyecto.ForeColor = System.Drawing.Color.Black;
-            this.btnGuardarProyecto.Location = new System.Drawing.Point(53, 11);
+            this.btnGuardarProyecto.Location = new System.Drawing.Point(53, 6);
             this.btnGuardarProyecto.Name = "btnGuardarProyecto";
             this.btnGuardarProyecto.Size = new System.Drawing.Size(176, 36);
             this.btnGuardarProyecto.TabIndex = 17;
@@ -273,7 +275,7 @@
             this.btnCalcularFDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(10)))), ((int)(((byte)(40)))));
             this.btnCalcularFDP.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalcularFDP.ForeColor = System.Drawing.Color.White;
-            this.btnCalcularFDP.Location = new System.Drawing.Point(53, 47);
+            this.btnCalcularFDP.Location = new System.Drawing.Point(53, 42);
             this.btnCalcularFDP.Name = "btnCalcularFDP";
             this.btnCalcularFDP.Size = new System.Drawing.Size(176, 36);
             this.btnCalcularFDP.TabIndex = 16;
@@ -314,9 +316,9 @@
             // pnlMensaje
             // 
             this.pnlMensaje.Controls.Add(this.lblMensaje);
-            this.pnlMensaje.Location = new System.Drawing.Point(239, 81);
+            this.pnlMensaje.Location = new System.Drawing.Point(206, 81);
             this.pnlMensaje.Name = "pnlMensaje";
-            this.pnlMensaje.Size = new System.Drawing.Size(721, 19);
+            this.pnlMensaje.Size = new System.Drawing.Size(754, 19);
             this.pnlMensaje.TabIndex = 22;
             // 
             // lblMensaje
@@ -380,7 +382,7 @@
             this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVolver.Font = new System.Drawing.Font("Book Antiqua", 13F);
             this.btnVolver.ForeColor = System.Drawing.Color.White;
-            this.btnVolver.Location = new System.Drawing.Point(0, 527);
+            this.btnVolver.Location = new System.Drawing.Point(0, 528);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(210, 57);
             this.btnVolver.TabIndex = 6;
@@ -460,21 +462,22 @@
             this.panel1.Controls.Add(this.rbDtConstante);
             this.panel1.Controls.Add(this.rbEventoAEvento);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(666, 425);
+            this.panel1.Location = new System.Drawing.Point(666, 440);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(282, 59);
+            this.panel1.Size = new System.Drawing.Size(282, 56);
             this.panel1.TabIndex = 23;
             // 
-            // label3
+            // rbDtConstante
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(7, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 23);
-            this.label3.TabIndex = 55;
-            this.label3.Text = "Metodologia";
+            this.rbDtConstante.AutoSize = true;
+            this.rbDtConstante.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.rbDtConstante.Location = new System.Drawing.Point(146, 33);
+            this.rbDtConstante.Name = "rbDtConstante";
+            this.rbDtConstante.Size = new System.Drawing.Size(104, 22);
+            this.rbDtConstante.TabIndex = 57;
+            this.rbDtConstante.TabStop = true;
+            this.rbDtConstante.Text = "Δt constante";
+            this.rbDtConstante.UseVisualStyleBackColor = true;
             // 
             // rbEventoAEvento
             // 
@@ -489,17 +492,16 @@
             this.rbEventoAEvento.Text = "Evento a evento";
             this.rbEventoAEvento.UseVisualStyleBackColor = true;
             // 
-            // rbDtConstante
+            // label3
             // 
-            this.rbDtConstante.AutoSize = true;
-            this.rbDtConstante.Font = new System.Drawing.Font("Book Antiqua", 10F);
-            this.rbDtConstante.Location = new System.Drawing.Point(146, 33);
-            this.rbDtConstante.Name = "rbDtConstante";
-            this.rbDtConstante.Size = new System.Drawing.Size(104, 22);
-            this.rbDtConstante.TabIndex = 57;
-            this.rbDtConstante.TabStop = true;
-            this.rbDtConstante.Text = "Δt constante";
-            this.rbDtConstante.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(7, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 23);
+            this.label3.TabIndex = 55;
+            this.label3.Text = "Metodologia";
             // 
             // FrmProcesmientoDatos
             // 
