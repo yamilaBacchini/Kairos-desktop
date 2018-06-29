@@ -65,6 +65,10 @@
             this.rbDtConstante = new System.Windows.Forms.RadioButton();
             this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
+            this.pnlSegmentacion = new System.Windows.Forms.Panel();
+            this.rbHora = new System.Windows.Forms.RadioButton();
+            this.rbMinuto = new System.Windows.Forms.RadioButton();
+            this.rbDia = new System.Windows.Forms.RadioButton();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
             this.pnlModificable.SuspendLayout();
@@ -74,6 +78,7 @@
             this.pnlMensaje.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.pnlSegmentacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlEventos
@@ -127,7 +132,7 @@
             this.pnlModificable.Controls.Add(this.lblTituloAccion);
             this.pnlModificable.Location = new System.Drawing.Point(666, 106);
             this.pnlModificable.Name = "pnlModificable";
-            this.pnlModificable.Size = new System.Drawing.Size(282, 328);
+            this.pnlModificable.Size = new System.Drawing.Size(282, 303);
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
             // 
@@ -136,7 +141,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(7, 211);
+            this.label2.Location = new System.Drawing.Point(7, 183);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 20);
             this.label2.TabIndex = 54;
@@ -145,7 +150,7 @@
             // chlFiltros
             // 
             this.chlFiltros.FormattingEnabled = true;
-            this.chlFiltros.Location = new System.Drawing.Point(11, 239);
+            this.chlFiltros.Location = new System.Drawing.Point(11, 211);
             this.chlFiltros.Name = "chlFiltros";
             this.chlFiltros.Size = new System.Drawing.Size(230, 49);
             this.chlFiltros.TabIndex = 53;
@@ -156,7 +161,7 @@
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnLimpiar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
-            this.btnLimpiar.Location = new System.Drawing.Point(165, 291);
+            this.btnLimpiar.Location = new System.Drawing.Point(165, 263);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(76, 31);
             this.btnLimpiar.TabIndex = 52;
@@ -459,12 +464,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pnlSegmentacion);
             this.panel1.Controls.Add(this.rbDtConstante);
             this.panel1.Controls.Add(this.rbEventoAEvento);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(666, 440);
+            this.panel1.Location = new System.Drawing.Point(666, 415);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(282, 56);
+            this.panel1.Size = new System.Drawing.Size(282, 81);
             this.panel1.TabIndex = 23;
             // 
             // rbDtConstante
@@ -478,6 +484,7 @@
             this.rbDtConstante.TabStop = true;
             this.rbDtConstante.Text = "Δt constante";
             this.rbDtConstante.UseVisualStyleBackColor = true;
+            this.rbDtConstante.CheckedChanged += new System.EventHandler(this.rbDtConstante_CheckedChanged);
             // 
             // rbEventoAEvento
             // 
@@ -502,6 +509,49 @@
             this.label3.Size = new System.Drawing.Size(123, 23);
             this.label3.TabIndex = 55;
             this.label3.Text = "Metodologia";
+            // 
+            // pnlSegmentacion
+            // 
+            this.pnlSegmentacion.Controls.Add(this.rbDia);
+            this.pnlSegmentacion.Controls.Add(this.rbMinuto);
+            this.pnlSegmentacion.Controls.Add(this.rbHora);
+            this.pnlSegmentacion.Location = new System.Drawing.Point(0, 55);
+            this.pnlSegmentacion.Name = "pnlSegmentacion";
+            this.pnlSegmentacion.Size = new System.Drawing.Size(282, 26);
+            this.pnlSegmentacion.TabIndex = 58;
+            this.pnlSegmentacion.Visible = false;
+            // 
+            // rbHora
+            // 
+            this.rbHora.AutoSize = true;
+            this.rbHora.Location = new System.Drawing.Point(103, 3);
+            this.rbHora.Name = "rbHora";
+            this.rbHora.Size = new System.Drawing.Size(48, 17);
+            this.rbHora.TabIndex = 0;
+            this.rbHora.Text = "Hora";
+            this.rbHora.UseVisualStyleBackColor = true;
+            // 
+            // rbMinuto
+            // 
+            this.rbMinuto.AutoSize = true;
+            this.rbMinuto.Location = new System.Drawing.Point(184, 3);
+            this.rbMinuto.Name = "rbMinuto";
+            this.rbMinuto.Size = new System.Drawing.Size(57, 17);
+            this.rbMinuto.TabIndex = 1;
+            this.rbMinuto.Text = "Minuto";
+            this.rbMinuto.UseVisualStyleBackColor = true;
+            // 
+            // rbDia
+            // 
+            this.rbDia.AutoSize = true;
+            this.rbDia.Checked = true;
+            this.rbDia.Location = new System.Drawing.Point(11, 3);
+            this.rbDia.Name = "rbDia";
+            this.rbDia.Size = new System.Drawing.Size(41, 17);
+            this.rbDia.TabIndex = 2;
+            this.rbDia.TabStop = true;
+            this.rbDia.Text = "Dia";
+            this.rbDia.UseVisualStyleBackColor = true;
             // 
             // FrmProcesmientoDatos
             // 
@@ -535,6 +585,8 @@
             this.pnlAcciones.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlSegmentacion.ResumeLayout(false);
+            this.pnlSegmentacion.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -575,5 +627,9 @@
         private System.Windows.Forms.RadioButton rbDtConstante;
         private System.Windows.Forms.RadioButton rbEventoAEvento;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pnlSegmentacion;
+        private System.Windows.Forms.RadioButton rbDia;
+        private System.Windows.Forms.RadioButton rbMinuto;
+        private System.Windows.Forms.RadioButton rbHora;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kairos.Entidades
 {
-    class Origen
+    public class Origen
     {
         public int Id { get; set; }
         public DateTime fechaCreacion { get; set; }
