@@ -13,9 +13,16 @@ namespace Kairos.FuncionesDensidad.Implementacion
     {
         public ResultadoAjuste Ajustar(List<int> eventos)
         {
-            var funcion = new ExponentialDistribution();
-            funcion.Fit(eventos.Select(x => Convert.ToDouble(x)).ToArray());
-            return new ResultadoAjuste(funcion.ToString(), funcion.StandardDeviation, funcion.Mean, funcion.Variance);
+            try
+            {
+                var funcion = new ExponentialDistribution();
+                funcion.Fit(eventos.Select(x => Convert.ToDouble(x)).ToArray());
+                return new ResultadoAjuste(funcion.ToString(), funcion.StandardDeviation, funcion.Mean, funcion.Variance);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

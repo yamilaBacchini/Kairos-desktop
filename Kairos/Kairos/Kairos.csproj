@@ -272,7 +272,7 @@
     <Compile Include="FuncionesDensidad\Implementacion\FuncionFasesBiWeibull.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionLogistica.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionLogLogistica.cs" />
-    <Compile Include="FuncionesDensidad\Implementacion\FuncionLognormal.cs" />
+    <Compile Include="FuncionesDensidad\Implementacion\FuncionLogNormal.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionNormal.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionPoisson.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionUniforme.cs" />

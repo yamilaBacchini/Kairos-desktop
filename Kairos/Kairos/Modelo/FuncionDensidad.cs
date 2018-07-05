@@ -12,7 +12,7 @@ namespace Kairos.Modelo
         BINOMIAL,
         EXPONENCIAL,
         LOGISTICA,
-        LOGNORMAL,
+        LOG_NORMAL,
         LOG_LOGISTICA,
         NORMAL,
         FASES_BI_EXPONENCIAL,

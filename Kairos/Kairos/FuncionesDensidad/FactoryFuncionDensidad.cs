@@ -22,8 +22,8 @@ namespace Kairos.FuncionesDensidad
                     return new FuncionExponencial();
                 case FuncionDensidad.LOGISTICA:
                     return new FuncionLogistica();
-                case FuncionDensidad.LOGNORMAL:
-                    return new FuncionLognormal();
+                case FuncionDensidad.LOG_NORMAL:
+                    return new FuncionLogNormal();
                 case FuncionDensidad.LOG_LOGISTICA:
                     return new FuncionLogLogistica();
                 case FuncionDensidad.NORMAL:
