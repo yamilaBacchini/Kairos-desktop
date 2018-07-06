@@ -11,18 +11,26 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionUniforme : IFuncionDensidadProbabilidad
     {
-        public ResultadoAjuste Ajustar(List<int> eventos)
+        public UnivariateDiscreteDistribution DistribucionDiscreta => throw new NotImplementedException();
+
+        public UnivariateContinuousDistribution DistribucionContinua => new UniformContinuousDistribution();
+
+        public ResultadoAjuste Ajustar(double[] eventos)
         {
             try
             {
-                var funcion = new UniformContinuousDistribution();
-                funcion.Fit(eventos.Select(x => Convert.ToDouble(x)).ToArray());
-                return new ResultadoAjuste(funcion.ToString(), funcion.StandardDeviation, funcion.Mean, funcion.Variance);
+                DistribucionContinua.Fit(eventos);
+                return new ResultadoAjuste(DistribucionContinua.ToString(), DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance);
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        public List<int> ObtenerValores(int cantidad)
+        {
+            return DistribucionContinua.Generate(cantidad).Select(x => Convert.ToInt32(x)).ToList();
         }
     }
 }

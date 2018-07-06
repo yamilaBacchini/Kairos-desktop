@@ -11,7 +11,16 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionFasesBiExponencial : IFuncionDensidadProbabilidad
     {
-        public ResultadoAjuste Ajustar(List<int> eventosEaE)
+        public UnivariateDiscreteDistribution DistribucionDiscreta => null;
+
+        public UnivariateContinuousDistribution DistribucionContinua => null;
+
+        public ResultadoAjuste Ajustar(double[] eventosEaE)
+        {
+            return null;
+        }
+
+        public List<int> ObtenerValores(int cantidad)
         {
             return null;
         }

@@ -481,7 +481,6 @@ namespace Kairos.Forms
         {
             MetodologiaAjuste metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
             Segmentacion segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA : Segmentacion.MINUTO);
-            //FdpService.ajustar(eventoAEvento);
             FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos);
             this.Visible = false;
             frm.ShowDialog();

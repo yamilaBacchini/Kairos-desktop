@@ -11,18 +11,26 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionPoisson : IFuncionDensidadProbabilidad
     {
-        public ResultadoAjuste Ajustar(List<int> eventos)
+        public UnivariateDiscreteDistribution DistribucionDiscreta => new PoissonDistribution();
+
+        public UnivariateContinuousDistribution DistribucionContinua => null;
+
+        public ResultadoAjuste Ajustar(double[] eventos)
         {
             try
             {
-                var funcion = new PoissonDistribution();
-                funcion.Fit(eventos.Select(x => Convert.ToDouble(x)).ToArray());
-                return new ResultadoAjuste(funcion.ToString(), funcion.StandardDeviation, funcion.Mean, funcion.Variance);
+                DistribucionDiscreta.Fit(eventos);
+                return new ResultadoAjuste(DistribucionDiscreta.ToString(), DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance);
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        public List<int> ObtenerValores(int cantidad)
+        {
+            return DistribucionDiscreta.Generate(cantidad).ToList();
         }
     }
 }

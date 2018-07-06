@@ -1,4 +1,5 @@
-﻿using Kairos.Entidades;
+﻿using Accord.Statistics.Distributions.Univariate;
+using Kairos.Entidades;
 using Kairos.Modelo;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace Kairos.FuncionesDensidad
 {
     public interface IFuncionDensidadProbabilidad
     {
-        ResultadoAjuste Ajustar(List<Int32> eventos);
+        UnivariateDiscreteDistribution DistribucionDiscreta { get; }
+
+        UnivariateContinuousDistribution DistribucionContinua { get; }
+
+        ResultadoAjuste Ajustar(double[] eventos);
+
+        List<int> ObtenerValores(int cantidad);
     }
 }
