@@ -33,5 +33,10 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             throw new NotImplementedException();
         }
+
+        public string StringFDP()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

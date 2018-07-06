@@ -18,5 +18,7 @@ namespace Kairos.FuncionesDensidad
         ResultadoAjuste Ajustar(double[] eventos);
 
         List<int> ObtenerValores(int cantidad);
+
+        string StringFDP();
     }
 }

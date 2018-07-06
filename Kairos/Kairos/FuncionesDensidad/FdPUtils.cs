@@ -22,7 +22,7 @@ namespace Kairos.FuncionesDensidad
                     .Skip(1), (x, y) => y - x)
                     .Select(x => Math.Abs(x.TotalMinutes))
                     .GroupBy(x => x)
-                    .ToDictionary(x => x.Key.ToString(), x => x.Count() / cantEventos);
+                    .ToDictionary(x => x.Key.ToString(), x => x.Count() / (cantEventos > 1 ? cantEventos - 1 : cantEventos));
             }
             else
                 return null;

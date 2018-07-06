@@ -32,5 +32,10 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             return DistribucionContinua.Generate(cantidad).Select(x => Convert.ToInt32(x)).ToList();
         }
+
+        public string StringFDP()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

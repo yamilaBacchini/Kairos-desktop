@@ -24,5 +24,10 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             return null;
         }
+
+        public string StringFDP()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

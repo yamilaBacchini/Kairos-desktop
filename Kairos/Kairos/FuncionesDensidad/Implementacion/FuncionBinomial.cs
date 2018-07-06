@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Kairos.Entidades;
 using Kairos.Modelo;
 using Accord.Statistics.Distributions.Univariate;
+using MathNet.Symbolics;
+using Expr = MathNet.Symbolics.Expression;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
@@ -20,7 +22,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
             try
             {
                 DistribucionDiscreta.Fit(eventos);
-                return new ResultadoAjuste(DistribucionDiscreta.ToString(), DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance);
+                return new ResultadoAjuste(StringFDP(), DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance);
             }
             catch (Exception)
             {
@@ -31,6 +33,11 @@ namespace Kairos.FuncionesDensidad.Implementacion
         public List<int> ObtenerValores(int cantidad)
         {
             return DistribucionDiscreta.Generate(cantidad).ToList();
+        }
+
+        public string StringFDP()
+        {
+            return string.Format("f(x)=({0} x) {1}^x(1-{1})^({0}-x)", DistribucionDiscreta.Mean, DistribucionDiscreta.Median);
         }
     }
 }
