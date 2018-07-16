@@ -100,10 +100,10 @@
             // 
             // chrtInversa
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chrtInversa.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chrtInversa.Legends.Add(legend3);
+            chartArea2.Name = "ChartArea2";
+            this.chrtInversa.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend2";
+            this.chrtInversa.Legends.Add(legend2);
             this.chrtInversa.Location = new System.Drawing.Point(7, 266);
             this.chrtInversa.Name = "chrtInversa";
             this.chrtInversa.Size = new System.Drawing.Size(355, 205);
@@ -112,10 +112,10 @@
             // 
             // chrtFuncion
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chrtFuncion.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chrtFuncion.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chrtFuncion.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrtFuncion.Legends.Add(legend1);
             this.chrtFuncion.Location = new System.Drawing.Point(7, 32);
             this.chrtFuncion.Name = "chrtFuncion";
             series1.ChartArea = "ChartArea1";
