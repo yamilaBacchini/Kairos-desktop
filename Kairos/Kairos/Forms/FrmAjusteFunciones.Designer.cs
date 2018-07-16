@@ -100,10 +100,10 @@
             // 
             // chrtInversa
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chrtInversa.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chrtInversa.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chrtInversa.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chrtInversa.Legends.Add(legend3);
             this.chrtInversa.Location = new System.Drawing.Point(7, 266);
             this.chrtInversa.Name = "chrtInversa";
             this.chrtInversa.Size = new System.Drawing.Size(355, 205);
@@ -112,10 +112,10 @@
             // 
             // chrtFuncion
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chrtFuncion.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chrtFuncion.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chrtFuncion.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chrtFuncion.Legends.Add(legend4);
             this.chrtFuncion.Location = new System.Drawing.Point(7, 32);
             this.chrtFuncion.Name = "chrtFuncion";
             series1.ChartArea = "ChartArea1";
@@ -184,7 +184,7 @@
             // 
             this.lblFuncion.AutoSize = true;
             this.lblFuncion.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFuncion.Location = new System.Drawing.Point(7, 27);
+            this.lblFuncion.Location = new System.Drawing.Point(7, 26);
             this.lblFuncion.Name = "lblFuncion";
             this.lblFuncion.Size = new System.Drawing.Size(128, 20);
             this.lblFuncion.TabIndex = 50;
