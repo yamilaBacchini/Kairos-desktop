@@ -21,7 +21,7 @@ namespace Kairos.FuncionesDensidad
         {
         }
 
-        public double[] GenerarVaores(int cantidad)
+        public double[] GenerarValores(int cantidad)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Kairos.FuncionesDensidad
         public Dictionary<double, double> ObtenerDensidad(int cantidad)
         {
             Dictionary<double, double> densidades = new Dictionary<double, double>();
-            var arr = GenerarVaores(cantidad).Distinct().ToArray();
+            var arr = GenerarValores(cantidad).Distinct().ToArray();
             if (DistribucionContinua != null)
                 foreach (var item in arr)
                     densidades.Add(item, DistribucionContinua.ProbabilityDensityFunction(item));

@@ -31,10 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAjusteFunciones));
             this.pnlEventos = new System.Windows.Forms.Panel();
             this.chrtInversa = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -67,7 +66,7 @@
             this.btnFuncionUniforme = new System.Windows.Forms.Button();
             this.btnFuncionWeibull = new System.Windows.Forms.Button();
             this.pnlValoresAleatorios = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbxGenerados = new System.Windows.Forms.ListBox();
             this.btnGenerarValoresAleatorios = new System.Windows.Forms.Button();
             this.lblTituloCantidadValoresGenerados = new System.Windows.Forms.Label();
             this.nudCantidadGenerados = new System.Windows.Forms.NumericUpDown();
@@ -107,10 +106,6 @@
             this.chrtInversa.Legends.Add(legend1);
             this.chrtInversa.Location = new System.Drawing.Point(7, 266);
             this.chrtInversa.Name = "chrtInversa";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chrtInversa.Series.Add(series1);
             this.chrtInversa.Size = new System.Drawing.Size(355, 205);
             this.chrtInversa.TabIndex = 27;
             this.chrtInversa.Text = "chart2";
@@ -123,10 +118,10 @@
             this.chrtFuncion.Legends.Add(legend2);
             this.chrtFuncion.Location = new System.Drawing.Point(7, 32);
             this.chrtFuncion.Name = "chrtFuncion";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chrtFuncion.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chrtFuncion.Series.Add(series1);
             this.chrtFuncion.Size = new System.Drawing.Size(355, 205);
             this.chrtFuncion.TabIndex = 26;
             this.chrtFuncion.Text = "chart1";
@@ -515,7 +510,7 @@
             // 
             // pnlValoresAleatorios
             // 
-            this.pnlValoresAleatorios.Controls.Add(this.listBox1);
+            this.pnlValoresAleatorios.Controls.Add(this.lbxGenerados);
             this.pnlValoresAleatorios.Controls.Add(this.btnGenerarValoresAleatorios);
             this.pnlValoresAleatorios.Controls.Add(this.lblTituloCantidadValoresGenerados);
             this.pnlValoresAleatorios.Controls.Add(this.nudCantidadGenerados);
@@ -525,13 +520,13 @@
             this.pnlValoresAleatorios.Size = new System.Drawing.Size(264, 307);
             this.pnlValoresAleatorios.TabIndex = 23;
             // 
-            // listBox1
+            // lbxGenerados
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(11, 85);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(237, 212);
-            this.listBox1.TabIndex = 59;
+            this.lbxGenerados.FormattingEnabled = true;
+            this.lbxGenerados.Location = new System.Drawing.Point(11, 85);
+            this.lbxGenerados.Name = "lbxGenerados";
+            this.lbxGenerados.Size = new System.Drawing.Size(237, 212);
+            this.lbxGenerados.TabIndex = 59;
             // 
             // btnGenerarValoresAleatorios
             // 
@@ -544,6 +539,7 @@
             this.btnGenerarValoresAleatorios.TabIndex = 58;
             this.btnGenerarValoresAleatorios.Text = "Generar";
             this.btnGenerarValoresAleatorios.UseVisualStyleBackColor = false;
+            this.btnGenerarValoresAleatorios.Click += new System.EventHandler(this.btnGenerarValoresAleatorios_Click);
             // 
             // lblTituloCantidadValoresGenerados
             // 
@@ -694,7 +690,7 @@
         private System.Windows.Forms.Label lblGraficoFuncionInversa;
         private System.Windows.Forms.Label lblFuncionInversa;
         private System.Windows.Forms.Label lblTituloFuncionInversa;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbxGenerados;
         private System.Windows.Forms.Button btnGenerarValoresAleatorios;
         private System.Windows.Forms.Label lblTituloCantidadValoresGenerados;
         private System.Windows.Forms.NumericUpDown nudCantidadGenerados;

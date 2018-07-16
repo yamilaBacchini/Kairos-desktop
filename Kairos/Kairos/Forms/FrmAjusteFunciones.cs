@@ -23,6 +23,7 @@ namespace Kairos.Forms
         private List<Evento> eventos = null;
         private Dictionary<string, double> eventosSimplificados = null;
         private double[] intervalosEventosEaE = null;
+        private ResultadoAjuste resultadoSeleccionado = null;
         private ResultadoAjuste resultadoFuncionBurr = null;
         private ResultadoAjuste resultadoFuncionBinomial = null;
         private ResultadoAjuste resultadoFuncionExponencial = null;
@@ -137,9 +138,11 @@ namespace Kairos.Forms
         private void SetupGraficoFuncion()
         {
             this.chrtFuncion.Series.Clear();
-            this.chrtFuncion.Palette = ChartColorPalette.EarthTones;
+            this.chrtFuncion.Palette = ChartColorPalette.None;
             this.chrtFuncion.Titles.Add("Funcion de Densidad de Probabilidad");
             Series series = this.chrtFuncion.Series.Add("Eventos");
+            series.Color = Color.Red;
+            series.BorderColor = Color.Black;
             foreach (var item in eventosSimplificados.OrderBy(x => Convert.ToDouble(x.Key)))
             {
                 series.Points.AddXY(item.Key, item.Value);
@@ -153,6 +156,7 @@ namespace Kairos.Forms
             {
                 series = this.chrtFuncion.Series.Add("FDP");
                 series.ChartType = SeriesChartType.Line;
+                series.BorderWidth = 2;
             }
             else
                 series.Points.Clear();
@@ -170,6 +174,7 @@ namespace Kairos.Forms
             {
                 series = this.chrtInversa.Series.Add("Inversa");
                 series.ChartType = SeriesChartType.Line;
+                series.BorderWidth = 2;
             }
             else
                 series.Points.Clear();
@@ -211,10 +216,11 @@ namespace Kairos.Forms
             CambiarRepresentacionFuncionEInversa(funcion);
             GraficarLineaFDP(funcion.FDP);
             GraficarLineaInversa(funcion.FDP);
+            resultadoSeleccionado = funcion;
         }
 
         private void btnFuncionBurr_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Burr", resultadoFuncionBurr);
-        
+
         private void btnFuncionBinomial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Binomial", resultadoFuncionBinomial);
 
         private void btnFuncionExponencial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Exponencial", resultadoFuncionExponencial);
@@ -236,5 +242,18 @@ namespace Kairos.Forms
         private void btnFuncionUniforme_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Uniforme", resultadoFuncionUniforme);
 
         private void btnFuncionWeibull_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull", resultadoFuncionWeibull);
+
+        private void btnGenerarValoresAleatorios_Click(object sender, EventArgs e)
+        {
+            if (resultadoSeleccionado != null)
+            {
+                lbxGenerados.Items.Clear();
+                int cant = Convert.ToInt32(nudCantidadGenerados.Value);
+                int[] arrGenerados = resultadoSeleccionado.FDP.GenerarValores(cant).Select(x => Convert.ToInt32(x)).ToArray();
+                lbxGenerados.Items.AddRange(arrGenerados.Select(x => (object)x).ToArray());
+            }
+            else
+                MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
     }
 }
