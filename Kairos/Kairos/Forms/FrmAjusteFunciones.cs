@@ -56,7 +56,6 @@ namespace Kairos.Forms
             CalcularYOrdenarFunciones();
             OrdernarFuncionesEnVista();
             SetupGraficoFuncion();
-            SetupGraficoInversa();
         }
 
         private void CalcularEventosSimplificados()
@@ -157,15 +156,28 @@ namespace Kairos.Forms
             }
             else
                 series.Points.Clear();
-            List<double> lGenerados = fdp.ObtenerValores(10);
+            Dictionary<double, double> lGenerados = fdp.ObtenerDensidad(100);
             foreach (var item in lGenerados)
             {
-                series.Points.Add(item);
+                series.Points.AddXY(item.Key, item.Value);
             }
         }
 
-        private void SetupGraficoInversa()
+        private void GraficarLineaInversa(FuncionDensidadProbabilidad fdp)
         {
+            Series series = this.chrtInversa.Series.FindByName("Inversa");
+            if (series == null)
+            {
+                series = this.chrtInversa.Series.Add("Inversa");
+                series.ChartType = SeriesChartType.Line;
+            }
+            else
+                series.Points.Clear();
+            Dictionary<double, double> lGenerados = fdp.ObtenerDensidadInversa(100);
+            foreach (var item in lGenerados)
+            {
+                series.Points.AddXY(item.Key, item.Value);
+            }
         }
 
         private void BotonSeleccionado(Control boton)
@@ -192,100 +204,37 @@ namespace Kairos.Forms
             lblFuncionInversa.Text = fdp.Inversa;
         }
 
-        private void btnFuncionBurr_Click(object sender, EventArgs e)
+        private void SetupPantallaSegunFDP(object boton, string nombreFuncion, ResultadoAjuste funcion)
         {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Burr");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionBurr);
-            GraficarLineaFDP(resultadoFuncionBurr.FDP);
+            BotonSeleccionado((Control)boton);
+            CambiarLblGraficoFuncion(nombreFuncion);
+            CambiarRepresentacionFuncionEInversa(funcion);
+            GraficarLineaFDP(funcion.FDP);
+            GraficarLineaInversa(funcion.FDP);
         }
 
-        private void btnFuncionBinomial_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Binomial");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionBinomial);
-            GraficarLineaFDP(resultadoFuncionBinomial.FDP);
-        }
+        private void btnFuncionBurr_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Burr", resultadoFuncionBurr);
+        
+        private void btnFuncionBinomial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Binomial", resultadoFuncionBinomial);
 
-        private void btnFuncionExponencial_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Exponencial");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionExponencial);
-            GraficarLineaFDP(resultadoFuncionExponencial.FDP);
-        }
+        private void btnFuncionExponencial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Exponencial", resultadoFuncionExponencial);
 
-        private void btnFuncionLogistica_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Logistica");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionLogistica);
-            GraficarLineaFDP(resultadoFuncionLogistica.FDP);
-        }
+        private void btnFuncionLogistica_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Logistica", resultadoFuncionLogistica);
 
-        private void btnFuncionLognormal_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Log-Normal");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionLogNormal);
-            GraficarLineaFDP(resultadoFuncionLogNormal.FDP);
-        }
+        private void btnFuncionLognormal_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Log-Normal", resultadoFuncionLogNormal);
 
-        private void btnFuncionLogLogistica_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Log-Logistica");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionLogLogistica);
-            GraficarLineaFDP(resultadoFuncionLogLogistica.FDP);
-        }
+        private void btnFuncionLogLogistica_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Log-Logistica", resultadoFuncionLogLogistica);
 
-        private void btnFuncionNormal_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Normal");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionNormal);
-            GraficarLineaFDP(resultadoFuncionNormal.FDP);
-        }
+        private void btnFuncionNormal_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Normal", resultadoFuncionNormal);
 
-        private void btnFuncionFasesBiExponencial_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Fases Bi-Exponencial");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionFasesBiExponencial);
-            GraficarLineaFDP(resultadoFuncionFasesBiExponencial.FDP);
-        }
+        private void btnFuncionFasesBiExponencial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Fases Bi-Exponencial", resultadoFuncionFasesBiExponencial);
 
-        private void btnFuncionFasesBiWeibull_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Fases Bi-Weibull");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionFasesBiWeibull);
-            GraficarLineaFDP(resultadoFuncionFasesBiWeibull.FDP);
-        }
+        private void btnFuncionFasesBiWeibull_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Fases Bi-Weibull", resultadoFuncionFasesBiWeibull);
 
-        private void btnFuncionPoisson_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Poisson");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionPoisson);
-            GraficarLineaFDP(resultadoFuncionPoisson.FDP);
-        }
+        private void btnFuncionPoisson_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Poisson", resultadoFuncionPoisson);
 
-        private void btnFuncionUniforme_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Uniforme");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionUniforme);
-            GraficarLineaFDP(resultadoFuncionUniforme.FDP);
-        }
+        private void btnFuncionUniforme_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Uniforme", resultadoFuncionUniforme);
 
-        private void btnFuncionWeibull_Click(object sender, EventArgs e)
-        {
-            BotonSeleccionado((Control)sender);
-            CambiarLblGraficoFuncion("Weibull");
-            CambiarRepresentacionFuncionEInversa(resultadoFuncionWeibull);
-            GraficarLineaFDP(resultadoFuncionWeibull.FDP);
-        }
+        private void btnFuncionWeibull_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull", resultadoFuncionWeibull);
     }
 }

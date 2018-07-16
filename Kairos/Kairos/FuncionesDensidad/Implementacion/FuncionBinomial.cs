@@ -13,10 +13,6 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionBinomial : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        public UnivariateDiscreteDistribution DistribucionDiscreta;
-
-        public UnivariateContinuousDistribution DistribucionContinua => null;
-
         public string StringFDP => string.Format("f(x)=({0} x) {1}^x(1-{1})^({0}-x)", DistribucionDiscreta.ToString(), DistribucionDiscreta.ToString());
 
         public string StringInversa => "No implementado aun";
@@ -33,15 +29,6 @@ namespace Kairos.FuncionesDensidad.Implementacion
             {
                 Resultado = null;
             }
-        }
-
-        public override List<double> ObtenerValores(int cantidad)
-        {
-            List<double> result = new List<double>();
-            Parallel.ForEach(DistribucionDiscreta.Generate(cantidad), x => {
-                result.Add(DistribucionDiscreta.DistributionFunction(x));
-            });
-            return result;
         }
     }
 }

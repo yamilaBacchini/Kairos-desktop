@@ -12,10 +12,6 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionUniforme : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        public UnivariateDiscreteDistribution DistribucionDiscreta => throw new NotImplementedException();
-
-        public UnivariateContinuousDistribution DistribucionContinua;
-
         private readonly string A = "";
         private readonly string B = "";
 
@@ -37,16 +33,6 @@ namespace Kairos.FuncionesDensidad.Implementacion
             {
                 Resultado = null;
             }
-        }
-
-        public override List<double> ObtenerValores(int cantidad)
-        {
-            List<double> result = new List<double>();
-            Parallel.ForEach(DistribucionContinua.Generate(cantidad), x =>
-            {
-                result.Add(DistribucionContinua.ProbabilityDensityFunction(x));
-            });
-            return result;
         }
     }
 }

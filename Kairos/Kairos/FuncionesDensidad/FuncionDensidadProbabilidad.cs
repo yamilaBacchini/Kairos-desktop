@@ -11,9 +11,9 @@ namespace Kairos.FuncionesDensidad
 {
     public abstract class FuncionDensidadProbabilidad
     {
-        UnivariateDiscreteDistribution DistribucionDiscreta { get; }
+        public UnivariateDiscreteDistribution DistribucionDiscreta { get; protected set; }
 
-        UnivariateContinuousDistribution DistribucionContinua { get; }
+        public UnivariateContinuousDistribution DistribucionContinua { get; protected set; }
 
         public ResultadoAjuste Resultado { get; protected set; }
 
@@ -21,6 +21,56 @@ namespace Kairos.FuncionesDensidad
         {
         }
 
-        public abstract List<double> ObtenerValores(int cantidad);
+        public double[] GenerarVaores(int cantidad)
+        {
+            try
+            {
+                if (DistribucionContinua != null)
+                    return DistribucionContinua.Generate(cantidad);
+                else
+                    return DistribucionDiscreta.Generate(cantidad).Select(x => Convert.ToDouble(x)).ToArray();
+            }
+            catch (Exception)
+            {
+                return new double[0];
+            }
+        }
+
+        public Dictionary<double, double> ObtenerDensidad(int cantidad)
+        {
+            Dictionary<double, double> densidades = new Dictionary<double, double>();
+            var arr = GenerarVaores(cantidad).Distinct().ToArray();
+            if (DistribucionContinua != null)
+                foreach (var item in arr)
+                    densidades.Add(item, DistribucionContinua.ProbabilityDensityFunction(item));
+            else
+                foreach (var item in arr)
+                    densidades.Add(item, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item)));
+            return densidades.OrderBy(x => x.Key).ToDictionary(x => x.Key, y => y.Value);
+        }
+
+        public Dictionary<double, double> ObtenerDensidadInversa(int cantidad)
+        {
+            Dictionary<double, double> densidades = new Dictionary<double, double>();
+            try
+            {
+                var rand = new Random();
+                double[] arr = new double[cantidad];
+                for (int i = 0; i < cantidad; i++)
+                    arr[i] = rand.NextDouble();
+                arr = arr.Distinct().ToArray();
+                if (DistribucionContinua != null)
+                    foreach (var item in arr)
+                        densidades.Add(item, DistribucionContinua.QuantileDensityFunction(item));
+                else
+                    foreach (var item in arr)
+                        densidades.Add(item, DistribucionDiscreta.QuantileDensityFunction(item));
+                return densidades.OrderBy(x => x.Key).ToDictionary(x => x.Key, y => y.Value);
+            }
+            catch (Exception)
+            {
+                return densidades;
+            }
+        }
     }
 }

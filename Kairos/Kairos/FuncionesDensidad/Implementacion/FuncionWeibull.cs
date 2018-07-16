@@ -14,11 +14,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
         private readonly double shape = 0.5;
         private readonly double scale = 0.5;
 
-        public UnivariateDiscreteDistribution DistribucionDiscreta => null;
-
-        public UnivariateContinuousDistribution DistribucionContinua;
-
-        public string StringFDP => throw new NotImplementedException();
+        public string StringFDP => "No implementado aun";
 
         public string StringInversa => "No implementado aun";
 
@@ -28,21 +24,12 @@ namespace Kairos.FuncionesDensidad.Implementacion
             {
                 DistribucionContinua = new WeibullDistribution(shape, scale);
                 DistribucionContinua.Fit(eventos);
-                Resultado = new ResultadoAjuste(DistribucionContinua.ToString(), StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
                 Resultado = null;
             }
-        }
-
-        public override List<double> ObtenerValores(int cantidad)
-        {
-            List<double> result = new List<double>();
-            Parallel.ForEach(DistribucionContinua.Generate(cantidad), x => {
-                result.Add(DistribucionContinua.ProbabilityDensityFunction(x));
-            });
-            return result;
         }
     }
 }
