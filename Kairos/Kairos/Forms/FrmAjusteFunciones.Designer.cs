@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAjusteFunciones));
             this.pnlEventos = new System.Windows.Forms.Panel();
             this.chrtInversa = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -67,7 +66,7 @@
             this.btnFuncionUniforme = new System.Windows.Forms.Button();
             this.btnFuncionWeibull = new System.Windows.Forms.Button();
             this.pnlValoresAleatorios = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbxGenerados = new System.Windows.Forms.ListBox();
             this.btnGenerarValoresAleatorios = new System.Windows.Forms.Button();
             this.lblTituloCantidadValoresGenerados = new System.Windows.Forms.Label();
             this.nudCantidadGenerados = new System.Windows.Forms.NumericUpDown();
@@ -107,10 +106,6 @@
             this.chrtInversa.Legends.Add(legend3);
             this.chrtInversa.Location = new System.Drawing.Point(7, 266);
             this.chrtInversa.Name = "chrtInversa";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chrtInversa.Series.Add(series3);
             this.chrtInversa.Size = new System.Drawing.Size(355, 205);
             this.chrtInversa.TabIndex = 27;
             this.chrtInversa.Text = "chart2";
@@ -123,10 +118,10 @@
             this.chrtFuncion.Legends.Add(legend4);
             this.chrtFuncion.Location = new System.Drawing.Point(7, 32);
             this.chrtFuncion.Name = "chrtFuncion";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chrtFuncion.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chrtFuncion.Series.Add(series1);
             this.chrtFuncion.Size = new System.Drawing.Size(355, 205);
             this.chrtFuncion.TabIndex = 26;
             this.chrtFuncion.Text = "chart1";
@@ -275,6 +270,7 @@
             this.btnFuncionBurr.TabIndex = 14;
             this.btnFuncionBurr.Text = "Burr";
             this.btnFuncionBurr.UseVisualStyleBackColor = false;
+            this.btnFuncionBurr.Click += new System.EventHandler(this.btnFuncionBurr_Click);
             // 
             // btnVolver
             // 
@@ -330,6 +326,7 @@
             this.btnFuncionBinomial.TabIndex = 15;
             this.btnFuncionBinomial.Text = "Binomial";
             this.btnFuncionBinomial.UseVisualStyleBackColor = false;
+            this.btnFuncionBinomial.Click += new System.EventHandler(this.btnFuncionBinomial_Click);
             // 
             // btnFuncionExponencial
             // 
@@ -347,6 +344,7 @@
             this.btnFuncionExponencial.TabIndex = 16;
             this.btnFuncionExponencial.Text = "Exponencial";
             this.btnFuncionExponencial.UseVisualStyleBackColor = false;
+            this.btnFuncionExponencial.Click += new System.EventHandler(this.btnFuncionExponencial_Click);
             // 
             // btnFuncionLogistica
             // 
@@ -364,6 +362,7 @@
             this.btnFuncionLogistica.TabIndex = 17;
             this.btnFuncionLogistica.Text = "Logística";
             this.btnFuncionLogistica.UseVisualStyleBackColor = false;
+            this.btnFuncionLogistica.Click += new System.EventHandler(this.btnFuncionLogistica_Click);
             // 
             // btnFuncionLognormal
             // 
@@ -381,6 +380,7 @@
             this.btnFuncionLognormal.TabIndex = 18;
             this.btnFuncionLognormal.Text = "Log-Normal";
             this.btnFuncionLognormal.UseVisualStyleBackColor = false;
+            this.btnFuncionLognormal.Click += new System.EventHandler(this.btnFuncionLognormal_Click);
             // 
             // btnFuncionLogLogistica
             // 
@@ -398,6 +398,7 @@
             this.btnFuncionLogLogistica.TabIndex = 19;
             this.btnFuncionLogLogistica.Text = "Log-Logística";
             this.btnFuncionLogLogistica.UseVisualStyleBackColor = false;
+            this.btnFuncionLogLogistica.Click += new System.EventHandler(this.btnFuncionLogLogistica_Click);
             // 
             // btnFuncionNormal
             // 
@@ -415,6 +416,7 @@
             this.btnFuncionNormal.TabIndex = 20;
             this.btnFuncionNormal.Text = "Normal";
             this.btnFuncionNormal.UseVisualStyleBackColor = false;
+            this.btnFuncionNormal.Click += new System.EventHandler(this.btnFuncionNormal_Click);
             // 
             // btnFuncionFasesBiExponencial
             // 
@@ -432,6 +434,7 @@
             this.btnFuncionFasesBiExponencial.TabIndex = 21;
             this.btnFuncionFasesBiExponencial.Text = "Fases Bi-Exponencial";
             this.btnFuncionFasesBiExponencial.UseVisualStyleBackColor = false;
+            this.btnFuncionFasesBiExponencial.Click += new System.EventHandler(this.btnFuncionFasesBiExponencial_Click);
             // 
             // btnFuncionFasesBiWeibull
             // 
@@ -449,6 +452,7 @@
             this.btnFuncionFasesBiWeibull.TabIndex = 22;
             this.btnFuncionFasesBiWeibull.Text = "Fases Bi-Weibull";
             this.btnFuncionFasesBiWeibull.UseVisualStyleBackColor = false;
+            this.btnFuncionFasesBiWeibull.Click += new System.EventHandler(this.btnFuncionFasesBiWeibull_Click);
             // 
             // btnFuncionPoisson
             // 
@@ -466,6 +470,7 @@
             this.btnFuncionPoisson.TabIndex = 23;
             this.btnFuncionPoisson.Text = "Poisson";
             this.btnFuncionPoisson.UseVisualStyleBackColor = false;
+            this.btnFuncionPoisson.Click += new System.EventHandler(this.btnFuncionPoisson_Click);
             // 
             // btnFuncionUniforme
             // 
@@ -483,6 +488,7 @@
             this.btnFuncionUniforme.TabIndex = 24;
             this.btnFuncionUniforme.Text = "Uniforme";
             this.btnFuncionUniforme.UseVisualStyleBackColor = false;
+            this.btnFuncionUniforme.Click += new System.EventHandler(this.btnFuncionUniforme_Click);
             // 
             // btnFuncionWeibull
             // 
@@ -500,10 +506,11 @@
             this.btnFuncionWeibull.TabIndex = 25;
             this.btnFuncionWeibull.Text = "Weibull";
             this.btnFuncionWeibull.UseVisualStyleBackColor = false;
+            this.btnFuncionWeibull.Click += new System.EventHandler(this.btnFuncionWeibull_Click);
             // 
             // pnlValoresAleatorios
             // 
-            this.pnlValoresAleatorios.Controls.Add(this.listBox1);
+            this.pnlValoresAleatorios.Controls.Add(this.lbxGenerados);
             this.pnlValoresAleatorios.Controls.Add(this.btnGenerarValoresAleatorios);
             this.pnlValoresAleatorios.Controls.Add(this.lblTituloCantidadValoresGenerados);
             this.pnlValoresAleatorios.Controls.Add(this.nudCantidadGenerados);
@@ -513,13 +520,13 @@
             this.pnlValoresAleatorios.Size = new System.Drawing.Size(264, 307);
             this.pnlValoresAleatorios.TabIndex = 23;
             // 
-            // listBox1
+            // lbxGenerados
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(11, 85);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(237, 212);
-            this.listBox1.TabIndex = 59;
+            this.lbxGenerados.FormattingEnabled = true;
+            this.lbxGenerados.Location = new System.Drawing.Point(11, 85);
+            this.lbxGenerados.Name = "lbxGenerados";
+            this.lbxGenerados.Size = new System.Drawing.Size(237, 212);
+            this.lbxGenerados.TabIndex = 59;
             // 
             // btnGenerarValoresAleatorios
             // 
@@ -532,6 +539,7 @@
             this.btnGenerarValoresAleatorios.TabIndex = 58;
             this.btnGenerarValoresAleatorios.Text = "Generar";
             this.btnGenerarValoresAleatorios.UseVisualStyleBackColor = false;
+            this.btnGenerarValoresAleatorios.Click += new System.EventHandler(this.btnGenerarValoresAleatorios_Click);
             // 
             // lblTituloCantidadValoresGenerados
             // 
@@ -627,6 +635,7 @@
             this.Name = "FrmAjusteFunciones";
             this.Opacity = 0.98D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.FrmAjusteFunciones_Load);
             this.pnlEventos.ResumeLayout(false);
             this.pnlEventos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtInversa)).EndInit();
@@ -681,7 +690,7 @@
         private System.Windows.Forms.Label lblGraficoFuncionInversa;
         private System.Windows.Forms.Label lblFuncionInversa;
         private System.Windows.Forms.Label lblTituloFuncionInversa;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbxGenerados;
         private System.Windows.Forms.Button btnGenerarValoresAleatorios;
         private System.Windows.Forms.Label lblTituloCantidadValoresGenerados;
         private System.Windows.Forms.NumericUpDown nudCantidadGenerados;

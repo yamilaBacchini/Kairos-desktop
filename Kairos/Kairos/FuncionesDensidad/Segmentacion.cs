@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kairos.Modelo
+namespace Kairos.FuncionesDensidad
 {
-    public enum MetodologiaAjuste
+    public enum Segmentacion
     {
-        EVENTO_A_EVENTO, DT_CONSTANTE
+        ANIO, MES, DIA, HORA, MINUTO, SEGUNDO
     }
 }
