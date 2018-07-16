@@ -282,7 +282,8 @@
     </Compile>
     <Compile Include="FuncionesDensidad\FactoryFuncionDensidad.cs" />
     <Compile Include="FuncionesDensidad\FdPUtils.cs" />
-    <Compile Include="FuncionesDensidad\IFuncionDensidadProbabilidad.cs" />
+    <Compile Include="FuncionesDensidad\FuncionDensidadProbabilidad.cs" />
+    <Compile Include="FuncionesDensidad\IFuncionRepresentable.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionBinomial.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionBurr.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionExponencial.cs" />

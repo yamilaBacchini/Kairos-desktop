@@ -4,38 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Accord.Statistics.Distributions.Univariate;
+using Accord.Math;
 using Kairos.Entidades;
 using Kairos.Modelo;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionLogNormal : IFuncionDensidadProbabilidad
+    class FuncionLogNormal : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
         public UnivariateDiscreteDistribution DistribucionDiscreta => null;
 
-        public UnivariateContinuousDistribution DistribucionContinua => new LognormalDistribution();
+        public UnivariateContinuousDistribution DistribucionContinua;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        public string StringFDP => "No implementado aun";
+
+        public string StringInversa => "No implementado aun";
+
+        public FuncionLogNormal(double[] eventos) : base(eventos)
         {
             try
             {
+                DistribucionContinua = new LognormalDistribution();
                 DistribucionContinua.Fit(eventos);
-                return new ResultadoAjuste(DistribucionContinua.ToString(), DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            return DistribucionDiscreta.Generate(cantidad).ToList();
-        }
-
-        public string StringFDP()
-        {
-            throw new NotImplementedException();
+            var general = GeneralContinuousDistribution
+                   .FromDistributionFunction(DistribucionContinua.Support, DistribucionContinua.DistributionFunction);
+            return DistribucionContinua.Generate(cantidad).Apply(general.ProbabilityDensityFunction).ToList();
         }
     }
 }

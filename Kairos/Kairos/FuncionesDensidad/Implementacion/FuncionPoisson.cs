@@ -9,33 +9,37 @@ using Kairos.Modelo;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionPoisson : IFuncionDensidadProbabilidad
+    class FuncionPoisson : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        public UnivariateDiscreteDistribution DistribucionDiscreta => new PoissonDistribution();
+        public UnivariateDiscreteDistribution DistribucionDiscreta;
 
         public UnivariateContinuousDistribution DistribucionContinua => null;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        public string StringFDP => "No implementado aun";
+
+        public string StringInversa => "No implementado aun";
+
+        public FuncionPoisson(double[] eventos) : base(eventos)
         {
             try
             {
+                DistribucionDiscreta = new PoissonDistribution();
                 DistribucionDiscreta.Fit(eventos);
-                return new ResultadoAjuste(DistribucionDiscreta.ToString(), DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance, this);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            return DistribucionDiscreta.Generate(cantidad).ToList();
-        }
-
-        public string StringFDP()
-        {
-            throw new NotImplementedException();
+            List<double> result = new List<double>();
+            Parallel.ForEach(DistribucionDiscreta.Generate(cantidad), x => {
+                result.Add(DistribucionDiscreta.DistributionFunction(x));
+            });
+            return result;
         }
     }
 }

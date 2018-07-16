@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 
 namespace Kairos.FuncionesDensidad
 {
-    public interface IFuncionDensidadProbabilidad
+    public abstract class FuncionDensidadProbabilidad
     {
         UnivariateDiscreteDistribution DistribucionDiscreta { get; }
 
         UnivariateContinuousDistribution DistribucionContinua { get; }
 
-        ResultadoAjuste Ajustar(double[] eventos);
+        public ResultadoAjuste Resultado { get; protected set; }
 
-        List<int> ObtenerValores(int cantidad);
+        public FuncionDensidadProbabilidad(double[] eventos)
+        {
+        }
 
-        string StringFDP();
+        public abstract List<double> ObtenerValores(int cantidad);
     }
 }

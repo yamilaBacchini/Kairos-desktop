@@ -9,34 +9,37 @@ using Kairos.Modelo;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionBurr : IFuncionDensidadProbabilidad
+    class FuncionBurr : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
         public UnivariateDiscreteDistribution DistribucionDiscreta => null;
 
         public UnivariateContinuousDistribution DistribucionContinua => null;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        public string StringFDP => throw new NotImplementedException();
+
+        public string StringInversa => throw new NotImplementedException();
+
+        public FuncionBurr(double[] eventos) : base(eventos)
         {
             try
             {
-                return null;
+                Resultado = null;
                 //funcion.Fit(eventos.Select(x => Convert.ToDouble(x)).ToArray());
                 //return new ResultadoAjuste(funcion.ToString(), funcion.StandardDeviation, funcion.Median, funcion.Variance);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            throw new NotImplementedException();
-        }
-
-        public string StringFDP()
-        {
-            throw new NotImplementedException();
+            List<double> result = new List<double>();
+            Parallel.ForEach(DistribucionContinua.Generate(cantidad), x => {
+                result.Add(DistribucionContinua.ProbabilityDensityFunction(x));
+            });
+            return result;
         }
     }
 }

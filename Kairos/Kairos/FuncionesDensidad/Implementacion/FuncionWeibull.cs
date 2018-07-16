@@ -9,36 +9,40 @@ using Kairos.Modelo;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionWeibull : IFuncionDensidadProbabilidad
+    class FuncionWeibull : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
         private readonly double shape = 0.5;
         private readonly double scale = 0.5;
 
         public UnivariateDiscreteDistribution DistribucionDiscreta => null;
 
-        public UnivariateContinuousDistribution DistribucionContinua => new WeibullDistribution(shape, scale);
+        public UnivariateContinuousDistribution DistribucionContinua;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        public string StringFDP => throw new NotImplementedException();
+
+        public string StringInversa => "No implementado aun";
+
+        public FuncionWeibull(double[] eventos) : base(eventos)
         {
             try
             {
+                DistribucionContinua = new WeibullDistribution(shape, scale);
                 DistribucionContinua.Fit(eventos);
-                return new ResultadoAjuste(DistribucionContinua.ToString(), DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance);
+                Resultado = new ResultadoAjuste(DistribucionContinua.ToString(), StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            return DistribucionContinua.Generate(cantidad).Select(x => Convert.ToInt32(x)).ToList();
-        }
-
-        public string StringFDP()
-        {
-            throw new NotImplementedException();
+            List<double> result = new List<double>();
+            Parallel.ForEach(DistribucionContinua.Generate(cantidad), x => {
+                result.Add(DistribucionContinua.ProbabilityDensityFunction(x));
+            });
+            return result;
         }
     }
 }

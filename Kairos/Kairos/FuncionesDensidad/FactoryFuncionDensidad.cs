@@ -10,34 +10,34 @@ namespace Kairos.FuncionesDensidad
 {
     public static class FactoryFuncionDensidad
     {
-        public static IFuncionDensidadProbabilidad Instancia(FuncionDensidad funcion)
+        public static FuncionDensidadProbabilidad Instancia(FuncionDensidad funcion, double[] eventos)
         {
             switch (funcion)
             {
                 case FuncionDensidad.BURR:
-                    return new FuncionBurr();
+                    return new FuncionBurr(eventos);
                 case FuncionDensidad.BINOMIAL:
-                    return new FuncionBinomial();
+                    return new FuncionBinomial(eventos);
                 case FuncionDensidad.EXPONENCIAL:
-                    return new FuncionExponencial();
+                    return new FuncionExponencial(eventos);
                 case FuncionDensidad.LOGISTICA:
-                    return new FuncionLogistica();
+                    return new FuncionLogistica(eventos);
                 case FuncionDensidad.LOG_NORMAL:
-                    return new FuncionLogNormal();
+                    return new FuncionLogNormal(eventos);
                 case FuncionDensidad.LOG_LOGISTICA:
-                    return new FuncionLogLogistica();
+                    return new FuncionLogLogistica(eventos);
                 case FuncionDensidad.NORMAL:
-                    return new FuncionNormal();
+                    return new FuncionNormal(eventos);
                 case FuncionDensidad.FASES_BI_EXPONENCIAL:
-                    return new FuncionFasesBiExponencial();
+                    return new FuncionFasesBiExponencial(eventos);
                 case FuncionDensidad.FASES_BI_WEIBULL:
-                    return new FuncionFasesBiWeibull();
+                    return new FuncionFasesBiWeibull(eventos);
                 case FuncionDensidad.POISSON:
-                    return new FuncionPoisson();
+                    return new FuncionPoisson(eventos);
                 case FuncionDensidad.UNIFORME:
-                    return new FuncionUniforme();
+                    return new FuncionUniforme(eventos);
                 case FuncionDensidad.WEIBULL:
-                    return new FuncionWeibull();
+                    return new FuncionWeibull(eventos);
                 default:
                     return null;
             }

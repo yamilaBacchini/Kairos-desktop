@@ -9,33 +9,37 @@ using Kairos.Modelo;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionLogLogistica : IFuncionDensidadProbabilidad
+    class FuncionLogLogistica : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
         public UnivariateDiscreteDistribution DistribucionDiscreta => null;
 
-        public UnivariateContinuousDistribution DistribucionContinua => new LogLogisticDistribution();
+        public UnivariateContinuousDistribution DistribucionContinua;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        public string StringFDP => "No implementado aun";
+
+        public string StringInversa => "No implementado aun";
+
+        public FuncionLogLogistica(double[] eventos) : base(eventos)
         {
             try
             {
+                DistribucionContinua = new LogLogisticDistribution();
                 DistribucionContinua.Fit(eventos);
-                return new ResultadoAjuste(DistribucionContinua.ToString(), DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            return DistribucionContinua.Generate(cantidad).Select(x=> Convert.ToInt32(x)).ToList();
-        }
-
-        public string StringFDP()
-        {
-            throw new NotImplementedException();
+            List<double> result = new List<double>();
+            Parallel.ForEach(DistribucionContinua.Generate(cantidad), x => {
+                result.Add(DistribucionContinua.ProbabilityDensityFunction(x));
+            });
+            return result;
         }
     }
 }

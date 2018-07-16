@@ -9,33 +9,37 @@ using Accord.Statistics.Distributions.Univariate;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionExponencial : IFuncionDensidadProbabilidad
+    class FuncionExponencial : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
         public UnivariateDiscreteDistribution DistribucionDiscreta => null;
 
-        public UnivariateContinuousDistribution DistribucionContinua => new ExponentialDistribution();
+        public UnivariateContinuousDistribution DistribucionContinua;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        public string StringFDP => "No implementado aun";
+
+        public string StringInversa => "No implementado aun";
+
+        public FuncionExponencial(double[] eventos) : base(eventos)
         {
             try
             {
+                DistribucionContinua = new ExponentialDistribution();
                 DistribucionContinua.Fit(eventos);
-                return new ResultadoAjuste(DistribucionContinua.ToString(), DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            return DistribucionDiscreta.Generate(cantidad).ToList();
-        }
-
-        public string StringFDP()
-        {
-            throw new NotImplementedException();
+            List<double> result = new List<double>();
+            Parallel.ForEach(DistribucionContinua.Generate(cantidad), x => {
+                result.Add(DistribucionContinua.ProbabilityDensityFunction(x));
+            });
+            return result;
         }
     }
 }

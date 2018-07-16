@@ -11,33 +11,37 @@ using Expr = MathNet.Symbolics.Expression;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionBinomial : IFuncionDensidadProbabilidad
+    class FuncionBinomial : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        public UnivariateDiscreteDistribution DistribucionDiscreta => new BinomialDistribution();
+        public UnivariateDiscreteDistribution DistribucionDiscreta;
 
         public UnivariateContinuousDistribution DistribucionContinua => null;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        public string StringFDP => string.Format("f(x)=({0} x) {1}^x(1-{1})^({0}-x)", DistribucionDiscreta.ToString(), DistribucionDiscreta.ToString());
+
+        public string StringInversa => "No implementado aun";
+
+        public FuncionBinomial(double[] eventos) : base(eventos)
         {
             try
             {
+                DistribucionDiscreta = new BinomialDistribution();
                 DistribucionDiscreta.Fit(eventos);
-                return new ResultadoAjuste(StringFDP(), DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance, this);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            return DistribucionDiscreta.Generate(cantidad).ToList();
-        }
-
-        public string StringFDP()
-        {
-            return string.Format("f(x)=({0} x) {1}^x(1-{1})^({0}-x)", DistribucionDiscreta.Mean, DistribucionDiscreta.Median);
+            List<double> result = new List<double>();
+            Parallel.ForEach(DistribucionDiscreta.Generate(cantidad), x => {
+                result.Add(DistribucionDiscreta.DistributionFunction(x));
+            });
+            return result;
         }
     }
 }

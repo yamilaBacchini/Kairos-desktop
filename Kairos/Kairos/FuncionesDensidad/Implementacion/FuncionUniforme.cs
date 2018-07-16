@@ -3,39 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Accord.Math;
 using Accord.Statistics.Distributions.Univariate;
 using Kairos.Entidades;
 using Kairos.Modelo;
 
 namespace Kairos.FuncionesDensidad.Implementacion
 {
-    class FuncionUniforme : IFuncionDensidadProbabilidad
+    class FuncionUniforme : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
         public UnivariateDiscreteDistribution DistribucionDiscreta => throw new NotImplementedException();
 
-        public UnivariateContinuousDistribution DistribucionContinua => new UniformContinuousDistribution();
+        public UnivariateContinuousDistribution DistribucionContinua;
 
-        public ResultadoAjuste Ajustar(double[] eventos)
+        private readonly string A = "";
+        private readonly string B = "";
+
+        public string StringFDP => string.Format("f(x)=1/({0}-{1})", B, A);
+
+        public string StringInversa => string.Format("f(x)=R*({0}-{1})+{1}", B, A);
+
+        public FuncionUniforme(double[] eventos) : base(eventos)
         {
             try
             {
+                DistribucionContinua = new UniformContinuousDistribution();
                 DistribucionContinua.Fit(eventos);
-                return new ResultadoAjuste(DistribucionContinua.ToString(), DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance);
+                A = DistribucionContinua.ToString().Split('=')[1].Split(',')[0].Trim();
+                B = DistribucionContinua.ToString().Split('=')[2].Split(')')[0].Trim();
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
-                return null;
+                Resultado = null;
             }
         }
 
-        public List<int> ObtenerValores(int cantidad)
+        public override List<double> ObtenerValores(int cantidad)
         {
-            return DistribucionContinua.Generate(cantidad).Select(x => Convert.ToInt32(x)).ToList();
-        }
-
-        public string StringFDP()
-        {
-            throw new NotImplementedException();
+            List<double> result = new List<double>();
+            Parallel.ForEach(DistribucionContinua.Generate(cantidad), x =>
+            {
+                result.Add(DistribucionContinua.ProbabilityDensityFunction(x));
+            });
+            return result;
         }
     }
 }
