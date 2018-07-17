@@ -63,11 +63,12 @@ namespace Kairos.Forms
             return (T)x;
         }
 
+        private List<string> valoresNoPermitidos = new List<string>() { " ", ".", ":", "-", "" };
+        private OpenFileDialog openFileDialog1 = new OpenFileDialog();
+        private string extencion = "";
+
         private void btnImportarProyecto_Click(object sender, EventArgs e)
         {
-           // Stream myStream = null;
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
             openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter = "All supported files (*.txt, *.xls, *xlsx)|*.txt;*.xls;*.xlsx|Text files (*.txt)|*.txt|Excel files (*.xls,*.xlsx)|*.xls; *.xlsx*";
             openFileDialog1.FilterIndex = 2;
@@ -75,49 +76,39 @@ namespace Kairos.Forms
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                pnlImportacion.Visible = true;
                 int indice = openFileDialog1.FileName.LastIndexOf(".");
-                string extencion = openFileDialog1.FileName.Substring(indice + 1);
-                IImportarService importador = null;
+                extencion = openFileDialog1.FileName.Substring(indice + 1);
                 switch (extencion)
                 {
                     case "txt":
-                        FrmImportacionTxtFormato frmtxt = new FrmImportacionTxtFormato();
-                        if (frmtxt.ShowDialog() == DialogResult.OK)
-                        {
-                            importador = new ImportarTxtFile(frmtxt.delimitador);
-                        }
+                        //FrmImportacionTxtFormato frmtxt = new FrmImportacionTxtFormato();
+                        //if (frmtxt.ShowDialog() == DialogResult.OK)
+                        //{
+                        //    importador = new ImportarTxtFile(frmtxt.delimitador);
+                        //}
+                        pnlImportacionTxt.Visible = true;
+                        pnlImportacionExcel.Visible = false;
                         break;
                     case "xls":
                     case "xlsx":
-                        FrmImportacionExcelFormato frmxls = new FrmImportacionExcelFormato();
-                        if (frmxls.ShowDialog() == DialogResult.OK)
-                        {
-                            importador = new ImportarExcelFile(frmxls.hoja,frmxls.columna,frmxls.filaIncial);
-                        }
+                        //FrmImportacionExcelFormato frmxls = new FrmImportacionExcelFormato();
+                        //if (frmxls.ShowDialog() == DialogResult.OK)
+                        //{
+                        //    importador = new ImportarExcelFile(frmxls.hoja,frmxls.columna,frmxls.filaIncial);
+                        //}
+                        pnlImportacionExcel.Visible = true;
+                        pnlImportacionTxt.Visible = false;
                         break;
                     default:
                         break;
                 }
-                if (importador != null)
-                {
-                    bool resultado = importador.importarArchivo(openFileDialog1.FileName);
-                    if (resultado == true)
-                    {
-                        MessageBox.Show("El archivo se importó correctamente", "Importar Archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cargarLista();
-                    }
-                    else
-                    {
-                        MessageBox.Show(" No se puede abrir el archivo", "Error de importación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-               
             }
         }
 
         private void txtNombreModificado_TextChanged(object sender, EventArgs e)
         {
-            if (txtNombreProyecto.Text!="")
+            if (txtNombreProyecto.Text != "")
             {
                 btnAceptarModificar.Visible = true;
             }
@@ -139,20 +130,21 @@ namespace Kairos.Forms
                 var seleccionado = lbProyectosRecientes.SelectedItem;
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
-                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text+".prk");
+                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text + ".prk");
 
-                lblMensaje.Text = "Se modifico el proyecto "+txtNombreProyecto.Text+".prk correctamente";
-                panelNotificaciones.Visible = true;
-                timerMensaje.Start();
-            } else
-            {
-                ProyectoService.nuevoProyecto(txtNombreProyecto.Text+".prk");//le agrega la extension
-
-                lblMensaje.Text = "Se creo el proyecto "+txtNombreProyecto.Text+".prk correctamente";
+                lblMensaje.Text = "Se modifico el proyecto " + txtNombreProyecto.Text + ".prk correctamente";
                 panelNotificaciones.Visible = true;
                 timerMensaje.Start();
             }
-            
+            else
+            {
+                ProyectoService.nuevoProyecto(txtNombreProyecto.Text + ".prk");//le agrega la extension
+
+                lblMensaje.Text = "Se creo el proyecto " + txtNombreProyecto.Text + ".prk correctamente";
+                panelNotificaciones.Visible = true;
+                timerMensaje.Start();
+            }
+
             modificacionInvisible();
             cargarLista();
         }
@@ -168,19 +160,19 @@ namespace Kairos.Forms
         private void imgBorrar_Click(object sender, EventArgs e)
         {
             var seleccionado = lbProyectosRecientes.SelectedItem;
-            if(seleccionado!=null)
+            if (seleccionado != null)
             {
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
                 ProyectoService.borrarProyecto(a.Id);
 
-                lblMensaje.Text = "Se elimino el proyecto "+a.nombreOrigen+" correctamente";
+                lblMensaje.Text = "Se elimino el proyecto " + a.nombreOrigen + " correctamente";
                 panelNotificaciones.Visible = true;
                 timerMensaje.Start();
 
                 cargarLista();
             }
-    }
+        }
 
         private void imgEditar_Click(object sender, EventArgs e)
         {
@@ -190,7 +182,7 @@ namespace Kairos.Forms
             {
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
-                txtNombreProyecto.Text = a.nombreOrigen.Substring(0,a.nombreOrigen.Length-4); //le saco la extension
+                txtNombreProyecto.Text = a.nombreOrigen.Substring(0, a.nombreOrigen.Length - 4); //le saco la extension
 
                 txtNombreProyecto.Focus();
                 btnAceptarModificar.Text = "Modificar";
@@ -236,6 +228,104 @@ namespace Kairos.Forms
             Visible = false;
             frm.ShowDialog();
             Visible = true;
+        }
+
+        private void rbOtro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbOtro.Checked == true)
+            {
+                btnAceptarImportacion.BackColor = Color.LightGray;
+                btnAceptarImportacion.Enabled = false;
+                txtOtro.BackColor = Color.White;
+                txtOtro.Enabled = true;
+            }
+            else
+            {
+                btnAceptarImportacion.BackColor = Color.FromArgb(255, 128, 128);
+                btnAceptarImportacion.Enabled = true;
+                txtOtro.BackColor = Color.LightGray;
+                txtOtro.Enabled = false;
+            }
+        }
+
+        private string BuscarSeleccionado()
+        {
+            string resultado = "";
+            if (rbComa.Checked == true)
+                resultado = ",";
+            else if (rbEnter.Checked == true)
+                resultado = "enter";
+            else if (rbPipe.Checked == true)
+                resultado = "|";
+            else if (rbTab.Checked == true)
+                resultado = "\t";
+            else if (rbOtro.Checked == true)
+                resultado = txtOtro.Text;
+            return resultado;
+        }
+
+        private bool EsValorPermitido(string valor)
+        {
+            if (this.valoresNoPermitidos.Contains(valor))
+                return false;
+            else
+                return true;
+        }
+
+        private void btnAceptarImportacion_Click(object sender, EventArgs e)
+        {
+            IImportarService importador = null;
+            switch (extencion)
+            {
+                case "txt":
+                    string delimitador = BuscarSeleccionado();
+                    importador = new ImportarTxtFile(delimitador);
+                    break;
+                case "xls":
+                case "xlsx":
+                    int hoja = Convert.ToInt32(nudHoja.Value);
+                    int columna = Convert.ToInt32(nudColumna.Value);
+                    int filaIncial = Convert.ToInt32(nudFilaInicial.Value);
+                    importador = new ImportarExcelFile(hoja, columna, filaIncial);
+                    break;
+                default:
+                    break;
+            }
+            pnlImportacionTxt.Visible = false;
+            pnlImportacionExcel.Visible = false;
+            if (importador != null)
+            {
+                bool resultado = importador.importarArchivo(openFileDialog1.FileName);
+                if (resultado == true)
+                {
+                    MessageBox.Show("El archivo se importó correctamente", "Importar Archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cargarLista();
+                }
+                else
+                {
+                    MessageBox.Show(" No se puede abrir el archivo", "Error de importación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            pnlImportacion.Visible = false;
+        }
+
+        private void btncancelarImportacion_Click(object sender, EventArgs e)
+        {
+            pnlImportacion.Visible = false;
+        }
+
+        private void txtOtro_TextChanged(object sender, EventArgs e)
+        {
+            if (EsValorPermitido(txtOtro.Text))
+            {
+                btnAceptarImportacion.Enabled = true;
+                btnAceptarImportacion.BackColor = Color.FromArgb(255, 128, 128);
+            }
+            else
+            {
+                btnAceptarImportacion.Enabled = false;
+                btnAceptarImportacion.BackColor = Color.LightGray;
+            }
         }
     }
 }

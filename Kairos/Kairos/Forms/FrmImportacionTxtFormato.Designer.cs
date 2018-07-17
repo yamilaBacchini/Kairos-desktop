@@ -178,7 +178,7 @@
             this.rbOtro.UseVisualStyleBackColor = true;
             this.rbOtro.CheckedChanged += new System.EventHandler(this.rbOtro_CheckedChanged);
             // 
-            // formImportacionTxtFormato
+            // FrmImportacionTxtFormato
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -189,7 +189,7 @@
             this.Controls.Add(this.btncancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblTitulo);
-            this.Name = "formImportacionTxtFormato";
+            this.Name = "FrmImportacionTxtFormato";
             ((System.ComponentModel.ISupportInitialize)(this.imgInformacion)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
