@@ -249,18 +249,6 @@
     <Compile Include="EventoContexto.cs" />
     <Compile Include="Filtros\FiltroImpl.cs" />
     <Compile Include="Filtros\INuevoFiltro.cs" />
-    <Compile Include="Forms\FrmImportacionExcelFormato.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmImportacionExcelFormato.Designer.cs">
-      <DependentUpon>FrmImportacionExcelFormato.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FrmImportacionTxtFormato.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmImportacionTxtFormato.Designer.cs">
-      <DependentUpon>FrmImportacionTxtFormato.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmPantallaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,12 +305,6 @@
     <Compile Include="Services\ProyectoService.cs" />
     <EmbeddedResource Include="Forms\FrmCapturaDatosArduino.resx">
       <DependentUpon>FrmCapturaDatosArduino.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmImportacionExcelFormato.resx">
-      <DependentUpon>FrmImportacionExcelFormato.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmImportacionTxtFormato.resx">
-      <DependentUpon>FrmImportacionTxtFormato.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmPantallaPrincipal.resx">
       <DependentUpon>FrmPantallaPrincipal.cs</DependentUpon>

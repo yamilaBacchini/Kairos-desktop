@@ -22,13 +22,12 @@ namespace Kairos.Services.Implementaciones
             this.filaInicial = filaInicial;
         }
 
-        public bool importarArchivo(string pathArchivo)
+        public bool importarArchivoEnNuevoProyecto(string pathArchivo, string nombreProyecto)
         {
             bool resultado = false;
             try
             {
-                string nombre = "Importacion automatica_" + DateTime.Now.ToLongDateString();
-                Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombre, activo = true };
+                Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombreProyecto, activo = true };
                 List<Evento> eventos = new List<Evento>();
                 using (var archivo = new XLWorkbook(pathArchivo))
                 {
@@ -52,6 +51,45 @@ namespace Kairos.Services.Implementaciones
                     db.SaveChanges();
                 }
                 resultado = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.Write(ex.Message);
+                resultado = false;
+            }
+            return resultado;
+        }
+
+        public bool importarArchivoEnProyectoExistente(string pathArchivo, int idProyecto)
+        {
+            bool resultado = false;
+            try
+            {
+                using (var db = new EventoContexto())
+                {
+                    Origen auxOrigen = db.Origenes.Find(idProyecto);
+                    if (auxOrigen != null)
+                    {
+                        List<Evento> eventos = new List<Evento>();
+                        using (var archivo = new XLWorkbook(pathArchivo))
+                        {
+                            var hoja = archivo.Worksheet(this.hoja);
+                            int numeroFila = this.filaInicial;
+                            int columna = this.columna;
+                            while (!hoja.Cell(numeroFila, columna).IsEmpty())
+                            {
+                                DateTime auxFecha = hoja.Cell(numeroFila, columna).GetDateTime();
+                                eventos.Add(new Evento() { fecha = auxFecha, origen = auxOrigen, activo = true });
+                                numeroFila++;
+                            }
+                        }
+                        db.Eventos.AddRange(eventos);
+                        db.SaveChanges();
+                        resultado = true;
+                    }
+                    else
+                        resultado = false;
+                }
             }
             catch (Exception ex)
             {
