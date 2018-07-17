@@ -431,5 +431,11 @@ namespace Kairos.Forms
                 btnAceptarImportacion.Enabled = false;
             }
         }
+
+        private void btnProyectos_Click(object sender, EventArgs e)
+        {
+            pnlImportacion.Visible = false;
+            pnlProyectos.Visible = true;
+        }
     }
 }

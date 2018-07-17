@@ -479,12 +479,19 @@ namespace Kairos.Forms
 
         private void btnCalcularFDP_Click(object sender, EventArgs e)
         {
-            MetodologiaAjuste metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
-            Segmentacion segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA : Segmentacion.MINUTO);
-            FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos);
-            this.Visible = false;
-            frm.ShowDialog();
-            this.Visible = true;
+            try
+            {
+                MetodologiaAjuste metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
+                Segmentacion segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA : Segmentacion.MINUTO);
+                FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos);
+                this.Visible = false;
+                frm.ShowDialog();
+                this.Visible = true;
+            }
+            catch
+            {
+
+            }
         }
 
         private void rbDtConstante_CheckedChanged(object sender, EventArgs e)

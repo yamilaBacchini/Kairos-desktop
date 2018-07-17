@@ -17,7 +17,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
 
         public string StringFDP => string.Format("f(x)=1/({0}-{1})", B, A);
 
-        public string StringInversa => string.Format("f(x)=R*({0}-{1})+{1}", B, A);
+        public string StringInversa => string.Format("f(R)=R*({0}-{1})+{1}", B, A);
 
         public FuncionUniforme(double[] eventos) : base(eventos)
         {

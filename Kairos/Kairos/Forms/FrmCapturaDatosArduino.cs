@@ -53,14 +53,23 @@ namespace Kairos.Forms
                 if (escribirDistancias.estaAbierto())
                 {
                     // Obtenemos el puerto serie que lanza el evento
-                    SerialPort currentSerialPort = (SerialPort)sender;
+                    
 
                     // Leemos el dato recibido del puerto serie
-                    inData = currentSerialPort.ReadLine();
-                    escribirDistancias.escribir(inData + ", ");
+                    try
+                    {
+                        SerialPort currentSerialPort = (SerialPort)sender;
+                        inData = currentSerialPort.ReadLine();
+                        escribirDistancias.escribir(inData + "\n");
+                    }
+                    catch
+                    {
+
+                    }
+                    
 
                     // Y lo escribimos en un label inferior del Form
-                    labelLectura.Text = inData;
+                    //labelLectura.Text = inData;
                 }
 
             }
