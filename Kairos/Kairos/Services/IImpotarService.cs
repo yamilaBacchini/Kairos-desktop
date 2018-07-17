@@ -9,6 +9,7 @@ namespace Kairos.Services
 {
     interface IImportarService
     {
-        bool importarArchivo(string pathArchivo);
+        bool importarArchivoEnNuevoProyecto(string pathArchivo, string nombreProyecto);
+        bool importarArchivoEnProyectoExistente(string pathArchivo, int idProyecto);
     }
 }

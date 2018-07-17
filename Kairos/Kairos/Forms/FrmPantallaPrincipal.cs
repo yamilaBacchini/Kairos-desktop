@@ -82,21 +82,13 @@ namespace Kairos.Forms
                 switch (extencion)
                 {
                     case "txt":
-                        //FrmImportacionTxtFormato frmtxt = new FrmImportacionTxtFormato();
-                        //if (frmtxt.ShowDialog() == DialogResult.OK)
-                        //{
-                        //    importador = new ImportarTxtFile(frmtxt.delimitador);
-                        //}
+                        lblTituloImportacion.Text = "Indique el delimitador";
                         pnlImportacionTxt.Visible = true;
                         pnlImportacionExcel.Visible = false;
                         break;
                     case "xls":
                     case "xlsx":
-                        //FrmImportacionExcelFormato frmxls = new FrmImportacionExcelFormato();
-                        //if (frmxls.ShowDialog() == DialogResult.OK)
-                        //{
-                        //    importador = new ImportarExcelFile(frmxls.hoja,frmxls.columna,frmxls.filaIncial);
-                        //}
+                        lblTituloImportacion.Text = "Indique la ubicación de los datos";
                         pnlImportacionExcel.Visible = true;
                         pnlImportacionTxt.Visible = false;
                         break;
@@ -109,13 +101,9 @@ namespace Kairos.Forms
         private void txtNombreModificado_TextChanged(object sender, EventArgs e)
         {
             if (txtNombreProyecto.Text != "")
-            {
                 btnAceptarModificar.Visible = true;
-            }
             else
-            {
                 btnAceptarModificar.Visible = false;
-            }
         }
 
         private void btnCancelarModificacion_Click(object sender, EventArgs e)
@@ -241,8 +229,29 @@ namespace Kairos.Forms
             }
             else
             {
-                btnAceptarImportacion.BackColor = Color.FromArgb(255, 128, 128);
-                btnAceptarImportacion.Enabled = true;
+                bool mostrar = false;
+                if (rbImportacionNuevo.Checked)
+                    if (txtImportacionNombre.Text != "")
+                        mostrar = true;
+                    else
+                        mostrar = false;
+                else
+                {
+                    if (lbxProyectosExistentes.SelectedIndex > -1)
+                        mostrar = true;
+                    else
+                        mostrar = false;
+                }
+                if (mostrar)
+                {
+                    btnAceptarImportacion.BackColor = Color.FromArgb(255, 128, 128);
+                    btnAceptarImportacion.Enabled = true;
+                }
+                else
+                {
+                    btnAceptarImportacion.BackColor = Color.LightGray;
+                    btnAceptarImportacion.Enabled = false;
+                }
                 txtOtro.BackColor = Color.LightGray;
                 txtOtro.Enabled = false;
             }
@@ -295,7 +304,17 @@ namespace Kairos.Forms
             pnlImportacionExcel.Visible = false;
             if (importador != null)
             {
-                bool resultado = importador.importarArchivo(openFileDialog1.FileName);
+                bool resultado = false;
+                string fileName = openFileDialog1.FileName;
+                if (rbImportacionNuevo.Checked)
+                    resultado = importador.importarArchivoEnNuevoProyecto(fileName, txtImportacionNombre.Text);
+                else
+                {
+                    var seleccionado = lbxProyectosExistentes.SelectedItem;
+                    var a = new { nombreOrigen = "", Id = 0 };
+                    a = Cast(a, seleccionado);
+                    resultado = importador.importarArchivoEnProyectoExistente(fileName, a.Id);
+                }
                 if (resultado == true)
                 {
                     MessageBox.Show("El archivo se importó correctamente", "Importar Archivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -316,15 +335,100 @@ namespace Kairos.Forms
 
         private void txtOtro_TextChanged(object sender, EventArgs e)
         {
+            bool mostrar = false;
             if (EsValorPermitido(txtOtro.Text))
             {
-                btnAceptarImportacion.Enabled = true;
-                btnAceptarImportacion.BackColor = Color.FromArgb(255, 128, 128);
+                if (rbImportacionNuevo.Checked)
+                    if (txtImportacionNombre.Text != "")
+                        mostrar = true;
+                    else
+                        mostrar = false;
+                else
+                    mostrar = true;
+            }
+            else
+                mostrar = false;
+            EsconderOMostrarBotonAceptarImportacion(mostrar);
+        }
+
+        private void rbImportacionNuevo_CheckedChanged(object sender, EventArgs e)
+        {
+            bool mostrar = false;
+            if (rbImportacionNuevo.Checked)
+            {
+                txtImportacionNombre.Visible = true;
+                lbxProyectosExistentes.Visible = false;
+                if (txtImportacionNombre.Text != "")
+                {
+                    if (rbOtro.Checked)
+                        if (EsValorPermitido(txtOtro.Text))
+                            mostrar = true;
+                        else
+                            mostrar = false;
+                    else
+                        mostrar = true;
+                }
             }
             else
             {
-                btnAceptarImportacion.Enabled = false;
+                lbxProyectosExistentes.Visible = true;
+                txtImportacionNombre.Visible = false;
+                var resultado = (from o in new EventoContexto().Origenes select new { o.nombreOrigen, o.Id }).ToList();
+                lbxProyectosExistentes.ValueMember = "nombreOrigen";
+                lbxProyectosExistentes.Items.Clear();
+                lbxProyectosExistentes.Items.AddRange(resultado.ToArray());
+                mostrar = false;
+            }
+            EsconderOMostrarBotonAceptarImportacion(mostrar);
+        }
+
+        private void txtImportacionNombre_TextChanged(object sender, EventArgs e)
+        {
+            bool mostrar = false;
+            if (txtImportacionNombre.Text != "")
+            {
+                if (rbOtro.Checked)
+                    if (EsValorPermitido(txtOtro.Text))
+                        mostrar = true;
+                    else
+                        mostrar = false;
+                else
+                    mostrar = true;
+            }
+            else
+                mostrar = false;
+            EsconderOMostrarBotonAceptarImportacion(mostrar);
+        }
+
+        private void lbxProyectosExistentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool mostrar = false;
+            if (lbxProyectosExistentes.SelectedIndex > -1)
+            {
+                if (rbOtro.Checked)
+                    if (EsValorPermitido(txtOtro.Text))
+                        mostrar = true;
+                    else
+                        mostrar = false;
+                else
+                    mostrar = true;
+            }
+            else
+                mostrar = false;
+            EsconderOMostrarBotonAceptarImportacion(mostrar);
+        }
+
+        private void EsconderOMostrarBotonAceptarImportacion(bool mostrar)
+        {
+            if (mostrar)
+            {
+                btnAceptarImportacion.BackColor = Color.FromArgb(255, 128, 128);
+                btnAceptarImportacion.Enabled = true;
+            }
+            else
+            {
                 btnAceptarImportacion.BackColor = Color.LightGray;
+                btnAceptarImportacion.Enabled = false;
             }
         }
     }

@@ -73,6 +73,12 @@
             this.btnAceptarImportacion = new System.Windows.Forms.Button();
             this.lblTituloImportacion = new System.Windows.Forms.Label();
             this.toolTipInformacion = new System.Windows.Forms.ToolTip(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblDestinoImportacion = new System.Windows.Forms.Label();
+            this.rbImportacionNuevo = new System.Windows.Forms.RadioButton();
+            this.rbImportacionExistente = new System.Windows.Forms.RadioButton();
+            this.txtImportacionNombre = new System.Windows.Forms.TextBox();
+            this.lbxProyectosExistentes = new System.Windows.Forms.ListBox();
             lblProyectosGuardados = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -90,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilaInicial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumna)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHoja)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProyectosGuardados
@@ -421,6 +428,8 @@
             // 
             // pnlImportacion
             // 
+            this.pnlImportacion.Controls.Add(this.lblDestinoImportacion);
+            this.pnlImportacion.Controls.Add(this.panel1);
             this.pnlImportacion.Controls.Add(this.pnlImportacionTxt);
             this.pnlImportacion.Controls.Add(this.btncancelarImportacion);
             this.pnlImportacion.Controls.Add(this.pnlImportacionExcel);
@@ -533,7 +542,7 @@
             this.btncancelarImportacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btncancelarImportacion.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btncancelarImportacion.ForeColor = System.Drawing.Color.White;
-            this.btncancelarImportacion.Location = new System.Drawing.Point(172, 192);
+            this.btncancelarImportacion.Location = new System.Drawing.Point(204, 209);
             this.btncancelarImportacion.Name = "btncancelarImportacion";
             this.btncancelarImportacion.Size = new System.Drawing.Size(84, 30);
             this.btncancelarImportacion.TabIndex = 29;
@@ -626,10 +635,11 @@
             // 
             // btnAceptarImportacion
             // 
-            this.btnAceptarImportacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnAceptarImportacion.BackColor = System.Drawing.Color.LightGray;
+            this.btnAceptarImportacion.Enabled = false;
             this.btnAceptarImportacion.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptarImportacion.ForeColor = System.Drawing.Color.White;
-            this.btnAceptarImportacion.Location = new System.Drawing.Point(52, 192);
+            this.btnAceptarImportacion.Location = new System.Drawing.Point(84, 209);
             this.btnAceptarImportacion.Name = "btnAceptarImportacion";
             this.btnAceptarImportacion.Size = new System.Drawing.Size(84, 30);
             this.btnAceptarImportacion.TabIndex = 28;
@@ -646,6 +656,70 @@
             this.lblTituloImportacion.Size = new System.Drawing.Size(320, 25);
             this.lblTituloImportacion.TabIndex = 27;
             this.lblTituloImportacion.Text = "Indique la ubicación de los datos";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbxProyectosExistentes);
+            this.panel1.Controls.Add(this.txtImportacionNombre);
+            this.panel1.Controls.Add(this.rbImportacionExistente);
+            this.panel1.Controls.Add(this.rbImportacionNuevo);
+            this.panel1.Location = new System.Drawing.Point(322, 45);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(397, 358);
+            this.panel1.TabIndex = 31;
+            // 
+            // lblDestinoImportacion
+            // 
+            this.lblDestinoImportacion.AutoSize = true;
+            this.lblDestinoImportacion.Font = new System.Drawing.Font("Book Antiqua", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblDestinoImportacion.Location = new System.Drawing.Point(350, 12);
+            this.lblDestinoImportacion.Name = "lblDestinoImportacion";
+            this.lblDestinoImportacion.Size = new System.Drawing.Size(350, 25);
+            this.lblDestinoImportacion.TabIndex = 32;
+            this.lblDestinoImportacion.Text = "Indique el destino de la importacion";
+            // 
+            // rbImportacionNuevo
+            // 
+            this.rbImportacionNuevo.AutoSize = true;
+            this.rbImportacionNuevo.Checked = true;
+            this.rbImportacionNuevo.Font = new System.Drawing.Font("Book Antiqua", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.rbImportacionNuevo.Location = new System.Drawing.Point(17, 8);
+            this.rbImportacionNuevo.Name = "rbImportacionNuevo";
+            this.rbImportacionNuevo.Size = new System.Drawing.Size(131, 22);
+            this.rbImportacionNuevo.TabIndex = 0;
+            this.rbImportacionNuevo.TabStop = true;
+            this.rbImportacionNuevo.Text = "Nuevo proyecto";
+            this.rbImportacionNuevo.UseVisualStyleBackColor = true;
+            this.rbImportacionNuevo.CheckedChanged += new System.EventHandler(this.rbImportacionNuevo_CheckedChanged);
+            // 
+            // rbImportacionExistente
+            // 
+            this.rbImportacionExistente.AutoSize = true;
+            this.rbImportacionExistente.Font = new System.Drawing.Font("Book Antiqua", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.rbImportacionExistente.Location = new System.Drawing.Point(192, 8);
+            this.rbImportacionExistente.Name = "rbImportacionExistente";
+            this.rbImportacionExistente.Size = new System.Drawing.Size(151, 22);
+            this.rbImportacionExistente.TabIndex = 1;
+            this.rbImportacionExistente.Text = "Proyecto existente";
+            this.rbImportacionExistente.UseVisualStyleBackColor = true;
+            // 
+            // txtImportacionNombre
+            // 
+            this.txtImportacionNombre.Location = new System.Drawing.Point(17, 36);
+            this.txtImportacionNombre.Name = "txtImportacionNombre";
+            this.txtImportacionNombre.Size = new System.Drawing.Size(326, 20);
+            this.txtImportacionNombre.TabIndex = 2;
+            this.txtImportacionNombre.TextChanged += new System.EventHandler(this.txtImportacionNombre_TextChanged);
+            // 
+            // lbxProyectosExistentes
+            // 
+            this.lbxProyectosExistentes.FormattingEnabled = true;
+            this.lbxProyectosExistentes.Location = new System.Drawing.Point(17, 36);
+            this.lbxProyectosExistentes.Name = "lbxProyectosExistentes";
+            this.lbxProyectosExistentes.Size = new System.Drawing.Size(326, 316);
+            this.lbxProyectosExistentes.TabIndex = 3;
+            this.lbxProyectosExistentes.Visible = false;
+            this.lbxProyectosExistentes.SelectedIndexChanged += new System.EventHandler(this.lbxProyectosExistentes_SelectedIndexChanged);
             // 
             // FrmPantallaPrincipal
             // 
@@ -688,6 +762,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilaInicial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumna)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHoja)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -735,5 +811,11 @@
         private System.Windows.Forms.RadioButton rbPipe;
         private System.Windows.Forms.RadioButton rbTab;
         private System.Windows.Forms.ToolTip toolTipInformacion;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblDestinoImportacion;
+        private System.Windows.Forms.RadioButton rbImportacionExistente;
+        private System.Windows.Forms.RadioButton rbImportacionNuevo;
+        private System.Windows.Forms.ListBox lbxProyectosExistentes;
+        private System.Windows.Forms.TextBox txtImportacionNombre;
     }
 }

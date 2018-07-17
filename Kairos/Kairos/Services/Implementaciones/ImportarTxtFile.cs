@@ -19,23 +19,22 @@ namespace Kairos.Services.Implementaciones
             this.delimitador = delimitador;
         }
 
-        public bool importarArchivo(string pathArchivo)
+        public bool importarArchivoEnNuevoProyecto(string pathArchivo, string nombreProyecto)
         {
             try
-            {   
+            {
                 List<string> eventos = new List<string>();
 
                 if (delimitador == "enter")
                     eventos = leerDelimitadorEnter(pathArchivo);
                 else
                     eventos = leerDelimitadorCaracter(pathArchivo, this.delimitador);
-                
+
                 //creo el proyecto en la tabla origenes
                 //checkear que no exista el nombre que se desea ingresar
                 using (var db = new EventoContexto())
                 {//el origen se debe encargar de esto
-                    string nombre = "Importacion automatica_" + DateTime.Now.ToLongDateString();
-                    Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombre, activo = true };
+                    Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombreProyecto, activo = true };
                     db.Origenes.Add(nuevoOrigen);
                     db.SaveChanges();
                     int idOrigenInsertado = nuevoOrigen.Id;
@@ -74,7 +73,7 @@ namespace Kairos.Services.Implementaciones
         }
 
 
-        public List<string> leerDelimitadorCaracter(string pathArchivo,string caracter)
+        public List<string> leerDelimitadorCaracter(string pathArchivo, string caracter)
         {
             StreamReader objReader = new StreamReader(pathArchivo);
             string sLine = "";
@@ -91,10 +90,38 @@ namespace Kairos.Services.Implementaciones
             }
             return eventosLeidos;
         }
-        
+
+        public bool importarArchivoEnProyectoExistente(string pathArchivo, int idProyecto)
+        {
+            bool resultado = false;
+            try
+            {
+                List<string> eventos = new List<string>();
+                if (delimitador == "enter")
+                    eventos = leerDelimitadorEnter(pathArchivo);
+                else
+                    eventos = leerDelimitadorCaracter(pathArchivo, this.delimitador);
+                using (var db = new EventoContexto())
+                {
+                    Origen auxOrigen = db.Origenes.Find(idProyecto);
+                    if (auxOrigen != null)
+                    {
+                        foreach (string item in eventos)
+                            db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(item), idOrigen = auxOrigen.Id, activo = true });
+                        db.SaveChanges();
+                        resultado = true;
+                    }
+                    else
+                        resultado = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                resultado = false;
+            }
+            return resultado;
+        }
     }
-
-
-
 }
 
