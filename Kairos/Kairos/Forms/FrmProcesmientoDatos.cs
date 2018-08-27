@@ -31,7 +31,6 @@ namespace Kairos.Forms
             InitializeComponent();
             this.idOrigen = idOrigen;
             this.nombreProyecto = nombreProyecto;
-            //lblNombreProyecto.Text = nombreProyecto;
             filtros = new List<Filtro>();
             setupFiltrosCheckboxList();
             cargarFiltros();
@@ -58,6 +57,8 @@ namespace Kairos.Forms
         {
             //lleno la grilla con los eventos
             eventos = EventoService.cargarEventos(idOrigen);
+            //DataTable tabla = new DataTable();
+            //tabla.
             dgwEventos.DataSource = eventos;
             dgwEventos.Columns[1].Width = 235;
             dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
@@ -143,12 +144,25 @@ namespace Kairos.Forms
                     break;
                 case TipoAccionProcesamiento.FILTRAR:
                     lblTituloAccion.Text = "Filtrar";
-                    lblAccion1.Text = "Fecha";
+                    
                     dtp1.Format = DateTimePickerFormat.Short;
+                    if (rbFecha.Checked)
+                    {
+                        lblAccion1.Text = "Fecha";
+                        txtIntervalo.Visible = false;
+                        cambiarFiltros(0);
+                    }
+                    else
+                    {
+                        lblAccion1.Text = "Fecha";
+                        dtp1.Visible=false;
+                        txtIntervalo.Visible = true;
+                    }
                     lblAccion2.Text = "Hora";
                     dtp2.Format = DateTimePickerFormat.Custom;
                     dtp2.CustomFormat = "HH:mm:ss";
-                    cambiarFiltros(0);
+                    
+
                     break;
                 default:
                     break;
@@ -180,9 +194,23 @@ namespace Kairos.Forms
                     {
                         control.Visible = true;
                     }
-                    lblTipoFiltro.Visible = true;
-                    cmbTipoFiltro.Visible = true;
-                    btnLimpiar.Visible = false;
+                    if (rbFecha.Checked)
+                    {
+                        lblTipoFiltro.Visible = true;
+                        cmbTipoFiltro.Visible = true;
+                        btnLimpiar.Visible = false;
+                    }
+                    else
+                    {
+                        lblTipoFiltro.Visible = false;
+                        cmbTipoFiltro.Visible = false;
+                        lblTituloAccion.Text = "Filtrar";
+                        lblAccion1.Text = "Intervalo";
+                        dtp1.Visible = false;
+                        lblAccion2.Visible = false;
+                        dtp2.Visible = false;
+                        txtIntervalo.Visible = true;
+                    }
                     break;
                 default:
                     break;
@@ -500,6 +528,58 @@ namespace Kairos.Forms
                 pnlSegmentacion.Visible = true;
             else
                 pnlSegmentacion.Visible = false;
+        }
+
+        private void rbIntervalos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbIntervalos.Checked)
+            {
+                if (eventos != null && eventos.Count > 0)
+                {
+                    //calculo intervalos
+                    var eventosOrdenados = eventos.OrderBy(x => x.fecha);
+                    List<double> lista = new List<double>();
+                    lista = eventosOrdenados.Select(x => x.fecha.TimeOfDay)
+                    .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
+                    .Skip(1), (x, y) => y - x)
+                    .Select(x => Math.Abs(x.TotalSeconds))
+                    .ToList();
+
+                    //leno dataGridView con los intervalos
+                    DataTable tabla = new DataTable();
+                    tabla.Columns.Add("Intervalos");
+                    foreach (var item in lista)
+                    {
+                        DataRow row = tabla.NewRow();
+                        row["Intervalos"] = item;
+                        tabla.Rows.Add(row);
+                    }
+                    dgwEventos.DataSource = tabla;
+                    dgwEventos.Columns[0].Visible = true;
+                    dgwEventos.Columns[0].Width = 235;
+
+                    //deshabilito funciones
+                    btnAgregarRegistro.Enabled = false;
+                    btnModificarRegistro.Enabled = false;
+                    btnBorrarSeleccionados.Enabled = false;
+                    btnSeleccionarTodos.Enabled = false;
+
+                    modificarLayout(TipoAccionProcesamiento.FILTRAR);
+
+                }
+            }
+        }
+        private void rbFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbFecha.Checked)
+            {
+                cargarEventos();
+                btnAgregarRegistro.Enabled = true;
+                btnModificarRegistro.Enabled = true;
+                btnBorrarSeleccionados.Enabled = true;
+                btnSeleccionarTodos.Enabled = true;
+                modificarLayout(TipoAccionProcesamiento.FILTRAR);
+            }
         }
     }
 }
