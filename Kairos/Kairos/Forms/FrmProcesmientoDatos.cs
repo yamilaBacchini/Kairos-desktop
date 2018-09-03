@@ -200,11 +200,22 @@ namespace Kairos.Forms
                         lblTipoFiltro.Visible = true;
                         cmbTipoFiltro.Visible = true;
                         btnLimpiar.Visible = false;
+
+                        List<ComboItem> tipos = new List<ComboItem> { new ComboItem(0, "Fecha menor a"), new ComboItem(1, "Fecha mayor a"), new ComboItem(2, "Fecha entre"), new ComboItem(3, "Hora menor a"), new ComboItem(4, "Hora mayor a"), new ComboItem(5, "Hora entre") };
+                        cmbTipoFiltro.DisplayMember = "Display";
+                        cmbTipoFiltro.ValueMember = "Value";
+                        cmbTipoFiltro.DataSource = tipos;
                     }
                     else
                     {
-                        lblTipoFiltro.Visible = false;
-                        cmbTipoFiltro.Visible = false;
+                        cmbTipoFiltro.DataSource = null;
+                        cmbTipoFiltro.Items.Clear();
+                        List<ComboItem> tipos = new List<ComboItem> { new ComboItem(0, "Intervalo menor a"), new ComboItem(1, "Intervalo mayor a"), new ComboItem(2, "Intervalo entre")};
+                        cmbTipoFiltro.DisplayMember = "Display";
+                        cmbTipoFiltro.ValueMember = "Value";
+                        cmbTipoFiltro.DataSource = tipos;
+
+                        //cmbTipoFiltro.Visible = false;
                         lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Text = "Intervalo";
                         dtp1.Visible = false;
@@ -470,7 +481,7 @@ namespace Kairos.Forms
             }
             else if(rbIntervalos.Checked)
             {
-                //hacer menor mayor y entre
+                //hacer menor, mayor y entre
                 intervalo = Convert.ToInt32(txtIntervalo.Text);
                 auxFiltro = new Filtro(TipoFiltro.INTERVALO_MENOR, intervalo);
             }
