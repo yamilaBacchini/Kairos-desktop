@@ -38,6 +38,7 @@
             this.rbIntervalos = new System.Windows.Forms.RadioButton();
             this.lblEventos = new System.Windows.Forms.Label();
             this.pnlModificable = new System.Windows.Forms.Panel();
+            this.txtIntervalo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chlFiltros = new System.Windows.Forms.CheckedListBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -73,7 +74,6 @@
             this.rbDtConstante = new System.Windows.Forms.RadioButton();
             this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtIntervalo = new System.Windows.Forms.TextBox();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
             this.panel2.SuspendLayout();
@@ -190,6 +190,14 @@
             this.pnlModificable.Size = new System.Drawing.Size(282, 303);
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
+            // 
+            // txtIntervalo
+            // 
+            this.txtIntervalo.Location = new System.Drawing.Point(112, 69);
+            this.txtIntervalo.Name = "txtIntervalo";
+            this.txtIntervalo.Size = new System.Drawing.Size(39, 20);
+            this.txtIntervalo.TabIndex = 55;
+            this.txtIntervalo.Visible = false;
             // 
             // label2
             // 
@@ -607,14 +615,6 @@
             this.label3.Size = new System.Drawing.Size(123, 23);
             this.label3.TabIndex = 55;
             this.label3.Text = "Metodologia";
-            // 
-            // txtIntervalo
-            // 
-            this.txtIntervalo.Location = new System.Drawing.Point(112, 69);
-            this.txtIntervalo.Name = "txtIntervalo";
-            this.txtIntervalo.Size = new System.Drawing.Size(39, 20);
-            this.txtIntervalo.TabIndex = 55;
-            this.txtIntervalo.Visible = false;
             // 
             // FrmProcesmientoDatos
             // 

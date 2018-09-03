@@ -154,7 +154,7 @@ namespace Kairos.Forms
                     }
                     else
                     {
-                        lblAccion1.Text = "Fecha";
+                        lblAccion1.Text = "Intervalo";
                         dtp1.Visible=false;
                         txtIntervalo.Visible = true;
                     }
@@ -183,6 +183,7 @@ namespace Kairos.Forms
                     lblTipoFiltro.Visible = false;
                     cmbTipoFiltro.Visible = false;
                     btnLimpiar.Visible = false;
+                    txtIntervalo.Visible = false;
                     break;
                 case TipoAccionProcesamiento.BORRAR_SELECCIONADOS:
                 case TipoAccionProcesamiento.SELECCIONAR_TODOS:
@@ -438,29 +439,40 @@ namespace Kairos.Forms
             DateTime fecha2 = DateTime.Now;
             fecha = dtp1.Value;
             fecha2 = dtp2.Value;
-            switch (selectedValue)
+            long intervalo = -1;
+            long intervalo2 = -1;
+            if (rbFecha.Checked)
             {
-                case 0:
-                    auxFiltro = new Filtro(TipoFiltro.FECHA_MENOR, fecha);
-                    break;
-                case 1:
-                    auxFiltro = new Filtro(TipoFiltro.FECHA_MAYOR, fecha);
-                    break;
-                case 2:
-                    auxFiltro = new Filtro(TipoFiltro.FECHA_ENTRE, fecha, fecha2);
-                    break;
-                case 3:
-                    auxFiltro = new Filtro(TipoFiltro.HORA_MENOR, fecha);
-                    break;
-                case 4:
-                    auxFiltro = new Filtro(TipoFiltro.HORA_MAYOR, fecha);
-                    break;
-                case 5:
-                    auxFiltro = new Filtro(TipoFiltro.HORA_ENTRE, fecha, fecha2);
-                    break;
-                default:
-                    auxFiltro = null;
-                    break;
+                switch (selectedValue)
+                {
+                    case 0:
+                        auxFiltro = new Filtro(TipoFiltro.FECHA_MENOR, fecha);
+                        break;
+                    case 1:
+                        auxFiltro = new Filtro(TipoFiltro.FECHA_MAYOR, fecha);
+                        break;
+                    case 2:
+                        auxFiltro = new Filtro(TipoFiltro.FECHA_ENTRE, fecha, fecha2);
+                        break;
+                    case 3:
+                        auxFiltro = new Filtro(TipoFiltro.HORA_MENOR, fecha);
+                        break;
+                    case 4:
+                        auxFiltro = new Filtro(TipoFiltro.HORA_MAYOR, fecha);
+                        break;
+                    case 5:
+                        auxFiltro = new Filtro(TipoFiltro.HORA_ENTRE, fecha, fecha2);
+                        break;
+                    default:
+                        auxFiltro = null;
+                        break;
+                }
+            }
+            else if(rbIntervalos.Checked)
+            {
+                //hacer menor mayor y entre
+                intervalo = Convert.ToInt32(txtIntervalo.Text);
+                auxFiltro = new Filtro(TipoFiltro.INTERVALO_MENOR, intervalo);
             }
             filtros.Add(auxFiltro);
             setupFiltrosCheckboxList();
@@ -534,6 +546,10 @@ namespace Kairos.Forms
         {
             if (rbIntervalos.Checked)
             {
+                tipoAccion = TipoAccionProcesamiento.FILTRAR;
+                modificarLayout(tipoAccion);
+                botonSeleccionado(btnFiltrar);
+
                 if (eventos != null && eventos.Count > 0)
                 {
                     //calculo intervalos
@@ -562,6 +578,7 @@ namespace Kairos.Forms
                     btnAgregarRegistro.Enabled = false;
                     btnModificarRegistro.Enabled = false;
                     btnBorrarSeleccionados.Enabled = false;
+                    btnBorrarSeleccionados.BackColor = Color.Black;
                     btnSeleccionarTodos.Enabled = false;
 
                     modificarLayout(TipoAccionProcesamiento.FILTRAR);
@@ -577,8 +594,10 @@ namespace Kairos.Forms
                 btnAgregarRegistro.Enabled = true;
                 btnModificarRegistro.Enabled = true;
                 btnBorrarSeleccionados.Enabled = true;
+                btnBorrarSeleccionados.BackColor = Color.FromArgb(134, 0, 3);
                 btnSeleccionarTodos.Enabled = true;
-                modificarLayout(TipoAccionProcesamiento.FILTRAR);
+                modificarLayout(tipoAccion);
+                botonSeleccionado(btnFiltrar);
             }
         }
     }
