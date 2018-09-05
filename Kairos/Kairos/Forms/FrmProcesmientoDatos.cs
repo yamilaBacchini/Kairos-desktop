@@ -479,11 +479,25 @@ namespace Kairos.Forms
                         break;
                 }
             }
-            else if(rbIntervalos.Checked)
+            else if (rbIntervalos.Checked)
             {
                 //hacer menor, mayor y entre
                 intervalo = Convert.ToInt32(txtIntervalo.Text);
-                auxFiltro = new Filtro(TipoFiltro.INTERVALO_MENOR, intervalo);
+                //intervalo 2
+                switch (selectedValue)
+                {
+                    case 0:
+                        auxFiltro = new Filtro(TipoFiltro.INTERVALO_MENOR, intervalo);
+                        break;
+                    case 1:
+                        auxFiltro = new Filtro(TipoFiltro.INTERVALO_MAYOR, fecha);
+                        break;
+                    case 2:
+                        auxFiltro = new Filtro(TipoFiltro.INTERVALO_ENTRE, intervalo, intervalo2);
+                        break;
+                    default:
+                        break;
+                }
             }
             filtros.Add(auxFiltro);
             setupFiltrosCheckboxList();
@@ -491,14 +505,22 @@ namespace Kairos.Forms
 
         private void filtrar()
         {
-            List<Evento> filtrado = filtrador.Filtrar(idOrigen, filtros);
-            if (filtrado != null)
+            if (rbFecha.Checked)
             {
-                eventos = filtrado;
-                dgwEventos.DataSource = filtrado;
-                dgwEventos.Columns[1].Width = 235;
-                dgwEventos.Columns[0].Visible = false;
-                dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
+                List<Evento> filtrado = filtrador.FiltrarFechas(idOrigen, filtros);
+                if (filtrado != null)
+                {
+                    eventos = filtrado;
+                    dgwEventos.DataSource = filtrado;
+                    dgwEventos.Columns[1].Width = 235;
+                    dgwEventos.Columns[0].Visible = false;
+                    dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
+                }
+            }
+            else if(rbIntervalos.Checked)
+            {
+              //  List<int> filtrado = filtrador.FiltrarIntervalos(dgwEventos.Columns[0],tipoFiltro,txtIntervalo);
+
             }
         }
 

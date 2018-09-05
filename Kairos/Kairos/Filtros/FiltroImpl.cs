@@ -12,7 +12,7 @@ namespace Kairos.Filtros
     {
         private readonly EventoContexto contexto = new EventoContexto();
 
-        public List<Evento> Filtrar(int idOrigen, List<Filtro> filtros)
+        public List<Evento> FiltrarFechas(int idOrigen, List<Filtro> filtros)
         {
             List<Evento> resultado = null;
             try
@@ -63,5 +63,11 @@ namespace Kairos.Filtros
             }
             return resultado;
         }
+
+        public List<int> FiltrarIntervalos(List<int> intervalos, Enum tipoFiltro, int intervalo)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
