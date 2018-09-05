@@ -32,8 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProcesmientoDatos));
             this.pnlEventos = new System.Windows.Forms.Panel();
             this.dgwEventos = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.rbFecha = new System.Windows.Forms.RadioButton();
+            this.lblVista = new System.Windows.Forms.Label();
+            this.rbIntervalos = new System.Windows.Forms.RadioButton();
             this.lblEventos = new System.Windows.Forms.Label();
             this.pnlModificable = new System.Windows.Forms.Panel();
+            this.txtIntervalo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chlFiltros = new System.Windows.Forms.CheckedListBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -62,15 +67,16 @@
             this.btnSeleccionarTodos = new System.Windows.Forms.Button();
             this.pnlAcciones = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSegmentacion = new System.Windows.Forms.Panel();
+            this.rbDia = new System.Windows.Forms.RadioButton();
+            this.rbMinuto = new System.Windows.Forms.RadioButton();
+            this.rbHora = new System.Windows.Forms.RadioButton();
             this.rbDtConstante = new System.Windows.Forms.RadioButton();
             this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.pnlSegmentacion = new System.Windows.Forms.Panel();
-            this.rbHora = new System.Windows.Forms.RadioButton();
-            this.rbMinuto = new System.Windows.Forms.RadioButton();
-            this.rbDia = new System.Windows.Forms.RadioButton();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
+            this.panel2.SuspendLayout();
             this.pnlModificable.SuspendLayout();
             this.pnlAccionesFinales.SuspendLayout();
             this.pnlTitulo.SuspendLayout();
@@ -84,6 +90,7 @@
             // pnlEventos
             // 
             this.pnlEventos.Controls.Add(this.dgwEventos);
+            this.pnlEventos.Controls.Add(this.panel2);
             this.pnlEventos.Controls.Add(this.lblEventos);
             this.pnlEventos.Location = new System.Drawing.Point(251, 104);
             this.pnlEventos.Name = "pnlEventos";
@@ -98,20 +105,67 @@
             this.dgwEventos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgwEventos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgwEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwEventos.Location = new System.Drawing.Point(16, 30);
+            this.dgwEventos.Location = new System.Drawing.Point(16, 31);
             this.dgwEventos.Name = "dgwEventos";
             this.dgwEventos.ReadOnly = true;
             this.dgwEventos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwEventos.Size = new System.Drawing.Size(344, 439);
+            this.dgwEventos.Size = new System.Drawing.Size(344, 438);
             this.dgwEventos.TabIndex = 23;
             this.dgwEventos.SelectionChanged += new System.EventHandler(this.dgwEventos_SelectionChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.rbFecha);
+            this.panel2.Controls.Add(this.lblVista);
+            this.panel2.Controls.Add(this.rbIntervalos);
+            this.panel2.Location = new System.Drawing.Point(143, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(232, 33);
+            this.panel2.TabIndex = 61;
+            // 
+            // rbFecha
+            // 
+            this.rbFecha.AutoSize = true;
+            this.rbFecha.Checked = true;
+            this.rbFecha.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.rbFecha.Location = new System.Drawing.Point(56, 8);
+            this.rbFecha.Name = "rbFecha";
+            this.rbFecha.Size = new System.Drawing.Size(62, 22);
+            this.rbFecha.TabIndex = 59;
+            this.rbFecha.TabStop = true;
+            this.rbFecha.Text = "Fecha";
+            this.rbFecha.UseVisualStyleBackColor = true;
+            this.rbFecha.CheckedChanged += new System.EventHandler(this.rbFecha_CheckedChanged);
+            // 
+            // lblVista
+            // 
+            this.lblVista.AutoSize = true;
+            this.lblVista.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.lblVista.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblVista.Location = new System.Drawing.Point(2, 8);
+            this.lblVista.Name = "lblVista";
+            this.lblVista.Size = new System.Drawing.Size(46, 20);
+            this.lblVista.TabIndex = 55;
+            this.lblVista.Text = "Vista";
+            // 
+            // rbIntervalos
+            // 
+            this.rbIntervalos.AutoSize = true;
+            this.rbIntervalos.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.rbIntervalos.Location = new System.Drawing.Point(125, 8);
+            this.rbIntervalos.Name = "rbIntervalos";
+            this.rbIntervalos.Size = new System.Drawing.Size(90, 22);
+            this.rbIntervalos.TabIndex = 60;
+            this.rbIntervalos.Text = "Intervalos";
+            this.rbIntervalos.UseVisualStyleBackColor = true;
+            this.rbIntervalos.CheckedChanged += new System.EventHandler(this.rbIntervalos_CheckedChanged);
             // 
             // lblEventos
             // 
             this.lblEventos.AutoSize = true;
             this.lblEventos.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEventos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblEventos.Location = new System.Drawing.Point(146, 4);
+            this.lblEventos.Location = new System.Drawing.Point(12, 6);
             this.lblEventos.Name = "lblEventos";
             this.lblEventos.Size = new System.Drawing.Size(80, 23);
             this.lblEventos.TabIndex = 24;
@@ -119,6 +173,7 @@
             // 
             // pnlModificable
             // 
+            this.pnlModificable.Controls.Add(this.txtIntervalo);
             this.pnlModificable.Controls.Add(this.label2);
             this.pnlModificable.Controls.Add(this.chlFiltros);
             this.pnlModificable.Controls.Add(this.btnLimpiar);
@@ -135,6 +190,14 @@
             this.pnlModificable.Size = new System.Drawing.Size(282, 303);
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
+            // 
+            // txtIntervalo
+            // 
+            this.txtIntervalo.Location = new System.Drawing.Point(112, 69);
+            this.txtIntervalo.Name = "txtIntervalo";
+            this.txtIntervalo.Size = new System.Drawing.Size(39, 20);
+            this.txtIntervalo.TabIndex = 55;
+            this.txtIntervalo.Visible = false;
             // 
             // label2
             // 
@@ -473,6 +536,49 @@
             this.panel1.Size = new System.Drawing.Size(282, 81);
             this.panel1.TabIndex = 23;
             // 
+            // pnlSegmentacion
+            // 
+            this.pnlSegmentacion.Controls.Add(this.rbDia);
+            this.pnlSegmentacion.Controls.Add(this.rbMinuto);
+            this.pnlSegmentacion.Controls.Add(this.rbHora);
+            this.pnlSegmentacion.Location = new System.Drawing.Point(0, 55);
+            this.pnlSegmentacion.Name = "pnlSegmentacion";
+            this.pnlSegmentacion.Size = new System.Drawing.Size(282, 26);
+            this.pnlSegmentacion.TabIndex = 58;
+            this.pnlSegmentacion.Visible = false;
+            // 
+            // rbDia
+            // 
+            this.rbDia.AutoSize = true;
+            this.rbDia.Checked = true;
+            this.rbDia.Location = new System.Drawing.Point(11, 3);
+            this.rbDia.Name = "rbDia";
+            this.rbDia.Size = new System.Drawing.Size(41, 17);
+            this.rbDia.TabIndex = 2;
+            this.rbDia.TabStop = true;
+            this.rbDia.Text = "Dia";
+            this.rbDia.UseVisualStyleBackColor = true;
+            // 
+            // rbMinuto
+            // 
+            this.rbMinuto.AutoSize = true;
+            this.rbMinuto.Location = new System.Drawing.Point(184, 3);
+            this.rbMinuto.Name = "rbMinuto";
+            this.rbMinuto.Size = new System.Drawing.Size(57, 17);
+            this.rbMinuto.TabIndex = 1;
+            this.rbMinuto.Text = "Minuto";
+            this.rbMinuto.UseVisualStyleBackColor = true;
+            // 
+            // rbHora
+            // 
+            this.rbHora.AutoSize = true;
+            this.rbHora.Location = new System.Drawing.Point(103, 3);
+            this.rbHora.Name = "rbHora";
+            this.rbHora.Size = new System.Drawing.Size(48, 17);
+            this.rbHora.TabIndex = 0;
+            this.rbHora.Text = "Hora";
+            this.rbHora.UseVisualStyleBackColor = true;
+            // 
             // rbDtConstante
             // 
             this.rbDtConstante.AutoSize = true;
@@ -510,49 +616,6 @@
             this.label3.TabIndex = 55;
             this.label3.Text = "Metodologia";
             // 
-            // pnlSegmentacion
-            // 
-            this.pnlSegmentacion.Controls.Add(this.rbDia);
-            this.pnlSegmentacion.Controls.Add(this.rbMinuto);
-            this.pnlSegmentacion.Controls.Add(this.rbHora);
-            this.pnlSegmentacion.Location = new System.Drawing.Point(0, 55);
-            this.pnlSegmentacion.Name = "pnlSegmentacion";
-            this.pnlSegmentacion.Size = new System.Drawing.Size(282, 26);
-            this.pnlSegmentacion.TabIndex = 58;
-            this.pnlSegmentacion.Visible = false;
-            // 
-            // rbHora
-            // 
-            this.rbHora.AutoSize = true;
-            this.rbHora.Location = new System.Drawing.Point(103, 3);
-            this.rbHora.Name = "rbHora";
-            this.rbHora.Size = new System.Drawing.Size(48, 17);
-            this.rbHora.TabIndex = 0;
-            this.rbHora.Text = "Hora";
-            this.rbHora.UseVisualStyleBackColor = true;
-            // 
-            // rbMinuto
-            // 
-            this.rbMinuto.AutoSize = true;
-            this.rbMinuto.Location = new System.Drawing.Point(184, 3);
-            this.rbMinuto.Name = "rbMinuto";
-            this.rbMinuto.Size = new System.Drawing.Size(57, 17);
-            this.rbMinuto.TabIndex = 1;
-            this.rbMinuto.Text = "Minuto";
-            this.rbMinuto.UseVisualStyleBackColor = true;
-            // 
-            // rbDia
-            // 
-            this.rbDia.AutoSize = true;
-            this.rbDia.Checked = true;
-            this.rbDia.Location = new System.Drawing.Point(11, 3);
-            this.rbDia.Name = "rbDia";
-            this.rbDia.Size = new System.Drawing.Size(41, 17);
-            this.rbDia.TabIndex = 2;
-            this.rbDia.TabStop = true;
-            this.rbDia.Text = "Dia";
-            this.rbDia.UseVisualStyleBackColor = true;
-            // 
             // FrmProcesmientoDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -575,6 +638,8 @@
             this.pnlEventos.ResumeLayout(false);
             this.pnlEventos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.pnlModificable.ResumeLayout(false);
             this.pnlModificable.PerformLayout();
             this.pnlAccionesFinales.ResumeLayout(false);
@@ -631,5 +696,10 @@
         private System.Windows.Forms.RadioButton rbDia;
         private System.Windows.Forms.RadioButton rbMinuto;
         private System.Windows.Forms.RadioButton rbHora;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton rbFecha;
+        private System.Windows.Forms.Label lblVista;
+        private System.Windows.Forms.RadioButton rbIntervalos;
+        private System.Windows.Forms.TextBox txtIntervalo;
     }
 }
