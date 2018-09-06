@@ -162,6 +162,7 @@ namespace Kairos.Forms
                 timerMensaje.Start();
                 lbProyectosRecientes.ClearSelected();
 
+                pnlImportacion.Visible = false;
                 modificacionInvisible();
                 cargarLista();
             }
