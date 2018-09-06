@@ -133,6 +133,9 @@ namespace Kairos.Forms
                 timerMensaje.Start();
             }
 
+            btnImportarProyecto.Enabled = false;
+            btnProcesarDatos.Enabled = false;
+            btnArduino.Enabled = false;
             modificacionInvisible();
             cargarLista();
         }
@@ -159,6 +162,8 @@ namespace Kairos.Forms
                 timerMensaje.Start();
                 lbProyectosRecientes.ClearSelected();
 
+                pnlImportacion.Visible = false;
+                modificacionInvisible();
                 cargarLista();
             }
         }
@@ -295,6 +300,7 @@ namespace Kairos.Forms
                     panelNotificaciones.Visible = true;
                     timerMensaje.Start();
                     cargarLista();
+                    lbProyectosRecientes.SelectedItem = seleccionado;
                 } else {
                     MessageBox.Show(" No se puede abrir el archivo", "Error de importación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -342,6 +348,12 @@ namespace Kairos.Forms
                 btnImportarProyecto.Enabled = true;
                 btnProcesarDatos.Enabled = true;
                 btnArduino.Enabled = true;
+
+                if (btnAceptarModificar.Text != "Crear")
+                {
+                    var selectedItem = Cast(new { nombreOrigen = "", Id = 0 }, lbProyectosRecientes.SelectedItem);
+                    txtNombreProyecto.Text = selectedItem.nombreOrigen.Substring(0, selectedItem.nombreOrigen.Length - 4);
+                }
             } else
             {
                 btnImportarProyecto.Enabled = false;
