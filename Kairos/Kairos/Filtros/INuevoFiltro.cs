@@ -11,6 +11,6 @@ namespace Kairos.Filtros
     interface INuevoFiltro
     {
         List<Evento> FiltrarFechas(int idOrigen, List<Filtro> filtros);
-        List<int> FiltrarIntervalos(List<int> intervalos, Enum tipoFiltro, int intervalo);
+        List<double> FiltrarIntervalos(List<double> intervalos, int selectedFiltro, int intervalo, int intervalo2);
     }
 }

@@ -17,9 +17,9 @@ namespace Kairos.Modelo
 
         public DateTime Fecha2 { get; set; }
 
-        public long intervalo { get; set; }
+        public double intervalo { get; set; }
 
-        public long intervalo2 { get; set; }
+        public double intervalo2 { get; set; }
 
         public Filtro(TipoFiltro tipo, DateTime fecha)
         {
@@ -64,7 +64,7 @@ namespace Kairos.Modelo
             }
         }
 
-        public Filtro(TipoFiltro tipo, long intervalo)
+        public Filtro(TipoFiltro tipo, double intervalo)
         {
             this.Tipo = tipo;
             this.intervalo = intervalo;
@@ -82,7 +82,7 @@ namespace Kairos.Modelo
             }
         }
 
-            public Filtro(TipoFiltro tipo, long intervalo1, long intervalo2)
+            public Filtro(TipoFiltro tipo, double intervalo1, double intervalo2)
             {
                 this.Tipo = tipo;
                 this.intervalo = intervalo1;
