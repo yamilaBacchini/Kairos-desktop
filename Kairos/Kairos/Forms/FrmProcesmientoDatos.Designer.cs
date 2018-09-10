@@ -38,6 +38,7 @@
             this.rbIntervalos = new System.Windows.Forms.RadioButton();
             this.lblEventos = new System.Windows.Forms.Label();
             this.pnlModificable = new System.Windows.Forms.Panel();
+            this.txtIntervalo2 = new System.Windows.Forms.TextBox();
             this.txtIntervalo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chlFiltros = new System.Windows.Forms.CheckedListBox();
@@ -173,6 +174,7 @@
             // 
             // pnlModificable
             // 
+            this.pnlModificable.Controls.Add(this.txtIntervalo2);
             this.pnlModificable.Controls.Add(this.txtIntervalo);
             this.pnlModificable.Controls.Add(this.label2);
             this.pnlModificable.Controls.Add(this.chlFiltros);
@@ -191,12 +193,22 @@
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
             // 
+            // txtIntervalo2
+            // 
+            this.txtIntervalo2.Location = new System.Drawing.Point(126, 113);
+            this.txtIntervalo2.Name = "txtIntervalo2";
+            this.txtIntervalo2.Size = new System.Drawing.Size(39, 20);
+            this.txtIntervalo2.TabIndex = 56;
+            this.txtIntervalo2.Text = "0";
+            this.txtIntervalo2.Visible = false;
+            // 
             // txtIntervalo
             // 
-            this.txtIntervalo.Location = new System.Drawing.Point(112, 69);
+            this.txtIntervalo.Location = new System.Drawing.Point(126, 69);
             this.txtIntervalo.Name = "txtIntervalo";
             this.txtIntervalo.Size = new System.Drawing.Size(39, 20);
             this.txtIntervalo.TabIndex = 55;
+            this.txtIntervalo.Text = "0";
             this.txtIntervalo.Visible = false;
             // 
             // label2
@@ -701,5 +713,6 @@
         private System.Windows.Forms.Label lblVista;
         private System.Windows.Forms.RadioButton rbIntervalos;
         private System.Windows.Forms.TextBox txtIntervalo;
+        private System.Windows.Forms.TextBox txtIntervalo2;
     }
 }

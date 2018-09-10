@@ -25,6 +25,8 @@ namespace Kairos.Forms
         private bool timerActivo = false;
         private List<Filtro> filtros = null;
         private readonly INuevoFiltro filtrador = new FiltroImpl();
+        private List<double> intervalos = new List<double>();
+        private List<Double> intervalosParciales = new List<double>();
 
         public FrmProcesmientoDatos(string nombreProyecto, int idOrigen)
         {
@@ -34,7 +36,7 @@ namespace Kairos.Forms
             filtros = new List<Filtro>();
             setupFiltrosCheckboxList();
             cargarFiltros();
-            cambiarFiltros(0);
+            cambiarFiltrosVistaFecha(0);
             cargarEventos();
         }
 
@@ -57,8 +59,6 @@ namespace Kairos.Forms
         {
             //lleno la grilla con los eventos
             eventos = EventoService.cargarEventos(idOrigen);
-            //DataTable tabla = new DataTable();
-            //tabla.
             dgwEventos.DataSource = eventos;
             dgwEventos.Columns[1].Width = 235;
             dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
@@ -131,7 +131,7 @@ namespace Kairos.Forms
                     lblAccion2.Text = "Hora";
                     dtp2.Format = DateTimePickerFormat.Custom;
                     dtp2.CustomFormat = "HH:mm:ss";
-                    cambiarFiltros(0);
+                    cambiarFiltrosVistaFecha(0);
                     break;
                 case TipoAccionProcesamiento.MODIFICAR_REGISTRO:
                     lblTituloAccion.Text = "Modificar Registro";
@@ -140,28 +140,29 @@ namespace Kairos.Forms
                     lblAccion2.Text = "Hora";
                     dtp2.Format = DateTimePickerFormat.Custom;
                     dtp2.CustomFormat = "HH:mm:ss";
-                    cambiarFiltros(0);
+                    cambiarFiltrosVistaFecha(0);
                     break;
                 case TipoAccionProcesamiento.FILTRAR:
                     lblTituloAccion.Text = "Filtrar";
-                    
+
                     dtp1.Format = DateTimePickerFormat.Short;
                     if (rbFecha.Checked)
                     {
                         lblAccion1.Text = "Fecha";
                         txtIntervalo.Visible = false;
-                        cambiarFiltros(0);
+                        txtIntervalo2.Visible = false;
+                        cambiarFiltrosVistaFecha(0);
                     }
                     else
                     {
                         lblAccion1.Text = "Intervalo";
-                        dtp1.Visible=false;
+                        dtp1.Visible = false;
                         txtIntervalo.Visible = true;
                     }
                     lblAccion2.Text = "Hora";
                     dtp2.Format = DateTimePickerFormat.Custom;
                     dtp2.CustomFormat = "HH:mm:ss";
-                    
+
 
                     break;
                 default:
@@ -201,21 +202,17 @@ namespace Kairos.Forms
                         cmbTipoFiltro.Visible = true;
                         btnLimpiar.Visible = false;
 
-                        List<ComboItem> tipos = new List<ComboItem> { new ComboItem(0, "Fecha menor a"), new ComboItem(1, "Fecha mayor a"), new ComboItem(2, "Fecha entre"), new ComboItem(3, "Hora menor a"), new ComboItem(4, "Hora mayor a"), new ComboItem(5, "Hora entre") };
-                        cmbTipoFiltro.DisplayMember = "Display";
-                        cmbTipoFiltro.ValueMember = "Value";
-                        cmbTipoFiltro.DataSource = tipos;
+                        cargarFiltros();
                     }
                     else
                     {
                         cmbTipoFiltro.DataSource = null;
                         cmbTipoFiltro.Items.Clear();
-                        List<ComboItem> tipos = new List<ComboItem> { new ComboItem(0, "Intervalo menor a"), new ComboItem(1, "Intervalo mayor a"), new ComboItem(2, "Intervalo entre")};
+                        List<ComboItem> tipos = new List<ComboItem> { new ComboItem(0, "Intervalo menor a"), new ComboItem(1, "Intervalo mayor a"), new ComboItem(2, "Intervalo entre") };
                         cmbTipoFiltro.DisplayMember = "Display";
                         cmbTipoFiltro.ValueMember = "Value";
                         cmbTipoFiltro.DataSource = tipos;
 
-                        //cmbTipoFiltro.Visible = false;
                         lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Text = "Intervalo";
                         dtp1.Visible = false;
@@ -347,10 +344,15 @@ namespace Kairos.Forms
         private void cmbTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbTipoFiltro.SelectedValue != null)
-                cambiarFiltros(Convert.ToInt32(cmbTipoFiltro.SelectedValue));
+            {
+                if (rbFecha.Checked)
+                    cambiarFiltrosVistaFecha(Convert.ToInt32(cmbTipoFiltro.SelectedValue));
+                else if (rbIntervalos.Checked)
+                    cambiarFiltrosVistaIntervalos(Convert.ToInt32(cmbTipoFiltro.SelectedValue));
+            }
         }
 
-        private void cambiarFiltros(int valorSeleccionado)
+        private void cambiarFiltrosVistaFecha(int valorSeleccionado)
         {
             if (tipoAccion == TipoAccionProcesamiento.FILTRAR)
             {
@@ -375,9 +377,8 @@ namespace Kairos.Forms
                     case 0:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
+                        lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Visible = true;
-                        lblAccion1.Text = "Fecha";
                         lblAccion1.Text = "Fecha";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
@@ -387,7 +388,7 @@ namespace Kairos.Forms
                     case 1:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
+                        lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Text = "Fecha";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
@@ -397,7 +398,7 @@ namespace Kairos.Forms
                     case 2:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
+                        lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Text = "Fecha desde";
                         dtp1.Visible = true;
                         lblAccion2.Visible = true;
@@ -408,7 +409,7 @@ namespace Kairos.Forms
                     case 3:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
+                        lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Text = "Hora";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
@@ -418,7 +419,7 @@ namespace Kairos.Forms
                     case 4:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
+                        lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Text = "Hora";
                         dtp1.Visible = true;
                         lblAccion2.Visible = false;
@@ -428,7 +429,7 @@ namespace Kairos.Forms
                     case 5:
                         btnAceptar.Visible = true;
                         lblTituloAccion.Visible = true;
-                        lblTituloAccion.Text = "Filtar";
+                        lblTituloAccion.Text = "Filtrar";
                         lblAccion1.Text = "Hora desde";
                         dtp1.Visible = true;
                         lblAccion2.Visible = true;
@@ -442,6 +443,41 @@ namespace Kairos.Forms
             }
         }
 
+        private void cambiarFiltrosVistaIntervalos(int valorSeleccionado)
+        {
+            btnAceptar.Visible = true;
+            lblTituloAccion.Visible = true;
+            lblTituloAccion.Text = "Filtrar";
+
+            switch (valorSeleccionado)
+            {
+                case 0: //intervalo menor a
+                case 1: //intervalo mayor a
+                    lblAccion1.Visible = true;
+                    lblAccion1.Text = "Intervalo";
+                    //dtp1.Visible = true;
+                    txtIntervalo.Visible = true;
+                    //lblAccion2.Visible = false;
+                    //dtp2.Visible = false;
+                    txtIntervalo2.Visible = false;
+                    btnLimpiar.Visible = true;
+                    break;
+                case 2://intervalo entre
+                    lblAccion1.Visible = true;
+                    lblAccion1.Text = "Intervalo desde";
+                    //dtp1.Visible = true;
+                    txtIntervalo.Visible = true;
+                    lblAccion2.Visible = true;
+                    lblAccion2.Text = "Intervalo hasta";
+                    //dtp2.Visible = false;
+                    txtIntervalo2.Visible = true;
+                    btnLimpiar.Visible = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void agregarFiltro()
         {
             int selectedValue = Convert.ToInt32(cmbTipoFiltro.SelectedValue);
@@ -450,8 +486,8 @@ namespace Kairos.Forms
             DateTime fecha2 = DateTime.Now;
             fecha = dtp1.Value;
             fecha2 = dtp2.Value;
-            long intervalo = -1;
-            long intervalo2 = -1;
+            double intervalo = -1;
+            double intervalo2 = -1;
             if (rbFecha.Checked)
             {
                 switch (selectedValue)
@@ -481,16 +517,16 @@ namespace Kairos.Forms
             }
             else if (rbIntervalos.Checked)
             {
-                //hacer menor, mayor y entre
-                intervalo = Convert.ToInt32(txtIntervalo.Text);
-                //intervalo 2
+                intervalo = Convert.ToDouble(txtIntervalo.Text);
+                intervalo2 = Convert.ToDouble(txtIntervalo2.Text);
+
                 switch (selectedValue)
                 {
                     case 0:
                         auxFiltro = new Filtro(TipoFiltro.INTERVALO_MENOR, intervalo);
                         break;
                     case 1:
-                        auxFiltro = new Filtro(TipoFiltro.INTERVALO_MAYOR, fecha);
+                        auxFiltro = new Filtro(TipoFiltro.INTERVALO_MAYOR, intervalo);
                         break;
                     case 2:
                         auxFiltro = new Filtro(TipoFiltro.INTERVALO_ENTRE, intervalo, intervalo2);
@@ -517,19 +553,64 @@ namespace Kairos.Forms
                     dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
                 }
             }
-            else if(rbIntervalos.Checked)
+            else if (rbIntervalos.Checked)
             {
-              //  List<int> filtrado = filtrador.FiltrarIntervalos(dgwEventos.Columns[0],tipoFiltro,txtIntervalo);
+                List<double> filtrado = filtrador.FiltrarIntervalos(this.intervalosParciales, cmbTipoFiltro.SelectedIndex, Convert.ToInt32(txtIntervalo.Text),Convert.ToInt32(txtIntervalo2.Text));
+                intervalosParciales = filtrado; //para filtros acumulativos
+
+                //leno dataGridView con los intervalos
+                DataTable tabla = new DataTable();
+                tabla.Columns.Add("Intervalos");
+                foreach (var item in filtrado)
+                {
+                    DataRow row = tabla.NewRow();
+                    row["Intervalos"] = item;
+                    tabla.Rows.Add(row);
+                }
+                dgwEventos.DataSource = tabla;
+                dgwEventos.Columns[0].Visible = true;
+                dgwEventos.Columns[0].Width = 235;
 
             }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            cmbTipoFiltro.SelectedIndex = 0;
-            filtros.Clear();
-            chlFiltros.Items.Clear();
-            filtrar();
+            if(rbFecha.Checked)
+            {
+                cmbTipoFiltro.SelectedIndex = 0;
+                filtros.Clear();
+                chlFiltros.Items.Clear();
+                filtrar();
+            }
+            else if(rbIntervalos.Checked)
+            {
+                cmbTipoFiltro.SelectedIndex = 0;
+
+                //leno dataGridView con los intervalos
+                DataTable tabla = new DataTable();
+                tabla.Columns.Add("Intervalos");
+                foreach (var item in intervalos)
+                {
+                    DataRow row = tabla.NewRow();
+                    row["Intervalos"] = item;
+                    tabla.Rows.Add(row);
+                }
+                dgwEventos.DataSource = tabla;
+                dgwEventos.Columns[0].Visible = true;
+                dgwEventos.Columns[0].Width = 235;
+
+                quitarFiltrosIntervalos();
+            }
+        }
+
+        public void quitarFiltrosIntervalos()
+        {
+            foreach (var item in chlFiltros.Items)
+            {
+                if (Convert.ToString(item).Contains("Intervalo"))
+                    chlFiltros.Items.Remove(item);
+            }
         }
 
         private bool _updatingCheckList = false;
@@ -594,6 +675,9 @@ namespace Kairos.Forms
                     .Select(x => Math.Abs(x.TotalSeconds))
                     .ToList();
 
+                    this.intervalos = lista; //para limpir los filtros y volver al original
+                    this.intervalosParciales = lista; //para los filtros consecutivos
+
                     //leno dataGridView con los intervalos
                     DataTable tabla = new DataTable();
                     tabla.Columns.Add("Intervalos");
@@ -613,6 +697,7 @@ namespace Kairos.Forms
                     btnBorrarSeleccionados.Enabled = false;
                     btnBorrarSeleccionados.BackColor = Color.Black;
                     btnSeleccionarTodos.Enabled = false;
+                    chlFiltros.Enabled = false;
 
                     modificarLayout(TipoAccionProcesamiento.FILTRAR);
 
@@ -629,8 +714,11 @@ namespace Kairos.Forms
                 btnBorrarSeleccionados.Enabled = true;
                 btnBorrarSeleccionados.BackColor = Color.FromArgb(134, 0, 3);
                 btnSeleccionarTodos.Enabled = true;
+                chlFiltros.Enabled = true;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnFiltrar);
+
+                quitarFiltrosIntervalos();
             }
         }
     }
