@@ -26,10 +26,10 @@ namespace Kairos.FuncionesDensidad.Implementacion
                 double media = eventos.Average();
                 int n = eventos.Count();
                 double sigma = eventos.Sum(x => Math.Pow(x - media, 2)) / n;
-                var distribucionContinua = new LogisticDistribution(media, sigma);
-                this.MU = distribucionContinua.Location.ToString("0.0000");
-                this.S = distribucionContinua.Scale.ToString("0.0000");
-                Resultado = new ResultadoAjuste(StringFDP, StringInversa, distribucionContinua.StandardDeviation, distribucionContinua.Mean, distribucionContinua.Variance, this);
+                DistribucionContinua = new LogisticDistribution(media, sigma);
+                this.MU = ((LogisticDistribution)DistribucionContinua).Location.ToString("0.0000");
+                this.S = ((LogisticDistribution)DistribucionContinua).Scale.ToString("0.0000");
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
 
             }
             catch (Exception)

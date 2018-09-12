@@ -21,10 +21,10 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             try
             {
-                ExponentialDistribution distribucionContinua = new ExponentialDistribution();
-                distribucionContinua.Fit(eventos);
-                this.L = distribucionContinua.Rate.ToString("0.0000");
-                Resultado = new ResultadoAjuste(StringFDP, StringInversa, distribucionContinua.StandardDeviation, distribucionContinua.Mean, distribucionContinua.Variance, this);
+                DistribucionContinua = new ExponentialDistribution();
+                DistribucionContinua.Fit(eventos);
+                this.L = ((ExponentialDistribution)DistribucionContinua).Rate.ToString("0.0000");
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {

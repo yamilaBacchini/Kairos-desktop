@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Accord.Math.Optimization;
 using Accord.Statistics.Distributions.Univariate;
 using Kairos.Entidades;
 using Kairos.Modelo;
@@ -21,9 +22,15 @@ namespace Kairos.FuncionesDensidad.Implementacion
             {
                 double[] eventosOrdenados = eventos.OrderBy(x => x).ToArray();
                 double alfa = eventos.Count() % 2 == 0 ? (eventosOrdenados.ElementAt(eventos.Count() / 2) + eventosOrdenados.ElementAt((eventos.Count() / 2) + 1)) / 2 : eventos.OrderBy(x => x).ElementAt((eventos.Count() / 2) + 1);
-                double beta = 0;
-                DistribucionContinua = new LogLogisticDistribution();
-                DistribucionContinua.Fit(eventos);
+                double media = eventos.Average();
+                int n = eventos.Count();
+                double sigma = eventos.Sum(x => Math.Pow(x - media, 2)) / n;
+                double k = Math.Sqrt(Math.Pow(sigma, 2) / (Math.Pow(sigma, 2) + Math.Pow(media, 2)));
+                Func<double, double> function = x => Math.Sqrt(1 - (x / Math.Tan(x))) - k;
+                BrentSearch search = new BrentSearch(function, (Math.PI / 2) * k, Math.Sqrt(3) * k);
+                search.FindRoot();
+                double beta = Math.PI / search.Solution;
+                DistribucionContinua = new LogLogisticDistribution(alfa, beta);
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
