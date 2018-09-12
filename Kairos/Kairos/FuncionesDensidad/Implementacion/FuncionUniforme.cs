@@ -23,11 +23,11 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             try
             {
-                UniformContinuousDistribution distribucionContinua = new UniformContinuousDistribution();
-                distribucionContinua.Fit(eventos);
-                A = distribucionContinua.Minimum.ToString();
-                B = distribucionContinua.Maximum.ToString();
-                Resultado = new ResultadoAjuste(StringFDP, StringInversa, distribucionContinua.StandardDeviation, distribucionContinua.Mean, distribucionContinua.Variance, this);
+                DistribucionContinua = new UniformContinuousDistribution();
+                DistribucionContinua.Fit(eventos);
+                A = ((UniformContinuousDistribution)DistribucionContinua).Minimum.ToString();
+                B = ((UniformContinuousDistribution)DistribucionContinua).Maximum.ToString();
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
