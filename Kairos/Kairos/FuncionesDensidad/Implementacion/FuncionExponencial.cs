@@ -15,7 +15,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
 
         public string StringFDP => string.Format("{0}*e^(-{0}*x)", L);
 
-        public string StringInversa => string.Format("ln(-R+1)/(-{0})",L);
+        public string StringInversa => string.Format("f(R) = ln(-R+1)/(-{0})", L);
 
         public FuncionExponencial(double[] eventos) : base(eventos)
         {
