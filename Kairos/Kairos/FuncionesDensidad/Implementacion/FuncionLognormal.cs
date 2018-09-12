@@ -21,7 +21,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
             try
             {
                 DistribucionContinua = new LognormalDistribution();
-                //DistribucionContinua.Fit(eventos);
+                DistribucionContinua.Fit(eventos);
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)

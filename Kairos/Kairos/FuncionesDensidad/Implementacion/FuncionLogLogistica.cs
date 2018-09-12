@@ -12,9 +12,12 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionLogLogistica : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        public string StringFDP => "No implementado aun";
+        private readonly string A = "";
+        private readonly string B = "";
 
-        public string StringInversa => "No implementado aun";
+        public string StringFDP => string.Format("({0}/{1})*((x/{1})^({0}-1))*((1+(x/{1})^{0})^(-2))",A ,B);
+
+        public string StringInversa => string.Format("f(R) = {1}/((1/R-1)^(1/{0}))+{0}",A ,B);
 
         public FuncionLogLogistica(double[] eventos) : base(eventos)
         {
@@ -22,6 +25,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
             {
                 double[] eventosOrdenados = eventos.OrderBy(x => x).ToArray();
                 double alfa = eventos.Count() % 2 == 0 ? (eventosOrdenados.ElementAt(eventos.Count() / 2) + eventosOrdenados.ElementAt((eventos.Count() / 2) + 1)) / 2 : eventos.OrderBy(x => x).ElementAt((eventos.Count() / 2) + 1);
+                this.A = alfa.ToString("0.0000");
                 double media = eventos.Average();
                 int n = eventos.Count();
                 double sigma = eventos.Sum(x => Math.Pow(x - media, 2)) / n;
@@ -30,6 +34,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
                 BrentSearch search = new BrentSearch(function, (Math.PI / 2) * k, Math.Sqrt(3) * k);
                 search.FindRoot();
                 double beta = Math.PI / search.Solution;
+                this.B = beta.ToString("0.0000");
                 DistribucionContinua = new LogLogisticDistribution(alfa, beta);
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
