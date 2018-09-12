@@ -19,6 +19,9 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             try
             {
+                double[] eventosOrdenados = eventos.OrderBy(x => x).ToArray();
+                double alfa = eventos.Count() % 2 == 0 ? (eventosOrdenados.ElementAt(eventos.Count() / 2) + eventosOrdenados.ElementAt((eventos.Count() / 2) + 1)) / 2 : eventos.OrderBy(x => x).ElementAt((eventos.Count() / 2) + 1);
+                double beta = 0;
                 DistribucionContinua = new LogLogisticDistribution();
                 DistribucionContinua.Fit(eventos);
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
