@@ -13,7 +13,7 @@ namespace Kairos.FuncionesDensidad
     {
         public UnivariateDiscreteDistribution DistribucionDiscreta { get; protected set; }
 
-        public UnivariateContinuousDistribution DistribucionContinua { get; protected set; }
+        public UnivariateContinuousDistribution MultivariateDistribucionContinua { get; protected set; }
 
         public ResultadoAjuste Resultado { get; protected set; }
 
@@ -25,8 +25,8 @@ namespace Kairos.FuncionesDensidad
         {
             try
             {
-                if (DistribucionContinua != null)
-                    return DistribucionContinua.Generate(cantidad);
+                if (MultivariateDistribucionContinua != null)
+                    return MultivariateDistribucionContinua.Generate(cantidad);
                 else
                     return DistribucionDiscreta.Generate(cantidad).Select(x => Convert.ToDouble(x)).ToArray();
             }
@@ -40,9 +40,9 @@ namespace Kairos.FuncionesDensidad
         {
             Dictionary<double, double> densidades = new Dictionary<double, double>();
             var arr = GenerarValores(cantidad).Distinct().ToArray();
-            if (DistribucionContinua != null)
+            if (MultivariateDistribucionContinua != null)
                 foreach (var item in arr)
-                    densidades.Add(item, DistribucionContinua.ProbabilityDensityFunction(item));
+                    densidades.Add(item, MultivariateDistribucionContinua.ProbabilityDensityFunction(item));
             else
                 foreach (var item in arr)
                     densidades.Add(item, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item)));
@@ -59,9 +59,9 @@ namespace Kairos.FuncionesDensidad
                 for (int i = 0; i < cantidad; i++)
                     arr[i] = rand.NextDouble();
                 arr = arr.Distinct().ToArray();
-                if (DistribucionContinua != null)
+                if (MultivariateDistribucionContinua != null)
                     foreach (var item in arr)
-                        densidades.Add(item, DistribucionContinua.QuantileDensityFunction(item));
+                        densidades.Add(item, MultivariateDistribucionContinua.QuantileDensityFunction(item));
                 else
                     foreach (var item in arr)
                         densidades.Add(item, DistribucionDiscreta.QuantileDensityFunction(item));

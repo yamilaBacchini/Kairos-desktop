@@ -19,9 +19,9 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             try
             {
-                DistribucionContinua = new NormalDistribution();
-                DistribucionContinua.Fit(eventos);
-                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
+                MultivariateDistribucionContinua = new NormalDistribution();
+                MultivariateDistribucionContinua.Fit(eventos);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, MultivariateDistribucionContinua.StandardDeviation, MultivariateDistribucionContinua.Mean, MultivariateDistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
