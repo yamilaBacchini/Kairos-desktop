@@ -22,9 +22,9 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             try
             {
-                DistribucionContinua = new WeibullDistribution(shape, scale);
-                DistribucionContinua.Fit(eventos);
-                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
+                MultivariateDistribucionContinua = new WeibullDistribution(shape, scale);
+                MultivariateDistribucionContinua.Fit(eventos);
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, MultivariateDistribucionContinua.StandardDeviation, MultivariateDistribucionContinua.Mean, MultivariateDistribucionContinua.Variance, this);
             }
             catch (Exception)
             {
