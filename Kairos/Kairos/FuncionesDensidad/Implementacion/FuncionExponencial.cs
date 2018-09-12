@@ -11,17 +11,20 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionExponencial : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        public string StringFDP => "No implementado aun";
+        private readonly string L = "";
 
-        public string StringInversa => "No implementado aun";
+        public string StringFDP => string.Format("{0}*e^(-{0}*x)", L);
+
+        public string StringInversa => string.Format("ln(-R+1)/(-{0})",L);
 
         public FuncionExponencial(double[] eventos) : base(eventos)
         {
             try
             {
-                DistribucionContinua = new ExponentialDistribution();
-                DistribucionContinua.Fit(eventos);
-                Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
+                ExponentialDistribution distribucionContinua = new ExponentialDistribution();
+                distribucionContinua.Fit(eventos);
+                this.L = distribucionContinua.Rate.ToString("0.0000");
+                Resultado = new ResultadoAjuste(StringFDP, StringInversa, distribucionContinua.StandardDeviation, distribucionContinua.Mean, distribucionContinua.Variance, this);
             }
             catch (Exception)
             {
