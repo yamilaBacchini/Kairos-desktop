@@ -604,10 +604,26 @@ namespace Kairos.Forms
 
         public void quitarFiltrosIntervalos()
         {
-            foreach (var item in chlFiltros.Items)
+            List<Filtro> filtros = new List<Filtro>();
+            foreach (Filtro item in chlFiltros.Items)
             {
-                if (Convert.ToString(item).Contains("Intervalo"))
-                    chlFiltros.Items.Remove(item);
+                if (!item.Name.Contains("Intervalo"))
+                    filtros.Add(item);
+                    // chlFiltros.Items.Remove(item);   
+            }
+
+            chlFiltros.Items.Clear();
+
+            ((ListBox)this.chlFiltros).DisplayMember = "Name";
+            ((ListBox)this.chlFiltros).ValueMember = "IsChecked";
+            for (int i = 0; i < filtros.Count; i++)
+            {
+                if (!chlFiltros.Items.Contains(filtros[i]))
+                {
+                    chlFiltros.Items.Add(filtros[i]);
+                    Filtro obj = (Filtro)chlFiltros.Items[i];
+                    chlFiltros.SetItemChecked(i, obj.IsChecked);
+                }
             }
         }
 
