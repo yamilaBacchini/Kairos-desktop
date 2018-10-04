@@ -52,7 +52,6 @@
             this.lblAccion1 = new System.Windows.Forms.Label();
             this.lblTituloAccion = new System.Windows.Forms.Label();
             this.pnlAccionesFinales = new System.Windows.Forms.Panel();
-            this.btnGuardarProyecto = new System.Windows.Forms.Button();
             this.btnCalcularFDP = new System.Windows.Forms.Button();
             this.pnlTitulo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -75,6 +74,7 @@
             this.rbDtConstante = new System.Windows.Forms.RadioButton();
             this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
+            this.rbSegundo = new System.Windows.Forms.RadioButton();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
             this.panel2.SuspendLayout();
@@ -331,24 +331,11 @@
             // 
             // pnlAccionesFinales
             // 
-            this.pnlAccionesFinales.Controls.Add(this.btnGuardarProyecto);
             this.pnlAccionesFinales.Controls.Add(this.btnCalcularFDP);
             this.pnlAccionesFinales.Location = new System.Drawing.Point(666, 502);
             this.pnlAccionesFinales.Name = "pnlAccionesFinales";
             this.pnlAccionesFinales.Size = new System.Drawing.Size(282, 82);
             this.pnlAccionesFinales.TabIndex = 3;
-            // 
-            // btnGuardarProyecto
-            // 
-            this.btnGuardarProyecto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnGuardarProyecto.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarProyecto.ForeColor = System.Drawing.Color.Black;
-            this.btnGuardarProyecto.Location = new System.Drawing.Point(53, 6);
-            this.btnGuardarProyecto.Name = "btnGuardarProyecto";
-            this.btnGuardarProyecto.Size = new System.Drawing.Size(176, 36);
-            this.btnGuardarProyecto.TabIndex = 17;
-            this.btnGuardarProyecto.Text = "Guardar Proyecto";
-            this.btnGuardarProyecto.UseVisualStyleBackColor = false;
             // 
             // btnCalcularFDP
             // 
@@ -550,6 +537,7 @@
             // 
             // pnlSegmentacion
             // 
+            this.pnlSegmentacion.Controls.Add(this.rbSegundo);
             this.pnlSegmentacion.Controls.Add(this.rbDia);
             this.pnlSegmentacion.Controls.Add(this.rbMinuto);
             this.pnlSegmentacion.Controls.Add(this.rbHora);
@@ -574,7 +562,7 @@
             // rbMinuto
             // 
             this.rbMinuto.AutoSize = true;
-            this.rbMinuto.Location = new System.Drawing.Point(184, 3);
+            this.rbMinuto.Location = new System.Drawing.Point(135, 3);
             this.rbMinuto.Name = "rbMinuto";
             this.rbMinuto.Size = new System.Drawing.Size(57, 17);
             this.rbMinuto.TabIndex = 1;
@@ -584,7 +572,7 @@
             // rbHora
             // 
             this.rbHora.AutoSize = true;
-            this.rbHora.Location = new System.Drawing.Point(103, 3);
+            this.rbHora.Location = new System.Drawing.Point(70, 3);
             this.rbHora.Name = "rbHora";
             this.rbHora.Size = new System.Drawing.Size(48, 17);
             this.rbHora.TabIndex = 0;
@@ -627,6 +615,16 @@
             this.label3.Size = new System.Drawing.Size(123, 23);
             this.label3.TabIndex = 55;
             this.label3.Text = "Metodologia";
+            // 
+            // rbSegundo
+            // 
+            this.rbSegundo.AutoSize = true;
+            this.rbSegundo.Location = new System.Drawing.Point(198, 3);
+            this.rbSegundo.Name = "rbSegundo";
+            this.rbSegundo.Size = new System.Drawing.Size(68, 17);
+            this.rbSegundo.TabIndex = 3;
+            this.rbSegundo.Text = "Segundo";
+            this.rbSegundo.UseVisualStyleBackColor = true;
             // 
             // FrmProcesmientoDatos
             // 
@@ -677,7 +675,6 @@
         private System.Windows.Forms.Panel pnlMensaje;
         private System.Windows.Forms.DataGridView dgwEventos;
         private System.Windows.Forms.Label lblEventos;
-        private System.Windows.Forms.Button btnGuardarProyecto;
         private System.Windows.Forms.Button btnCalcularFDP;
         private System.Windows.Forms.DateTimePicker dtp2;
         private System.Windows.Forms.DateTimePicker dtp1;
@@ -714,5 +711,6 @@
         private System.Windows.Forms.RadioButton rbIntervalos;
         private System.Windows.Forms.TextBox txtIntervalo;
         private System.Windows.Forms.TextBox txtIntervalo2;
+        private System.Windows.Forms.RadioButton rbSegundo;
     }
 }
