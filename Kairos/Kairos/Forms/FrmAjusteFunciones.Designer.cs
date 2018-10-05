@@ -41,6 +41,7 @@
             this.lblGraficoFuncionInversa = new System.Windows.Forms.Label();
             this.lblGraficoFuncion = new System.Windows.Forms.Label();
             this.pnlInfoFunciones = new System.Windows.Forms.Panel();
+            this.lblFuncionInversa = new System.Windows.Forms.TextBox();
             this.lblTituloFuncionInversa = new System.Windows.Forms.Label();
             this.lblFuncion = new System.Windows.Forms.Label();
             this.lblTituloFuncion = new System.Windows.Forms.Label();
@@ -50,7 +51,7 @@
             this.pnlMensaje = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.timerMensaje = new System.Windows.Forms.Timer(this.components);
-            this.btnFuncionBurr = new System.Windows.Forms.Button();
+            this.btnFuncionWeibull0_5 = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.pnlFunciones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnFuncionBinomial = new System.Windows.Forms.Button();
@@ -59,7 +60,7 @@
             this.btnFuncionLognormal = new System.Windows.Forms.Button();
             this.btnFuncionLogLogistica = new System.Windows.Forms.Button();
             this.btnFuncionNormal = new System.Windows.Forms.Button();
-            this.btnFuncionFasesBiExponencial = new System.Windows.Forms.Button();
+            this.btnFuncionWeibull1_5 = new System.Windows.Forms.Button();
             this.btnFuncionFasesBiWeibull = new System.Windows.Forms.Button();
             this.btnFuncionPoisson = new System.Windows.Forms.Button();
             this.btnFuncionUniforme = new System.Windows.Forms.Button();
@@ -73,7 +74,6 @@
             this.lblTituloFunciones = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExportarResultados = new System.Windows.Forms.Button();
-            this.lblFuncionInversa = new System.Windows.Forms.TextBox();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtInversa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chrtFuncion)).BeginInit();
@@ -158,6 +158,18 @@
             this.pnlInfoFunciones.Name = "pnlInfoFunciones";
             this.pnlInfoFunciones.Size = new System.Drawing.Size(264, 99);
             this.pnlInfoFunciones.TabIndex = 2;
+            // 
+            // lblFuncionInversa
+            // 
+            this.lblFuncionInversa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.lblFuncionInversa.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lblFuncionInversa.Font = new System.Drawing.Font("Book Antiqua", 11.25F);
+            this.lblFuncionInversa.Location = new System.Drawing.Point(10, 74);
+            this.lblFuncionInversa.Name = "lblFuncionInversa";
+            this.lblFuncionInversa.ReadOnly = true;
+            this.lblFuncionInversa.Size = new System.Drawing.Size(147, 19);
+            this.lblFuncionInversa.TabIndex = 56;
+            this.lblFuncionInversa.TabStop = false;
             // 
             // lblTituloFuncionInversa
             // 
@@ -244,23 +256,23 @@
             // 
             this.timerMensaje.Interval = 2000;
             // 
-            // btnFuncionBurr
+            // btnFuncionWeibull0_5
             // 
-            this.btnFuncionBurr.BackColor = System.Drawing.Color.Black;
-            this.btnFuncionBurr.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFuncionBurr.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnFuncionBurr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.btnFuncionBurr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFuncionBurr.Font = new System.Drawing.Font("Book Antiqua", 13F);
-            this.btnFuncionBurr.ForeColor = System.Drawing.Color.White;
-            this.btnFuncionBurr.Location = new System.Drawing.Point(0, 0);
-            this.btnFuncionBurr.Margin = new System.Windows.Forms.Padding(0);
-            this.btnFuncionBurr.Name = "btnFuncionBurr";
-            this.btnFuncionBurr.Size = new System.Drawing.Size(210, 33);
-            this.btnFuncionBurr.TabIndex = 14;
-            this.btnFuncionBurr.Text = "Burr";
-            this.btnFuncionBurr.UseVisualStyleBackColor = false;
-            this.btnFuncionBurr.Click += new System.EventHandler(this.btnFuncionBurr_Click);
+            this.btnFuncionWeibull0_5.BackColor = System.Drawing.Color.Black;
+            this.btnFuncionWeibull0_5.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFuncionWeibull0_5.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull0_5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnFuncionWeibull0_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFuncionWeibull0_5.Font = new System.Drawing.Font("Book Antiqua", 13F);
+            this.btnFuncionWeibull0_5.ForeColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull0_5.Location = new System.Drawing.Point(0, 0);
+            this.btnFuncionWeibull0_5.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFuncionWeibull0_5.Name = "btnFuncionWeibull0_5";
+            this.btnFuncionWeibull0_5.Size = new System.Drawing.Size(210, 33);
+            this.btnFuncionWeibull0_5.TabIndex = 14;
+            this.btnFuncionWeibull0_5.Text = "Weibull 0.5";
+            this.btnFuncionWeibull0_5.UseVisualStyleBackColor = false;
+            this.btnFuncionWeibull0_5.Click += new System.EventHandler(this.btnFuncionWeibull0_5_Click);
             // 
             // btnVolver
             // 
@@ -282,14 +294,14 @@
             // pnlFunciones
             // 
             this.pnlFunciones.BackColor = System.Drawing.Color.Black;
-            this.pnlFunciones.Controls.Add(this.btnFuncionBurr);
+            this.pnlFunciones.Controls.Add(this.btnFuncionWeibull0_5);
             this.pnlFunciones.Controls.Add(this.btnFuncionBinomial);
             this.pnlFunciones.Controls.Add(this.btnFuncionExponencial);
             this.pnlFunciones.Controls.Add(this.btnFuncionLogistica);
             this.pnlFunciones.Controls.Add(this.btnFuncionLognormal);
             this.pnlFunciones.Controls.Add(this.btnFuncionLogLogistica);
             this.pnlFunciones.Controls.Add(this.btnFuncionNormal);
-            this.pnlFunciones.Controls.Add(this.btnFuncionFasesBiExponencial);
+            this.pnlFunciones.Controls.Add(this.btnFuncionWeibull1_5);
             this.pnlFunciones.Controls.Add(this.btnFuncionFasesBiWeibull);
             this.pnlFunciones.Controls.Add(this.btnFuncionPoisson);
             this.pnlFunciones.Controls.Add(this.btnFuncionUniforme);
@@ -408,23 +420,23 @@
             this.btnFuncionNormal.UseVisualStyleBackColor = false;
             this.btnFuncionNormal.Click += new System.EventHandler(this.btnFuncionNormal_Click);
             // 
-            // btnFuncionFasesBiExponencial
+            // btnFuncionWeibull1_5
             // 
-            this.btnFuncionFasesBiExponencial.BackColor = System.Drawing.Color.Black;
-            this.btnFuncionFasesBiExponencial.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFuncionFasesBiExponencial.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnFuncionFasesBiExponencial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.btnFuncionFasesBiExponencial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFuncionFasesBiExponencial.Font = new System.Drawing.Font("Book Antiqua", 13F);
-            this.btnFuncionFasesBiExponencial.ForeColor = System.Drawing.Color.White;
-            this.btnFuncionFasesBiExponencial.Location = new System.Drawing.Point(0, 231);
-            this.btnFuncionFasesBiExponencial.Margin = new System.Windows.Forms.Padding(0);
-            this.btnFuncionFasesBiExponencial.Name = "btnFuncionFasesBiExponencial";
-            this.btnFuncionFasesBiExponencial.Size = new System.Drawing.Size(210, 33);
-            this.btnFuncionFasesBiExponencial.TabIndex = 21;
-            this.btnFuncionFasesBiExponencial.Text = "Fases Bi-Exponencial";
-            this.btnFuncionFasesBiExponencial.UseVisualStyleBackColor = false;
-            this.btnFuncionFasesBiExponencial.Click += new System.EventHandler(this.btnFuncionFasesBiExponencial_Click);
+            this.btnFuncionWeibull1_5.BackColor = System.Drawing.Color.Black;
+            this.btnFuncionWeibull1_5.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFuncionWeibull1_5.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull1_5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnFuncionWeibull1_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFuncionWeibull1_5.Font = new System.Drawing.Font("Book Antiqua", 13F);
+            this.btnFuncionWeibull1_5.ForeColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull1_5.Location = new System.Drawing.Point(0, 231);
+            this.btnFuncionWeibull1_5.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFuncionWeibull1_5.Name = "btnFuncionWeibull1_5";
+            this.btnFuncionWeibull1_5.Size = new System.Drawing.Size(210, 33);
+            this.btnFuncionWeibull1_5.TabIndex = 21;
+            this.btnFuncionWeibull1_5.Text = "Fases Weibull 1.5";
+            this.btnFuncionWeibull1_5.UseVisualStyleBackColor = false;
+            this.btnFuncionWeibull1_5.Click += new System.EventHandler(this.btnFuncionFasesWeibull1_5_Click);
             // 
             // btnFuncionFasesBiWeibull
             // 
@@ -605,18 +617,6 @@
             this.btnExportarResultados.Text = "Exportar Resultados";
             this.btnExportarResultados.UseVisualStyleBackColor = false;
             // 
-            // lblFuncionInversa
-            // 
-            this.lblFuncionInversa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.lblFuncionInversa.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lblFuncionInversa.Font = new System.Drawing.Font("Book Antiqua", 11.25F);
-            this.lblFuncionInversa.Location = new System.Drawing.Point(10, 74);
-            this.lblFuncionInversa.Name = "lblFuncionInversa";
-            this.lblFuncionInversa.ReadOnly = true;
-            this.lblFuncionInversa.Size = new System.Drawing.Size(147, 19);
-            this.lblFuncionInversa.TabIndex = 56;
-            this.lblFuncionInversa.TabStop = false;
-            // 
             // FrmAjusteFunciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,7 +670,7 @@
         private System.Windows.Forms.Timer timerMensaje;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnFuncionBurr;
+        private System.Windows.Forms.Button btnFuncionWeibull0_5;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.FlowLayoutPanel pnlFunciones;
         private System.Windows.Forms.Panel pnlValoresAleatorios;
@@ -681,7 +681,7 @@
         private System.Windows.Forms.Button btnFuncionLognormal;
         private System.Windows.Forms.Button btnFuncionLogLogistica;
         private System.Windows.Forms.Button btnFuncionNormal;
-        private System.Windows.Forms.Button btnFuncionFasesBiExponencial;
+        private System.Windows.Forms.Button btnFuncionWeibull1_5;
         private System.Windows.Forms.Button btnFuncionFasesBiWeibull;
         private System.Windows.Forms.Button btnFuncionPoisson;
         private System.Windows.Forms.Button btnFuncionUniforme;

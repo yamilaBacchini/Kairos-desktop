@@ -8,14 +8,14 @@ namespace Kairos.Modelo
 {
     public enum FuncionDensidad
     {
-        BURR,
+        WEIBULL0_5,
         BINOMIAL,
         EXPONENCIAL,
         LOGISTICA,
         LOG_NORMAL,
         LOG_LOGISTICA,
         NORMAL,
-        FASES_BI_EXPONENCIAL,
+        WEIBULL1_5,
         FASES_BI_WEIBULL,
         POISSON,
         UNIFORME,

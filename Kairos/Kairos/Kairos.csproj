@@ -294,9 +294,9 @@
     <Compile Include="FuncionesDensidad\FuncionDensidadProbabilidad.cs" />
     <Compile Include="FuncionesDensidad\IFuncionRepresentable.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionBinomial.cs" />
-    <Compile Include="FuncionesDensidad\Implementacion\FuncionBurr.cs" />
+    <Compile Include="FuncionesDensidad\Implementacion\FuncionWeibull0_5.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionExponencial.cs" />
-    <Compile Include="FuncionesDensidad\Implementacion\FuncionFasesBiExponencial.cs" />
+    <Compile Include="FuncionesDensidad\Implementacion\FuncionWeibull1_5.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionFasesBiWeibull.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionLogistica.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionLogLogistica.cs" />
