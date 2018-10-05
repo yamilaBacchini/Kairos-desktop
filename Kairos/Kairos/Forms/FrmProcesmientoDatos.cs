@@ -185,6 +185,7 @@ namespace Kairos.Forms
                     cmbTipoFiltro.Visible = false;
                     btnLimpiar.Visible = false;
                     txtIntervalo.Visible = false;
+                    txtIntervalo2.Visible = false;
                     break;
                 case TipoAccionProcesamiento.BORRAR_SELECCIONADOS:
                 case TipoAccionProcesamiento.SELECCIONAR_TODOS:
@@ -455,21 +456,17 @@ namespace Kairos.Forms
                 case 1: //intervalo mayor a
                     lblAccion1.Visible = true;
                     lblAccion1.Text = "Intervalo";
-                    //dtp1.Visible = true;
                     txtIntervalo.Visible = true;
-                    //lblAccion2.Visible = false;
-                    //dtp2.Visible = false;
                     txtIntervalo2.Visible = false;
                     btnLimpiar.Visible = true;
+                    lblAccion2.Visible = false;
                     break;
                 case 2://intervalo entre
                     lblAccion1.Visible = true;
                     lblAccion1.Text = "Intervalo desde";
-                    //dtp1.Visible = true;
                     txtIntervalo.Visible = true;
                     lblAccion2.Visible = true;
                     lblAccion2.Text = "Intervalo hasta";
-                    //dtp2.Visible = false;
                     txtIntervalo2.Visible = true;
                     btnLimpiar.Visible = true;
                     break;
@@ -585,6 +582,8 @@ namespace Kairos.Forms
             }
             else if(rbIntervalos.Checked)
             {
+                quitarFiltrosIntervalos();
+
                 cmbTipoFiltro.SelectedIndex = 0;
 
                 //leno dataGridView con los intervalos
@@ -600,17 +599,39 @@ namespace Kairos.Forms
                 dgwEventos.Columns[0].Visible = true;
                 dgwEventos.Columns[0].Width = 235;
 
-                quitarFiltrosIntervalos();
+                intervalosParciales = intervalos;
+
+                
             }
         }
 
         public void quitarFiltrosIntervalos()
         {
-            foreach (var item in chlFiltros.Items)
+            List<Filtro> filtrosAux = new List<Filtro>();
+            foreach (Filtro item in chlFiltros.Items)
             {
-                if (Convert.ToString(item).Contains("Intervalo"))
-                    chlFiltros.Items.Remove(item);
+                if (item.Name.Contains("Intervalo"))
+                    this.filtros.Remove(item);
+
+
+                // chlFiltros.Items.Remove(item);   
             }
+            chlFiltros.Items.Clear();
+            setupFiltrosCheckboxList();
+
+        /* chlFiltros.Items.Clear();
+
+            ((ListBox)this.chlFiltros).DisplayMember = "Name";
+            ((ListBox)this.chlFiltros).ValueMember = "IsChecked";
+            for (int i = 0; i < filtros.Count; i++)
+            {
+                if (!chlFiltros.Items.Contains(filtros[i]))
+                {
+                    chlFiltros.Items.Add(filtros[i]);
+                    Filtro obj = (Filtro)chlFiltros.Items[i];
+                    chlFiltros.SetItemChecked(i, obj.IsChecked);
+                }
+            }*/
         }
 
         private bool _updatingCheckList = false;
@@ -635,13 +656,32 @@ namespace Kairos.Forms
         {
             try
             {
-                MetodologiaAjuste metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
-                Segmentacion segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA : Segmentacion.MINUTO);
-                FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos);
-                this.Visible = false;
-                frm.ShowDialog();
-                this.Visible = true;
+                MetodologiaAjuste metodologia=MetodologiaAjuste.EVENTO_A_EVENTO;
+                Segmentacion segmentacion=Segmentacion.SEGUNDO;
+                int flagIntervalos = 0;
+
+                if(rbFecha.Checked)
+                {
+                    metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
+                    segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA :(rbMinuto.Checked ? Segmentacion.MINUTO : Segmentacion.SEGUNDO));
+                    FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos, flagIntervalos);
+                    this.Visible = false;
+                    frm.ShowDialog();
+                    this.Visible = true;
+                }
+                else if(rbIntervalos.Checked)
+                {
+                    metodologia = MetodologiaAjuste.EVENTO_A_EVENTO;
+                    segmentacion = Segmentacion.SEGUNDO;
+                    flagIntervalos = 1;
+                    FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos);
+                    this.Visible = false;
+                    frm.ShowDialog();
+                    this.Visible = true;
+                }
             }
+
+
             catch
             {
 

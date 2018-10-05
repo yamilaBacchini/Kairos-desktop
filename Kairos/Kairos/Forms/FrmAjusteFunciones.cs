@@ -37,13 +37,25 @@ namespace Kairos.Forms
         private ResultadoAjuste resultadoFuncionUniforme = null;
         private ResultadoAjuste resultadoFuncionWeibull = null;
         private Dictionary<FuncionDensidad, ResultadoAjuste> lResultadosOrdenados = new Dictionary<FuncionDensidad, ResultadoAjuste>();
+        private int flagIntervalos=0;
+        private List<Double> intervalos;
 
-        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Evento> eventos)
+        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Evento> eventos,int flagIntervalos)
         {
             InitializeComponent();
             this.metodologia = metodologia;
             this.segmentacion = segmentacion;
             this.eventos = eventos;
+            this.flagIntervalos = flagIntervalos;
+        }
+
+        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Double> intervalos, int flagIntervalos)
+        {
+            InitializeComponent();
+            this.metodologia = metodologia;
+            this.segmentacion = segmentacion;
+            this.intervalos = intervalos;
+            this.flagIntervalos = flagIntervalos;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -61,22 +73,41 @@ namespace Kairos.Forms
 
         private void CalcularEventosSimplificados()
         {
-            if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
-                eventosSimplificados = FdPUtils.Agrupar(segmentacion, eventos);
+            if(flagIntervalos==0)
+            {
+                if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
+                    eventosSimplificados = FdPUtils.Agrupar(segmentacion, eventos);
+                else
+                {
+                    eventosSimplificados = FdPUtils.AgruparIntervalos(eventos);
+                    intervalosEventosEaE = FdPUtils.CalcularIntervalos(eventos).ToArray();
+                }
+            }
             else
             {
-                eventosSimplificados = FdPUtils.AgruparIntervalos(eventos);
-                intervalosEventosEaE = FdPUtils.CalcularIntervalos(eventos).ToArray();
+                double cant = intervalos.Count;
+                eventosSimplificados= intervalos.GroupBy(x => x).ToDictionary(x => x.Key.ToString(), x => x.Count() / cant > 1 ? cant - 1 : cant);
+                intervalosEventosEaE = intervalos.ToArray();
             }
+            
         }
 
         private void CalcularYOrdenarFunciones()
         {
             double[] arrEventos = null;
-            if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
-                arrEventos = eventosSimplificados.Values.ToArray();
+
+            if (flagIntervalos == 0)
+            {
+                if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
+                    arrEventos = eventosSimplificados.Values.ToArray();
+                else
+                    arrEventos = intervalosEventosEaE;
+            }
             else
+            {
                 arrEventos = intervalosEventosEaE;
+            }
+           
             resultadoFuncionBurr = FactoryFuncionDensidad.Instancia(FuncionDensidad.BURR, arrEventos).Resultado;
             if (resultadoFuncionBurr != null)
                 lResultadosOrdenados.Add(FuncionDensidad.BURR, resultadoFuncionBurr);

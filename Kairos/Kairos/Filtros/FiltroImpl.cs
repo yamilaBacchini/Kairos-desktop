@@ -84,7 +84,7 @@ namespace Kairos.Filtros
                     resultado = intervalos.Where(x => x > intervalo).ToList(); ;
                     break;
                 case 2: //intervalo entre
-                    resultado = intervalos.Where(x => x <= intervalo && x <= intervalo2).ToList(); ;
+                    resultado = intervalos.Where(x => x >= intervalo && x <= intervalo2).ToList(); ;
                     break;
                 default:
                     break;
