@@ -185,6 +185,7 @@ namespace Kairos.Forms
                     cmbTipoFiltro.Visible = false;
                     btnLimpiar.Visible = false;
                     txtIntervalo.Visible = false;
+                    txtIntervalo2.Visible = false;
                     break;
                 case TipoAccionProcesamiento.BORRAR_SELECCIONADOS:
                 case TipoAccionProcesamiento.SELECCIONAR_TODOS:
@@ -581,6 +582,8 @@ namespace Kairos.Forms
             }
             else if(rbIntervalos.Checked)
             {
+                quitarFiltrosIntervalos();
+
                 cmbTipoFiltro.SelectedIndex = 0;
 
                 //leno dataGridView con los intervalos
@@ -598,21 +601,25 @@ namespace Kairos.Forms
 
                 intervalosParciales = intervalos;
 
-                quitarFiltrosIntervalos();
+                
             }
         }
 
         public void quitarFiltrosIntervalos()
         {
-            List<Filtro> filtros = new List<Filtro>();
+            List<Filtro> filtrosAux = new List<Filtro>();
             foreach (Filtro item in chlFiltros.Items)
             {
-                if (!item.Name.Contains("Intervalo"))
-                    filtros.Add(item);
-                    // chlFiltros.Items.Remove(item);   
-            }
+                if (item.Name.Contains("Intervalo"))
+                    this.filtros.Remove(item);
 
+
+                // chlFiltros.Items.Remove(item);   
+            }
             chlFiltros.Items.Clear();
+            setupFiltrosCheckboxList();
+
+        /* chlFiltros.Items.Clear();
 
             ((ListBox)this.chlFiltros).DisplayMember = "Name";
             ((ListBox)this.chlFiltros).ValueMember = "IsChecked";
@@ -624,7 +631,7 @@ namespace Kairos.Forms
                     Filtro obj = (Filtro)chlFiltros.Items[i];
                     chlFiltros.SetItemChecked(i, obj.IsChecked);
                 }
-            }
+            }*/
         }
 
         private bool _updatingCheckList = false;
