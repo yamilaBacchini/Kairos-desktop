@@ -15,7 +15,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
         private readonly string A = "";
         private readonly string B = "";
 
-        public string StringFDP => string.Format("({0}/{1})*((x/{1})^({0}-1))*((1+(x/{1})^{0})^(-2))",A ,B);
+        public string StringFDP => string.Format("f(x) = ({0}/{1})*((x/{1})^({0}-1))*((1+(x/{1})^{0})^(-2))",A ,B);
 
         public string StringInversa => string.Format("f(R) = {1}/((1/R-1)^(1/{0}))+{0}",A ,B);
 

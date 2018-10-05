@@ -14,7 +14,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
         private readonly string shape = "1.5";
         private readonly string scale = "1";
 
-        public string StringFDP => string.Format("({0}/{1})*(x/{1})^({0}-1)*e^(-(x/{1})^{0})", shape, scale);
+        public string StringFDP => string.Format("f(x) = ({0}/{1})*(x/{1})^({0}-1)*e^(-(x/{1})^{0})", shape, scale);
 
         public string StringInversa => string.Format("f(R)= {1}*(-ln(-R+1))^(1/{0})", shape, scale);
 
