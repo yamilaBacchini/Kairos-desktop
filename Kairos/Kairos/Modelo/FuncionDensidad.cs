@@ -16,7 +16,7 @@ namespace Kairos.Modelo
         LOG_LOGISTICA,
         NORMAL,
         WEIBULL1_5,
-        FASES_BI_WEIBULL,
+        WEIBULL3,
         POISSON,
         UNIFORME,
         WEIBULL

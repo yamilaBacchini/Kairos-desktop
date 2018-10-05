@@ -32,7 +32,7 @@ namespace Kairos.Forms
         private ResultadoAjuste resultadoFuncionLogLogistica = null;
         private ResultadoAjuste resultadoFuncionNormal = null;
         private ResultadoAjuste resultadoFuncionWeibull1_5 = null;
-        private ResultadoAjuste resultadoFuncionFasesBiWeibull = null;
+        private ResultadoAjuste resultadoFuncionWeibull3 = null;
         private ResultadoAjuste resultadoFuncionPoisson = null;
         private ResultadoAjuste resultadoFuncionUniforme = null;
         private ResultadoAjuste resultadoFuncionWeibull = null;
@@ -132,9 +132,9 @@ namespace Kairos.Forms
             resultadoFuncionWeibull1_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL1_5, arrEventos).Resultado;
             if (resultadoFuncionWeibull1_5 != null)
                 lResultadosOrdenados.Add(FuncionDensidad.WEIBULL1_5, resultadoFuncionWeibull1_5);
-            resultadoFuncionFasesBiWeibull = FactoryFuncionDensidad.Instancia(FuncionDensidad.FASES_BI_WEIBULL, arrEventos).Resultado;
-            if (resultadoFuncionFasesBiWeibull != null)
-                lResultadosOrdenados.Add(FuncionDensidad.FASES_BI_WEIBULL, resultadoFuncionFasesBiWeibull);
+            resultadoFuncionWeibull3 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL3, arrEventos).Resultado;
+            if (resultadoFuncionWeibull3 != null)
+                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL3, resultadoFuncionWeibull3);
             resultadoFuncionPoisson = FactoryFuncionDensidad.Instancia(FuncionDensidad.POISSON, arrEventos).Resultado;
             if (resultadoFuncionPoisson != null)
                 lResultadosOrdenados.Add(FuncionDensidad.POISSON, resultadoFuncionPoisson);
@@ -250,7 +250,7 @@ namespace Kairos.Forms
             resultadoSeleccionado = funcion;
         }
 
-        private void btnFuncionWeibull0_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Burr", resultadoFuncionWeibull0_5);
+        private void btnFuncionWeibull0_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 0.5", resultadoFuncionWeibull0_5);
 
         private void btnFuncionBinomial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Binomial", resultadoFuncionBinomial);
 
@@ -264,9 +264,9 @@ namespace Kairos.Forms
 
         private void btnFuncionNormal_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Normal", resultadoFuncionNormal);
 
-        private void btnFuncionFasesWeibull1_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Fases Bi-Exponencial", resultadoFuncionWeibull1_5);
+        private void btnFuncionWeibull1_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 1.5", resultadoFuncionWeibull1_5);
 
-        private void btnFuncionFasesBiWeibull_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Fases Bi-Weibull", resultadoFuncionFasesBiWeibull);
+        private void btnFuncionWeibull3_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 3", resultadoFuncionWeibull3);
 
         private void btnFuncionPoisson_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Poisson", resultadoFuncionPoisson);
 
@@ -286,7 +286,6 @@ namespace Kairos.Forms
             else
                 MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-
 
     }
 }

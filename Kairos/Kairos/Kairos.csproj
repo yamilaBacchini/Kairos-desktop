@@ -297,7 +297,7 @@
     <Compile Include="FuncionesDensidad\Implementacion\FuncionWeibull0_5.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionExponencial.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionWeibull1_5.cs" />
-    <Compile Include="FuncionesDensidad\Implementacion\FuncionFasesBiWeibull.cs" />
+    <Compile Include="FuncionesDensidad\Implementacion\FuncionWeibull3.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionLogistica.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionLogLogistica.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionLogNormal.cs" />
