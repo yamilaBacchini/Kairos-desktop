@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using Kairos.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Kairos.Entidades;
 
 namespace Kairos.Services.Implementaciones
 {
-    class ImportarTxtFile : IImportarService
+    internal class ImportarTxtFile : IImportarService
     {
         private string delimitador;
 
@@ -30,24 +26,26 @@ namespace Kairos.Services.Implementaciones
                 else
                     eventos = leerDelimitadorCaracter(pathArchivo, this.delimitador);
 
-                //creo el proyecto en la tabla origenes
-                //checkear que no exista el nombre que se desea ingresar
-                using (var db = new EventoContexto())
-                {//el origen se debe encargar de esto
-                    Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombreProyecto, activo = true };
-                    db.Origenes.Add(nuevoOrigen);
-                    db.SaveChanges();
-                    int idOrigenInsertado = nuevoOrigen.Id;
+                Origen origen = ProyectoService.nuevoProyecto(nombreProyecto);
+                EventoService.agregarTodos(eventos, origen.Id);
+                ////creo el proyecto en la tabla origenes
+                ////checkear que no exista el nombre que se desea ingresar
+                //using (var db = new EventoContexto())
+                //{//el origen se debe encargar de esto
+                //    Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombreProyecto, activo = true };
+                //    db.Origenes.Add(nuevoOrigen);
+                //    db.SaveChanges();
+                //    int idOrigenInsertado = nuevoOrigen.Id;
 
-                    foreach (string item in eventos)
-                    {
-                        db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(item), idOrigen = idOrigenInsertado, activo = true });
+                //    foreach (string item in eventos)
+                //    {
+                //        db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(item), idOrigen = idOrigenInsertado, activo = true });
 
-                    }
-                    db.SaveChanges();
-                    return true;
-
-                }
+                //    }
+                //    db.SaveChanges();
+                //    return true;
+                //}
+                return true;
             }
             catch (Exception ex)
             {
@@ -101,19 +99,27 @@ namespace Kairos.Services.Implementaciones
                     eventos = leerDelimitadorEnter(pathArchivo);
                 else
                     eventos = leerDelimitadorCaracter(pathArchivo, this.delimitador);
-                using (var db = new EventoContexto())
+                //using (var db = new EventoContexto())
+                //{
+                //    Origen auxOrigen = db.Origenes.Find(idProyecto);
+                //    if (auxOrigen != null)
+                //    {
+                //        foreach (string item in eventos)
+                //            db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(item), idOrigen = auxOrigen.Id, activo = true });
+                //        db.SaveChanges();
+                //        resultado = true;
+                //    }
+                //    else
+                //        resultado = false;
+                //}
+                Origen auxOrigen = ProyectoService.obtenerProyectoPorId(idProyecto);
+                if (auxOrigen != null)
                 {
-                    Origen auxOrigen = db.Origenes.Find(idProyecto);
-                    if (auxOrigen != null)
-                    {
-                        foreach (string item in eventos)
-                            db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(item), idOrigen = auxOrigen.Id, activo = true });
-                        db.SaveChanges();
-                        resultado = true;
-                    }
-                    else
-                        resultado = false;
+                    EventoService.agregarTodos(eventos, auxOrigen.Id);
+                    resultado = true;
                 }
+                else
+                    resultado = false;
             }
             catch (Exception ex)
             {

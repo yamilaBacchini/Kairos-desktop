@@ -2,18 +2,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kairos.Services
 {
-    class EventoService
+    internal class EventoService
     {
+        public static void agregarTodos(List<Evento> aAgregar)
+        {
+            using (var db = new EventoContexto())
+            {
+                db.Eventos.AddRange(aAgregar.Select(x =>
+                {
+                    x.fecha = obtenerFechaSinMilisegundos(x.fecha);
+                    return x;
+                }));
+                db.SaveChanges();
+            }
+        }
+
+        public static void agregarTodos(List<string> aAgregarEnString, int idOrigen)
+        {
+            using (var db = new EventoContexto())
+            {
+                foreach (string item in aAgregarEnString)
+                {
+                    db.Eventos.Add(new Entidades.Evento { fecha = obtenerFechaSinMilisegundos(Convert.ToDateTime(item)), idOrigen = idOrigen, activo = true });
+                }
+                db.SaveChanges();
+            }
+        }
+
         public static void nuevo(DateTime fecha, int idOrigen)
         {
             using (var db = new EventoContexto())
             {
-                db.Eventos.Add(new Evento { fecha = fecha, idOrigen = idOrigen, activo = true });
+                db.Eventos.Add(new Evento { fecha = obtenerFechaSinMilisegundos(fecha), idOrigen = idOrigen, activo = true });
                 db.SaveChanges();
             }
         }
@@ -23,7 +46,7 @@ namespace Kairos.Services
             using (var db = new EventoContexto())
             {
                 Evento evento = db.Eventos.Find(idEvento);
-                evento.fecha = fecha;
+                evento.fecha = obtenerFechaSinMilisegundos(fecha);
                 db.Update(evento);
                 db.SaveChanges();
             }
@@ -39,6 +62,15 @@ namespace Kairos.Services
             }
         }
 
+        public static void borrar(List<Evento> aBorrar)
+        {
+            using (var db = new EventoContexto())
+            {
+                db.Eventos.RemoveRange(aBorrar);
+                db.SaveChanges();
+            }
+        }
+
         public static List<Evento> cargarEventos(int idOrigen)
         {
             List<Evento> eventos = null;
@@ -50,6 +82,12 @@ namespace Kairos.Services
                            select e).ToList();
             }
             return eventos;
+        }
+
+        private static DateTime obtenerFechaSinMilisegundos(DateTime aRemoverMilisegundos)
+        {
+            DateTime aux = aRemoverMilisegundos.AddTicks(-(aRemoverMilisegundos.Ticks % 10000000));
+            return aux;
         }
     }
 }
