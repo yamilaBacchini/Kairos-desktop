@@ -86,7 +86,7 @@ namespace Kairos.Services.Implementaciones
                     //db.Eventos.AddRange(eventos);
                     //db.SaveChanges();
                     EventoService.agregarTodos(eventos);
-                    resultado = true;
+                    resultado = true; 
                 }
                 else
                     resultado = false;
