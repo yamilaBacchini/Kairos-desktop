@@ -3,13 +3,10 @@ using Kairos.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kairos.Services.Implementaciones
 {
-    class ImportarExcelFile : IImportarService
+    internal class ImportarExcelFile : IImportarService
     {
         private int hoja = -1;
         private int columna = -1;
@@ -27,7 +24,8 @@ namespace Kairos.Services.Implementaciones
             bool resultado = false;
             try
             {
-                Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombreProyecto, activo = true };
+                //Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombreProyecto, activo = true };
+                Origen nuevoOrigen = ProyectoService.nuevoProyecto(nombreProyecto);
                 List<Evento> eventos = new List<Evento>();
                 using (var archivo = new XLWorkbook(pathArchivo))
                 {
@@ -41,15 +39,16 @@ namespace Kairos.Services.Implementaciones
                         numeroFila++;
                     }
                 }
-                using (var db = new EventoContexto())
-                {
-                    //el origen se debe encargar de esto
-                    db.Origenes.Add(nuevoOrigen);
-                    db.SaveChanges();
-                    int idOrigenInsertado = nuevoOrigen.Id;
-                    db.Eventos.AddRange(eventos);
-                    db.SaveChanges();
-                }
+                EventoService.agregarTodos(eventos);
+                //using (var db = new EventoContexto())
+                //{
+                //    //el origen se debe encargar de esto
+                //    db.Origenes.Add(nuevoOrigen);
+                //    db.SaveChanges();
+                //    int idOrigenInsertado = nuevoOrigen.Id;
+                //    db.Eventos.AddRange(eventos);
+                //    db.SaveChanges();
+                //}
                 resultado = true;
             }
             catch (Exception ex)
@@ -65,31 +64,33 @@ namespace Kairos.Services.Implementaciones
             bool resultado = false;
             try
             {
-                using (var db = new EventoContexto())
+                Origen auxOrigen = ProyectoService.obtenerProyectoPorId(idProyecto);
+                //using (var db = new EventoContexto())
+                //{
+                //Origen auxOrigen = db.Origenes.Find(idProyecto);
+                if (auxOrigen != null)
                 {
-                    Origen auxOrigen = db.Origenes.Find(idProyecto);
-                    if (auxOrigen != null)
+                    List<Evento> eventos = new List<Evento>();
+                    using (var archivo = new XLWorkbook(pathArchivo))
                     {
-                        List<Evento> eventos = new List<Evento>();
-                        using (var archivo = new XLWorkbook(pathArchivo))
+                        var hoja = archivo.Worksheet(this.hoja);
+                        int numeroFila = this.filaInicial;
+                        int columna = this.columna;
+                        while (!hoja.Cell(numeroFila, columna).IsEmpty())
                         {
-                            var hoja = archivo.Worksheet(this.hoja);
-                            int numeroFila = this.filaInicial;
-                            int columna = this.columna;
-                            while (!hoja.Cell(numeroFila, columna).IsEmpty())
-                            {
-                                DateTime auxFecha = hoja.Cell(numeroFila, columna).GetDateTime();
-                                eventos.Add(new Evento() { fecha = auxFecha, origen = auxOrigen, activo = true });
-                                numeroFila++;
-                            }
+                            DateTime auxFecha = hoja.Cell(numeroFila, columna).GetDateTime();
+                            eventos.Add(new Evento() { fecha = auxFecha, idOrigen = auxOrigen.Id, activo = true });
+                            numeroFila++;
                         }
-                        db.Eventos.AddRange(eventos);
-                        db.SaveChanges();
-                        resultado = true;
                     }
-                    else
-                        resultado = false;
+                    //db.Eventos.AddRange(eventos);
+                    //db.SaveChanges();
+                    EventoService.agregarTodos(eventos);
+                    resultado = true; 
                 }
+                else
+                    resultado = false;
+                //}
             }
             catch (Exception ex)
             {

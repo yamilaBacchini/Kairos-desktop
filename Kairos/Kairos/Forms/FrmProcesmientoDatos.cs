@@ -92,10 +92,7 @@ namespace Kairos.Forms
             botonSeleccionado(btnBorrarSeleccionados);
             int cant = eventosSeleccionados.Count;
 
-            foreach (var item in eventosSeleccionados)
-            {
-                EventoService.borrar(item.Id);
-            }
+            EventoService.borrar(eventosSeleccionados);
             cargarEventos();
 
             if (eventosSeleccionados.Count > 1)

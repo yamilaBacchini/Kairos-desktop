@@ -9,13 +9,25 @@ namespace Kairos.Services
 {
     class ProyectoService
     {
-        public static void nuevoProyecto(string nombre)
+        public static Origen obtenerProyectoPorId(int idProyecto)
         {
+            Origen aDevolver = null;
             using (var db = new EventoContexto())
             {
-                db.Origenes.Add(new Entidades.Origen { nombreOrigen = nombre, fechaCreacion = DateTime.Now, activo = true });
+                aDevolver = db.Origenes.Find(idProyecto);
+            }
+            return aDevolver;
+        }
+
+        public static Origen nuevoProyecto(string nombre)
+        {
+            Origen aGuardar = new Entidades.Origen { nombreOrigen = nombre, fechaCreacion = DateTime.Now, activo = true };
+            using (var db = new EventoContexto())
+            {
+                db.Origenes.Add(aGuardar);
                 db.SaveChanges();
             }
+            return aGuardar;
         }
 
         public static void modificarProyecto(int id, string nombre)

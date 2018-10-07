@@ -24,15 +24,15 @@ namespace Kairos.Forms
         private Dictionary<string, double> eventosSimplificados = null;
         private double[] intervalosEventosEaE = null;
         private ResultadoAjuste resultadoSeleccionado = null;
-        private ResultadoAjuste resultadoFuncionBurr = null;
+        private ResultadoAjuste resultadoFuncionWeibull0_5 = null;
         private ResultadoAjuste resultadoFuncionBinomial = null;
         private ResultadoAjuste resultadoFuncionExponencial = null;
         private ResultadoAjuste resultadoFuncionLogistica = null;
         private ResultadoAjuste resultadoFuncionLogNormal = null;
         private ResultadoAjuste resultadoFuncionLogLogistica = null;
         private ResultadoAjuste resultadoFuncionNormal = null;
-        private ResultadoAjuste resultadoFuncionFasesBiExponencial = null;
-        private ResultadoAjuste resultadoFuncionFasesBiWeibull = null;
+        private ResultadoAjuste resultadoFuncionWeibull1_5 = null;
+        private ResultadoAjuste resultadoFuncionWeibull3 = null;
         private ResultadoAjuste resultadoFuncionPoisson = null;
         private ResultadoAjuste resultadoFuncionUniforme = null;
         private ResultadoAjuste resultadoFuncionWeibull = null;
@@ -67,7 +67,7 @@ namespace Kairos.Forms
         {
             CalcularEventosSimplificados();
             CalcularYOrdenarFunciones();
-            OrdernarFuncionesEnVista();
+            OrdenarFuncionesEnVista();
             SetupGraficoFuncion();
         }
 
@@ -108,9 +108,9 @@ namespace Kairos.Forms
                 arrEventos = intervalosEventosEaE;
             }
            
-            resultadoFuncionBurr = FactoryFuncionDensidad.Instancia(FuncionDensidad.BURR, arrEventos).Resultado;
-            if (resultadoFuncionBurr != null)
-                lResultadosOrdenados.Add(FuncionDensidad.BURR, resultadoFuncionBurr);
+            resultadoFuncionWeibull0_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL05, arrEventos).Resultado;
+            if (resultadoFuncionWeibull0_5 != null)
+                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL05, resultadoFuncionWeibull0_5);
             resultadoFuncionBinomial = FactoryFuncionDensidad.Instancia(FuncionDensidad.BINOMIAL, arrEventos).Resultado;
             if (resultadoFuncionBinomial != null)
                 lResultadosOrdenados.Add(FuncionDensidad.BINOMIAL, resultadoFuncionBinomial);
@@ -129,12 +129,12 @@ namespace Kairos.Forms
             resultadoFuncionNormal = FactoryFuncionDensidad.Instancia(FuncionDensidad.NORMAL, arrEventos).Resultado;
             if (resultadoFuncionNormal != null)
                 lResultadosOrdenados.Add(FuncionDensidad.NORMAL, resultadoFuncionNormal);
-            resultadoFuncionFasesBiExponencial = FactoryFuncionDensidad.Instancia(FuncionDensidad.FASES_BI_EXPONENCIAL, arrEventos).Resultado;
-            if (resultadoFuncionFasesBiExponencial != null)
-                lResultadosOrdenados.Add(FuncionDensidad.FASES_BI_EXPONENCIAL, resultadoFuncionFasesBiExponencial);
-            resultadoFuncionFasesBiWeibull = FactoryFuncionDensidad.Instancia(FuncionDensidad.FASES_BI_WEIBULL, arrEventos).Resultado;
-            if (resultadoFuncionFasesBiWeibull != null)
-                lResultadosOrdenados.Add(FuncionDensidad.FASES_BI_WEIBULL, resultadoFuncionFasesBiWeibull);
+            resultadoFuncionWeibull1_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL15, arrEventos).Resultado;
+            if (resultadoFuncionWeibull1_5 != null)
+                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL15, resultadoFuncionWeibull1_5);
+            resultadoFuncionWeibull3 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL3, arrEventos).Resultado;
+            if (resultadoFuncionWeibull3 != null)
+                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL3, resultadoFuncionWeibull3);
             resultadoFuncionPoisson = FactoryFuncionDensidad.Instancia(FuncionDensidad.POISSON, arrEventos).Resultado;
             if (resultadoFuncionPoisson != null)
                 lResultadosOrdenados.Add(FuncionDensidad.POISSON, resultadoFuncionPoisson);
@@ -147,7 +147,7 @@ namespace Kairos.Forms
             lResultadosOrdenados = lResultadosOrdenados.OrderBy(x => x.Value.DesvioEstandar).ToDictionary(x => x.Key, y => y.Value);
         }
 
-        private void OrdernarFuncionesEnVista()
+        private void OrdenarFuncionesEnVista()
         {
             List<Button> controls = new List<Button>();
             foreach (var item in pnlFunciones.Controls)
@@ -250,7 +250,7 @@ namespace Kairos.Forms
             resultadoSeleccionado = funcion;
         }
 
-        private void btnFuncionBurr_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Burr", resultadoFuncionBurr);
+        private void btnFuncionWeibull0_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 0.5", resultadoFuncionWeibull0_5);
 
         private void btnFuncionBinomial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Binomial", resultadoFuncionBinomial);
 
@@ -264,9 +264,9 @@ namespace Kairos.Forms
 
         private void btnFuncionNormal_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Normal", resultadoFuncionNormal);
 
-        private void btnFuncionFasesBiExponencial_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Fases Bi-Exponencial", resultadoFuncionFasesBiExponencial);
+        private void btnFuncionWeibull1_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 1.5", resultadoFuncionWeibull1_5);
 
-        private void btnFuncionFasesBiWeibull_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Fases Bi-Weibull", resultadoFuncionFasesBiWeibull);
+        private void btnFuncionWeibull3_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 3", resultadoFuncionWeibull3);
 
         private void btnFuncionPoisson_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Poisson", resultadoFuncionPoisson);
 
@@ -286,5 +286,6 @@ namespace Kairos.Forms
             else
                 MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
     }
 }
