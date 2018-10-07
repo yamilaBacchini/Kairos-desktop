@@ -51,7 +51,7 @@
             this.pnlMensaje = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.timerMensaje = new System.Windows.Forms.Timer(this.components);
-            this.btnFuncionWeibull0_5 = new System.Windows.Forms.Button();
+            this.btnFuncionWeibull05 = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.pnlFunciones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnFuncionBinomial = new System.Windows.Forms.Button();
@@ -60,7 +60,7 @@
             this.btnFuncionLognormal = new System.Windows.Forms.Button();
             this.btnFuncionLogLogistica = new System.Windows.Forms.Button();
             this.btnFuncionNormal = new System.Windows.Forms.Button();
-            this.btnFuncionWeibull1_5 = new System.Windows.Forms.Button();
+            this.btnFuncionWeibull15 = new System.Windows.Forms.Button();
             this.btnFuncionWeibull3 = new System.Windows.Forms.Button();
             this.btnFuncionPoisson = new System.Windows.Forms.Button();
             this.btnFuncionUniforme = new System.Windows.Forms.Button();
@@ -256,23 +256,23 @@
             // 
             this.timerMensaje.Interval = 2000;
             // 
-            // btnFuncionWeibull0_5
+            // btnFuncionWeibull05
             // 
-            this.btnFuncionWeibull0_5.BackColor = System.Drawing.Color.Black;
-            this.btnFuncionWeibull0_5.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFuncionWeibull0_5.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnFuncionWeibull0_5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.btnFuncionWeibull0_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFuncionWeibull0_5.Font = new System.Drawing.Font("Book Antiqua", 13F);
-            this.btnFuncionWeibull0_5.ForeColor = System.Drawing.Color.White;
-            this.btnFuncionWeibull0_5.Location = new System.Drawing.Point(0, 0);
-            this.btnFuncionWeibull0_5.Margin = new System.Windows.Forms.Padding(0);
-            this.btnFuncionWeibull0_5.Name = "btnFuncionWeibull0_5";
-            this.btnFuncionWeibull0_5.Size = new System.Drawing.Size(210, 33);
-            this.btnFuncionWeibull0_5.TabIndex = 14;
-            this.btnFuncionWeibull0_5.Text = "Weibull 0.5";
-            this.btnFuncionWeibull0_5.UseVisualStyleBackColor = false;
-            this.btnFuncionWeibull0_5.Click += new System.EventHandler(this.btnFuncionWeibull0_5_Click);
+            this.btnFuncionWeibull05.BackColor = System.Drawing.Color.Black;
+            this.btnFuncionWeibull05.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFuncionWeibull05.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull05.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnFuncionWeibull05.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFuncionWeibull05.Font = new System.Drawing.Font("Book Antiqua", 13F);
+            this.btnFuncionWeibull05.ForeColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull05.Location = new System.Drawing.Point(0, 0);
+            this.btnFuncionWeibull05.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFuncionWeibull05.Name = "btnFuncionWeibull05";
+            this.btnFuncionWeibull05.Size = new System.Drawing.Size(210, 33);
+            this.btnFuncionWeibull05.TabIndex = 14;
+            this.btnFuncionWeibull05.Text = "Weibull 0.5";
+            this.btnFuncionWeibull05.UseVisualStyleBackColor = false;
+            this.btnFuncionWeibull05.Click += new System.EventHandler(this.btnFuncionWeibull0_5_Click);
             // 
             // btnVolver
             // 
@@ -294,14 +294,14 @@
             // pnlFunciones
             // 
             this.pnlFunciones.BackColor = System.Drawing.Color.Black;
-            this.pnlFunciones.Controls.Add(this.btnFuncionWeibull0_5);
+            this.pnlFunciones.Controls.Add(this.btnFuncionWeibull05);
             this.pnlFunciones.Controls.Add(this.btnFuncionBinomial);
             this.pnlFunciones.Controls.Add(this.btnFuncionExponencial);
             this.pnlFunciones.Controls.Add(this.btnFuncionLogistica);
             this.pnlFunciones.Controls.Add(this.btnFuncionLognormal);
             this.pnlFunciones.Controls.Add(this.btnFuncionLogLogistica);
             this.pnlFunciones.Controls.Add(this.btnFuncionNormal);
-            this.pnlFunciones.Controls.Add(this.btnFuncionWeibull1_5);
+            this.pnlFunciones.Controls.Add(this.btnFuncionWeibull15);
             this.pnlFunciones.Controls.Add(this.btnFuncionWeibull3);
             this.pnlFunciones.Controls.Add(this.btnFuncionPoisson);
             this.pnlFunciones.Controls.Add(this.btnFuncionUniforme);
@@ -420,23 +420,23 @@
             this.btnFuncionNormal.UseVisualStyleBackColor = false;
             this.btnFuncionNormal.Click += new System.EventHandler(this.btnFuncionNormal_Click);
             // 
-            // btnFuncionWeibull1_5
+            // btnFuncionWeibull15
             // 
-            this.btnFuncionWeibull1_5.BackColor = System.Drawing.Color.Black;
-            this.btnFuncionWeibull1_5.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFuncionWeibull1_5.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnFuncionWeibull1_5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.btnFuncionWeibull1_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFuncionWeibull1_5.Font = new System.Drawing.Font("Book Antiqua", 13F);
-            this.btnFuncionWeibull1_5.ForeColor = System.Drawing.Color.White;
-            this.btnFuncionWeibull1_5.Location = new System.Drawing.Point(0, 231);
-            this.btnFuncionWeibull1_5.Margin = new System.Windows.Forms.Padding(0);
-            this.btnFuncionWeibull1_5.Name = "btnFuncionWeibull1_5";
-            this.btnFuncionWeibull1_5.Size = new System.Drawing.Size(210, 33);
-            this.btnFuncionWeibull1_5.TabIndex = 21;
-            this.btnFuncionWeibull1_5.Text = "Weibull 1.5";
-            this.btnFuncionWeibull1_5.UseVisualStyleBackColor = false;
-            this.btnFuncionWeibull1_5.Click += new System.EventHandler(this.btnFuncionWeibull1_5_Click);
+            this.btnFuncionWeibull15.BackColor = System.Drawing.Color.Black;
+            this.btnFuncionWeibull15.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFuncionWeibull15.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnFuncionWeibull15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFuncionWeibull15.Font = new System.Drawing.Font("Book Antiqua", 13F);
+            this.btnFuncionWeibull15.ForeColor = System.Drawing.Color.White;
+            this.btnFuncionWeibull15.Location = new System.Drawing.Point(0, 231);
+            this.btnFuncionWeibull15.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFuncionWeibull15.Name = "btnFuncionWeibull15";
+            this.btnFuncionWeibull15.Size = new System.Drawing.Size(210, 33);
+            this.btnFuncionWeibull15.TabIndex = 21;
+            this.btnFuncionWeibull15.Text = "Weibull 1.5";
+            this.btnFuncionWeibull15.UseVisualStyleBackColor = false;
+            this.btnFuncionWeibull15.Click += new System.EventHandler(this.btnFuncionWeibull1_5_Click);
             // 
             // btnFuncionWeibull3
             // 
@@ -670,7 +670,7 @@
         private System.Windows.Forms.Timer timerMensaje;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnFuncionWeibull0_5;
+        private System.Windows.Forms.Button btnFuncionWeibull05;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.FlowLayoutPanel pnlFunciones;
         private System.Windows.Forms.Panel pnlValoresAleatorios;
@@ -681,7 +681,7 @@
         private System.Windows.Forms.Button btnFuncionLognormal;
         private System.Windows.Forms.Button btnFuncionLogLogistica;
         private System.Windows.Forms.Button btnFuncionNormal;
-        private System.Windows.Forms.Button btnFuncionWeibull1_5;
+        private System.Windows.Forms.Button btnFuncionWeibull15;
         private System.Windows.Forms.Button btnFuncionWeibull3;
         private System.Windows.Forms.Button btnFuncionPoisson;
         private System.Windows.Forms.Button btnFuncionUniforme;

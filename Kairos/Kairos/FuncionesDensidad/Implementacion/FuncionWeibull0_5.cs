@@ -11,8 +11,8 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionWeibull0_5 : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        private readonly string shape = "0.5";
-        private readonly string scale = "1";
+        private readonly double shape = 0.5;
+        private readonly double scale = 1;
 
         public string StringFDP => string.Format("f(x) = ({0}/{1})*(x/{1})^({0}-1)*e^(-(x/{1})^{0})", shape, scale);
 
@@ -22,9 +22,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
         {
             try
             {
-                DistribucionContinua = new WeibullDistribution(Convert.ToDouble(shape),Convert.ToDouble(scale));
-                this.shape = ((WeibullDistribution)DistribucionContinua).Shape.ToString("0.0000");
-                this.scale = ((WeibullDistribution)DistribucionContinua).Scale.ToString("0.0000");
+                DistribucionContinua = new WeibullDistribution(shape,scale);
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)

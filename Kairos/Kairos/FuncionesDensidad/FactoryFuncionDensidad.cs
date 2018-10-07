@@ -14,7 +14,7 @@ namespace Kairos.FuncionesDensidad
         {
             switch (funcion)
             {
-                case FuncionDensidad.WEIBULL0_5:
+                case FuncionDensidad.WEIBULL05:
                     return new FuncionWeibull0_5(eventos);
                 case FuncionDensidad.BINOMIAL:
                     return new FuncionBinomial(eventos);
@@ -28,7 +28,7 @@ namespace Kairos.FuncionesDensidad
                     return new FuncionLogLogistica(eventos);
                 case FuncionDensidad.NORMAL:
                     return new FuncionNormal(eventos);
-                case FuncionDensidad.WEIBULL1_5:
+                case FuncionDensidad.WEIBULL15:
                     return new FuncionWeibull1_5(eventos);
                 case FuncionDensidad.WEIBULL3:
                     return new FuncionWeibull3(eventos);

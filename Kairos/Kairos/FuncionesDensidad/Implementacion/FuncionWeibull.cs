@@ -36,7 +36,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
                 DistribucionContinua = new WeibullDistribution(shape, scale);
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Resultado = null;
             }

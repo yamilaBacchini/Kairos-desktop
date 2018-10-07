@@ -108,9 +108,9 @@ namespace Kairos.Forms
                 arrEventos = intervalosEventosEaE;
             }
            
-            resultadoFuncionWeibull0_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL0_5, arrEventos).Resultado;
+            resultadoFuncionWeibull0_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL05, arrEventos).Resultado;
             if (resultadoFuncionWeibull0_5 != null)
-                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL0_5, resultadoFuncionWeibull0_5);
+                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL05, resultadoFuncionWeibull0_5);
             resultadoFuncionBinomial = FactoryFuncionDensidad.Instancia(FuncionDensidad.BINOMIAL, arrEventos).Resultado;
             if (resultadoFuncionBinomial != null)
                 lResultadosOrdenados.Add(FuncionDensidad.BINOMIAL, resultadoFuncionBinomial);
@@ -129,9 +129,9 @@ namespace Kairos.Forms
             resultadoFuncionNormal = FactoryFuncionDensidad.Instancia(FuncionDensidad.NORMAL, arrEventos).Resultado;
             if (resultadoFuncionNormal != null)
                 lResultadosOrdenados.Add(FuncionDensidad.NORMAL, resultadoFuncionNormal);
-            resultadoFuncionWeibull1_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL1_5, arrEventos).Resultado;
+            resultadoFuncionWeibull1_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL15, arrEventos).Resultado;
             if (resultadoFuncionWeibull1_5 != null)
-                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL1_5, resultadoFuncionWeibull1_5);
+                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL15, resultadoFuncionWeibull1_5);
             resultadoFuncionWeibull3 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL3, arrEventos).Resultado;
             if (resultadoFuncionWeibull3 != null)
                 lResultadosOrdenados.Add(FuncionDensidad.WEIBULL3, resultadoFuncionWeibull3);
