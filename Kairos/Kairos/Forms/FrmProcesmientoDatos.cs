@@ -109,7 +109,7 @@ namespace Kairos.Forms
 
                 mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     mostrarMensaje("Error al eliminar registros", Color.FromArgb(255, 89, 89));
                 }

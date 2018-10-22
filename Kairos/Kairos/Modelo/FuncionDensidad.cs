@@ -19,6 +19,6 @@ namespace Kairos.Modelo
         WEIBULL3,
         POISSON,
         UNIFORME,
-        WEIBULL
+        WEIBULL5
     }
 }

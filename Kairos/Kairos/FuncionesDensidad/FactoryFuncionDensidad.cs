@@ -36,8 +36,8 @@ namespace Kairos.FuncionesDensidad
                     return new FuncionPoisson(eventos);
                 case FuncionDensidad.UNIFORME:
                     return new FuncionUniforme(eventos);
-                case FuncionDensidad.WEIBULL:
-                    return new FuncionWeibull(eventos);
+                case FuncionDensidad.WEIBULL5:
+                    return new FuncionWeibull5(eventos);
                 default:
                     return null;
             }

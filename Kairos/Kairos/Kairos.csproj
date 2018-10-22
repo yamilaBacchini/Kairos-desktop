@@ -304,7 +304,7 @@
     <Compile Include="FuncionesDensidad\Implementacion\FuncionNormal.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionPoisson.cs" />
     <Compile Include="FuncionesDensidad\Implementacion\FuncionUniforme.cs" />
-    <Compile Include="FuncionesDensidad\Implementacion\FuncionWeibull.cs" />
+    <Compile Include="FuncionesDensidad\Implementacion\FuncionWeibull5.cs" />
     <Compile Include="FuncionesDensidad\Segmentacion.cs" />
     <Compile Include="Migrations\20180125003607_MyFirstMigration.cs" />
     <Compile Include="Migrations\20180125003607_MyFirstMigration.designer.cs">

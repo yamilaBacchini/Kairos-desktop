@@ -35,7 +35,7 @@ namespace Kairos.Forms
         private ResultadoAjuste resultadoFuncionWeibull3 = null;
         private ResultadoAjuste resultadoFuncionPoisson = null;
         private ResultadoAjuste resultadoFuncionUniforme = null;
-        private ResultadoAjuste resultadoFuncionWeibull = null;
+        private ResultadoAjuste resultadoFuncionWeibull5 = null;
         private Dictionary<FuncionDensidad, ResultadoAjuste> lResultadosOrdenados = new Dictionary<FuncionDensidad, ResultadoAjuste>();
         private int flagIntervalos=0;
         private List<Double> intervalos;
@@ -141,9 +141,9 @@ namespace Kairos.Forms
             resultadoFuncionUniforme = FactoryFuncionDensidad.Instancia(FuncionDensidad.UNIFORME, arrEventos).Resultado;
             if (resultadoFuncionUniforme != null)
                 lResultadosOrdenados.Add(FuncionDensidad.UNIFORME, resultadoFuncionUniforme);
-            resultadoFuncionWeibull = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL, arrEventos).Resultado;
-            if (resultadoFuncionWeibull != null)
-                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL, resultadoFuncionWeibull);
+            resultadoFuncionWeibull5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL5, arrEventos).Resultado;
+            if (resultadoFuncionWeibull5 != null)
+                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL5, resultadoFuncionWeibull5);
             lResultadosOrdenados = lResultadosOrdenados.OrderBy(x => x.Value.DesvioEstandar).ToDictionary(x => x.Key, y => y.Value);
         }
 
@@ -272,7 +272,7 @@ namespace Kairos.Forms
 
         private void btnFuncionUniforme_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Uniforme", resultadoFuncionUniforme);
 
-        private void btnFuncionWeibull_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull", resultadoFuncionWeibull);
+        private void btnFuncionWeibull5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull", resultadoFuncionWeibull5);
 
         private void btnGenerarValoresAleatorios_Click(object sender, EventArgs e)
         {
@@ -286,6 +286,12 @@ namespace Kairos.Forms
             else
                 MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

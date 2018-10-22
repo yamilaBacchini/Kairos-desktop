@@ -26,7 +26,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
                 DistribucionContinua = new UniformContinuousDistribution();
                 DistribucionContinua.Fit(eventos);
                 A = ((UniformContinuousDistribution)DistribucionContinua).Minimum.ToString("0.0000");
-                B = ((UniformContinuousDistribution)DistribucionContinua).Maximum.ToString("0.0000S");
+                B = ((UniformContinuousDistribution)DistribucionContinua).Maximum.ToString("0.0000");
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionContinua.StandardDeviation, DistribucionContinua.Mean, DistribucionContinua.Variance, this);
             }
             catch (Exception)
