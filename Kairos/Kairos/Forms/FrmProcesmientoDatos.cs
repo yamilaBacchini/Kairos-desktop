@@ -40,8 +40,7 @@ namespace Kairos.Forms
             cargarFiltros();
             cambiarFiltrosVistaFecha(0);
             cargarEventos();
-            lblCantidad.Text = eventos.Count().ToString();
-            lblMedia.Text = calcularMedia().ToString("0.0000");
+            actualizarEstadisticas();
         }
 
         private void setupFiltrosCheckboxList()
@@ -111,6 +110,7 @@ namespace Kairos.Forms
                 cargarEventos();
 
                 mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
+                actualizarEstadisticas();
                 }
                 catch (Exception)
                 {
@@ -285,6 +285,7 @@ namespace Kairos.Forms
                     EventoService.nuevo(fecha, this.idOrigen);
                     mostrarMensaje("Registro agregado correctamente", Color.FromArgb(128, 255, 128));
                     cargarEventos();
+                    actualizarEstadisticas();
                     break;
                 case TipoAccionProcesamiento.MODIFICAR_REGISTRO:
                     fecha = new DateTime(dtp1.Value.Year, dtp1.Value.Month, dtp1.Value.Day, dtp2.Value.Hour, dtp2.Value.Minute, dtp2.Value.Second);
@@ -293,6 +294,7 @@ namespace Kairos.Forms
                         EventoService.modificar(eventosSeleccionados[0].Id, fecha);
                         cargarEventos();
                         mostrarMensaje("Registro modificado correctamente", Color.FromArgb(128, 255, 128));
+                        actualizarEstadisticas();
                     }
                     else
                         mostrarMensaje("Seleccione solo un registro", Color.FromArgb(255, 89, 89));
@@ -301,6 +303,7 @@ namespace Kairos.Forms
                     agregarFiltro();
                     filtrar();
                     mostrarMensaje("Filtro aplicado correctamente", Color.FromArgb(128, 255, 128));
+                    actualizarEstadisticas();
                     break;
                 default:
                     break;
@@ -782,6 +785,11 @@ namespace Kairos.Forms
             }
         }
 
+        private void actualizarEstadisticas()
+        {
+            lblCantidad.Text = eventos.Count().ToString();
+            lblMedia.Text = calcularMedia().ToString("0.0000");
+        }
         private double calcularMedia()
         {
             List<double> intervalos = FdPUtils.CalcularIntervalos(eventos);
