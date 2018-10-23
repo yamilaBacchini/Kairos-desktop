@@ -638,25 +638,10 @@ namespace Kairos.Forms
                 if (item.Name.Contains("Intervalo"))
                     this.filtros.Remove(item);
 
-
-                // chlFiltros.Items.Remove(item);   
             }
             chlFiltros.Items.Clear();
             setupFiltrosCheckboxList();
 
-        /* chlFiltros.Items.Clear();
-
-            ((ListBox)this.chlFiltros).DisplayMember = "Name";
-            ((ListBox)this.chlFiltros).ValueMember = "IsChecked";
-            for (int i = 0; i < filtros.Count; i++)
-            {
-                if (!chlFiltros.Items.Contains(filtros[i]))
-                {
-                    chlFiltros.Items.Add(filtros[i]);
-                    Filtro obj = (Filtro)chlFiltros.Items[i];
-                    chlFiltros.SetItemChecked(i, obj.IsChecked);
-                }
-            }*/
         }
 
         private bool _updatingCheckList = false;
@@ -679,37 +664,44 @@ namespace Kairos.Forms
 
         private void btnCalcularFDP_Click(object sender, EventArgs e)
         {
-            try
+            if (eventos.Count() >= 15)
             {
-                MetodologiaAjuste metodologia=MetodologiaAjuste.EVENTO_A_EVENTO;
-                Segmentacion segmentacion=Segmentacion.SEGUNDO;
-                int flagIntervalos = 0;
+                try
+                {
+                    MetodologiaAjuste metodologia = MetodologiaAjuste.EVENTO_A_EVENTO;
+                    Segmentacion segmentacion = Segmentacion.SEGUNDO;
+                    int flagIntervalos = 0;
 
-                if(rbFecha.Checked)
-                {
-                    metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
-                    segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA :(rbMinuto.Checked ? Segmentacion.MINUTO : Segmentacion.SEGUNDO));
-                    FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos, flagIntervalos);
-                    this.Visible = false;
-                    frm.ShowDialog();
-                    this.Visible = true;
+                    if (rbFecha.Checked)
+                    {
+                        metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
+                        segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA : (rbMinuto.Checked ? Segmentacion.MINUTO : Segmentacion.SEGUNDO));
+                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos, flagIntervalos);
+                        this.Visible = false;
+                        frm.ShowDialog();
+                        this.Visible = true;
+                    }
+                    else if (rbIntervalos.Checked)
+                    {
+                        metodologia = MetodologiaAjuste.EVENTO_A_EVENTO;
+                        segmentacion = Segmentacion.SEGUNDO;
+                        flagIntervalos = 1;
+                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos);
+                        this.Visible = false;
+                        frm.ShowDialog();
+                        this.Visible = true;
+                    }
                 }
-                else if(rbIntervalos.Checked)
+
+
+                catch
                 {
-                    metodologia = MetodologiaAjuste.EVENTO_A_EVENTO;
-                    segmentacion = Segmentacion.SEGUNDO;
-                    flagIntervalos = 1;
-                    FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos);
-                    this.Visible = false;
-                    frm.ShowDialog();
-                    this.Visible = true;
+                    mostrarMensaje("Error al calcular funciones", Color.FromArgb(255, 89, 89));
                 }
             }
-
-
-            catch
+            else
             {
-
+                mostrarMensaje("Debe haber al menos 15 eventos en el proyecto", Color.FromArgb(255, 255, 0));
             }
         }
 
