@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Kairos.Arduino;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO.Ports;
-using System.IO;
-using Kairos.Arduino;
+using System.Windows.Forms;
 
 namespace Kairos.Forms
 {
     public partial class FrmCapturaDatosArduino : Form
     {
-        SerialPort serialPort = new SerialPort();
-        EscrituraTxt escribirDistancias;
-
-        string estado = null;               //Estado del Form que puede ser "iniciado" o "finalizado"
+        private string tipoArchivo = "";
+        private bool timerActivo = false;
+        private SerialPort serialPort = new SerialPort();
+        private EscrituraTxt escribirDistancias;
+        private string estado = null;               //Estado del Form que puede ser "iniciado" o "finalizado"
 
         public FrmCapturaDatosArduino()
         {
@@ -56,14 +51,14 @@ namespace Kairos.Forms
         {
 
             string inData;
-         //Si el puerto esta abierto
+            //Si el puerto esta abierto
             if (serialPort.IsOpen)
             {
                 //Si hay algun archivo de escritura abierto
                 if (escribirDistancias.estaAbierto())
                 {
                     // Obtenemos el puerto serie que lanza el evento
-                    
+
 
                     // Leemos el dato recibido del puerto serie
                     try
@@ -76,7 +71,7 @@ namespace Kairos.Forms
                     {
 
                     }
-                    
+
 
                     // Y lo escribimos en un label inferior del Form
                     //labelLectura.Text = inData;
@@ -98,7 +93,7 @@ namespace Kairos.Forms
                 }
                 catch
                 {
-                    MessageBox.Show("Error", "Error al cerrar el puerto serie", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mostrarMensaje("Error al cerrar el puerto serie", Color.FromArgb(255, 89, 89));
                 }
             }
 
@@ -106,62 +101,60 @@ namespace Kairos.Forms
 
         private void buttonComenzar_Click(object sender, EventArgs e)
         {
-            //Si no se inicio ya una grabacion
-            if (estado != "iniciado")
+            try
             {
-                //Seteo el puerto para la lectura del Puerto Serial
-                if (comboBoxPuerto.Enabled == true)
+                //Si no se inicio ya una grabacion
+                if (estado != "iniciado")
                 {
-                    serialPort.PortName = comboBoxPuerto.Text;
-                }
-
-                // Valida que se haya seleccionado algun archivo
-                if (textBoxExplorar.Text == "")
-                {
-                    // Set the error if the age is too young.
-                    errorProviderExplorar.SetError(textBoxExplorar, "Seleccione archivo donde se grabaran los datos");
-                    return;
-                }
-
-                // Instancio clase para controlar escritura de archivo
-                escribirDistancias = new EscrituraTxt(textBoxExplorar.Text);
-
-                // Creamos el evento para manejo del puerto serial
-                serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
-
-                // Controlamos que el puerto indicado esté operativo y lo abrimos para la conexion
-                // Sino mandamos mensaje de error ARDUINO y cerramos el Form
-                try
-                {
-                    if (serialPort.IsOpen == false)
+                    //Seteo el puerto para la lectura del Puerto Serial
+                    if (comboBoxPuerto.Enabled == true)
                     {
-                        serialPort.Open();
-                        DateTime localDate = DateTime.Now;
-                        serialPort.Write(localDate.ToString("dd/MM/yyyy hh:mm:ss"));
+                        serialPort.PortName = comboBoxPuerto.Text;
                     }
 
+                    // Valida que se haya seleccionado algun archivo
+                    if (textBoxExplorar.Text == "")
+                    {
+                        // Set the error if the age is too young.
+                        errorProviderExplorar.SetError(textBoxExplorar, "Seleccione archivo donde se grabaran los datos");
+                        return;
+                    }
+
+                    // Instancio clase para controlar escritura de archivo
+                    escribirDistancias = new EscrituraTxt(textBoxExplorar.Text);
+
+                    // Creamos el evento para manejo del puerto serial
+                    serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
+
+                    // Controlamos que el puerto indicado esté operativo y lo abrimos para la conexion
+                    // Sino mandamos mensaje de error ARDUINO y cerramos el Form
+
+                        if (serialPort.IsOpen == false)
+                        {
+                            serialPort.Open();
+                            DateTime localDate = DateTime.Now;
+                            serialPort.Write(localDate.ToString("dd/MM/yyyy hh:mm:ss"));
+                        }
+
+
+
+
+                    // Cambiamos el label inferior de Estado
+                    labelEstado.Text = "Capturando Datos...";
+
+                    //Deshabilito componentes del Form una vez iniciada la grabacion
+                    comboBoxPuerto.Enabled = false;
+                    textBoxExplorar.Enabled = false;
+                    buttonExplorar.Enabled = false;
+
+                    //Marco como iniciado el estado del form
+                    estado = "iniciado";
                 }
-                catch
-                {
-                    MessageBox.Show("ERROR AL DETECTAR ARDUINO");
-                    this.Close();
-                }
-
-
-
-
-                // Cambiamos el label inferior de Estado
-                labelEstado.Text = "Capturando Datos...";
-
-                //Deshabilito componentes del Form una vez iniciada la grabacion
-                comboBoxPuerto.Enabled = false;
-                textBoxExplorar.Enabled = false;
-                buttonExplorar.Enabled = false;
-
-                //Marco como iniciado el estado del form
-                estado = "iniciado";
             }
-
+            catch
+            {
+                mostrarMensaje("Error al detectar el Arduino", Color.FromArgb(255, 89, 89));
+            }
 
         }
 
@@ -208,7 +201,7 @@ namespace Kairos.Forms
                 }
 
             }
-            MessageBox.Show("No hay puerto abierto");
+            mostrarMensaje("Seleccione un puerto", Color.FromArgb(255, 89, 89));
             /*
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Documento de texto|*.txt";
@@ -220,14 +213,50 @@ namespace Kairos.Forms
             */
         }
 
-        private void textBoxExplorar_TextChanged(object sender, EventArgs e)
+        //habilitar o deshabilitar explorar
+        private void rbNewFile_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (rbNewFile.Checked)
+            {
+                textBoxExplorar.Enabled = true;
+                this.tipoArchivo = "N";
+                buttonExplorar.Enabled = true;
+                buttonExplorar.BackColor = Color.FromArgb(255, 128, 128);
+            }
         }
 
+        private void rbExistingFile_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbExistingFile.Checked)
+            {
+                textBoxExplorar.Enabled = true;
+                this.tipoArchivo = "E";
+                buttonExplorar.Enabled = true;
+                buttonExplorar.BackColor = Color.FromArgb(255, 128, 128);
+            }
+        }
+
+        //mensajeria
+        private void mostrarMensaje(string mensaje, Color color)
+        {
+            lblMensaje.Text = mensaje;
+            lblMensaje.Visible = true;
+            pnlMensaje.Visible = true;
+            pnlMensaje.BackColor = color;
+            if (this.timerActivo)
+                timerMensaje.Stop();
+
+            timerMensaje.Start();
+            this.timerActivo = true;
+        }
+
+        private void timerMensaje_Tick(object sender, EventArgs e)
+        {
+            pnlMensaje.Visible = false;
+            timerMensaje.Stop();
+            this.timerActivo = false;
+        }
     }
-
-
 }
 
 

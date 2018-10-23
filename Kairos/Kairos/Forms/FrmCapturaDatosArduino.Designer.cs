@@ -42,13 +42,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.rbExistingFile = new System.Windows.Forms.RadioButton();
             this.rbNewFile = new System.Windows.Forms.RadioButton();
+            this.timerMensaje = new System.Windows.Forms.Timer(this.components);
+            this.pnlMensaje = new System.Windows.Forms.Panel();
+            this.lblMensaje = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderExplorar)).BeginInit();
+            this.pnlMensaje.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonComenzar
             // 
             this.buttonComenzar.AutoSize = true;
-            this.buttonComenzar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.buttonComenzar.BackColor = System.Drawing.Color.Black;
             this.buttonComenzar.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonComenzar.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonComenzar.ForeColor = System.Drawing.Color.White;
@@ -63,7 +67,7 @@
             // buttonFinalizar
             // 
             this.buttonFinalizar.AutoSize = true;
-            this.buttonFinalizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.buttonFinalizar.BackColor = System.Drawing.Color.Black;
             this.buttonFinalizar.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonFinalizar.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFinalizar.ForeColor = System.Drawing.Color.White;
@@ -77,7 +81,8 @@
             // 
             // buttonExplorar
             // 
-            this.buttonExplorar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.buttonExplorar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonExplorar.Enabled = false;
             this.buttonExplorar.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.buttonExplorar.ForeColor = System.Drawing.Color.White;
             this.buttonExplorar.Location = new System.Drawing.Point(279, 123);
@@ -90,11 +95,11 @@
             // 
             // textBoxExplorar
             // 
+            this.textBoxExplorar.Enabled = false;
             this.textBoxExplorar.Location = new System.Drawing.Point(114, 132);
             this.textBoxExplorar.Name = "textBoxExplorar";
             this.textBoxExplorar.Size = new System.Drawing.Size(159, 20);
             this.textBoxExplorar.TabIndex = 5;
-            this.textBoxExplorar.TextChanged += new System.EventHandler(this.textBoxExplorar_TextChanged);
             // 
             // labelEstado
             // 
@@ -142,7 +147,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 11F);
-            this.label2.Location = new System.Drawing.Point(120, 15);
+            this.label2.Location = new System.Drawing.Point(120, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(184, 20);
             this.label2.TabIndex = 12;
@@ -168,6 +173,7 @@
             this.rbExistingFile.TabStop = true;
             this.rbExistingFile.Text = "Existente";
             this.rbExistingFile.UseVisualStyleBackColor = true;
+            this.rbExistingFile.CheckedChanged += new System.EventHandler(this.rbExistingFile_CheckedChanged);
             // 
             // rbNewFile
             // 
@@ -179,6 +185,31 @@
             this.rbNewFile.TabStop = true;
             this.rbNewFile.Text = "Nuevo";
             this.rbNewFile.UseVisualStyleBackColor = true;
+            this.rbNewFile.CheckedChanged += new System.EventHandler(this.rbNewFile_CheckedChanged);
+            // 
+            // timerMensaje
+            // 
+            this.timerMensaje.Interval = 2000;
+            this.timerMensaje.Tick += new System.EventHandler(this.timerMensaje_Tick);
+            // 
+            // pnlMensaje
+            // 
+            this.pnlMensaje.Controls.Add(this.lblMensaje);
+            this.pnlMensaje.Location = new System.Drawing.Point(90, 2);
+            this.pnlMensaje.Name = "pnlMensaje";
+            this.pnlMensaje.Size = new System.Drawing.Size(286, 19);
+            this.pnlMensaje.TabIndex = 24;
+            // 
+            // lblMensaje
+            // 
+            this.lblMensaje.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMensaje.Location = new System.Drawing.Point(9, 2);
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(274, 17);
+            this.lblMensaje.TabIndex = 22;
+            this.lblMensaje.Text = "Mensaje";
+            this.lblMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMensaje.Visible = false;
             // 
             // FrmCapturaDatosArduino
             // 
@@ -186,6 +217,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(455, 244);
+            this.Controls.Add(this.pnlMensaje);
             this.Controls.Add(this.rbExistingFile);
             this.Controls.Add(this.rbNewFile);
             this.Controls.Add(this.label3);
@@ -204,6 +236,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderExplorar)).EndInit();
+            this.pnlMensaje.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,6 +256,9 @@
         private System.Windows.Forms.RadioButton rbNewFile;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer timerMensaje;
+        private System.Windows.Forms.Label lblMensaje;
+        private System.Windows.Forms.Panel pnlMensaje;
     }
 }
 
