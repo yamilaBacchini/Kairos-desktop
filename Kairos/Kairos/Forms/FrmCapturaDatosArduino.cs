@@ -203,12 +203,20 @@ namespace Kairos.Forms
             }
             mostrarMensaje("Seleccione un puerto", Color.FromArgb(255, 89, 89));
             /*
+             if(rbexisteingfile.checked)
+             {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Documento de texto|*.txt";
 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 textBoxExplorar.Text = ofd.FileName;
+            }
+            }
+            else if(rbnewfile.checked)
+            {
+                abrir explorar
+                que si no existe lo cree
             }
             */
         }
