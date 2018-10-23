@@ -33,6 +33,7 @@ namespace Kairos.Forms
             InitializeComponent();
             this.idOrigen = idOrigen;
             this.nombreProyecto = nombreProyecto;
+            lblTituloProyecto.Text = nombreProyecto;
             filtros = new List<Filtro>();
             setupFiltrosCheckboxList();
             cargarFiltros();
@@ -80,25 +81,45 @@ namespace Kairos.Forms
 
         private void btnModificarRegistro_Click(object sender, EventArgs e)
         {
+            if(eventos.Count()>0)
+            {
             tipoAccion = TipoAccionProcesamiento.MODIFICAR_REGISTRO;
             modificarLayout(tipoAccion);
             botonSeleccionado(btnModificarRegistro);
+            }
+            else
+            {
+                mostrarMensaje("No hay ningún evento", Color.FromArgb(255, 255, 0));
+            }
         }
 
         private void btnBorrarSeleccionados_Click(object sender, EventArgs e)
         {
-            tipoAccion = TipoAccionProcesamiento.BORRAR_SELECCIONADOS;
-            modificarLayout(tipoAccion);
-            botonSeleccionado(btnBorrarSeleccionados);
-            int cant = eventosSeleccionados.Count;
+            if(eventos.Count()>0)
+            {
+                try
+                {
+                tipoAccion = TipoAccionProcesamiento.BORRAR_SELECCIONADOS;
+                modificarLayout(tipoAccion);
+                botonSeleccionado(btnBorrarSeleccionados);
+                int cant = eventosSeleccionados.Count;
 
-            EventoService.borrar(eventosSeleccionados);
-            cargarEventos();
+                EventoService.borrar(eventosSeleccionados);
+                cargarEventos();
 
-            if (eventosSeleccionados.Count > 1)
                 mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
-            else if (eventosSeleccionados.Count == 1)
-                mostrarMensaje("Registro eliminado correctamente", Color.FromArgb(128, 255, 128));
+                }
+                catch (Exception ex)
+                {
+                    mostrarMensaje("Error al eliminar registros", Color.FromArgb(255, 89, 89));
+                }
+
+            }
+            else
+            {
+                mostrarMensaje("No hay ningún evento", Color.FromArgb(255, 255, 0));
+            }
+            
         }
 
         private void btnSeleccionarTodos_Click(object sender, EventArgs e)
@@ -111,9 +132,16 @@ namespace Kairos.Forms
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            tipoAccion = TipoAccionProcesamiento.FILTRAR;
-            modificarLayout(tipoAccion);
-            botonSeleccionado(btnFiltrar);
+            if (eventos.Count() > 0)
+            {
+                tipoAccion = TipoAccionProcesamiento.FILTRAR;
+                modificarLayout(tipoAccion);
+                botonSeleccionado(btnFiltrar);
+            }
+            else
+            {
+                mostrarMensaje("No hay ningún evento", Color.FromArgb(255, 255, 0));
+            }
         }
 
         private void modificarLayout(TipoAccionProcesamiento tipoAccion)
