@@ -5,14 +5,10 @@ using Kairos.Modelo;
 using Kairos.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Kairos.FuncionesDensidad;
 
 namespace Kairos.Forms
 {
@@ -83,11 +79,11 @@ namespace Kairos.Forms
 
         private void btnModificarRegistro_Click(object sender, EventArgs e)
         {
-            if(eventos.Count()>0)
+            if (eventos.Count() > 0)
             {
-            tipoAccion = TipoAccionProcesamiento.MODIFICAR_REGISTRO;
-            modificarLayout(tipoAccion);
-            botonSeleccionado(btnModificarRegistro);
+                tipoAccion = TipoAccionProcesamiento.MODIFICAR_REGISTRO;
+                modificarLayout(tipoAccion);
+                botonSeleccionado(btnModificarRegistro);
             }
             else
             {
@@ -97,20 +93,20 @@ namespace Kairos.Forms
 
         private void btnBorrarSeleccionados_Click(object sender, EventArgs e)
         {
-            if(eventos.Count()>0)
+            if (eventos.Count() > 0)
             {
                 try
                 {
-                tipoAccion = TipoAccionProcesamiento.BORRAR_SELECCIONADOS;
-                modificarLayout(tipoAccion);
-                botonSeleccionado(btnBorrarSeleccionados);
-                int cant = eventosSeleccionados.Count;
+                    tipoAccion = TipoAccionProcesamiento.BORRAR_SELECCIONADOS;
+                    modificarLayout(tipoAccion);
+                    botonSeleccionado(btnBorrarSeleccionados);
+                    int cant = eventosSeleccionados.Count;
 
-                EventoService.borrar(eventosSeleccionados);
-                cargarEventos();
+                    EventoService.borrar(eventosSeleccionados);
+                    cargarEventos();
 
-                mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
-                actualizarEstadisticas();
+                    mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
+                    actualizarEstadisticas();
                 }
                 catch (Exception)
                 {
@@ -122,7 +118,7 @@ namespace Kairos.Forms
             {
                 mostrarMensaje("No hay ningún evento", Color.FromArgb(255, 255, 0));
             }
-            
+
         }
 
         private void btnSeleccionarTodos_Click(object sender, EventArgs e)
@@ -358,7 +354,7 @@ namespace Kairos.Forms
 
         //filtros
 
-        class ComboItem
+        private class ComboItem
         {
             public int Value { get; set; }
             public string Display { get; set; }
@@ -583,7 +579,7 @@ namespace Kairos.Forms
             }
             else if (rbIntervalos.Checked)
             {
-                List<double> filtrado = filtrador.FiltrarIntervalos(this.intervalosParciales, cmbTipoFiltro.SelectedIndex, Convert.ToInt32(txtIntervalo.Text),Convert.ToInt32(txtIntervalo2.Text));
+                List<double> filtrado = filtrador.FiltrarIntervalos(this.intervalosParciales, cmbTipoFiltro.SelectedIndex, Convert.ToInt32(txtIntervalo.Text), Convert.ToInt32(txtIntervalo2.Text));
                 intervalosParciales = filtrado; //para filtros acumulativos
 
                 //leno dataGridView con los intervalos
@@ -604,14 +600,14 @@ namespace Kairos.Forms
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            if(rbFecha.Checked)
+            if (rbFecha.Checked)
             {
                 cmbTipoFiltro.SelectedIndex = 0;
                 filtros.Clear();
                 chlFiltros.Items.Clear();
                 filtrar();
             }
-            else if(rbIntervalos.Checked)
+            else if (rbIntervalos.Checked)
             {
                 quitarFiltrosIntervalos();
 
@@ -631,9 +627,8 @@ namespace Kairos.Forms
                 dgwEventos.Columns[0].Width = 235;
 
                 intervalosParciales = intervalos;
-
-                
             }
+            actualizarEstadisticas();
         }
 
         public void quitarFiltrosIntervalos()
@@ -765,13 +760,14 @@ namespace Kairos.Forms
                     modificarLayout(TipoAccionProcesamiento.FILTRAR);
 
                 }
+                actualizarEstadisticas();
             }
         }
         private void rbFecha_CheckedChanged(object sender, EventArgs e)
         {
             if (rbFecha.Checked)
             {
-                cargarEventos();
+                cargarEventos(); //aca se ponen en cero los eventos: revisar
                 btnAgregarRegistro.Enabled = true;
                 btnModificarRegistro.Enabled = true;
                 btnBorrarSeleccionados.Enabled = true;
@@ -780,20 +776,38 @@ namespace Kairos.Forms
                 chlFiltros.Enabled = true;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnFiltrar);
-
                 quitarFiltrosIntervalos();
+                actualizarEstadisticas();
             }
         }
 
         private void actualizarEstadisticas()
         {
-            lblCantidad.Text = eventos.Count().ToString();
+            if (rbFecha.Checked)
+            {
+                lblCantidad.Text = eventos.Count().ToString();
+            }
+            else if (rbIntervalos.Checked)
+            {
+                lblCantidad.Text = intervalosParciales.Count().ToString();
+            }
             lblMedia.Text = calcularMedia().ToString("0.0000");
+
         }
         private double calcularMedia()
         {
-            List<double> intervalos = FdPUtils.CalcularIntervalos(eventos);
-            return intervalos.Sum() / intervalos.Count();
+            double resultado = 0;
+            if (rbFecha.Checked)
+            {
+                List<double> intervalos = FdPUtils.CalcularIntervalos(eventos);
+                resultado = intervalos.Sum() / intervalos.Count();
+            }
+            else if (rbIntervalos.Checked)
+            {
+                resultado = intervalosParciales.Sum() / intervalosParciales.Count();
+            }
+            return resultado;
+
         }
     }
 }
