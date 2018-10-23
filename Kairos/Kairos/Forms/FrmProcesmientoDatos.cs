@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Kairos.FuncionesDensidad;
 
 namespace Kairos.Forms
 {
@@ -39,6 +40,8 @@ namespace Kairos.Forms
             cargarFiltros();
             cambiarFiltrosVistaFecha(0);
             cargarEventos();
+            lblCantidad.Text = eventos.Count().ToString();
+            lblMedia.Text = calcularMedia().ToString("0.0000");
         }
 
         private void setupFiltrosCheckboxList()
@@ -777,6 +780,12 @@ namespace Kairos.Forms
 
                 quitarFiltrosIntervalos();
             }
+        }
+
+        private double calcularMedia()
+        {
+            List<double> intervalos = FdPUtils.CalcularIntervalos(eventos);
+            return intervalos.Sum() / intervalos.Count();
         }
     }
 }
