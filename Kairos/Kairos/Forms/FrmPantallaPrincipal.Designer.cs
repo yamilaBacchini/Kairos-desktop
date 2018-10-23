@@ -259,7 +259,6 @@
             // 
             // pnlProyectos
             // 
-            this.pnlProyectos.Controls.Add(this.pnlImportacion);
             this.pnlProyectos.Controls.Add(this.panelNombreProyecto);
             this.pnlProyectos.Controls.Add(this.imgBorrar);
             this.pnlProyectos.Controls.Add(this.imgEditar);
@@ -279,7 +278,7 @@
             this.pnlImportacion.Controls.Add(this.pnlImportacionExcel);
             this.pnlImportacion.Controls.Add(this.btnAceptarImportacion);
             this.pnlImportacion.Controls.Add(this.lblTituloImportacion);
-            this.pnlImportacion.Location = new System.Drawing.Point(403, 48);
+            this.pnlImportacion.Location = new System.Drawing.Point(0, 0);
             this.pnlImportacion.Name = "pnlImportacion";
             this.pnlImportacion.Size = new System.Drawing.Size(343, 403);
             this.pnlImportacion.TabIndex = 24;
@@ -509,6 +508,7 @@
             // panelNombreProyecto
             // 
             this.panelNombreProyecto.BackColor = System.Drawing.Color.Transparent;
+            this.panelNombreProyecto.Controls.Add(this.pnlImportacion);
             this.panelNombreProyecto.Controls.Add(this.txtNombreProyecto);
             this.panelNombreProyecto.Controls.Add(this.lblNombreProyecto);
             this.panelNombreProyecto.Controls.Add(this.btnAceptarModificar);
