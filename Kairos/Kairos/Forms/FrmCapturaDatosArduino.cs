@@ -26,12 +26,22 @@ namespace Kairos.Forms
             // Creamos el evento para leer datos desde puerto serial
             serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
 
+            //show list of valid com ports
+            foreach (string s in System.IO.Ports.SerialPort.GetPortNames())
+            {
+                comboBoxPuerto.Items.Add(s);
+            }
+
             // Inicializamos comboBox de lectura de puerto y parametro de velocidad de transmicion por puerto serial
-            comboBoxPuerto.SelectedIndex = 2;
+            if (comboBoxPuerto.Items.Count > 0)
+            {
+                comboBoxPuerto.SelectedIndex = 0;
+            }
+
             serialPort.BaudRate = 9600;
             // Asignamos las propiedades ---- PARA LEER DESDE UN ARCHIVO DE CONFIGURACION probando branch1 -----
             serialPort.BaudRate = 9600;
-            serialPort.PortName = "COM3";
+
 
 
 
@@ -46,7 +56,7 @@ namespace Kairos.Forms
         {
 
             string inData;
-            //Si el puerto esta abierto
+         //Si el puerto esta abierto
             if (serialPort.IsOpen)
             {
                 //Si hay algun archivo de escritura abierto
@@ -127,7 +137,7 @@ namespace Kairos.Forms
                     {
                         serialPort.Open();
                         DateTime localDate = DateTime.Now;
-                        serialPort.Write(localDate.ToString());
+                        serialPort.Write(localDate.ToString("dd/MM/yyyy hh:mm:ss"));
                     }
 
                 }
@@ -181,6 +191,25 @@ namespace Kairos.Forms
 
         private void buttonExplorar_Click(object sender, EventArgs e)
         {
+            var portNames = SerialPort.GetPortNames();
+
+            foreach (var port in portNames)
+            {
+                serialPort.PortName = port;
+                try
+                {
+                    serialPort.Open();
+                    MessageBox.Show(port);
+                    break;
+                }
+                catch
+                {
+                    continue;
+                }
+
+            }
+            MessageBox.Show("No hay puerto abierto");
+            /*
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Documento de texto|*.txt";
 
@@ -188,7 +217,7 @@ namespace Kairos.Forms
             {
                 textBoxExplorar.Text = ofd.FileName;
             }
-
+            */
         }
 
         private void textBoxExplorar_TextChanged(object sender, EventArgs e)
