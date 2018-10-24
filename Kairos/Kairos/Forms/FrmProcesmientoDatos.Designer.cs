@@ -76,6 +76,11 @@
             this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTituloProyecto = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblMedia = new System.Windows.Forms.Label();
             this.pnlEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
             this.panel2.SuspendLayout();
@@ -87,10 +92,12 @@
             this.pnlAcciones.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlSegmentacion.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlEventos
             // 
+            this.pnlEventos.Controls.Add(this.panel3);
             this.pnlEventos.Controls.Add(this.dgwEventos);
             this.pnlEventos.Controls.Add(this.panel2);
             this.pnlEventos.Controls.Add(this.lblEventos);
@@ -111,7 +118,7 @@
             this.dgwEventos.Name = "dgwEventos";
             this.dgwEventos.ReadOnly = true;
             this.dgwEventos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwEventos.Size = new System.Drawing.Size(344, 414);
+            this.dgwEventos.Size = new System.Drawing.Size(344, 379);
             this.dgwEventos.TabIndex = 23;
             this.dgwEventos.SelectionChanged += new System.EventHandler(this.dgwEventos_SelectionChanged);
             // 
@@ -190,7 +197,7 @@
             this.pnlModificable.Controls.Add(this.lblTituloAccion);
             this.pnlModificable.Location = new System.Drawing.Point(666, 106);
             this.pnlModificable.Name = "pnlModificable";
-            this.pnlModificable.Size = new System.Drawing.Size(282, 303);
+            this.pnlModificable.Size = new System.Drawing.Size(282, 338);
             this.pnlModificable.TabIndex = 2;
             this.pnlModificable.Visible = false;
             // 
@@ -217,7 +224,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(7, 183);
+            this.label2.Location = new System.Drawing.Point(7, 218);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 20);
             this.label2.TabIndex = 54;
@@ -226,7 +233,7 @@
             // chlFiltros
             // 
             this.chlFiltros.FormattingEnabled = true;
-            this.chlFiltros.Location = new System.Drawing.Point(11, 211);
+            this.chlFiltros.Location = new System.Drawing.Point(11, 243);
             this.chlFiltros.Name = "chlFiltros";
             this.chlFiltros.Size = new System.Drawing.Size(230, 49);
             this.chlFiltros.TabIndex = 53;
@@ -237,7 +244,7 @@
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnLimpiar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
-            this.btnLimpiar.Location = new System.Drawing.Point(165, 263);
+            this.btnLimpiar.Location = new System.Drawing.Point(165, 296);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(76, 31);
             this.btnLimpiar.TabIndex = 52;
@@ -333,9 +340,9 @@
             // pnlAccionesFinales
             // 
             this.pnlAccionesFinales.Controls.Add(this.btnCalcularFDP);
-            this.pnlAccionesFinales.Location = new System.Drawing.Point(666, 502);
+            this.pnlAccionesFinales.Location = new System.Drawing.Point(666, 539);
             this.pnlAccionesFinales.Name = "pnlAccionesFinales";
-            this.pnlAccionesFinales.Size = new System.Drawing.Size(282, 82);
+            this.pnlAccionesFinales.Size = new System.Drawing.Size(282, 45);
             this.pnlAccionesFinales.TabIndex = 3;
             // 
             // btnCalcularFDP
@@ -343,7 +350,7 @@
             this.btnCalcularFDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(10)))), ((int)(((byte)(40)))));
             this.btnCalcularFDP.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalcularFDP.ForeColor = System.Drawing.Color.White;
-            this.btnCalcularFDP.Location = new System.Drawing.Point(53, 42);
+            this.btnCalcularFDP.Location = new System.Drawing.Point(53, 3);
             this.btnCalcularFDP.Name = "btnCalcularFDP";
             this.btnCalcularFDP.Size = new System.Drawing.Size(176, 36);
             this.btnCalcularFDP.TabIndex = 16;
@@ -531,7 +538,7 @@
             this.panel1.Controls.Add(this.rbDtConstante);
             this.panel1.Controls.Add(this.rbEventoAEvento);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(666, 415);
+            this.panel1.Location = new System.Drawing.Point(666, 450);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 81);
             this.panel1.TabIndex = 23;
@@ -638,6 +645,61 @@
             this.lblTituloProyecto.TabIndex = 64;
             this.lblTituloProyecto.Text = "Titulo Proyecto";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(12, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 20);
+            this.label4.TabIndex = 57;
+            this.label4.Text = "Cantidad:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label5.Location = new System.Drawing.Point(163, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.TabIndex = 62;
+            this.label5.Text = "Media:";
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.lblCantidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblCantidad.Location = new System.Drawing.Point(89, 7);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(17, 20);
+            this.lblCantidad.TabIndex = 63;
+            this.lblCantidad.Text = "0";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblMedia);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.lblCantidad);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Location = new System.Drawing.Point(0, 418);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(388, 35);
+            this.panel3.TabIndex = 64;
+            // 
+            // lblMedia
+            // 
+            this.lblMedia.AutoSize = true;
+            this.lblMedia.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.lblMedia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMedia.Location = new System.Drawing.Point(217, 7);
+            this.lblMedia.Name = "lblMedia";
+            this.lblMedia.Size = new System.Drawing.Size(17, 20);
+            this.lblMedia.TabIndex = 64;
+            this.lblMedia.Text = "0";
+            // 
             // FrmProcesmientoDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -675,6 +737,8 @@
             this.panel1.PerformLayout();
             this.pnlSegmentacion.ResumeLayout(false);
             this.pnlSegmentacion.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -727,5 +791,10 @@
         private System.Windows.Forms.TextBox txtIntervalo2;
         private System.Windows.Forms.RadioButton rbSegundo;
         private System.Windows.Forms.Label lblTituloProyecto;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblMedia;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblCantidad;
+        private System.Windows.Forms.Label label4;
     }
 }
