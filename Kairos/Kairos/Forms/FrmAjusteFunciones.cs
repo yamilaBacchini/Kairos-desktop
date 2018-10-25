@@ -248,6 +248,10 @@ namespace Kairos.Forms
             GraficarLineaFDP(funcion.FDP);
             GraficarLineaInversa(funcion.FDP);
             resultadoSeleccionado = funcion;
+            if (nombreFuncion.Contains("Poisson") || nombreFuncion.Contains("Binomial"))
+                lblTituloFuncionInversa.Text = "Función Acumulada";
+            else
+                lblTituloFuncionInversa.Text = "Función Inversa";
         }
 
         private void btnFuncionWeibull0_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 0.5", resultadoFuncionWeibull0_5);
