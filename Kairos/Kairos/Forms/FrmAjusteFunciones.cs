@@ -77,8 +77,9 @@ namespace Kairos.Forms
             {
                 if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
                 {
-                   //eventosSimplificados = FdPUtils.AgruparSegmentacionProbabilidad(segmentacion, eventos);
-                   eventosParaAjuste = FdPUtils.AgruparSegmentacion(segmentacion,eventos).ToArray();
+                    List<double> lista = FdPUtils.AgruparSegmentacion(segmentacion, eventos);
+                   eventosParaAjuste = lista.ToArray();
+                   eventosSimplificados = FdPUtils.AgruparSegmentacionProbabilidad(lista);
                 }
                 else if(metodologia == MetodologiaAjuste.EVENTO_A_EVENTO)
                 {
