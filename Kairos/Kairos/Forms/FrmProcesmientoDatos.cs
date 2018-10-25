@@ -767,6 +767,7 @@ namespace Kairos.Forms
         {
             if (rbFecha.Checked)
             {
+                quitarFiltrosIntervalos();
                 cargarEventos(); //aca se ponen en cero los eventos: revisar
                 btnAgregarRegistro.Enabled = true;
                 btnModificarRegistro.Enabled = true;
@@ -776,7 +777,6 @@ namespace Kairos.Forms
                 chlFiltros.Enabled = true;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnFiltrar);
-                quitarFiltrosIntervalos();
                 actualizarEstadisticas();
             }
         }
