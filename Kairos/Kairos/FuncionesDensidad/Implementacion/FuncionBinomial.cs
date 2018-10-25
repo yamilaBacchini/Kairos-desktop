@@ -13,9 +13,11 @@ namespace Kairos.FuncionesDensidad.Implementacion
 {
     class FuncionBinomial : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
-        public string StringFDP => string.Format("f(x)=({0} x) {1}^x(1-{1})^({0}-x)", DistribucionDiscreta.ToString(), DistribucionDiscreta.ToString());
+        private readonly string n = "";
+        private readonly string p = "";
+        public string StringFDP => string.Format("f(x)=({0}|x)({1}^x)*(1-{1})^({0}-x)", n,p);
 
-        public string StringInversa => "No implementado aun";
+        public string StringInversa => string.Format("F(x) =Σ(i=0;{0}) ({1}^i)*(1-{1})^({0}-i)",n,p);
 
         public FuncionBinomial(double[] eventos) : base(eventos)
         {
@@ -23,6 +25,8 @@ namespace Kairos.FuncionesDensidad.Implementacion
             {
                 DistribucionDiscreta = new BinomialDistribution();
                 DistribucionDiscreta.Fit(eventos);
+                n = ((BinomialDistribution)DistribucionDiscreta).NumberOfTrials.ToString("0.0000");
+                p = ((BinomialDistribution)DistribucionDiscreta).ProbabilityOfSuccess.ToString("0.0000");
                 Resultado = new ResultadoAjuste(StringFDP, StringInversa, DistribucionDiscreta.StandardDeviation, DistribucionDiscreta.Mean, DistribucionDiscreta.Variance, this);
             }
             catch (Exception)
