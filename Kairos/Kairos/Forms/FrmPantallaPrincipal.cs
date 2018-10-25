@@ -118,9 +118,9 @@ namespace Kairos.Forms
                 var seleccionado = lbProyectosRecientes.SelectedItem;
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
-                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text + ".prk");
+                ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text);
 
-                lblMensaje.Text = "Se modifico el proyecto " + txtNombreProyecto.Text + ".prk correctamente";
+                lblMensaje.Text = "Se modifico el proyecto " + txtNombreProyecto.Text + "correctamente";
                 panelNotificaciones.Visible = true;
                 timerMensaje.Start();
             }
@@ -218,7 +218,8 @@ namespace Kairos.Forms
 
         private void btnArduino_Click(object sender, EventArgs e)
         {
-            FrmCapturaDatosArduino frm = new FrmCapturaDatosArduino();
+            var selectedItem = Cast(new { nombreOrigen = "", Id = 0 }, lbProyectosRecientes.SelectedItem);
+            FrmCapturaDatosArduino frm = new FrmCapturaDatosArduino(new Origen {nombreOrigen=selectedItem.nombreOrigen,Id=selectedItem.Id });
             Visible = false;
             frm.ShowDialog();
             Visible = true;
@@ -295,7 +296,7 @@ namespace Kairos.Forms
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
                 resultado = importador.importarArchivoEnProyectoExistente(fileName, a.Id);
-                if (resultado == true) {
+                if (resultado) {
                     lblMensaje.Text = "El archivo se importó correctamente";
                     panelNotificaciones.Visible = true;
                     timerMensaje.Start();

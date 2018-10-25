@@ -1,4 +1,7 @@
 ﻿using Kairos.Arduino;
+using Kairos.Entidades;
+using Kairos.Services;
+using Kairos.Services.Implementaciones;
 using System;
 using System.Drawing;
 using System.IO.Ports;
@@ -14,9 +17,11 @@ namespace Kairos.Forms
         private EscrituraTxt escribirDistancias;
         private string estado = null;               //Estado del Form que puede ser "iniciado" o "finalizado"
 
-        public FrmCapturaDatosArduino()
+        private Origen proyecto;
+        public FrmCapturaDatosArduino(Origen proyecto)
         {
             InitializeComponent();
+            this.proyecto = proyecto;
 
             // Creamos el evento para leer datos desde puerto serial
             serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
@@ -37,6 +42,22 @@ namespace Kairos.Forms
             // Asignamos las propiedades ---- PARA LEER DESDE UN ARCHIVO DE CONFIGURACION probando branch1 -----
             serialPort.BaudRate = 9600;
 
+           /* var portNames = SerialPort.GetPortNames();
+
+            foreach (var port in portNames)
+            {
+                serialPort.PortName = port;
+                try
+                {
+                    serialPort.Open();
+                    break;
+                }
+                catch
+                {
+                    continue;
+                }
+            }*/
+           // mostrarMensaje("Seleccione un puerto", Color.FromArgb(255, 89, 89));
 
 
 
@@ -151,7 +172,7 @@ namespace Kairos.Forms
                     estado = "iniciado";
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 mostrarMensaje("Error al detectar el Arduino", Color.FromArgb(255, 89, 89));
             }
@@ -177,48 +198,28 @@ namespace Kairos.Forms
                 //Marco como estado del form = finalizada la grabacion
                 estado = "finalizado";
 
-            }
+                //importar
+                ImportarTxtFile importador = new ImportarTxtFile("enter");
+                bool resultado = importador.importarArchivoEnProyectoExistente(textBoxExplorar.Text, this.proyecto.Id);
+                if (resultado)
+                    mostrarMensaje("El archivo se importo correctamente", Color.FromArgb(128, 255, 128));
+                }
         }
 
 
 
         private void buttonExplorar_Click(object sender, EventArgs e)
         {
-            var portNames = SerialPort.GetPortNames();
-
-            foreach (var port in portNames)
+            if (rbExistingFile.Checked)
             {
-                serialPort.PortName = port;
-                try
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "txt Files|*.txt";
+
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    serialPort.Open();
-                    MessageBox.Show(port);
-                    break;
+                    textBoxExplorar.Text = ofd.FileName;
                 }
-                catch
-                {
-                    continue;
-                }
-
             }
-            mostrarMensaje("Seleccione un puerto", Color.FromArgb(255, 89, 89));
-            /*
-             if(rbexisteingfile.checked)
-             {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Documento de texto|*.txt";
-
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                textBoxExplorar.Text = ofd.FileName;
-            }
-            }
-            else if(rbnewfile.checked)
-            {
-                abrir explorar
-                que si no existe lo cree
-            }
-            */
         }
 
         //habilitar o deshabilitar explorar

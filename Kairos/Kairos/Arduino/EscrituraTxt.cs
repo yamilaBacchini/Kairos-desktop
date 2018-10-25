@@ -17,7 +17,7 @@ namespace Kairos.Arduino
         {
             try
             {
-                sw = new StreamWriter(Archivo);
+                sw = new StreamWriter(Archivo, append: true);
                 isOpen = true;
             }
             catch (Exception e)
