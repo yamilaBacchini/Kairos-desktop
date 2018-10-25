@@ -22,7 +22,7 @@ namespace Kairos.Forms
         private Segmentacion segmentacion;
         private List<Evento> eventos = null;
         private Dictionary<string, double> eventosSimplificados = null;
-        private double[] intervalosEventosEaE = null;
+        private double[] eventosParaAjuste = null;
         private ResultadoAjuste resultadoSeleccionado = null;
         private ResultadoAjuste resultadoFuncionWeibull0_5 = null;
         private ResultadoAjuste resultadoFuncionBinomial = null;
@@ -76,18 +76,21 @@ namespace Kairos.Forms
             if(flagIntervalos==0)
             {
                 if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
-                    eventosSimplificados = FdPUtils.Agrupar(segmentacion, eventos);
-                else
+                {
+                   // eventosSimplificados = FdPUtils.AgruparSegmentacionProbabilidad(segmentacion, eventos);
+                   // eventosParaAjuste = FdPUtils.AgruparSegmentacion(segmentacion,eventos);
+                }
+                else if(metodologia == MetodologiaAjuste.EVENTO_A_EVENTO)
                 {
                     eventosSimplificados = FdPUtils.AgruparIntervalos(eventos);
-                    intervalosEventosEaE = FdPUtils.CalcularIntervalos(eventos).ToArray();
+                    eventosParaAjuste = FdPUtils.CalcularIntervalos(eventos).ToArray();
                 }
             }
             else
             {
                 double cant = intervalos.Count;
-                eventosSimplificados= intervalos.GroupBy(x => x).ToDictionary(x => x.Key.ToString(), x => x.Count() / cant > 1 ? cant - 1 : cant);
-                intervalosEventosEaE = intervalos.ToArray();
+                eventosSimplificados= intervalos.GroupBy(x => x).ToDictionary(x => x.Key.ToString(), x => x.Count() /(cant > 1 ? cant - 1 : cant));
+                eventosParaAjuste = intervalos.ToArray();
             }
             
         }
@@ -101,11 +104,11 @@ namespace Kairos.Forms
                 if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
                     arrEventos = eventosSimplificados.Values.ToArray();
                 else
-                    arrEventos = intervalosEventosEaE;
+                    arrEventos = eventosParaAjuste;
             }
             else
             {
-                arrEventos = intervalosEventosEaE;
+                arrEventos = eventosParaAjuste;
             }
            
             resultadoFuncionWeibull0_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL05, arrEventos).Resultado;

@@ -20,7 +20,7 @@ namespace Kairos.FuncionesDensidad
                 return eventosOrdenados.Select(x => x.fecha.TimeOfDay)
                     .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
                     .Skip(1), (x, y) => y - x)
-                    .Select(x => Math.Abs(x.TotalMinutes))
+                    .Select(x => Math.Abs(x.TotalSeconds))
                     .GroupBy(x => x)
                     .ToDictionary(x => x.Key.ToString(), x => x.Count() / (cantEventos > 1 ? cantEventos - 1 : cantEventos));
             }
@@ -34,18 +34,22 @@ namespace Kairos.FuncionesDensidad
             {
                 double cantEventos = (double)eventos.Count;
                 var eventosOrdenados = eventos.OrderBy(x => x.fecha);
-                return eventosOrdenados.Select(x => x.fecha)
+                return eventosOrdenados.Select(x => x.fecha.TimeOfDay)
+                    .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
+                    .Skip(1), (x, y) => y - x)
+                    .Select(x => Math.Abs(x.TotalSeconds)).ToList();
+                /*return eventosOrdenados.Select(x => x.fecha)
                     .Zip(eventosOrdenados.Select(x => x.fecha)
                     .Skip(1), (x, y) => y.Date == x.Date ? y - x : TimeSpan.MaxValue)
                     .Where(x => x != TimeSpan.MaxValue)
                     .Select(x => Math.Abs(x.TotalMinutes))
-                    .ToList();
+                    .ToList();*/
             }
             else
                 return null;
         }
 
-        public static Dictionary<string, double> Agrupar(Segmentacion segmentacion, List<Evento> eventos)
+        public static Dictionary<string, double> AgruparSegmentacion(Segmentacion segmentacion, List<Evento> eventos)
         {
             if (eventos != null && eventos.Count > 0)
             {
