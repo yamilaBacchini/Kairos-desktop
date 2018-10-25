@@ -77,8 +77,8 @@ namespace Kairos.Forms
             {
                 if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
                 {
-                   // eventosSimplificados = FdPUtils.AgruparSegmentacionProbabilidad(segmentacion, eventos);
-                   // eventosParaAjuste = FdPUtils.AgruparSegmentacion(segmentacion,eventos);
+                   //eventosSimplificados = FdPUtils.AgruparSegmentacionProbabilidad(segmentacion, eventos);
+                   eventosParaAjuste = FdPUtils.AgruparSegmentacion(segmentacion,eventos).ToArray();
                 }
                 else if(metodologia == MetodologiaAjuste.EVENTO_A_EVENTO)
                 {
@@ -97,19 +97,8 @@ namespace Kairos.Forms
 
         private void CalcularYOrdenarFunciones()
         {
-            double[] arrEventos = null;
+            double[] arrEventos = eventosParaAjuste.ToArray();
 
-            if (flagIntervalos == 0)
-            {
-                if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
-                    arrEventos = eventosSimplificados.Values.ToArray();
-                else
-                    arrEventos = eventosParaAjuste;
-            }
-            else
-            {
-                arrEventos = eventosParaAjuste;
-            }
            
             resultadoFuncionWeibull0_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL05, arrEventos).Resultado;
             if (resultadoFuncionWeibull0_5 != null)

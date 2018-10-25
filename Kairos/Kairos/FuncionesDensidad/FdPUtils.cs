@@ -49,23 +49,23 @@ namespace Kairos.FuncionesDensidad
                 return null;
         }
 
-        public static Dictionary<string, double> AgruparSegmentacion(Segmentacion segmentacion, List<Evento> eventos)
+        public static List<double> AgruparSegmentacion(Segmentacion segmentacion, List<Evento> eventos)
         {
             if (eventos != null && eventos.Count > 0)
             {
                 double cantEventos = (double)eventos.Count;
                 switch (segmentacion)
                 {
-                    case Segmentacion.ANIO:
+                    /*case Segmentacion.ANIO:
                         return eventos.Select(x => x.fecha.Year)
-                            .GroupBy(x => x).ToDictionary(x => x.Key.ToString(), x => x.Count() / cantEventos);
+                            .GroupBy(x => x).Select(x =>Convert.ToDouble(x.Count())).ToList();
                     case Segmentacion.MES:
                         return eventos.Select(x => new { Mes = x.fecha.Month, Anio = x.fecha.Year })
-                            .GroupBy(x => new { x.Mes, x.Anio }).ToDictionary(x => x.Key.Anio + "" + x.Key.Mes, x => x.Count() / cantEventos);
+                            .GroupBy(x => new { x.Mes, x.Anio }).ToDictionary(x => x.Key.Anio + "" + x.Key.Mes, x => x.Count() / cantEventos);*/
                     case Segmentacion.DIA:
                         return eventos.Select(x => new { Mes = x.fecha.Month, Anio = x.fecha.Year, Dia = x.fecha.Day })
-                            .GroupBy(x => new { x.Mes, x.Anio, x.Dia }).ToDictionary(x => x.Key.Anio + "" + x.Key.Mes + "" + x.Key.Dia, x => x.Count() / cantEventos);
-                    case Segmentacion.HORA:
+                            .GroupBy(x => new { x.Mes, x.Anio, x.Dia }).Select(x=> Convert.ToDouble(x.Count())).ToList();
+                    /*case Segmentacion.HORA:
                         return eventos.Select(x => new { Mes = x.fecha.Month, Anio = x.fecha.Year, Dia = x.fecha.Day, Hora = x.fecha.Hour })
                             .GroupBy(x => new { x.Anio, x.Mes, x.Dia, x.Hora }).ToDictionary(x => x.Key.Anio + "" + x.Key.Mes + "" + x.Key.Dia + "" + x.Key.Hora, x => x.Count() / cantEventos);
                     case Segmentacion.MINUTO:
@@ -74,7 +74,7 @@ namespace Kairos.FuncionesDensidad
                     case Segmentacion.SEGUNDO:
                         return eventos.Select(x => new { Mes = x.fecha.Month, Anio = x.fecha.Year, Dia = x.fecha.Day, Hora = x.fecha.Hour, Minuto = x.fecha.Minute, Segundo = x.fecha.Second })
                             .GroupBy(x => new { x.Anio, x.Mes, x.Dia, x.Hora, x.Minuto, x.Segundo }).ToDictionary(x => x.Key.Anio + "" + x.Key.Mes + "" + x.Key.Dia + "" + x.Key.Hora + "" + x.Key.Minuto + "" + x.Key.Segundo, x => x.Count() / cantEventos);
-                    default:
+                   */ default:
                         return null;
                 }
             }
