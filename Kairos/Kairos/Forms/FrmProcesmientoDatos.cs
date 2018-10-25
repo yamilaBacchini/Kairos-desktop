@@ -685,7 +685,6 @@ namespace Kairos.Forms
                     else if (rbIntervalos.Checked)
                     {
                         metodologia = MetodologiaAjuste.EVENTO_A_EVENTO;
-                        segmentacion = Segmentacion.SEGUNDO;
                         flagIntervalos = 1;
                         FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos);
                         this.Visible = false;
