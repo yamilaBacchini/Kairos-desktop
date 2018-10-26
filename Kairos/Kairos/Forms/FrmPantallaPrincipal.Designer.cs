@@ -36,14 +36,12 @@
             this.panelTitulo = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblMensaje = new System.Windows.Forms.Label();
             this.timerMensaje = new System.Windows.Forms.Timer(this.components);
             this.flowPanelBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnArduino = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.panelNotificaciones = new System.Windows.Forms.Panel();
             this.pnlProyectos = new System.Windows.Forms.Panel();
-            this.panelNombreProyecto = new System.Windows.Forms.Panel();
             this.pnlImportacion = new System.Windows.Forms.Panel();
             this.pnlImportacionTxt = new System.Windows.Forms.Panel();
             this.rbOtro = new System.Windows.Forms.RadioButton();
@@ -63,6 +61,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnAceptarImportacion = new System.Windows.Forms.Button();
             this.lblTituloImportacion = new System.Windows.Forms.Label();
+            this.panelNombreProyecto = new System.Windows.Forms.Panel();
             this.txtNombreProyecto = new System.Windows.Forms.TextBox();
             this.lblNombreProyecto = new System.Windows.Forms.Label();
             this.btnAceptarModificar = new System.Windows.Forms.Button();
@@ -72,13 +71,13 @@
             this.imgAgregar = new System.Windows.Forms.PictureBox();
             this.lbProyectosRecientes = new System.Windows.Forms.ListBox();
             this.toolTipInformacion = new System.Windows.Forms.ToolTip(this.components);
+            this.lblMensaje = new System.Windows.Forms.Label();
             lblProyectosGuardados = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowPanelBotones.SuspendLayout();
             this.panelNotificaciones.SuspendLayout();
             this.pnlProyectos.SuspendLayout();
-            this.panelNombreProyecto.SuspendLayout();
             this.pnlImportacion.SuspendLayout();
             this.pnlImportacionTxt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgInformacion)).BeginInit();
@@ -86,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilaInicial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumna)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHoja)).BeginInit();
+            this.panelNombreProyecto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).BeginInit();
@@ -176,19 +176,6 @@
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
-            // lblMensaje
-            // 
-            this.lblMensaje.AutoSize = true;
-            this.lblMensaje.BackColor = System.Drawing.Color.Transparent;
-            this.lblMensaje.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMensaje.ForeColor = System.Drawing.Color.LimeGreen;
-            this.lblMensaje.Location = new System.Drawing.Point(11, 0);
-            this.lblMensaje.Margin = new System.Windows.Forms.Padding(0);
-            this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(259, 21);
-            this.lblMensaje.TabIndex = 21;
-            this.lblMensaje.Text = "Esta es una notificación de prueba";
-            // 
             // timerMensaje
             // 
             this.timerMensaje.Interval = 3000;
@@ -270,20 +257,6 @@
             this.pnlProyectos.Name = "pnlProyectos";
             this.pnlProyectos.Size = new System.Drawing.Size(750, 485);
             this.pnlProyectos.TabIndex = 20;
-            // 
-            // panelNombreProyecto
-            // 
-            this.panelNombreProyecto.BackColor = System.Drawing.Color.Transparent;
-            this.panelNombreProyecto.Controls.Add(this.txtNombreProyecto);
-            this.panelNombreProyecto.Controls.Add(this.lblNombreProyecto);
-            this.panelNombreProyecto.Controls.Add(this.btnAceptarModificar);
-            this.panelNombreProyecto.Controls.Add(this.btnCancelarModificacion);
-            this.panelNombreProyecto.Location = new System.Drawing.Point(403, 48);
-            this.panelNombreProyecto.Margin = new System.Windows.Forms.Padding(2);
-            this.panelNombreProyecto.Name = "panelNombreProyecto";
-            this.panelNombreProyecto.Size = new System.Drawing.Size(330, 425);
-            this.panelNombreProyecto.TabIndex = 30;
-            this.panelNombreProyecto.Visible = false;
             // 
             // pnlImportacion
             // 
@@ -520,6 +493,20 @@
             this.lblTituloImportacion.TabIndex = 27;
             this.lblTituloImportacion.Text = "Indique la ubicación de los datos";
             // 
+            // panelNombreProyecto
+            // 
+            this.panelNombreProyecto.BackColor = System.Drawing.Color.Transparent;
+            this.panelNombreProyecto.Controls.Add(this.txtNombreProyecto);
+            this.panelNombreProyecto.Controls.Add(this.lblNombreProyecto);
+            this.panelNombreProyecto.Controls.Add(this.btnAceptarModificar);
+            this.panelNombreProyecto.Controls.Add(this.btnCancelarModificacion);
+            this.panelNombreProyecto.Location = new System.Drawing.Point(403, 48);
+            this.panelNombreProyecto.Margin = new System.Windows.Forms.Padding(2);
+            this.panelNombreProyecto.Name = "panelNombreProyecto";
+            this.panelNombreProyecto.Size = new System.Drawing.Size(330, 425);
+            this.panelNombreProyecto.TabIndex = 30;
+            this.panelNombreProyecto.Visible = false;
+            // 
             // txtNombreProyecto
             // 
             this.txtNombreProyecto.BackColor = System.Drawing.Color.LavenderBlush;
@@ -639,6 +626,17 @@
             this.lbProyectosRecientes.TabIndex = 26;
             this.lbProyectosRecientes.SelectedIndexChanged += new System.EventHandler(this.lbProyectosRecientes_SelectedIndexChanged);
             // 
+            // lblMensaje
+            // 
+            this.lblMensaje.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMensaje.Location = new System.Drawing.Point(0, 1);
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(750, 19);
+            this.lblMensaje.TabIndex = 23;
+            this.lblMensaje.Text = "Mensaje";
+            this.lblMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMensaje.Visible = false;
+            // 
             // FrmPantallaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -661,11 +659,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowPanelBotones.ResumeLayout(false);
             this.panelNotificaciones.ResumeLayout(false);
-            this.panelNotificaciones.PerformLayout();
             this.pnlProyectos.ResumeLayout(false);
             this.pnlProyectos.PerformLayout();
-            this.panelNombreProyecto.ResumeLayout(false);
-            this.panelNombreProyecto.PerformLayout();
             this.pnlImportacion.ResumeLayout(false);
             this.pnlImportacion.PerformLayout();
             this.pnlImportacionTxt.ResumeLayout(false);
@@ -676,6 +671,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilaInicial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumna)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHoja)).EndInit();
+            this.panelNombreProyecto.ResumeLayout(false);
+            this.panelNombreProyecto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).EndInit();
@@ -687,7 +684,6 @@
         private System.Windows.Forms.Button btnImportarProyecto;
         private System.Windows.Forms.Button btnProcesarDatos;
         private System.Windows.Forms.Panel panelTitulo;
-        private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Timer timerMensaje;
         private System.Windows.Forms.FlowLayoutPanel flowPanelBotones;
         private System.Windows.Forms.Panel panelNotificaciones;
@@ -725,5 +721,6 @@
         private System.Windows.Forms.RadioButton rbTab;
         private System.Windows.Forms.ToolTip toolTipInformacion;
         private System.Windows.Forms.Button btncancelarImportacion;
+        private System.Windows.Forms.Label lblMensaje;
     }
 }

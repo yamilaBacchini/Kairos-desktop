@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProcesmientoDatos));
             this.pnlEventos = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblMedia = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.dgwEventos = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rbFecha = new System.Windows.Forms.RadioButton();
@@ -76,12 +81,8 @@
             this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTituloProyecto = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblCantidad = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblMedia = new System.Windows.Forms.Label();
             this.pnlEventos.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
             this.panel2.SuspendLayout();
             this.pnlModificable.SuspendLayout();
@@ -92,7 +93,6 @@
             this.pnlAcciones.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlSegmentacion.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlEventos
@@ -105,6 +105,61 @@
             this.pnlEventos.Name = "pnlEventos";
             this.pnlEventos.Size = new System.Drawing.Size(388, 453);
             this.pnlEventos.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblMedia);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.lblCantidad);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Location = new System.Drawing.Point(0, 418);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(388, 35);
+            this.panel3.TabIndex = 64;
+            // 
+            // lblMedia
+            // 
+            this.lblMedia.AutoSize = true;
+            this.lblMedia.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.lblMedia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMedia.Location = new System.Drawing.Point(217, 7);
+            this.lblMedia.Name = "lblMedia";
+            this.lblMedia.Size = new System.Drawing.Size(17, 20);
+            this.lblMedia.TabIndex = 64;
+            this.lblMedia.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label5.Location = new System.Drawing.Point(163, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.TabIndex = 62;
+            this.label5.Text = "Media:";
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.lblCantidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblCantidad.Location = new System.Drawing.Point(89, 7);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(17, 20);
+            this.lblCantidad.TabIndex = 63;
+            this.lblCantidad.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(12, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 20);
+            this.label4.TabIndex = 57;
+            this.label4.Text = "Cantidad:";
             // 
             // dgwEventos
             // 
@@ -645,61 +700,6 @@
             this.lblTituloProyecto.TabIndex = 64;
             this.lblTituloProyecto.Text = "Titulo Proyecto";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Book Antiqua", 12F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(12, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 20);
-            this.label4.TabIndex = 57;
-            this.label4.Text = "Cantidad:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Book Antiqua", 12F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(163, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 20);
-            this.label5.TabIndex = 62;
-            this.label5.Text = "Media:";
-            // 
-            // lblCantidad
-            // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Font = new System.Drawing.Font("Book Antiqua", 12F);
-            this.lblCantidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblCantidad.Location = new System.Drawing.Point(89, 7);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(17, 20);
-            this.lblCantidad.TabIndex = 63;
-            this.lblCantidad.Text = "0";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.lblMedia);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.lblCantidad);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Location = new System.Drawing.Point(0, 418);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(388, 35);
-            this.panel3.TabIndex = 64;
-            // 
-            // lblMedia
-            // 
-            this.lblMedia.AutoSize = true;
-            this.lblMedia.Font = new System.Drawing.Font("Book Antiqua", 12F);
-            this.lblMedia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblMedia.Location = new System.Drawing.Point(217, 7);
-            this.lblMedia.Name = "lblMedia";
-            this.lblMedia.Size = new System.Drawing.Size(17, 20);
-            this.lblMedia.TabIndex = 64;
-            this.lblMedia.Text = "0";
-            // 
             // FrmProcesmientoDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -722,6 +722,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.pnlEventos.ResumeLayout(false);
             this.pnlEventos.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -737,8 +739,6 @@
             this.panel1.PerformLayout();
             this.pnlSegmentacion.ResumeLayout(false);
             this.pnlSegmentacion.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
