@@ -720,6 +720,12 @@ namespace Kairos.Forms
                 tipoAccion = TipoAccionProcesamiento.FILTRAR;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnFiltrar);
+                rbDtConstante.Visible = false;
+                if (rbDtConstante.Checked)
+                {
+                    rbEventoAEvento.Checked = true;
+                    pnlSegmentacion.Visible = false;
+                }
 
                 if (eventos != null && eventos.Count > 0)
                 {
@@ -776,6 +782,7 @@ namespace Kairos.Forms
                 chlFiltros.Enabled = true;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnFiltrar);
+                rbDtConstante.Visible = true;
                 actualizarEstadisticas();
             }
         }
