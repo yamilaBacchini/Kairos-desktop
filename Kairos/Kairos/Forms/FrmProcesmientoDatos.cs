@@ -84,6 +84,8 @@ namespace Kairos.Forms
                 tipoAccion = TipoAccionProcesamiento.MODIFICAR_REGISTRO;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnModificarRegistro);
+                dtp1.Value = eventosSeleccionados[0].fecha;
+                dtp2.Value = eventosSeleccionados[0].fecha;
             }
             else
             {
