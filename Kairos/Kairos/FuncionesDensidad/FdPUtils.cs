@@ -20,7 +20,7 @@ namespace Kairos.FuncionesDensidad
                 return eventosOrdenados.Select(x => x.fecha.TimeOfDay)
                     .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
                     .Skip(1), (x, y) => y - x)
-                    .Select(x => Math.Abs(x.TotalSeconds))
+                    .Select(x => Math.Abs(x.TotalMinutes))
                     .GroupBy(x => x)
                     .ToDictionary(x => x.Key.ToString(), x => x.Count() / (cantEventos > 1 ? cantEventos - 1 : cantEventos));
             }
@@ -37,7 +37,7 @@ namespace Kairos.FuncionesDensidad
                 return eventosOrdenados.Select(x => x.fecha.TimeOfDay)
                     .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
                     .Skip(1), (x, y) => y - x)
-                    .Select(x => Math.Abs(x.TotalSeconds)).ToList();
+                    .Select(x => Math.Abs(x.TotalMinutes)).ToList();
                 /*return eventosOrdenados.Select(x => x.fecha)
                     .Zip(eventosOrdenados.Select(x => x.fecha)
                     .Skip(1), (x, y) => y.Date == x.Date ? y - x : TimeSpan.MaxValue)

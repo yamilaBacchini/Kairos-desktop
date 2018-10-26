@@ -26,6 +26,7 @@ namespace Kairos.Services
             {
                 foreach (string item in aAgregarEnString)
                 {
+                    if(item!="" && item!="1970-1-1 0:0:")
                     db.Eventos.Add(new Entidades.Evento { fecha = obtenerFechaSinMilisegundos(Convert.ToDateTime(item)), idOrigen = idOrigen, activo = true });
                 }
                 db.SaveChanges();

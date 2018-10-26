@@ -203,7 +203,10 @@ namespace Kairos.Forms
                 bool resultado = importador.importarArchivoEnProyectoExistente(textBoxExplorar.Text, this.proyecto.Id);
                 if (resultado)
                     mostrarMensaje("El archivo se importo correctamente", Color.FromArgb(128, 255, 128));
-                }
+                else
+                    mostrarMensaje("Error al importar el archivo", Color.FromArgb(255, 89, 89));
+            }
+            
         }
 
 

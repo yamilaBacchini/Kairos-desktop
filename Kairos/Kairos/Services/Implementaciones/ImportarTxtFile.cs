@@ -83,19 +83,7 @@ namespace Kairos.Services.Implementaciones
                     eventos = leerDelimitadorEnter(pathArchivo);
                 else
                     eventos = leerDelimitadorCaracter(pathArchivo, this.delimitador);
-                //using (var db = new EventoContexto())
-                //{
-                //    Origen auxOrigen = db.Origenes.Find(idProyecto);
-                //    if (auxOrigen != null)
-                //    {
-                //        foreach (string item in eventos)
-                //            db.Eventos.Add(new Entidades.Evento { fecha = Convert.ToDateTime(item), idOrigen = auxOrigen.Id, activo = true });
-                //        db.SaveChanges();
-                //        resultado = true;
-                //    }
-                //    else
-                //        resultado = false;
-                //}
+
                 Origen auxOrigen = ProyectoService.obtenerProyectoPorId(idProyecto);
                 if (auxOrigen != null)
                 {
