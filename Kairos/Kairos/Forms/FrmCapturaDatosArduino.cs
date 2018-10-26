@@ -232,8 +232,8 @@ namespace Kairos.Forms
             {
                 textBoxExplorar.Enabled = true;
                 this.tipoArchivo = "N";
-                buttonExplorar.Enabled = true;
-                buttonExplorar.BackColor = Color.FromArgb(255, 128, 128);
+                buttonExplorar.Enabled = false;
+                buttonExplorar.BackColor = Color.FromArgb(100,100,100);
             }
         }
 
