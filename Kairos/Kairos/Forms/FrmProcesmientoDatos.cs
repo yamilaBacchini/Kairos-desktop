@@ -799,7 +799,10 @@ namespace Kairos.Forms
             if (rbFecha.Checked)
             {
                 List<double> intervalos = FdPUtils.CalcularIntervalos(eventos);
-                resultado = intervalos.Sum() / intervalos.Count();
+                if (eventos.Count() > 0)
+                    resultado = intervalos.Sum() / intervalos.Count();
+                else
+                    resultado = 0;
             }
             else if (rbIntervalos.Checked)
             {

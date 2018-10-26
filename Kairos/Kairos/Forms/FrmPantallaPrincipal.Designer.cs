@@ -53,6 +53,7 @@
             this.rbComa = new System.Windows.Forms.RadioButton();
             this.rbPipe = new System.Windows.Forms.RadioButton();
             this.rbTab = new System.Windows.Forms.RadioButton();
+            this.btncancelarImportacion = new System.Windows.Forms.Button();
             this.pnlImportacionExcel = new System.Windows.Forms.Panel();
             this.nudFilaInicial = new System.Windows.Forms.NumericUpDown();
             this.nudColumna = new System.Windows.Forms.NumericUpDown();
@@ -71,7 +72,6 @@
             this.imgAgregar = new System.Windows.Forms.PictureBox();
             this.lbProyectosRecientes = new System.Windows.Forms.ListBox();
             this.toolTipInformacion = new System.Windows.Forms.ToolTip(this.components);
-            this.btncancelarImportacion = new System.Windows.Forms.Button();
             lblProyectosGuardados = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -259,6 +259,7 @@
             // 
             // pnlProyectos
             // 
+            this.pnlProyectos.Controls.Add(this.pnlImportacion);
             this.pnlProyectos.Controls.Add(this.panelNombreProyecto);
             this.pnlProyectos.Controls.Add(this.imgBorrar);
             this.pnlProyectos.Controls.Add(this.imgEditar);
@@ -273,7 +274,6 @@
             // panelNombreProyecto
             // 
             this.panelNombreProyecto.BackColor = System.Drawing.Color.Transparent;
-            this.panelNombreProyecto.Controls.Add(this.pnlImportacion);
             this.panelNombreProyecto.Controls.Add(this.txtNombreProyecto);
             this.panelNombreProyecto.Controls.Add(this.lblNombreProyecto);
             this.panelNombreProyecto.Controls.Add(this.btnAceptarModificar);
@@ -281,7 +281,7 @@
             this.panelNombreProyecto.Location = new System.Drawing.Point(403, 48);
             this.panelNombreProyecto.Margin = new System.Windows.Forms.Padding(2);
             this.panelNombreProyecto.Name = "panelNombreProyecto";
-            this.panelNombreProyecto.Size = new System.Drawing.Size(330, 431);
+            this.panelNombreProyecto.Size = new System.Drawing.Size(330, 425);
             this.panelNombreProyecto.TabIndex = 30;
             this.panelNombreProyecto.Visible = false;
             // 
@@ -293,9 +293,9 @@
             this.pnlImportacion.Controls.Add(this.pnlImportacionExcel);
             this.pnlImportacion.Controls.Add(this.btnAceptarImportacion);
             this.pnlImportacion.Controls.Add(this.lblTituloImportacion);
-            this.pnlImportacion.Location = new System.Drawing.Point(0, 0);
+            this.pnlImportacion.Location = new System.Drawing.Point(401, 48);
             this.pnlImportacion.Name = "pnlImportacion";
-            this.pnlImportacion.Size = new System.Drawing.Size(343, 403);
+            this.pnlImportacion.Size = new System.Drawing.Size(327, 272);
             this.pnlImportacion.TabIndex = 24;
             this.pnlImportacion.Visible = false;
             // 
@@ -394,6 +394,22 @@
             this.rbTab.TabIndex = 25;
             this.rbTab.Text = "Tab";
             this.rbTab.UseVisualStyleBackColor = true;
+            // 
+            // btncancelarImportacion
+            // 
+            this.btncancelarImportacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btncancelarImportacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btncancelarImportacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(125)))), ((int)(((byte)(125)))));
+            this.btncancelarImportacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btncancelarImportacion.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncancelarImportacion.ForeColor = System.Drawing.Color.White;
+            this.btncancelarImportacion.Location = new System.Drawing.Point(204, 209);
+            this.btncancelarImportacion.Name = "btncancelarImportacion";
+            this.btncancelarImportacion.Size = new System.Drawing.Size(84, 30);
+            this.btncancelarImportacion.TabIndex = 29;
+            this.btncancelarImportacion.Text = "Cancelar";
+            this.btncancelarImportacion.UseVisualStyleBackColor = false;
+            this.btncancelarImportacion.Click += new System.EventHandler(this.btncancelarImportacion_Click);
             // 
             // pnlImportacionExcel
             // 
@@ -622,22 +638,6 @@
             this.lbProyectosRecientes.Size = new System.Drawing.Size(388, 420);
             this.lbProyectosRecientes.TabIndex = 26;
             this.lbProyectosRecientes.SelectedIndexChanged += new System.EventHandler(this.lbProyectosRecientes_SelectedIndexChanged);
-            // 
-            // btncancelarImportacion
-            // 
-            this.btncancelarImportacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.btncancelarImportacion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btncancelarImportacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(125)))), ((int)(((byte)(125)))));
-            this.btncancelarImportacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btncancelarImportacion.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancelarImportacion.ForeColor = System.Drawing.Color.White;
-            this.btncancelarImportacion.Location = new System.Drawing.Point(204, 209);
-            this.btncancelarImportacion.Name = "btncancelarImportacion";
-            this.btncancelarImportacion.Size = new System.Drawing.Size(84, 30);
-            this.btncancelarImportacion.TabIndex = 29;
-            this.btncancelarImportacion.Text = "Cancelar";
-            this.btncancelarImportacion.UseVisualStyleBackColor = false;
-            this.btncancelarImportacion.Click += new System.EventHandler(this.btncancelarImportacion_Click);
             // 
             // FrmPantallaPrincipal
             // 
