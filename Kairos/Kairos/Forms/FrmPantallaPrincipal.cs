@@ -120,15 +120,15 @@ namespace Kairos.Forms
                 a = Cast(a, seleccionado);
                 ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text);
 
-                lblMensaje.Text = "Se modifico el proyecto " + txtNombreProyecto.Text + "correctamente";
+                lblMensaje.Text = "Se modifico el proyecto " + txtNombreProyecto.Text + " correctamente";
                 panelNotificaciones.Visible = true;
                 timerMensaje.Start();
             }
             else
             {
-                ProyectoService.nuevoProyecto(txtNombreProyecto.Text + ".prk");//le agrega la extension
+                ProyectoService.nuevoProyecto(txtNombreProyecto.Text);
 
-                lblMensaje.Text = "Se creo el proyecto " + txtNombreProyecto.Text + ".prk correctamente";
+                lblMensaje.Text = "Se creo el proyecto " + txtNombreProyecto.Text + " correctamente";
                 panelNotificaciones.Visible = true;
                 timerMensaje.Start();
             }
@@ -176,7 +176,7 @@ namespace Kairos.Forms
             {
                 var a = new { nombreOrigen = "", Id = 0 };
                 a = Cast(a, seleccionado);
-                txtNombreProyecto.Text = a.nombreOrigen.Substring(0, a.nombreOrigen.Length - 4); //le saco la extension
+                txtNombreProyecto.Text = a.nombreOrigen;
 
                 txtNombreProyecto.Focus();
                 btnAceptarModificar.Text = "Modificar";
@@ -353,7 +353,7 @@ namespace Kairos.Forms
                 if (btnAceptarModificar.Text != "Crear")
                 {
                     var selectedItem = Cast(new { nombreOrigen = "", Id = 0 }, lbProyectosRecientes.SelectedItem);
-                    txtNombreProyecto.Text = selectedItem.nombreOrigen.Substring(0, selectedItem.nombreOrigen.Length - 4);
+                    txtNombreProyecto.Text = selectedItem.nombreOrigen;
                 }
             } else
             {
