@@ -56,18 +56,24 @@ namespace Kairos.Forms
 
         private void cargarEventos()
         {
-            //lleno la grilla con los eventos
-            eventos = EventoService.cargarEventos(idOrigen);
-            dgwEventos.DataSource = eventos;
-            dgwEventos.Columns[1].Width = 235;
-            dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
-            dgwEventos.Columns[0].Visible = false;
-            dgwEventos.Columns[2].Visible = false;
-            dgwEventos.Columns[3].Visible = false;
-            dgwEventos.Columns[4].Visible = false;
+            try
+            {
+                eventos = EventoService.cargarEventos(idOrigen);
+                dgwEventos.DataSource = eventos;
+                dgwEventos.Columns[1].Width = 235;
+                dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
+                dgwEventos.Columns[0].Visible = false;
+                dgwEventos.Columns[2].Visible = false;
+                dgwEventos.Columns[3].Visible = false;
+                dgwEventos.Columns[4].Visible = false;
 
-            if (eventos != null && tipoAccion == TipoAccionProcesamiento.FILTRAR)
-                filtrar();
+                if (eventos != null && tipoAccion == TipoAccionProcesamiento.FILTRAR)
+                    filtrar();
+            }
+            catch
+            {
+                mostrarMensaje("Error al cargar los eventos", Color.FromArgb(255, 89, 89));
+            }
         }
 
         private void btnAgregarRegistro_Click(object sender, EventArgs e)
@@ -84,6 +90,8 @@ namespace Kairos.Forms
                 tipoAccion = TipoAccionProcesamiento.MODIFICAR_REGISTRO;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnModificarRegistro);
+                dtp1.Value = eventosSeleccionados[0].fecha;
+                dtp2.Value = eventosSeleccionados[0].fecha;
             }
             else
             {
@@ -93,30 +101,37 @@ namespace Kairos.Forms
 
         private void btnBorrarSeleccionados_Click(object sender, EventArgs e)
         {
-            if (eventos.Count() > 0)
+            try
             {
-                try
+                if (eventos.Count() > 0)
                 {
-                    tipoAccion = TipoAccionProcesamiento.BORRAR_SELECCIONADOS;
-                    modificarLayout(tipoAccion);
-                    botonSeleccionado(btnBorrarSeleccionados);
-                    int cant = eventosSeleccionados.Count;
+                    try
+                    {
+                        tipoAccion = TipoAccionProcesamiento.BORRAR_SELECCIONADOS;
+                        modificarLayout(tipoAccion);
+                        botonSeleccionado(btnBorrarSeleccionados);
+                        int cant = eventosSeleccionados.Count;
 
-                    EventoService.borrar(eventosSeleccionados);
-                    cargarEventos();
+                        EventoService.borrar(eventosSeleccionados);
+                        cargarEventos();
 
-                    mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
-                    actualizarEstadisticas();
+                        mostrarMensaje("Registros eliminados correctamente", Color.FromArgb(128, 255, 128));
+                        actualizarEstadisticas();
+                    }
+                    catch (Exception)
+                    {
+                        mostrarMensaje("Error al eliminar registros", Color.FromArgb(255, 89, 89));
+                    }
+
                 }
-                catch (Exception)
+                else
                 {
-                    mostrarMensaje("Error al eliminar registros", Color.FromArgb(255, 89, 89));
+                    mostrarMensaje("No hay ningún evento", Color.FromArgb(255, 255, 0));
                 }
-
             }
-            else
+            catch
             {
-                mostrarMensaje("No hay ningún evento", Color.FromArgb(255, 255, 0));
+                mostrarMensaje("Error al eliminar los registros", Color.FromArgb(255, 89, 89));
             }
 
         }
@@ -600,35 +615,42 @@ namespace Kairos.Forms
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            if (rbFecha.Checked)
+            try
             {
-                cmbTipoFiltro.SelectedIndex = 0;
-                filtros.Clear();
-                chlFiltros.Items.Clear();
-                filtrar();
-            }
-            else if (rbIntervalos.Checked)
-            {
-                quitarFiltrosIntervalos();
-
-                cmbTipoFiltro.SelectedIndex = 0;
-
-                //leno dataGridView con los intervalos
-                DataTable tabla = new DataTable();
-                tabla.Columns.Add("Intervalos");
-                foreach (var item in intervalos)
+                if (rbFecha.Checked)
                 {
-                    DataRow row = tabla.NewRow();
-                    row["Intervalos"] = item;
-                    tabla.Rows.Add(row);
+                    cmbTipoFiltro.SelectedIndex = 0;
+                    filtros.Clear();
+                    chlFiltros.Items.Clear();
+                    filtrar();
                 }
-                dgwEventos.DataSource = tabla;
-                dgwEventos.Columns[0].Visible = true;
-                dgwEventos.Columns[0].Width = 235;
+                else if (rbIntervalos.Checked)
+                {
+                    quitarFiltrosIntervalos();
 
-                intervalosParciales = intervalos;
+                    cmbTipoFiltro.SelectedIndex = 0;
+
+                    //leno dataGridView con los intervalos
+                    DataTable tabla = new DataTable();
+                    tabla.Columns.Add("Intervalos");
+                    foreach (var item in intervalos)
+                    {
+                        DataRow row = tabla.NewRow();
+                        row["Intervalos"] = item;
+                        tabla.Rows.Add(row);
+                    }
+                    dgwEventos.DataSource = tabla;
+                    dgwEventos.Columns[0].Visible = true;
+                    dgwEventos.Columns[0].Width = 235;
+
+                    intervalosParciales = intervalos;
+                }
+                actualizarEstadisticas();
             }
-            actualizarEstadisticas();
+            catch
+            {
+                mostrarMensaje("Error al limpiar los filtros", Color.FromArgb(255, 89, 89));
+            }
         }
 
         public void quitarFiltrosIntervalos()
@@ -692,8 +714,6 @@ namespace Kairos.Forms
                         this.Visible = true;
                     }
                 }
-
-
                 catch
                 {
                     mostrarMensaje("Error al calcular funciones", Color.FromArgb(255, 89, 89));
@@ -715,51 +735,65 @@ namespace Kairos.Forms
 
         private void rbIntervalos_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbIntervalos.Checked)
+            try
             {
-                tipoAccion = TipoAccionProcesamiento.FILTRAR;
-                modificarLayout(tipoAccion);
-                botonSeleccionado(btnFiltrar);
-
-                if (eventos != null && eventos.Count > 0)
+                if (rbIntervalos.Checked)
                 {
-                    //calculo intervalos
-                    var eventosOrdenados = eventos.OrderBy(x => x.fecha);
-                    List<double> lista = new List<double>();
-                    lista = eventosOrdenados.Select(x => x.fecha.TimeOfDay)
-                    .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
-                    .Skip(1), (x, y) => y - x)
-                    .Select(x => Math.Abs(x.TotalSeconds))
-                    .ToList();
-
-                    this.intervalos = lista; //para limpir los filtros y volver al original
-                    this.intervalosParciales = lista; //para los filtros consecutivos
-
-                    //leno dataGridView con los intervalos
-                    DataTable tabla = new DataTable();
-                    tabla.Columns.Add("Intervalos");
-                    foreach (var item in lista)
+                    tipoAccion = TipoAccionProcesamiento.FILTRAR;
+                    modificarLayout(tipoAccion);
+                    botonSeleccionado(btnFiltrar);
+                    rbDtConstante.Visible = false;
+                    if (rbDtConstante.Checked)
                     {
-                        DataRow row = tabla.NewRow();
-                        row["Intervalos"] = item;
-                        tabla.Rows.Add(row);
+                        rbEventoAEvento.Checked = true;
+                        pnlSegmentacion.Visible = false;
                     }
-                    dgwEventos.DataSource = tabla;
-                    dgwEventos.Columns[0].Visible = true;
-                    dgwEventos.Columns[0].Width = 235;
 
-                    //deshabilito funciones
-                    btnAgregarRegistro.Enabled = false;
-                    btnModificarRegistro.Enabled = false;
-                    btnBorrarSeleccionados.Enabled = false;
-                    btnBorrarSeleccionados.BackColor = Color.Black;
-                    btnSeleccionarTodos.Enabled = false;
-                    chlFiltros.Enabled = false;
+                    if (eventos != null && eventos.Count > 0)
+                    {
+                        //calculo intervalos
+                        var eventosOrdenados = eventos.OrderBy(x => x.fecha);
+                        List<double> lista = new List<double>();
+                        lista = eventosOrdenados.Select(x => x.fecha.TimeOfDay)
+                        .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
+                        .Skip(1), (x, y) => y - x)
+                        .Select(x => Math.Abs(x.TotalSeconds))
+                        .ToList();
 
-                    modificarLayout(TipoAccionProcesamiento.FILTRAR);
+                        this.intervalos = lista; //para limpir los filtros y volver al original
+                        this.intervalosParciales = lista; //para los filtros consecutivos
+
+                        //leno dataGridView con los intervalos
+                        DataTable tabla = new DataTable();
+                        tabla.Columns.Add("Intervalos");
+                        foreach (var item in lista)
+                        {
+                            DataRow row = tabla.NewRow();
+                            row["Intervalos"] = item;
+                            tabla.Rows.Add(row);
+                        }
+                        dgwEventos.DataSource = tabla;
+                        dgwEventos.Columns[0].Visible = true;
+                        dgwEventos.Columns[0].Width = 235;
+
+                        //deshabilito funciones
+                        btnAgregarRegistro.Enabled = false;
+                        btnModificarRegistro.Enabled = false;
+                        btnBorrarSeleccionados.Enabled = false;
+                        btnBorrarSeleccionados.BackColor = Color.Black;
+                        btnSeleccionarTodos.Enabled = false;
+                        chlFiltros.Enabled = false;
+
+                        modificarLayout(TipoAccionProcesamiento.FILTRAR);
+
+                    }
+                    actualizarEstadisticas();
 
                 }
-                actualizarEstadisticas();
+            }
+            catch
+            {
+                mostrarMensaje("Error al calcular los intervalos", Color.FromArgb(255, 89, 89));
             }
         }
         private void rbFecha_CheckedChanged(object sender, EventArgs e)
@@ -767,7 +801,7 @@ namespace Kairos.Forms
             if (rbFecha.Checked)
             {
                 quitarFiltrosIntervalos();
-                cargarEventos(); //aca se ponen en cero los eventos: revisar
+                cargarEventos();
                 btnAgregarRegistro.Enabled = true;
                 btnModificarRegistro.Enabled = true;
                 btnBorrarSeleccionados.Enabled = true;
@@ -776,21 +810,29 @@ namespace Kairos.Forms
                 chlFiltros.Enabled = true;
                 modificarLayout(tipoAccion);
                 botonSeleccionado(btnFiltrar);
+                rbDtConstante.Visible = true;
                 actualizarEstadisticas();
             }
         }
 
         private void actualizarEstadisticas()
         {
-            if (rbFecha.Checked)
+            try
             {
-                lblCantidad.Text = eventos.Count().ToString();
+                if (rbFecha.Checked)
+                {
+                    lblCantidad.Text = eventos.Count().ToString();
+                }
+                else if (rbIntervalos.Checked)
+                {
+                    lblCantidad.Text = intervalosParciales.Count().ToString();
+                }
+                lblMedia.Text = calcularMedia().ToString("0.0000");
             }
-            else if (rbIntervalos.Checked)
+            catch
             {
-                lblCantidad.Text = intervalosParciales.Count().ToString();
+                mostrarMensaje("Error al calcular estadisticas", Color.FromArgb(255, 89, 89));
             }
-            lblMedia.Text = calcularMedia().ToString("0.0000");
 
         }
         private double calcularMedia()

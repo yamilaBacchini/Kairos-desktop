@@ -1,16 +1,11 @@
 ﻿using Kairos.Entidades;
-using Kairos.Filtros;
 using Kairos.FuncionesDensidad;
 using Kairos.Modelo;
-using Kairos.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -20,6 +15,7 @@ namespace Kairos.Forms
     {
         private MetodologiaAjuste metodologia;
         private Segmentacion segmentacion;
+        private bool timerActivo = false;
         private List<Evento> eventos = null;
         private Dictionary<string, double> eventosSimplificados = null;
         private double[] eventosParaAjuste = null;
@@ -37,10 +33,10 @@ namespace Kairos.Forms
         private ResultadoAjuste resultadoFuncionUniforme = null;
         private ResultadoAjuste resultadoFuncionWeibull5 = null;
         private Dictionary<FuncionDensidad, ResultadoAjuste> lResultadosOrdenados = new Dictionary<FuncionDensidad, ResultadoAjuste>();
-        private int flagIntervalos=0;
+        private int flagIntervalos = 0;
         private List<Double> intervalos;
 
-        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Evento> eventos,int flagIntervalos)
+        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Evento> eventos, int flagIntervalos)
         {
             InitializeComponent();
             this.metodologia = metodologia;
@@ -73,126 +69,164 @@ namespace Kairos.Forms
 
         private void CalcularEventosSimplificados()
         {
-            if(flagIntervalos==0)
+            try
             {
-                if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
+                if (flagIntervalos == 0)
                 {
-                    List<double> lista = FdPUtils.AgruparSegmentacion(segmentacion, eventos);
-                   eventosParaAjuste = lista.ToArray();
-                   eventosSimplificados = FdPUtils.AgruparSegmentacionProbabilidad(lista);
+                    if (metodologia == MetodologiaAjuste.DT_CONSTANTE)
+                    {
+                        List<double> lista = FdPUtils.AgruparSegmentacion(segmentacion, eventos);
+                        eventosParaAjuste = lista.ToArray();
+                        eventosSimplificados = FdPUtils.AgruparSegmentacionProbabilidad(lista);
+                    }
+                    else if (metodologia == MetodologiaAjuste.EVENTO_A_EVENTO)
+                    {
+                        eventosSimplificados = FdPUtils.AgruparIntervalos(eventos);
+                        eventosParaAjuste = FdPUtils.CalcularIntervalos(eventos).ToArray();
+                    }
                 }
-                else if(metodologia == MetodologiaAjuste.EVENTO_A_EVENTO)
+                else
                 {
-                    eventosSimplificados = FdPUtils.AgruparIntervalos(eventos);
-                    eventosParaAjuste = FdPUtils.CalcularIntervalos(eventos).ToArray();
+                    double cant = intervalos.Count;
+                    eventosSimplificados = intervalos.GroupBy(x => x).ToDictionary(x => x.Key.ToString(), x => x.Count() / (cant > 1 ? cant - 1 : cant));
+                    eventosParaAjuste = intervalos.ToArray();
                 }
             }
-            else
+            catch
             {
-                double cant = intervalos.Count;
-                eventosSimplificados= intervalos.GroupBy(x => x).ToDictionary(x => x.Key.ToString(), x => x.Count() /(cant > 1 ? cant - 1 : cant));
-                eventosParaAjuste = intervalos.ToArray();
+                mostrarMensaje("Error al calcular los intervalos", Color.FromArgb(255, 89, 89));
             }
-            
+
+
         }
 
         private void CalcularYOrdenarFunciones()
         {
-            double[] arrEventos = eventosParaAjuste.ToArray();
+            try
+            {
+                double[] arrEventos = eventosParaAjuste.ToArray();
 
-           
-            resultadoFuncionWeibull0_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL05, arrEventos).Resultado;
-            if (resultadoFuncionWeibull0_5 != null)
-                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL05, resultadoFuncionWeibull0_5);
-            resultadoFuncionBinomial = FactoryFuncionDensidad.Instancia(FuncionDensidad.BINOMIAL, arrEventos).Resultado;
-            if (resultadoFuncionBinomial != null)
-                lResultadosOrdenados.Add(FuncionDensidad.BINOMIAL, resultadoFuncionBinomial);
-            resultadoFuncionExponencial = FactoryFuncionDensidad.Instancia(FuncionDensidad.EXPONENCIAL, arrEventos).Resultado;
-            if (resultadoFuncionExponencial != null)
-                lResultadosOrdenados.Add(FuncionDensidad.EXPONENCIAL, resultadoFuncionExponencial);
-            resultadoFuncionLogistica = FactoryFuncionDensidad.Instancia(FuncionDensidad.LOGISTICA, arrEventos).Resultado;
-            if (resultadoFuncionLogistica != null)
-                lResultadosOrdenados.Add(FuncionDensidad.LOGISTICA, resultadoFuncionLogistica);
-            resultadoFuncionLogNormal = FactoryFuncionDensidad.Instancia(FuncionDensidad.LOG_NORMAL, arrEventos).Resultado;
-            if (resultadoFuncionLogNormal != null)
-                lResultadosOrdenados.Add(FuncionDensidad.LOG_NORMAL, resultadoFuncionLogNormal);
-            resultadoFuncionLogLogistica = FactoryFuncionDensidad.Instancia(FuncionDensidad.LOG_LOGISTICA, arrEventos).Resultado;
-            if (resultadoFuncionLogLogistica != null)
-                lResultadosOrdenados.Add(FuncionDensidad.LOG_LOGISTICA, resultadoFuncionLogLogistica);
-            resultadoFuncionNormal = FactoryFuncionDensidad.Instancia(FuncionDensidad.NORMAL, arrEventos).Resultado;
-            if (resultadoFuncionNormal != null)
-                lResultadosOrdenados.Add(FuncionDensidad.NORMAL, resultadoFuncionNormal);
-            resultadoFuncionWeibull1_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL15, arrEventos).Resultado;
-            if (resultadoFuncionWeibull1_5 != null)
-                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL15, resultadoFuncionWeibull1_5);
-            resultadoFuncionWeibull3 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL3, arrEventos).Resultado;
-            if (resultadoFuncionWeibull3 != null)
-                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL3, resultadoFuncionWeibull3);
-            resultadoFuncionPoisson = FactoryFuncionDensidad.Instancia(FuncionDensidad.POISSON, arrEventos).Resultado;
-            if (resultadoFuncionPoisson != null)
-                lResultadosOrdenados.Add(FuncionDensidad.POISSON, resultadoFuncionPoisson);
-            resultadoFuncionUniforme = FactoryFuncionDensidad.Instancia(FuncionDensidad.UNIFORME, arrEventos).Resultado;
-            if (resultadoFuncionUniforme != null)
-                lResultadosOrdenados.Add(FuncionDensidad.UNIFORME, resultadoFuncionUniforme);
-            resultadoFuncionWeibull5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL5, arrEventos).Resultado;
-            if (resultadoFuncionWeibull5 != null)
-                lResultadosOrdenados.Add(FuncionDensidad.WEIBULL5, resultadoFuncionWeibull5);
-            lResultadosOrdenados = lResultadosOrdenados.OrderBy(x => x.Value.DesvioEstandar).ToDictionary(x => x.Key, y => y.Value);
+
+                resultadoFuncionWeibull0_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL05, arrEventos).Resultado;
+                if (resultadoFuncionWeibull0_5 != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.WEIBULL05, resultadoFuncionWeibull0_5);
+                resultadoFuncionBinomial = FactoryFuncionDensidad.Instancia(FuncionDensidad.BINOMIAL, arrEventos).Resultado;
+                if (resultadoFuncionBinomial != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.BINOMIAL, resultadoFuncionBinomial);
+                resultadoFuncionExponencial = FactoryFuncionDensidad.Instancia(FuncionDensidad.EXPONENCIAL, arrEventos).Resultado;
+                if (resultadoFuncionExponencial != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.EXPONENCIAL, resultadoFuncionExponencial);
+                resultadoFuncionLogistica = FactoryFuncionDensidad.Instancia(FuncionDensidad.LOGISTICA, arrEventos).Resultado;
+                if (resultadoFuncionLogistica != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.LOGISTICA, resultadoFuncionLogistica);
+                resultadoFuncionLogNormal = FactoryFuncionDensidad.Instancia(FuncionDensidad.LOG_NORMAL, arrEventos).Resultado;
+                if (resultadoFuncionLogNormal != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.LOG_NORMAL, resultadoFuncionLogNormal);
+                resultadoFuncionLogLogistica = FactoryFuncionDensidad.Instancia(FuncionDensidad.LOG_LOGISTICA, arrEventos).Resultado;
+                if (resultadoFuncionLogLogistica != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.LOG_LOGISTICA, resultadoFuncionLogLogistica);
+                resultadoFuncionNormal = FactoryFuncionDensidad.Instancia(FuncionDensidad.NORMAL, arrEventos).Resultado;
+                if (resultadoFuncionNormal != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.NORMAL, resultadoFuncionNormal);
+                resultadoFuncionWeibull1_5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL15, arrEventos).Resultado;
+                if (resultadoFuncionWeibull1_5 != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.WEIBULL15, resultadoFuncionWeibull1_5);
+                resultadoFuncionWeibull3 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL3, arrEventos).Resultado;
+                if (resultadoFuncionWeibull3 != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.WEIBULL3, resultadoFuncionWeibull3);
+                resultadoFuncionPoisson = FactoryFuncionDensidad.Instancia(FuncionDensidad.POISSON, arrEventos).Resultado;
+                if (resultadoFuncionPoisson != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.POISSON, resultadoFuncionPoisson);
+                resultadoFuncionUniforme = FactoryFuncionDensidad.Instancia(FuncionDensidad.UNIFORME, arrEventos).Resultado;
+                if (resultadoFuncionUniforme != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.UNIFORME, resultadoFuncionUniforme);
+                resultadoFuncionWeibull5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL5, arrEventos).Resultado;
+                if (resultadoFuncionWeibull5 != null)
+                    lResultadosOrdenados.Add(FuncionDensidad.WEIBULL5, resultadoFuncionWeibull5);
+                lResultadosOrdenados = lResultadosOrdenados.OrderBy(x => x.Value.DesvioEstandar).ToDictionary(x => x.Key, y => y.Value);
+            }
+            catch
+            {
+                mostrarMensaje("Error al calcular y ordenar las funciones", Color.FromArgb(255, 89, 89));
+            }
         }
 
         private void OrdenarFuncionesEnVista()
         {
-            List<Button> controls = new List<Button>();
-            foreach (var item in pnlFunciones.Controls)
+            try
             {
-                controls.Add((Button)item);
-            }
-            pnlFunciones.Controls.Clear();
-            foreach (var item in lResultadosOrdenados)
-            {
-                foreach (var control in controls)
+                List<Button> controls = new List<Button>();
+                foreach (var item in pnlFunciones.Controls)
                 {
-                    var auxName = control.Name.Replace("btnFuncion", "");
-                    if (String.Compare(item.Key.ToString().Replace("_", ""), auxName, true) == 0)
-                        pnlFunciones.Controls.Add(control);
+                    controls.Add((Button)item);
                 }
+                pnlFunciones.Controls.Clear();
+                foreach (var item in lResultadosOrdenados)
+                {
+                    foreach (var control in controls)
+                    {
+                        var auxName = control.Name.Replace("btnFuncion", "");
+                        if (String.Compare(item.Key.ToString().Replace("_", ""), auxName, true) == 0)
+                            pnlFunciones.Controls.Add(control);
+                    }
+                }
+            }
+            catch
+            {
+                mostrarMensaje("Error al ordenar las funciones", Color.FromArgb(255, 89, 89));
             }
         }
 
         private void SetupGraficoFuncion()
         {
-            this.chrtFuncion.Series.Clear();
-            this.chrtFuncion.Palette = ChartColorPalette.None;
-            this.chrtFuncion.Titles.Add("Funcion de Densidad de Probabilidad");
-            Series series = this.chrtFuncion.Series.Add("Eventos");
-            series.Color = Color.Red;
-            series.BorderColor = Color.Black;
-            foreach (var item in eventosSimplificados.OrderBy(x => Convert.ToDouble(x.Key)))
+            try
             {
-                series.Points.AddXY(item.Key, item.Value);
+                this.chrtFuncion.Series.Clear();
+                this.chrtFuncion.Palette = ChartColorPalette.None;
+                this.chrtFuncion.Titles.Add("Funcion de Densidad de Probabilidad");
+                Series series = this.chrtFuncion.Series.Add("Eventos");
+                series.Color = Color.Red;
+                series.BorderColor = Color.Black;
+                foreach (var item in eventosSimplificados.OrderBy(x => Convert.ToDouble(x.Key)))
+                {
+                    series.Points.AddXY(item.Key, item.Value);
+                }
+            }
+            catch
+            {
+                mostrarMensaje("Error al graficar los eventos", Color.FromArgb(255, 89, 89));
             }
         }
 
         private void GraficarLineaFDP(FuncionDensidadProbabilidad fdp)
         {
-            Series series = this.chrtFuncion.Series.FindByName("FDP");
-            if (series == null)
+            try
             {
-                series = this.chrtFuncion.Series.Add("FDP");
-                series.ChartType = SeriesChartType.Line;
-                series.BorderWidth = 2;
+                Series series = this.chrtFuncion.Series.FindByName("FDP");
+                if (series == null)
+                {
+                    series = this.chrtFuncion.Series.Add("FDP");
+                    series.ChartType = SeriesChartType.Line;
+                    series.BorderWidth = 2;
+                }
+                else
+                    series.Points.Clear();
+                Dictionary<double, double> lGenerados = fdp.ObtenerDensidad(100);
+                foreach (var item in lGenerados)
+                {
+                    series.Points.AddXY(item.Key, item.Value);
+                }
             }
-            else
-                series.Points.Clear();
-            Dictionary<double, double> lGenerados = fdp.ObtenerDensidad(100);
-            foreach (var item in lGenerados)
+            catch
             {
-                series.Points.AddXY(item.Key, item.Value);
+                mostrarMensaje("Error al graficar la función", Color.FromArgb(255, 89, 89));
             }
         }
 
         private void GraficarLineaInversa(FuncionDensidadProbabilidad fdp)
         {
+            try
+            {
             Series series = this.chrtInversa.Series.FindByName("Inversa");
             if (series == null)
             {
@@ -206,6 +240,11 @@ namespace Kairos.Forms
             foreach (var item in lGenerados)
             {
                 series.Points.AddXY(item.Key, item.Value);
+            }
+            }
+            catch
+            {
+                mostrarMensaje("Error al graficar la función inversa", Color.FromArgb(255, 89, 89));
             }
         }
 
@@ -273,6 +312,8 @@ namespace Kairos.Forms
 
         private void btnGenerarValoresAleatorios_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (resultadoSeleccionado != null)
             {
                 lbxGenerados.Items.Clear();
@@ -282,13 +323,31 @@ namespace Kairos.Forms
             }
             else
                 MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            catch
+            {
+                mostrarMensaje("Error al general valores aleatorios", Color.FromArgb(255, 89, 89));
+            }
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void mostrarMensaje(string mensaje, Color color)
         {
+            lblMensaje.Text = mensaje;
+            lblMensaje.Visible = true;
+            pnlMensaje.Visible = true;
+            pnlMensaje.BackColor = color;
+            if (this.timerActivo)
+                timerMensaje.Stop();
 
+            timerMensaje.Start();
+            this.timerActivo = true;
         }
 
-
+        private void timerMensaje_Tick(object sender, EventArgs e)
+        {
+            pnlMensaje.Visible = false;
+            timerMensaje.Stop();
+            this.timerActivo = false;
+        }
     }
 }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAjusteFunciones));
             this.pnlEventos = new System.Windows.Forms.Panel();
             this.chrtInversa = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -70,7 +70,7 @@
             this.btnGenerarValoresAleatorios = new System.Windows.Forms.Button();
             this.lblTituloCantidadValoresGenerados = new System.Windows.Forms.Label();
             this.nudCantidadGenerados = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblGenerarValoresAleatorios = new System.Windows.Forms.Label();
             this.lblTituloFunciones = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExportarResultados = new System.Windows.Forms.Button();
@@ -100,10 +100,10 @@
             // 
             // chrtInversa
             // 
-            chartArea1.Name = "ChartArea2";
-            this.chrtInversa.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend2";
-            this.chrtInversa.Legends.Add(legend1);
+            chartArea11.Name = "ChartArea2";
+            this.chrtInversa.ChartAreas.Add(chartArea11);
+            legend11.Name = "Legend2";
+            this.chrtInversa.Legends.Add(legend11);
             this.chrtInversa.Location = new System.Drawing.Point(7, 266);
             this.chrtInversa.Name = "chrtInversa";
             this.chrtInversa.Size = new System.Drawing.Size(355, 205);
@@ -112,16 +112,16 @@
             // 
             // chrtFuncion
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chrtFuncion.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chrtFuncion.Legends.Add(legend2);
+            chartArea12.Name = "ChartArea1";
+            this.chrtFuncion.ChartAreas.Add(chartArea12);
+            legend12.Name = "Legend1";
+            this.chrtFuncion.Legends.Add(legend12);
             this.chrtFuncion.Location = new System.Drawing.Point(7, 32);
             this.chrtFuncion.Name = "chrtFuncion";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chrtFuncion.Series.Add(series1);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chrtFuncion.Series.Add(series6);
             this.chrtFuncion.Size = new System.Drawing.Size(355, 205);
             this.chrtFuncion.TabIndex = 26;
             this.chrtFuncion.Text = "chart1";
@@ -244,9 +244,9 @@
             // lblMensaje
             // 
             this.lblMensaje.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMensaje.Location = new System.Drawing.Point(-7, 0);
+            this.lblMensaje.Location = new System.Drawing.Point(3, 0);
             this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(731, 19);
+            this.lblMensaje.Size = new System.Drawing.Size(721, 19);
             this.lblMensaje.TabIndex = 22;
             this.lblMensaje.Text = "Mensaje";
             this.lblMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -255,6 +255,7 @@
             // timerMensaje
             // 
             this.timerMensaje.Interval = 2000;
+            this.timerMensaje.Tick += new System.EventHandler(this.timerMensaje_Tick);
             // 
             // btnFuncionWeibull05
             // 
@@ -516,7 +517,7 @@
             this.pnlValoresAleatorios.Controls.Add(this.btnGenerarValoresAleatorios);
             this.pnlValoresAleatorios.Controls.Add(this.lblTituloCantidadValoresGenerados);
             this.pnlValoresAleatorios.Controls.Add(this.nudCantidadGenerados);
-            this.pnlValoresAleatorios.Controls.Add(this.label3);
+            this.pnlValoresAleatorios.Controls.Add(this.lblGenerarValoresAleatorios);
             this.pnlValoresAleatorios.Location = new System.Drawing.Point(632, 215);
             this.pnlValoresAleatorios.Name = "pnlValoresAleatorios";
             this.pnlValoresAleatorios.Size = new System.Drawing.Size(298, 307);
@@ -575,17 +576,16 @@
             0,
             0});
             // 
-            // label3
+            // lblGenerarValoresAleatorios
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(7, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(240, 23);
-            this.label3.TabIndex = 55;
-            this.label3.Text = "Generar valores aleatorios";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.lblGenerarValoresAleatorios.AutoSize = true;
+            this.lblGenerarValoresAleatorios.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGenerarValoresAleatorios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblGenerarValoresAleatorios.Location = new System.Drawing.Point(7, 7);
+            this.lblGenerarValoresAleatorios.Name = "lblGenerarValoresAleatorios";
+            this.lblGenerarValoresAleatorios.Size = new System.Drawing.Size(240, 23);
+            this.lblGenerarValoresAleatorios.TabIndex = 55;
+            this.lblGenerarValoresAleatorios.Text = "Generar valores aleatorios";
             // 
             // lblTituloFunciones
             // 
@@ -675,7 +675,7 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.FlowLayoutPanel pnlFunciones;
         private System.Windows.Forms.Panel pnlValoresAleatorios;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblGenerarValoresAleatorios;
         private System.Windows.Forms.Button btnFuncionBinomial;
         private System.Windows.Forms.Button btnFuncionExponencial;
         private System.Windows.Forms.Button btnFuncionLogistica;
