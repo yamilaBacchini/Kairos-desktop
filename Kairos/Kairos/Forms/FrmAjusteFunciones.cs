@@ -13,6 +13,7 @@ namespace Kairos.Forms
 {
     public partial class FrmAjusteFunciones : Form
     {
+        private Origen proyecto = new Origen();
         private MetodologiaAjuste metodologia;
         private Segmentacion segmentacion;
         private bool timerActivo = false;
@@ -36,22 +37,24 @@ namespace Kairos.Forms
         private int flagIntervalos = 0;
         private List<Double> intervalos;
 
-        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Evento> eventos, int flagIntervalos)
+        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Evento> eventos, int flagIntervalos, Origen proyecto)
         {
             InitializeComponent();
             this.metodologia = metodologia;
             this.segmentacion = segmentacion;
             this.eventos = eventos;
             this.flagIntervalos = flagIntervalos;
+            this.proyecto = proyecto;
         }
 
-        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Double> intervalos, int flagIntervalos)
+        public FrmAjusteFunciones(MetodologiaAjuste metodologia, Segmentacion segmentacion, List<Double> intervalos, int flagIntervalos, Origen proyecto)
         {
             InitializeComponent();
             this.metodologia = metodologia;
             this.segmentacion = segmentacion;
             this.intervalos = intervalos;
             this.flagIntervalos = flagIntervalos;
+            this.proyecto = proyecto;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -227,20 +230,20 @@ namespace Kairos.Forms
         {
             try
             {
-            Series series = this.chrtInversa.Series.FindByName("Inversa");
-            if (series == null)
-            {
-                series = this.chrtInversa.Series.Add("Inversa");
-                series.ChartType = SeriesChartType.Line;
-                series.BorderWidth = 2;
-            }
-            else
-                series.Points.Clear();
-            Dictionary<double, double> lGenerados = fdp.ObtenerDensidadInversa(100);
-            foreach (var item in lGenerados)
-            {
-                series.Points.AddXY(item.Key, item.Value);
-            }
+                Series series = this.chrtInversa.Series.FindByName("Inversa");
+                if (series == null)
+                {
+                    series = this.chrtInversa.Series.Add("Inversa");
+                    series.ChartType = SeriesChartType.Line;
+                    series.BorderWidth = 2;
+                }
+                else
+                    series.Points.Clear();
+                Dictionary<double, double> lGenerados = fdp.ObtenerDensidadInversa(100);
+                foreach (var item in lGenerados)
+                {
+                    series.Points.AddXY(item.Key, item.Value);
+                }
             }
             catch
             {
@@ -314,15 +317,15 @@ namespace Kairos.Forms
         {
             try
             {
-            if (resultadoSeleccionado != null)
-            {
-                lbxGenerados.Items.Clear();
-                int cant = Convert.ToInt32(nudCantidadGenerados.Value);
-                int[] arrGenerados = resultadoSeleccionado.FDP.GenerarValores(cant).Select(x => Convert.ToInt32(x)).ToArray();
-                lbxGenerados.Items.AddRange(arrGenerados.Select(x => (object)x).ToArray());
-            }
-            else
-                MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (resultadoSeleccionado != null)
+                {
+                    lbxGenerados.Items.Clear();
+                    int cant = Convert.ToInt32(nudCantidadGenerados.Value);
+                    int[] arrGenerados = resultadoSeleccionado.FDP.GenerarValores(cant).Select(x => Convert.ToInt32(x)).ToArray();
+                    lbxGenerados.Items.AddRange(arrGenerados.Select(x => (object)x).ToArray());
+                }
+                else
+                    MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch
             {
@@ -348,6 +351,48 @@ namespace Kairos.Forms
             pnlMensaje.Visible = false;
             timerMensaje.Stop();
             this.timerActivo = false;
+        }
+
+        private void btnExportarResultados_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var folderBrowserDialog1 = new FolderBrowserDialog();
+
+                DialogResult result = folderBrowserDialog1.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string directorio = folderBrowserDialog1.SelectedPath;
+                    //crear carpeta con el nombre del proyecto
+                    string nombreProyecto = directorio + "\\" + this.proyecto.nombreOrigen;
+
+                    bool exists = System.IO.Directory.Exists(nombreProyecto);
+
+                    if (!exists)
+                    {
+                        System.IO.Directory.CreateDirectory(nombreProyecto);
+                        //crear excel con los eventos utilizados
+                        //crear excel con los intervalos utilizados y los creados adicionalmente
+                        //crear txt con la fdp e inversa
+                    }
+                    else
+                    {
+                        int cont = 1;
+                        while (System.IO.Directory.Exists(nombreProyecto + " (" + cont + ")"))
+                        {
+                            cont++;
+                        }
+                        string carpetaFinal = nombreProyecto + " (" + cont + ")";
+                        System.IO.Directory.CreateDirectory(carpetaFinal);
+                    }
+                    mostrarMensaje("Se exportaron los resultados exitosamente", Color.FromArgb(128, 255, 128));
+                }
+            }
+            catch
+            {
+                mostrarMensaje("Error al exportar los resultados", Color.FromArgb(255, 89, 89));
+            }
+
         }
     }
 }
