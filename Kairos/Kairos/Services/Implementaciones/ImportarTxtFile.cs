@@ -58,17 +58,13 @@ namespace Kairos.Services.Implementaciones
         public List<string> leerDelimitadorCaracter(string pathArchivo, string caracter)
         {
             StreamReader objReader = new StreamReader(pathArchivo);
-            string sLine = "";
             List<string> eventosLeidos = new List<string>();
-            string[] eventosTemp = null;
-            while ((sLine = objReader.ReadLine()) != null)
-            {
-                eventosTemp = (sLine.Split(Convert.ToChar(caracter)));
-            }
+            string todoElArchivo = objReader.ReadToEnd();
             objReader.Close();
-            for (int i = 0; i < eventosTemp.Length; i++)
+            foreach (var item in todoElArchivo.Split(Convert.ToChar(caracter)))
             {
-                eventosLeidos.Add(eventosTemp[i]);
+                DateTime aux = DateTime.Parse(item);
+                eventosLeidos.Add(aux.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             }
             return eventosLeidos;
         }
