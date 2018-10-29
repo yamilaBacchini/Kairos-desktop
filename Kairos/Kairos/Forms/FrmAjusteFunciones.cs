@@ -327,7 +327,7 @@ namespace Kairos.Forms
                     lbxGenerados.Items.AddRange(arrGenerados.Select(x => (object)x).ToArray());
                 }
                 else
-                    MessageBox.Show("Debe seleccionar una FDP", "Seleccione FDP", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    mostrarMensaje("Debe seleccionar una función", Color.FromArgb(255, 255, 0));
             }
             catch
             {
@@ -357,88 +357,100 @@ namespace Kairos.Forms
 
         private void btnExportarResultados_Click(object sender, EventArgs e)
         {
-            try
+            if (resultadoSeleccionado != null)
             {
-                var folderBrowserDialog1 = new FolderBrowserDialog();
-
-                DialogResult result = folderBrowserDialog1.ShowDialog();
-                if (result == DialogResult.OK)
+                try
                 {
-                    string directorio = folderBrowserDialog1.SelectedPath;
-                    //crear carpeta con el nombre del proyecto
-                    string nombreProyecto = directorio + "\\" + this.proyecto.nombreOrigen;
-                    bool exists = System.IO.Directory.Exists(nombreProyecto);
-                    string carpetaFinal = "";
-                    if (!exists)
-                    {
-                        System.IO.Directory.CreateDirectory(nombreProyecto);
-                        carpetaFinal = nombreProyecto;
-                    }
-                    else
-                    {
-                        int cont = 1;
-                        while (System.IO.Directory.Exists(nombreProyecto + " (" + cont + ")"))
-                        {
-                            cont++;
-                        }
-                        carpetaFinal = nombreProyecto + " (" + cont + ")";
-                        System.IO.Directory.CreateDirectory(carpetaFinal);
-                    }
-                    //crear excel con los eventos utilizados
-                    if (flagIntervalos == 0)
-                    {
-                        using (ExcelPackage excelEventos = new ExcelPackage())
-                        {
-                            excelEventos.Workbook.Worksheets.Add("Hoja1");
+                    var folderBrowserDialog1 = new FolderBrowserDialog();
 
-                            var worksheet = excelEventos.Workbook.Worksheets["Hoja1"];
+                    DialogResult result = folderBrowserDialog1.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        string directorio = folderBrowserDialog1.SelectedPath;
+                        //crear carpeta con el nombre del proyecto
+                        string nombreProyecto = directorio + "\\" + this.proyecto.nombreOrigen;
+                        bool exists = System.IO.Directory.Exists(nombreProyecto);
+                        string carpetaFinal = "";
+                        if (!exists)
+                        {
+                            System.IO.Directory.CreateDirectory(nombreProyecto);
+                            carpetaFinal = nombreProyecto;
+                        }
+                        else
+                        {
+                            int cont = 1;
+                            while (System.IO.Directory.Exists(nombreProyecto + " (" + cont + ")"))
+                            {
+                                cont++;
+                            }
+                            carpetaFinal = nombreProyecto + " (" + cont + ")";
+                            System.IO.Directory.CreateDirectory(carpetaFinal);
+                        }
+                        //crear excel con los eventos utilizados
+                        if (flagIntervalos == 0)
+                        {
+                            using (ExcelPackage excelEventos = new ExcelPackage())
+                            {
+                                excelEventos.Workbook.Worksheets.Add("Hoja1");
+
+                                var worksheet = excelEventos.Workbook.Worksheets["Hoja1"];
+
+                                List<string[]> data = new List<string[]>();
+
+                                foreach (Evento evento in eventos)
+                                {
+                                    data.Add(new string[] { evento.fecha.ToString("yyyy-MM-dd HH:mm:ss") });
+                                }
+                                worksheet.Cells["A1"].LoadFromArrays(data);
+
+                                FileInfo excelFile = new FileInfo(carpetaFinal + "\\Eventos.xlsx");
+                                excelEventos.SaveAs(excelFile);
+                            }
+
+                        }
+                        //crear excel con los intervalos utilizados y los creados adicionalmente
+                        using (ExcelPackage excelIntervalos = new ExcelPackage())
+                        {
+                            excelIntervalos.Workbook.Worksheets.Add("Hoja1");
+
+                            var worksheet = excelIntervalos.Workbook.Worksheets["Hoja1"];
 
                             List<string[]> data = new List<string[]>();
 
-                            foreach (Evento evento in eventos)
+                            foreach (int intervalo in eventosParaAjuste)
                             {
-                                data.Add(new string[] { evento.fecha.ToString("yyyy-MM-dd HH:mm:ss") });
+                                data.Add(new string[] { intervalo.ToString() });
                             }
+                            foreach (var item in lbxGenerados.Items)
+                            {
+                                data.Add(new string[] { item.ToString() });
+                            }
+
                             worksheet.Cells["A1"].LoadFromArrays(data);
 
-                            FileInfo excelFile = new FileInfo(carpetaFinal + "\\Eventos.xlsx");
-                            excelEventos.SaveAs(excelFile);
+                            FileInfo excelFile = new FileInfo(carpetaFinal + "\\Intervalos.xlsx");
+                            excelIntervalos.SaveAs(excelFile);
                         }
+                        //crear txt con la fdp e inversa
+                        string path = carpetaFinal + "\\FDP.txt";
+                        File.Create(path).Dispose();
 
-                    }
-                    //crear excel con los intervalos utilizados y los creados adicionalmente
-                    using (ExcelPackage excelIntervalos = new ExcelPackage())
-                    {
-                        excelIntervalos.Workbook.Worksheets.Add("Hoja1");
-
-                        var worksheet = excelIntervalos.Workbook.Worksheets["Hoja1"];
-
-                        List<string[]> data = new List<string[]>();
-
-                        foreach (int intervalo in eventosParaAjuste)
+                        using (TextWriter tw = new StreamWriter(path))
                         {
-                            data.Add(new string[] { intervalo.ToString() });
+                            tw.WriteLine(lblFuncion.Text);
                         }
-                        foreach (var item in lbxGenerados.Items)
-                        {
-                            data.Add(new string[] { item.ToString() });
-                        }
-
-                        worksheet.Cells["A1"].LoadFromArrays(data);
-
-                        FileInfo excelFile = new FileInfo(carpetaFinal + "\\Intervalos.xlsx");
-                        excelIntervalos.SaveAs(excelFile);
+                        //exportar gráficos de fdp e inversa
+                        mostrarMensaje("Se exportaron los resultados exitosamente", Color.FromArgb(128, 255, 128));
                     }
-                    //crear txt con la fdp e inversa
-                    //exportar gráficos de fdp e inversa
-                    mostrarMensaje("Se exportaron los resultados exitosamente", Color.FromArgb(128, 255, 128));
+                }
+                catch
+                {
+                    mostrarMensaje("Error al exportar los resultados", Color.FromArgb(255, 89, 89));
                 }
             }
-            catch
-            {
-                mostrarMensaje("Error al exportar los resultados", Color.FromArgb(255, 89, 89));
-            }
-
+            else
+                mostrarMensaje("Debe seleccionar una función", Color.FromArgb(255, 255, 0));
         }
+
     }
 }
