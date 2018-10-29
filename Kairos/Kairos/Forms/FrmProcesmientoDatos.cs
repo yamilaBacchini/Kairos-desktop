@@ -15,8 +15,7 @@ namespace Kairos.Forms
     public partial class FrmProcesmientoDatos : Form
     {
         private TipoAccionProcesamiento tipoAccion;
-        private string nombreProyecto = "";
-        private int idOrigen = -1;
+        private Origen proyecto = new Origen();
         private List<Evento> eventos = null;
         private List<Evento> eventosSeleccionados = new List<Evento>();
         private bool timerActivo = false;
@@ -25,11 +24,11 @@ namespace Kairos.Forms
         private List<double> intervalos = new List<double>();
         private List<Double> intervalosParciales = new List<double>();
 
-        public FrmProcesmientoDatos(string nombreProyecto, int idOrigen)
+        public FrmProcesmientoDatos(string nombreProyecto, int idProyecto)
         {
             InitializeComponent();
-            this.idOrigen = idOrigen;
-            this.nombreProyecto = nombreProyecto;
+            this.proyecto.nombreOrigen = nombreProyecto;
+            this.proyecto.Id = idProyecto;
             lblTituloProyecto.Text = nombreProyecto;
             filtros = new List<Filtro>();
             setupFiltrosCheckboxList();
@@ -58,7 +57,7 @@ namespace Kairos.Forms
         {
             try
             {
-                eventos = EventoService.cargarEventos(idOrigen);
+                eventos = EventoService.cargarEventos(this.proyecto.Id);
                 dgwEventos.DataSource = eventos;
                 dgwEventos.Columns[1].Width = 235;
                 dgwEventos.Columns[1].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
@@ -293,7 +292,7 @@ namespace Kairos.Forms
             {
                 case TipoAccionProcesamiento.AGREGAR_REGISTRO:
                     fecha = new DateTime(dtp1.Value.Year, dtp1.Value.Month, dtp1.Value.Day, dtp2.Value.Hour, dtp2.Value.Minute, dtp2.Value.Second);
-                    EventoService.nuevo(fecha, this.idOrigen);
+                    EventoService.nuevo(fecha, this.proyecto.Id);
                     mostrarMensaje("Registro agregado correctamente", Color.FromArgb(128, 255, 128));
                     cargarEventos();
                     actualizarEstadisticas();
@@ -582,7 +581,7 @@ namespace Kairos.Forms
         {
             if (rbFecha.Checked)
             {
-                List<Evento> filtrado = filtrador.FiltrarFechas(idOrigen, filtros);
+                List<Evento> filtrado = filtrador.FiltrarFechas(this.proyecto.Id, filtros);
                 if (filtrado != null)
                 {
                     eventos = filtrado;
@@ -699,7 +698,7 @@ namespace Kairos.Forms
                     {
                         metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
                         segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA : (rbMinuto.Checked ? Segmentacion.MINUTO : Segmentacion.SEGUNDO));
-                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos, flagIntervalos);
+                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos, flagIntervalos,this.proyecto);
                         this.Visible = false;
                         frm.ShowDialog();
                         this.Visible = true;
@@ -708,7 +707,7 @@ namespace Kairos.Forms
                     {
                         metodologia = MetodologiaAjuste.EVENTO_A_EVENTO;
                         flagIntervalos = 1;
-                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos);
+                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos,this.proyecto);
                         this.Visible = false;
                         frm.ShowDialog();
                         this.Visible = true;

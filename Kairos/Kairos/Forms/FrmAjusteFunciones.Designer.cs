@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAjusteFunciones));
             this.pnlEventos = new System.Windows.Forms.Panel();
             this.chrtInversa = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -100,10 +100,10 @@
             // 
             // chrtInversa
             // 
-            chartArea11.Name = "ChartArea2";
-            this.chrtInversa.ChartAreas.Add(chartArea11);
-            legend11.Name = "Legend2";
-            this.chrtInversa.Legends.Add(legend11);
+            chartArea3.Name = "ChartArea2";
+            this.chrtInversa.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend2";
+            this.chrtInversa.Legends.Add(legend3);
             this.chrtInversa.Location = new System.Drawing.Point(7, 266);
             this.chrtInversa.Name = "chrtInversa";
             this.chrtInversa.Size = new System.Drawing.Size(355, 205);
@@ -112,16 +112,16 @@
             // 
             // chrtFuncion
             // 
-            chartArea12.Name = "ChartArea1";
-            this.chrtFuncion.ChartAreas.Add(chartArea12);
-            legend12.Name = "Legend1";
-            this.chrtFuncion.Legends.Add(legend12);
+            chartArea4.Name = "ChartArea1";
+            this.chrtFuncion.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chrtFuncion.Legends.Add(legend4);
             this.chrtFuncion.Location = new System.Drawing.Point(7, 32);
             this.chrtFuncion.Name = "chrtFuncion";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chrtFuncion.Series.Add(series6);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chrtFuncion.Series.Add(series2);
             this.chrtFuncion.Size = new System.Drawing.Size(355, 205);
             this.chrtFuncion.TabIndex = 26;
             this.chrtFuncion.Text = "chart1";
@@ -617,6 +617,7 @@
             this.btnExportarResultados.TabIndex = 17;
             this.btnExportarResultados.Text = "Exportar Resultados";
             this.btnExportarResultados.UseVisualStyleBackColor = false;
+            this.btnExportarResultados.Click += new System.EventHandler(this.btnExportarResultados_Click);
             // 
             // FrmAjusteFunciones
             // 
