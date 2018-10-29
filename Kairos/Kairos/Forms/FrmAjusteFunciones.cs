@@ -1,10 +1,12 @@
 ﻿using Kairos.Entidades;
 using Kairos.FuncionesDensidad;
 using Kairos.Modelo;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -365,15 +367,12 @@ namespace Kairos.Forms
                     string directorio = folderBrowserDialog1.SelectedPath;
                     //crear carpeta con el nombre del proyecto
                     string nombreProyecto = directorio + "\\" + this.proyecto.nombreOrigen;
-
                     bool exists = System.IO.Directory.Exists(nombreProyecto);
-
+                    string carpetaFinal = "";
                     if (!exists)
                     {
                         System.IO.Directory.CreateDirectory(nombreProyecto);
-                        //crear excel con los eventos utilizados
-                        //crear excel con los intervalos utilizados y los creados adicionalmente
-                        //crear txt con la fdp e inversa
+                        carpetaFinal = nombreProyecto;
                     }
                     else
                     {
@@ -382,13 +381,35 @@ namespace Kairos.Forms
                         {
                             cont++;
                         }
-                        string carpetaFinal = nombreProyecto + " (" + cont + ")";
+                        carpetaFinal = nombreProyecto + " (" + cont + ")";
                         System.IO.Directory.CreateDirectory(carpetaFinal);
                     }
+                    //crear excel con los eventos utilizados
+                    using (ExcelPackage excel = new ExcelPackage())
+                    {
+                        excel.Workbook.Worksheets.Add("Hoja1");
+
+                        // Target a worksheet
+                        var worksheet = excel.Workbook.Worksheets["Hoja1"];
+
+                        // Popular header row data
+                        List<string[]> data = new List<string[]>();
+
+                        foreach(Evento evento in eventos)
+                        {
+                            data.Add(new string[] { evento.fecha.ToString("yyyy-MM-dd HH:mm:ss") });
+                        }
+                        worksheet.Cells["A1"].LoadFromArrays(data);
+
+                        FileInfo excelFile = new FileInfo(carpetaFinal+"\\Eventos.xlsx");
+                        excel.SaveAs(excelFile);
+                    }
+                    //crear excel con los intervalos utilizados y los creados adicionalmente
+                    //crear txt con la fdp e inversa
                     mostrarMensaje("Se exportaron los resultados exitosamente", Color.FromArgb(128, 255, 128));
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 mostrarMensaje("Error al exportar los resultados", Color.FromArgb(255, 89, 89));
             }
