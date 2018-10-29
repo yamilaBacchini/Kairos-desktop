@@ -385,12 +385,12 @@ namespace Kairos.Forms
                         System.IO.Directory.CreateDirectory(carpetaFinal);
                     }
                     //crear excel con los eventos utilizados
-                    using (ExcelPackage excel = new ExcelPackage())
+                    using (ExcelPackage excelEventos = new ExcelPackage())
                     {
-                        excel.Workbook.Worksheets.Add("Hoja1");
+                        excelEventos.Workbook.Worksheets.Add("Hoja1");
 
                         // Target a worksheet
-                        var worksheet = excel.Workbook.Worksheets["Hoja1"];
+                        var worksheet = excelEventos.Workbook.Worksheets["Hoja1"];
 
                         // Popular header row data
                         List<string[]> data = new List<string[]>();
@@ -402,14 +402,38 @@ namespace Kairos.Forms
                         worksheet.Cells["A1"].LoadFromArrays(data);
 
                         FileInfo excelFile = new FileInfo(carpetaFinal+"\\Eventos.xlsx");
-                        excel.SaveAs(excelFile);
+                        excelEventos.SaveAs(excelFile);
                     }
                     //crear excel con los intervalos utilizados y los creados adicionalmente
+                    using (ExcelPackage excelIntervalos = new ExcelPackage())
+                    {
+                        excelIntervalos.Workbook.Worksheets.Add("Hoja1");
+
+                        // Target a worksheet
+                        var worksheet = excelIntervalos.Workbook.Worksheets["Hoja1"];
+
+                        // Popular header row data
+                        List<string[]> data = new List<string[]>();
+
+                        foreach (int intervalo in eventosParaAjuste)
+                        {
+                            data.Add(new string[] { intervalo.ToString()});
+                        }
+                        foreach (var item in lbxGenerados.Items)
+                        {
+                            data.Add(new string[] { item.ToString() });
+                        }
+                        
+                        worksheet.Cells["A1"].LoadFromArrays(data);
+
+                        FileInfo excelFile = new FileInfo(carpetaFinal + "\\Intervalos.xlsx");
+                        excelIntervalos.SaveAs(excelFile);
+                    }
                     //crear txt con la fdp e inversa
                     mostrarMensaje("Se exportaron los resultados exitosamente", Color.FromArgb(128, 255, 128));
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 mostrarMensaje("Error al exportar los resultados", Color.FromArgb(255, 89, 89));
             }
