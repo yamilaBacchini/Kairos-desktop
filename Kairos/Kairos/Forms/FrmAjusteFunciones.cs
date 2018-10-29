@@ -432,14 +432,20 @@ namespace Kairos.Forms
                             excelIntervalos.SaveAs(excelFile);
                         }
                         //crear txt con la fdp e inversa
-                        string path = carpetaFinal + "\\FDP.txt";
-                        File.Create(path).Dispose();
+                        string pathFDP = carpetaFinal + "\\FDP.txt";
+                        File.Create(pathFDP).Dispose();
 
-                        using (TextWriter tw = new StreamWriter(path))
+                        using (TextWriter tw = new StreamWriter(pathFDP))
                         {
                             tw.WriteLine(lblFuncion.Text);
                         }
                         //exportar gráficos de fdp e inversa
+
+                        string pathInversa = carpetaFinal + "\\FuncionInversa.txt";
+                        using (TextWriter tw = new StreamWriter(pathInversa))
+                        {
+                            tw.WriteLine(lblFuncionInversa.Text);
+                        }
                         mostrarMensaje("Se exportaron los resultados exitosamente", Color.FromArgb(128, 255, 128));
                     }
                 }
