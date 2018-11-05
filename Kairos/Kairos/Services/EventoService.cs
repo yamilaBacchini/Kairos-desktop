@@ -1,4 +1,5 @@
 ﻿using Kairos.Entidades;
+using Kairos.FuncionesDensidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,8 @@ namespace Kairos.Services
             {
                 foreach (string item in aAgregarEnString)
                 {
-                    if(item!="" && item!="1970-1-1 0:0:")
-                    db.Eventos.Add(new Entidades.Evento { fecha = obtenerFechaSinMilisegundos(Convert.ToDateTime(item)), idOrigen = idOrigen, activo = true });
+                    if (item != "" && item != "1970-1-1 0:0:")
+                        db.Eventos.Add(new Entidades.Evento { fecha = obtenerFechaSinMilisegundos(Convert.ToDateTime(item)), idOrigen = idOrigen, activo = true });
                 }
                 db.SaveChanges();
             }
@@ -38,6 +39,34 @@ namespace Kairos.Services
             using (var db = new EventoContexto())
             {
                 db.Eventos.Add(new Evento { fecha = obtenerFechaSinMilisegundos(fecha), idOrigen = idOrigen, activo = true });
+                db.SaveChanges();
+            }
+        }
+
+        public static void nuevoPorIntervalo(int cantidad, Segmentacion segm, int idOrigen)
+        {
+            DateTime fechaAAgregar = DateTime.Now;
+            using (var db = new EventoContexto())
+            {
+                DateTime maxFecha = db.Eventos.Where(x => x.idOrigen == idOrigen).Max(x => x.fecha);
+                switch (segm)
+                {
+                    case Segmentacion.DIA:
+                        fechaAAgregar = maxFecha.AddDays(cantidad);
+                        break;
+                    case Segmentacion.HORA:
+                        fechaAAgregar = maxFecha.AddHours(cantidad);
+                        break;
+                    case Segmentacion.MINUTO:
+                        fechaAAgregar = maxFecha.AddMinutes(cantidad);
+                        break;
+                    case Segmentacion.SEGUNDO:
+                        fechaAAgregar = maxFecha.AddSeconds(cantidad);
+                        break;
+                    default:
+                        break;
+                }
+                db.Eventos.Add(entity: new Evento { fecha = fechaAAgregar, idOrigen = idOrigen, activo = true });
                 db.SaveChanges();
             }
         }

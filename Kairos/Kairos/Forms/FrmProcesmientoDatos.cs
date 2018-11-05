@@ -169,6 +169,12 @@ namespace Kairos.Forms
                     lblAccion2.Text = "Hora";
                     dtp2.Format = DateTimePickerFormat.Custom;
                     dtp2.CustomFormat = "HH:mm:ss";
+                    rbAgregarPorFechaYHora.Checked = true;
+                    rbAgregarPorFechaYHora.Visible = true;
+                    rbAgregarPorIntervalo.Checked = false;
+                    rbAgregarPorIntervalo.Visible = true;
+                    nudAgregarPorIntervalo.Visible = false;
+                    cbAgregarPorIntervalo.Visible = false;
                     cambiarFiltrosVistaFecha(0);
                     break;
                 case TipoAccionProcesamiento.MODIFICAR_REGISTRO:
@@ -178,6 +184,10 @@ namespace Kairos.Forms
                     lblAccion2.Text = "Hora";
                     dtp2.Format = DateTimePickerFormat.Custom;
                     dtp2.CustomFormat = "HH:mm:ss";
+                    rbAgregarPorFechaYHora.Visible = false;
+                    rbAgregarPorIntervalo.Visible = false;
+                    nudAgregarPorIntervalo.Visible = false;
+                    cbAgregarPorIntervalo.Visible = false;
                     cambiarFiltrosVistaFecha(0);
                     break;
                 case TipoAccionProcesamiento.FILTRAR:
@@ -200,6 +210,10 @@ namespace Kairos.Forms
                     lblAccion2.Text = "Hora";
                     dtp2.Format = DateTimePickerFormat.Custom;
                     dtp2.CustomFormat = "HH:mm:ss";
+                    rbAgregarPorFechaYHora.Visible = false;
+                    rbAgregarPorIntervalo.Visible = false;
+                    nudAgregarPorIntervalo.Visible = false;
+                    cbAgregarPorIntervalo.Visible = false;
 
 
                     break;
@@ -288,14 +302,41 @@ namespace Kairos.Forms
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             DateTime fecha;
+            Segmentacion segmentacion=Segmentacion.SEGUNDO;
             switch (tipoAccion)
             {
                 case TipoAccionProcesamiento.AGREGAR_REGISTRO:
-                    fecha = new DateTime(dtp1.Value.Year, dtp1.Value.Month, dtp1.Value.Day, dtp2.Value.Hour, dtp2.Value.Minute, dtp2.Value.Second);
-                    EventoService.nuevo(fecha, this.proyecto.Id);
+                    if (rbAgregarPorFechaYHora.Checked)
+                    {
+                        fecha = new DateTime(dtp1.Value.Year, dtp1.Value.Month, dtp1.Value.Day, dtp2.Value.Hour, dtp2.Value.Minute, dtp2.Value.Second);
+                        EventoService.nuevo(fecha, this.proyecto.Id);
+                    }
+                    else if (rbAgregarPorIntervalo.Checked)
+                    {
+
+                        switch (cbAgregarPorIntervalo.SelectedItem)
+                        {
+                            case "Segundos":
+                                segmentacion = Segmentacion.SEGUNDO;
+                                break;
+                            case "Minutos":
+                                segmentacion = Segmentacion.MINUTO;
+                                break;
+                            case "Horas":
+                                segmentacion = Segmentacion.HORA;
+                                break;
+                            case "Dias":
+                                segmentacion = Segmentacion.DIA;
+                                break;
+                            default:
+                                break;
+                        }
+                        EventoService.nuevoPorIntervalo(Convert.ToInt32(nudAgregarPorIntervalo.Value),segmentacion,this.proyecto.Id);
+                    }
                     mostrarMensaje("Registro agregado correctamente", Color.FromArgb(128, 255, 128));
                     cargarEventos();
                     actualizarEstadisticas();
+
                     break;
                 case TipoAccionProcesamiento.MODIFICAR_REGISTRO:
                     fecha = new DateTime(dtp1.Value.Year, dtp1.Value.Month, dtp1.Value.Day, dtp2.Value.Hour, dtp2.Value.Minute, dtp2.Value.Second);
@@ -698,7 +739,7 @@ namespace Kairos.Forms
                     {
                         metodologia = rbEventoAEvento.Checked ? MetodologiaAjuste.EVENTO_A_EVENTO : MetodologiaAjuste.DT_CONSTANTE;
                         segmentacion = rbDia.Checked ? Segmentacion.DIA : (rbHora.Checked ? Segmentacion.HORA : (rbMinuto.Checked ? Segmentacion.MINUTO : Segmentacion.SEGUNDO));
-                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos, flagIntervalos,this.proyecto);
+                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, eventos, flagIntervalos, this.proyecto);
                         this.Visible = false;
                         frm.ShowDialog();
                         this.Visible = true;
@@ -707,7 +748,7 @@ namespace Kairos.Forms
                     {
                         metodologia = MetodologiaAjuste.EVENTO_A_EVENTO;
                         flagIntervalos = 1;
-                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos,this.proyecto);
+                        FrmAjusteFunciones frm = new FrmAjusteFunciones(metodologia, segmentacion, intervalosParciales, flagIntervalos, this.proyecto);
                         this.Visible = false;
                         frm.ShowDialog();
                         this.Visible = true;
@@ -850,6 +891,28 @@ namespace Kairos.Forms
                 resultado = intervalosParciales.Sum() / intervalosParciales.Count();
             }
             return resultado;
+
+        }
+
+        private void rbAgregarPorFechaYHora_CheckedChanged(object sender, EventArgs e)
+        {
+            nudAgregarPorIntervalo.Visible = false;
+            cbAgregarPorIntervalo.Visible = false;
+            dtp1.Visible = true;
+            dtp2.Visible = true;
+            lblAccion1.Visible = true;
+            lblAccion2.Visible = true;
+        }
+
+        private void rbAgregarPorIntervalo_CheckedChanged(object sender, EventArgs e)
+        {
+            nudAgregarPorIntervalo.Visible = true;
+            cbAgregarPorIntervalo.Visible = true;
+            dtp1.Visible = false;
+            dtp2.Visible = false;
+            lblAccion1.Visible = false;
+            lblAccion2.Visible = false;
+            cbAgregarPorIntervalo.SelectedItem = "Segundos";
 
         }
     }

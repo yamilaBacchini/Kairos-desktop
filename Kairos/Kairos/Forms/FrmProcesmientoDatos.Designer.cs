@@ -81,6 +81,11 @@
             this.rbEventoAEvento = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTituloProyecto = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.rbAgregarPorFechaYHora = new System.Windows.Forms.RadioButton();
+            this.rbAgregarPorIntervalo = new System.Windows.Forms.RadioButton();
+            this.cbAgregarPorIntervalo = new System.Windows.Forms.ComboBox();
+            this.nudAgregarPorIntervalo = new System.Windows.Forms.NumericUpDown();
             this.pnlEventos.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventos)).BeginInit();
@@ -93,6 +98,7 @@
             this.pnlAcciones.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlSegmentacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAgregarPorIntervalo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEventos
@@ -237,6 +243,10 @@
             // 
             // pnlModificable
             // 
+            this.pnlModificable.Controls.Add(this.nudAgregarPorIntervalo);
+            this.pnlModificable.Controls.Add(this.cbAgregarPorIntervalo);
+            this.pnlModificable.Controls.Add(this.rbAgregarPorIntervalo);
+            this.pnlModificable.Controls.Add(this.rbAgregarPorFechaYHora);
             this.pnlModificable.Controls.Add(this.txtIntervalo2);
             this.pnlModificable.Controls.Add(this.txtIntervalo);
             this.pnlModificable.Controls.Add(this.label2);
@@ -258,7 +268,7 @@
             // 
             // txtIntervalo2
             // 
-            this.txtIntervalo2.Location = new System.Drawing.Point(126, 113);
+            this.txtIntervalo2.Location = new System.Drawing.Point(126, 116);
             this.txtIntervalo2.Name = "txtIntervalo2";
             this.txtIntervalo2.Size = new System.Drawing.Size(39, 20);
             this.txtIntervalo2.TabIndex = 56;
@@ -267,7 +277,7 @@
             // 
             // txtIntervalo
             // 
-            this.txtIntervalo.Location = new System.Drawing.Point(126, 69);
+            this.txtIntervalo.Location = new System.Drawing.Point(126, 72);
             this.txtIntervalo.Name = "txtIntervalo";
             this.txtIntervalo.Size = new System.Drawing.Size(39, 20);
             this.txtIntervalo.TabIndex = 55;
@@ -279,7 +289,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(7, 218);
+            this.label2.Location = new System.Drawing.Point(7, 224);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 20);
             this.label2.TabIndex = 54;
@@ -288,7 +298,7 @@
             // chlFiltros
             // 
             this.chlFiltros.FormattingEnabled = true;
-            this.chlFiltros.Location = new System.Drawing.Point(11, 243);
+            this.chlFiltros.Location = new System.Drawing.Point(11, 249);
             this.chlFiltros.Name = "chlFiltros";
             this.chlFiltros.Size = new System.Drawing.Size(230, 49);
             this.chlFiltros.TabIndex = 53;
@@ -299,7 +309,7 @@
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnLimpiar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
-            this.btnLimpiar.Location = new System.Drawing.Point(165, 296);
+            this.btnLimpiar.Location = new System.Drawing.Point(165, 300);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(76, 31);
             this.btnLimpiar.TabIndex = 52;
@@ -310,7 +320,7 @@
             // cmbTipoFiltro
             // 
             this.cmbTipoFiltro.FormattingEnabled = true;
-            this.cmbTipoFiltro.Location = new System.Drawing.Point(112, 42);
+            this.cmbTipoFiltro.Location = new System.Drawing.Point(112, 31);
             this.cmbTipoFiltro.Name = "cmbTipoFiltro";
             this.cmbTipoFiltro.Size = new System.Drawing.Size(129, 21);
             this.cmbTipoFiltro.TabIndex = 51;
@@ -322,7 +332,7 @@
             this.lblTipoFiltro.AutoSize = true;
             this.lblTipoFiltro.Font = new System.Drawing.Font("Book Antiqua", 12F);
             this.lblTipoFiltro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblTipoFiltro.Location = new System.Drawing.Point(7, 40);
+            this.lblTipoFiltro.Location = new System.Drawing.Point(7, 29);
             this.lblTipoFiltro.Name = "lblTipoFiltro";
             this.lblTipoFiltro.Size = new System.Drawing.Size(104, 20);
             this.lblTipoFiltro.TabIndex = 50;
@@ -332,7 +342,7 @@
             // 
             this.dtp2.CustomFormat = "HH:mm:ss";
             this.dtp2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp2.Location = new System.Drawing.Point(41, 136);
+            this.dtp2.Location = new System.Drawing.Point(41, 139);
             this.dtp2.Name = "dtp2";
             this.dtp2.ShowUpDown = true;
             this.dtp2.Size = new System.Drawing.Size(200, 20);
@@ -341,7 +351,7 @@
             // dtp1
             // 
             this.dtp1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtp1.Location = new System.Drawing.Point(41, 90);
+            this.dtp1.Location = new System.Drawing.Point(41, 93);
             this.dtp1.Name = "dtp1";
             this.dtp1.Size = new System.Drawing.Size(200, 20);
             this.dtp1.TabIndex = 48;
@@ -351,7 +361,7 @@
             this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
             this.btnAceptar.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptar.ForeColor = System.Drawing.Color.White;
-            this.btnAceptar.Location = new System.Drawing.Point(165, 165);
+            this.btnAceptar.Location = new System.Drawing.Point(165, 196);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(76, 31);
             this.btnAceptar.TabIndex = 47;
@@ -364,7 +374,7 @@
             this.lblAccion2.AutoSize = true;
             this.lblAccion2.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccion2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblAccion2.Location = new System.Drawing.Point(6, 113);
+            this.lblAccion2.Location = new System.Drawing.Point(6, 116);
             this.lblAccion2.Name = "lblAccion2";
             this.lblAccion2.Size = new System.Drawing.Size(65, 20);
             this.lblAccion2.TabIndex = 46;
@@ -375,7 +385,7 @@
             this.lblAccion1.AutoSize = true;
             this.lblAccion1.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccion1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblAccion1.Location = new System.Drawing.Point(6, 67);
+            this.lblAccion1.Location = new System.Drawing.Point(6, 70);
             this.lblAccion1.Name = "lblAccion1";
             this.lblAccion1.Size = new System.Drawing.Size(50, 20);
             this.lblAccion1.TabIndex = 45;
@@ -386,7 +396,7 @@
             this.lblTituloAccion.AutoSize = true;
             this.lblTituloAccion.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTituloAccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblTituloAccion.Location = new System.Drawing.Point(6, 4);
+            this.lblTituloAccion.Location = new System.Drawing.Point(6, 3);
             this.lblTituloAccion.Name = "lblTituloAccion";
             this.lblTituloAccion.Size = new System.Drawing.Size(135, 23);
             this.lblTituloAccion.TabIndex = 44;
@@ -700,6 +710,70 @@
             this.lblTituloProyecto.TabIndex = 64;
             this.lblTituloProyecto.Text = "Titulo Proyecto";
             // 
+            // rbAgregarPorFechaYHora
+            // 
+            this.rbAgregarPorFechaYHora.AutoSize = true;
+            this.rbAgregarPorFechaYHora.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.rbAgregarPorFechaYHora.Location = new System.Drawing.Point(9, 48);
+            this.rbAgregarPorFechaYHora.Name = "rbAgregarPorFechaYHora";
+            this.rbAgregarPorFechaYHora.Size = new System.Drawing.Size(107, 22);
+            this.rbAgregarPorFechaYHora.TabIndex = 61;
+            this.rbAgregarPorFechaYHora.Text = "Fecha y hora";
+            this.rbAgregarPorFechaYHora.UseVisualStyleBackColor = true;
+            this.rbAgregarPorFechaYHora.CheckedChanged += new System.EventHandler(this.rbAgregarPorFechaYHora_CheckedChanged);
+            // 
+            // rbAgregarPorIntervalo
+            // 
+            this.rbAgregarPorIntervalo.AutoSize = true;
+            this.rbAgregarPorIntervalo.Checked = true;
+            this.rbAgregarPorIntervalo.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.rbAgregarPorIntervalo.Location = new System.Drawing.Point(11, 168);
+            this.rbAgregarPorIntervalo.Name = "rbAgregarPorIntervalo";
+            this.rbAgregarPorIntervalo.Size = new System.Drawing.Size(84, 22);
+            this.rbAgregarPorIntervalo.TabIndex = 62;
+            this.rbAgregarPorIntervalo.TabStop = true;
+            this.rbAgregarPorIntervalo.Text = "Intervalo";
+            this.rbAgregarPorIntervalo.UseVisualStyleBackColor = true;
+            this.rbAgregarPorIntervalo.CheckedChanged += new System.EventHandler(this.rbAgregarPorIntervalo_CheckedChanged);
+            // 
+            // cbAgregarPorIntervalo
+            // 
+            this.cbAgregarPorIntervalo.FormattingEnabled = true;
+            this.cbAgregarPorIntervalo.Items.AddRange(new object[] {
+            "Segundos",
+            "Minutos",
+            "Horas",
+            "Dias"});
+            this.cbAgregarPorIntervalo.Location = new System.Drawing.Point(153, 168);
+            this.cbAgregarPorIntervalo.Name = "cbAgregarPorIntervalo";
+            this.cbAgregarPorIntervalo.Size = new System.Drawing.Size(88, 21);
+            this.cbAgregarPorIntervalo.TabIndex = 64;
+            this.cbAgregarPorIntervalo.Text = "Seleccione";
+            this.cbAgregarPorIntervalo.Visible = false;
+            // 
+            // nudAgregarPorIntervalo
+            // 
+            this.nudAgregarPorIntervalo.Location = new System.Drawing.Point(95, 168);
+            this.nudAgregarPorIntervalo.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudAgregarPorIntervalo.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudAgregarPorIntervalo.Name = "nudAgregarPorIntervalo";
+            this.nudAgregarPorIntervalo.Size = new System.Drawing.Size(52, 20);
+            this.nudAgregarPorIntervalo.TabIndex = 65;
+            this.nudAgregarPorIntervalo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudAgregarPorIntervalo.Visible = false;
+            // 
             // FrmProcesmientoDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -739,6 +813,7 @@
             this.panel1.PerformLayout();
             this.pnlSegmentacion.ResumeLayout(false);
             this.pnlSegmentacion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAgregarPorIntervalo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -796,5 +871,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbAgregarPorIntervalo;
+        private System.Windows.Forms.RadioButton rbAgregarPorIntervalo;
+        private System.Windows.Forms.RadioButton rbAgregarPorFechaYHora;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.NumericUpDown nudAgregarPorIntervalo;
     }
 }

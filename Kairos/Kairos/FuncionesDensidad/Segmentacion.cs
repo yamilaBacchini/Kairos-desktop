@@ -8,6 +8,6 @@ namespace Kairos.FuncionesDensidad
 {
     public enum Segmentacion
     {
-        ANIO, MES, DIA, HORA, MINUTO, SEGUNDO
+        DIA, HORA, MINUTO, SEGUNDO
     }
 }
