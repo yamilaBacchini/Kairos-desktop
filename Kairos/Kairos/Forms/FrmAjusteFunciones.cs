@@ -431,7 +431,7 @@ namespace Kairos.Forms
                             FileInfo excelFile = new FileInfo(carpetaFinal + "\\Intervalos.xlsx");
                             excelIntervalos.SaveAs(excelFile);
                         }
-                        //crear txt con la fdp e inversa
+                        //crear txt con la fdp
                         string pathFDP = carpetaFinal + "\\FDP.txt";
                         File.Create(pathFDP).Dispose();
 
@@ -439,8 +439,22 @@ namespace Kairos.Forms
                         {
                             tw.WriteLine(lblFuncion.Text);
                         }
-                        //exportar gráficos de fdp e inversa
 
+                        //exportar gráfico de fdp
+                        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                        saveFileDialog1.FileName = carpetaFinal+"\\GraficoFDP.png";
+                        System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                        this.chrtFuncion.SaveImage(fs, ChartImageFormat.Png);
+                        fs.Close();
+
+                        //exportar gráfico de inversa
+                        SaveFileDialog saveFileDialog2 = new SaveFileDialog();
+                        saveFileDialog2.FileName = carpetaFinal + "\\GraficoFuncionInversa.png";
+                        System.IO.FileStream fs2 = (System.IO.FileStream)saveFileDialog2.OpenFile();
+                        this.chrtInversa.SaveImage(fs, ChartImageFormat.Png);
+                        fs2.Close();
+
+                        //crear txt con la inversa
                         string pathInversa = carpetaFinal + "\\FuncionInversa.txt";
                         using (TextWriter tw = new StreamWriter(pathInversa))
                         {
