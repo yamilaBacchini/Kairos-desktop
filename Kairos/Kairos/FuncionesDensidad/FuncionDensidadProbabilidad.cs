@@ -17,6 +17,8 @@ namespace Kairos.FuncionesDensidad
 
         public ResultadoAjuste Resultado { get; protected set; }
 
+        public double Desvio { get; protected set; }
+
         public FuncionDensidadProbabilidad(double[] eventos)
         {
         }
