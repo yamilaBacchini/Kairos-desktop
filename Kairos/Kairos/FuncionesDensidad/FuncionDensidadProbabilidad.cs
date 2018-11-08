@@ -72,5 +72,22 @@ namespace Kairos.FuncionesDensidad
                 return densidades;
             }
         }
+
+        public double CalcularDesvio(Dictionary<string, double> eventos)
+        {
+            try
+            {
+                if (DistribucionContinua != null)
+                    Desvio = eventos.Sum(x => Math.Pow(DistribucionContinua.ProbabilityDensityFunction(Convert.ToDouble(x.Key)) - x.Value, 2));
+                else
+                    Desvio = eventos.Sum(x => Math.Pow(DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(x.Key)) - x.Value, 2));
+                return Desvio;
+            }
+            catch (Exception)
+            {
+                return double.NaN;
+            }
+        }
+
     }
 }
