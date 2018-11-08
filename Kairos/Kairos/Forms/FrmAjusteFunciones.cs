@@ -148,7 +148,7 @@ namespace Kairos.Forms
                 resultadoFuncionWeibull5 = FactoryFuncionDensidad.Instancia(FuncionDensidad.WEIBULL5, arrEventos).Resultado;
                 if (resultadoFuncionWeibull5 != null)
                     lResultadosOrdenados.Add(FuncionDensidad.WEIBULL5, resultadoFuncionWeibull5);
-                lResultadosOrdenados = lResultadosOrdenados.OrderBy(x => x.Value.DesvioEstandar).ToDictionary(x => x.Key, y => y.Value);
+                lResultadosOrdenados = lResultadosOrdenados.OrderBy(x => x.Value.FDP.CalcularDesvio(eventosSimplificados)).ToDictionary(x => x.Key, y => y.Value);
             }
             catch
             {
