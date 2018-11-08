@@ -795,9 +795,9 @@ namespace Kairos.Forms
                         var eventosOrdenados = eventos.OrderBy(x => x.fecha);
                         List<double> lista = new List<double>();
                         lista = eventosOrdenados.Select(x => x.fecha.TimeOfDay)
-                        .Zip(eventosOrdenados.Select(x => x.fecha.TimeOfDay)
+                        .Zip(eventosOrdenados.Select(x => x.fecha)
                         .Skip(1), (x, y) => y - x)
-                        .Select(x => Math.Abs(x.TotalSeconds))
+                        .Select(x => Math.Abs(x.TimeOfDay.TotalSeconds))
                         .ToList();
 
                         this.intervalos = lista; //para limpir los filtros y volver al original

@@ -48,7 +48,12 @@ namespace Kairos.Services
             DateTime fechaAAgregar = DateTime.Now;
             using (var db = new EventoContexto())
             {
-                DateTime maxFecha = db.Eventos.Where(x => x.idOrigen == idOrigen).Max(x => x.fecha);
+                DateTime maxFecha;
+                if (db.Eventos.Where(x=>x.idOrigen==idOrigen).Count()>0)
+                    maxFecha = db.Eventos.Where(x => x.idOrigen == idOrigen).Max(x => x.fecha);
+                else
+                    maxFecha = DateTime.Now;
+
                 switch (segm)
                 {
                     case Segmentacion.DIA:
