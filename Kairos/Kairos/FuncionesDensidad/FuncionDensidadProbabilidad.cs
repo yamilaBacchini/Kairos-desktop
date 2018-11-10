@@ -38,18 +38,18 @@ namespace Kairos.FuncionesDensidad
             }
         }
 
-        public Dictionary<double, double> ObtenerDensidad(int cantidad)
+        public Dictionary<double, double> ObtenerDensidad(Dictionary<double, double> valoresReales)
         {
             Dictionary<double, double> densidades = new Dictionary<double, double>();
-            var arr = GenerarValores(cantidad).Distinct().ToArray();
             if (DistribucionContinua != null)
-                foreach (var item in arr)
-                    densidades.Add(item, DistribucionContinua.ProbabilityDensityFunction(item));
+                foreach (var item in valoresReales)
+                    densidades.Add(item.Key, DistribucionContinua.ProbabilityDensityFunction(item.Key));
             else
-                foreach (var item in arr)
-                    densidades.Add(item, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item)));
+                foreach (var item in valoresReales)
+                    densidades.Add(item.Key, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item.Key)));
             return densidades.OrderBy(x => x.Key).ToDictionary(x => x.Key, y => y.Value);
         }
+
 
         public Dictionary<double, double> ObtenerDensidadInversa(int cantidad)
         {
