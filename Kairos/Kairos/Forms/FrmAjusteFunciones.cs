@@ -216,7 +216,7 @@ namespace Kairos.Forms
                 {
                     series = this.chrtFuncion.Series.Add("FDP");
                     series.ChartType = SeriesChartType.Line;
-                    series.BorderWidth = 2;
+                    series.BorderWidth = 5;
                 }
                 else
                     series.Points.Clear();
@@ -226,9 +226,9 @@ namespace Kairos.Forms
                     series.Points.AddXY(item.Key, item.Value);
                 }
             }
-            catch
+            catch(Exception e)
             {
-                mostrarMensaje("Error al graficar la función", Color.FromArgb(255, 89, 89));
+                mostrarMensaje("Error al graficar la función: " + e.Message, Color.FromArgb(255, 89, 89));
             }
         }
 
@@ -327,7 +327,7 @@ namespace Kairos.Forms
                 {
                     lbxGenerados.Items.Clear();
                     int cant = Convert.ToInt32(nudCantidadGenerados.Value);
-                    int[] arrGenerados = resultadoSeleccionado.FDP.GenerarValores(cant).Select(x => Convert.ToInt32(x)).ToArray();
+                    int[] arrGenerados = resultadoSeleccionado.FDP.GenerarValores(cant, eventosParaAjuste.ToArray()).Select(x => Convert.ToInt32(x)).ToArray();
                     lbxGenerados.Items.AddRange(arrGenerados.Select(x => (object)x).ToArray());
                 }
                 else
