@@ -1,11 +1,8 @@
 ﻿using Accord.Statistics.Distributions.Univariate;
-using Kairos.Entidades;
 using Kairos.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kairos.FuncionesDensidad
 {
@@ -23,7 +20,7 @@ namespace Kairos.FuncionesDensidad
         {
         }
 
-        public double[] GenerarValores(int cantidad)
+        public double[] GenerarValores(int cantidad, double[] eventos)
         {
             try
             {
@@ -32,24 +29,30 @@ namespace Kairos.FuncionesDensidad
                 else
                     return DistribucionDiscreta.Generate(cantidad).Select(x => Convert.ToDouble(x)).ToArray();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new double[0];
+                Random r = new Random();
+                int min = Convert.ToInt32(eventos.Min());
+                int max = Convert.ToInt32(eventos.Max());
+                double[] toReturn = new double[cantidad];
+                for (int i = 0; i < cantidad; i++)
+                    toReturn[i] = r.Next(min, max);
+                return toReturn;
             }
         }
 
-        public Dictionary<double, double> ObtenerDensidad(int cantidad)
+        public Dictionary<double, double> ObtenerDensidad(Dictionary<double, double> valoresReales)
         {
             Dictionary<double, double> densidades = new Dictionary<double, double>();
-            var arr = GenerarValores(cantidad).Distinct().ToArray();
             if (DistribucionContinua != null)
-                foreach (var item in arr)
-                    densidades.Add(item, DistribucionContinua.ProbabilityDensityFunction(item));
+                foreach (var item in valoresReales)
+                    densidades.Add(item.Key, DistribucionContinua.ProbabilityDensityFunction(item.Key));
             else
-                foreach (var item in arr)
-                    densidades.Add(item, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item)));
+                foreach (var item in valoresReales)
+                    densidades.Add(item.Key, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item.Key)));
             return densidades.OrderBy(x => x.Key).ToDictionary(x => x.Key, y => y.Value);
         }
+
 
         public Dictionary<double, double> ObtenerDensidadInversa(int cantidad)
         {

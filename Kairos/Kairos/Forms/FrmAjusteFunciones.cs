@@ -190,11 +190,15 @@ namespace Kairos.Forms
                 this.chrtFuncion.Palette = ChartColorPalette.None;
                 this.chrtFuncion.Titles.Add("Funcion de Densidad de Probabilidad");
                 Series series = this.chrtFuncion.Series.Add("Eventos");
+                series.XValueType = ChartValueType.Double;
+                series.XAxisType = AxisType.Primary;
+                series.YAxisType = AxisType.Secondary;
+                series.ChartType = SeriesChartType.Column;
                 series.Color = Color.Red;
                 series.BorderColor = Color.Black;
                 foreach (var item in eventosSimplificados.OrderBy(x => Convert.ToDouble(x.Key)))
                 {
-                    series.Points.AddXY(item.Key, item.Value);
+                    series.Points.AddXY(Convert.ToDouble(item.Key), item.Value);
                 }
             }
             catch
@@ -212,19 +216,19 @@ namespace Kairos.Forms
                 {
                     series = this.chrtFuncion.Series.Add("FDP");
                     series.ChartType = SeriesChartType.Line;
-                    series.BorderWidth = 2;
+                    series.BorderWidth = 5;
                 }
                 else
                     series.Points.Clear();
-                Dictionary<double, double> lGenerados = fdp.ObtenerDensidad(100);
+                Dictionary<double, double> lGenerados = fdp.ObtenerDensidad(eventosSimplificados.ToDictionary(x => Convert.ToDouble(x.Key), x => x.Value));
                 foreach (var item in lGenerados)
                 {
                     series.Points.AddXY(item.Key, item.Value);
                 }
             }
-            catch
+            catch(Exception e)
             {
-                mostrarMensaje("Error al graficar la función", Color.FromArgb(255, 89, 89));
+                mostrarMensaje("Error al graficar la función: " + e.Message, Color.FromArgb(255, 89, 89));
             }
         }
 
@@ -323,7 +327,7 @@ namespace Kairos.Forms
                 {
                     lbxGenerados.Items.Clear();
                     int cant = Convert.ToInt32(nudCantidadGenerados.Value);
-                    int[] arrGenerados = resultadoSeleccionado.FDP.GenerarValores(cant).Select(x => Convert.ToInt32(x)).ToArray();
+                    int[] arrGenerados = resultadoSeleccionado.FDP.GenerarValores(cant, eventosParaAjuste.ToArray()).Select(x => Convert.ToInt32(x)).ToArray();
                     lbxGenerados.Items.AddRange(arrGenerados.Select(x => (object)x).ToArray());
                 }
                 else
