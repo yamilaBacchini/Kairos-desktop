@@ -455,7 +455,7 @@ namespace Kairos.Forms
                         SaveFileDialog saveFileDialog2 = new SaveFileDialog();
                         saveFileDialog2.FileName = carpetaFinal + "\\GraficoFuncionInversa.png";
                         System.IO.FileStream fs2 = (System.IO.FileStream)saveFileDialog2.OpenFile();
-                        this.chrtInversa.SaveImage(fs, ChartImageFormat.Png);
+                        this.chrtInversa.SaveImage(fs2, ChartImageFormat.Png);
                         fs2.Close();
 
                         //crear txt con la inversa

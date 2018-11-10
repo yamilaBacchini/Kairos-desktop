@@ -48,8 +48,20 @@ namespace Kairos.FuncionesDensidad
                 foreach (var item in valoresReales)
                     densidades.Add(item.Key, DistribucionContinua.ProbabilityDensityFunction(item.Key));
             else
+            {
                 foreach (var item in valoresReales)
-                    densidades.Add(item.Key, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item.Key)));
+                {
+                    try
+                    {
+                        densidades.Add(item.Key, DistribucionDiscreta.ProbabilityMassFunction(Convert.ToInt32(item.Key)));
+                    }
+                    catch (Exception)
+                    {
+                       // densidades.Add(item.Key, DistribucionDiscreta.d(DistribucionDiscreta.Generate()));    
+                    }
+                }
+                    
+            }
             return densidades.OrderBy(x => x.Key).ToDictionary(x => x.Key, y => y.Value);
         }
 
