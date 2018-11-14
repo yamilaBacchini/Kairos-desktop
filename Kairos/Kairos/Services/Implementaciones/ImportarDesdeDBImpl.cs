@@ -9,9 +9,8 @@ namespace Kairos.Services.Implementaciones
         public List<DateTime> ObtenerColumnaDesdeDB(string connectionString, string database, string nombreDeTabla, string nombreColumna)
         {
             List<DateTime> dates = null;
-            try
-            {
-                string query = "SELECT " + nombreColumna + " FROM " + database + ".DBO." + nombreDeTabla + " ORDER BY " + nombreColumna + " ASC";
+
+                string query = "SELECT " + nombreColumna + " FROM " + database + ".DBO." + nombreDeTabla + " ORDER BY 1 ASC";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
@@ -24,12 +23,7 @@ namespace Kairos.Services.Implementaciones
                     }
                     reader.Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                dates = null;
-                Console.WriteLine(ex.Message);
-            }
+
             return dates;
         }
     }

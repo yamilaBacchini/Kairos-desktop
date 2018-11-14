@@ -67,8 +67,6 @@ namespace Kairos.Forms
 
         private static T Cast<T>(T typeHolder, Object x)
         {
-            // typeHolder above is just for compiler magic
-            // to infer the type to cast x to
             return (T)x;
         }
 
@@ -96,12 +94,14 @@ namespace Kairos.Forms
                             lblTituloImportacion.Text = "Indique el delimitador";
                             pnlImportacionTxt.Visible = true;
                             pnlImportacionExcel.Visible = false;
+                            pnlImportacionDB.Visible = false;
                             break;
                         case "xls":
                         case "xlsx":
                             lblTituloImportacion.Text = "Indique la ubicación de los datos";
                             pnlImportacionExcel.Visible = true;
                             pnlImportacionTxt.Visible = false;
+                            pnlImportacionDB.Visible = false;
                             break;
                         default:
                             break;
@@ -429,10 +429,140 @@ namespace Kairos.Forms
 
         private void btnImportarDesdeDB_Click(object sender, EventArgs e)
         {
-            var selectedItem = Cast(new { nombreOrigen = "", Id = 0 }, lbProyectosRecientes.SelectedItem);
-            Origen origen = ProyectoService.obtenerProyectoPorId(selectedItem.Id);
-            FrmImportarDesdeDB frmImportarDesdeDB = new FrmImportarDesdeDB(origen);
-            frmImportarDesdeDB.ShowDialog();
+            pnlImportacionTxt.Visible = false;
+            pnlImportacionExcel.Visible = false;
+            panelNombreProyecto.Visible = false;
+            pnlImportacionDB.Visible = true;
+            pnlImportacion.Visible = false;
+
+        }
+
+        private void btnAceptarImportacionDB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string server = txtNombreServidor.Text;
+                string database = txtNombreDB.Text;
+                string nombreTabla = txtNombreTabla.Text;
+                string nombreColumna = txtNombreColumna.Text;
+                string user = txtUsuario.Text;
+                string password = txtContrasenia.Text;
+
+                string connString = $"Data Source = {server}; Initial Catalog = {database};";
+                if (chUsuarioYContrasenia.Checked)
+                {
+                    connString = connString + $" User Id = {user}; Password = {password};";
+                }
+
+                IImportarDesdeDB importador = new ImportarDesdeDBImpl();
+
+                List<DateTime> dates = importador.ObtenerColumnaDesdeDB(connString, database, nombreTabla, nombreColumna);
+                if (dates != null)
+                {
+                    EventoService.agregarTodos(dates.Select(x =>
+                    {
+                        Evento aux = new Evento();
+                        aux.activo = true;
+                        aux.fecha = x;
+                        var seleccionado = lbProyectosRecientes.SelectedItem;
+                        var proyecto = new { nombreOrigen = "", Id = 0 };
+                        proyecto = Cast(proyecto, seleccionado);
+                        aux.idOrigen = proyecto.Id;
+                        return aux;
+                    }).ToList());
+                    mostrarMensaje("Se importaron los datos correctamente",Color.FromArgb(128, 255, 128));
+                    pnlImportacionDB.Visible = false;
+                    LimpiarTxtImportacionDB();
+                }
+            }
+            catch
+            {
+                mostrarMensaje("No se ha podido extraer la informacion solicitada. Por favor revise los datos",Color.FromArgb(255,89,89));
+            }
+        }
+
+        private void chUsuarioYContrasenia_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chUsuarioYContrasenia.Checked)
+            {
+                txtUsuario.Enabled = true;
+                txtUsuario.BackColor = Color.FromName("Window");
+                txtContrasenia.Enabled = true;
+                txtContrasenia.BackColor = Color.FromName("Window");
+                CheckearParametrosImportacionDB();
+            }
+            else if (!chUsuarioYContrasenia.Checked)
+            {
+                txtUsuario.Enabled = false;
+                txtUsuario.BackColor = Color.FromName("LightGray");
+                txtContrasenia.Enabled = false;
+                txtContrasenia.BackColor = Color.FromName("LightGray");
+            }
+        }
+
+
+        private void CheckearParametrosImportacionDB()
+        {
+            if (!string.IsNullOrEmpty(txtNombreServidor.Text) && !string.IsNullOrEmpty(txtNombreDB.Text)
+                && !string.IsNullOrEmpty(txtNombreTabla.Text) && !string.IsNullOrEmpty(txtNombreColumna.Text)
+                && ((chUsuarioYContrasenia.Checked && !string.IsNullOrEmpty(txtUsuario.Text) && !string.IsNullOrEmpty(txtContrasenia.Text))
+                            || !chUsuarioYContrasenia.Checked))
+            {
+                btnAceptarImportacionDB.Enabled = true;
+                btnAceptarImportacionDB.BackColor = Color.FromArgb(240, 100, 100);
+            }
+            else
+            {
+                btnAceptarImportacionDB.Enabled = false;
+                btnAceptarImportacionDB.BackColor = Color.FromName("LightGray");
+            }
+        }
+
+        private void txtNombreServidor_TextChanged(object sender, EventArgs e)
+        {
+            CheckearParametrosImportacionDB();
+        }
+
+        private void txtNombreDB_TextChanged(object sender, EventArgs e)
+        {
+            CheckearParametrosImportacionDB();
+        }
+
+        private void txtNombreTabla_TextChanged(object sender, EventArgs e)
+        {
+            CheckearParametrosImportacionDB();
+        }
+
+        private void txtNombreColumna_TextChanged(object sender, EventArgs e)
+        {
+            CheckearParametrosImportacionDB();
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            CheckearParametrosImportacionDB();
+        }
+
+        private void txtContrasenia_TextChanged(object sender, EventArgs e)
+        {
+            CheckearParametrosImportacionDB();
+        }
+
+        private void btnCancelarImportacionDB_Click(object sender, EventArgs e)
+        {
+            LimpiarTxtImportacionDB();
+        }
+
+        private void LimpiarTxtImportacionDB()
+        {
+            txtNombreServidor.Clear();
+            txtNombreDB.Clear();
+            txtNombreTabla.Clear();
+            txtNombreColumna.Clear();
+            txtUsuario.Clear();
+            txtContrasenia.Clear();
+            pnlImportacionDB.Visible = false;
+            chUsuarioYContrasenia.Checked = false;
         }
     }
 }

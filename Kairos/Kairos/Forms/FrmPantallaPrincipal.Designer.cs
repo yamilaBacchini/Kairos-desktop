@@ -39,10 +39,32 @@
             this.timerMensaje = new System.Windows.Forms.Timer(this.components);
             this.flowPanelBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnArduino = new System.Windows.Forms.Button();
+            this.btnImportarDesdeDB = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.panelNotificaciones = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.pnlProyectos = new System.Windows.Forms.Panel();
+            this.pnlImportacionDB = new System.Windows.Forms.Panel();
+            this.btnCancelarImportacionDB = new System.Windows.Forms.Button();
+            this.btnAceptarImportacionDB = new System.Windows.Forms.Button();
+            this.chUsuarioYContrasenia = new System.Windows.Forms.CheckBox();
+            this.txtContrasenia = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.txtNombreColumna = new System.Windows.Forms.TextBox();
+            this.txtNombreTabla = new System.Windows.Forms.TextBox();
+            this.txtNombreDB = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtNombreServidor = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblNombreDeColumna = new System.Windows.Forms.Label();
+            this.lblNombreTabla = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblNombreBaseDeDatos = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.imgBorrar = new System.Windows.Forms.PictureBox();
+            this.imgEditar = new System.Windows.Forms.PictureBox();
+            this.imgAgregar = new System.Windows.Forms.PictureBox();
+            this.lbProyectosRecientes = new System.Windows.Forms.ListBox();
             this.pnlImportacion = new System.Windows.Forms.Panel();
             this.pnlImportacionTxt = new System.Windows.Forms.Panel();
             this.rbOtro = new System.Windows.Forms.RadioButton();
@@ -67,18 +89,17 @@
             this.lblNombreProyecto = new System.Windows.Forms.Label();
             this.btnAceptarModificar = new System.Windows.Forms.Button();
             this.btnCancelarModificacion = new System.Windows.Forms.Button();
-            this.imgBorrar = new System.Windows.Forms.PictureBox();
-            this.imgEditar = new System.Windows.Forms.PictureBox();
-            this.imgAgregar = new System.Windows.Forms.PictureBox();
-            this.lbProyectosRecientes = new System.Windows.Forms.ListBox();
             this.toolTipInformacion = new System.Windows.Forms.ToolTip(this.components);
-            this.btnImportarDesdeDB = new System.Windows.Forms.Button();
             lblProyectosGuardados = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowPanelBotones.SuspendLayout();
             this.panelNotificaciones.SuspendLayout();
             this.pnlProyectos.SuspendLayout();
+            this.pnlImportacionDB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).BeginInit();
             this.pnlImportacion.SuspendLayout();
             this.pnlImportacionTxt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgInformacion)).BeginInit();
@@ -87,9 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudColumna)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHoja)).BeginInit();
             this.panelNombreProyecto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProyectosGuardados
@@ -216,6 +234,27 @@
             this.btnArduino.UseVisualStyleBackColor = false;
             this.btnArduino.Click += new System.EventHandler(this.btnArduino_Click);
             // 
+            // btnImportarDesdeDB
+            // 
+            this.btnImportarDesdeDB.BackColor = System.Drawing.Color.Transparent;
+            this.btnImportarDesdeDB.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnImportarDesdeDB.Enabled = false;
+            this.btnImportarDesdeDB.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnImportarDesdeDB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnImportarDesdeDB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnImportarDesdeDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImportarDesdeDB.Font = new System.Drawing.Font("Book Antiqua", 13F, System.Drawing.FontStyle.Bold);
+            this.btnImportarDesdeDB.ForeColor = System.Drawing.Color.White;
+            this.btnImportarDesdeDB.Location = new System.Drawing.Point(0, 246);
+            this.btnImportarDesdeDB.Margin = new System.Windows.Forms.Padding(0);
+            this.btnImportarDesdeDB.Name = "btnImportarDesdeDB";
+            this.btnImportarDesdeDB.Padding = new System.Windows.Forms.Padding(38, 0, 38, 0);
+            this.btnImportarDesdeDB.Size = new System.Drawing.Size(210, 82);
+            this.btnImportarDesdeDB.TabIndex = 15;
+            this.btnImportarDesdeDB.Text = "Importar desde DB";
+            this.btnImportarDesdeDB.UseVisualStyleBackColor = false;
+            this.btnImportarDesdeDB.Click += new System.EventHandler(this.btnImportarDesdeDB_Click);
+            // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(134)))), ((int)(((byte)(0)))), ((int)(((byte)(3)))));
@@ -259,17 +298,267 @@
             // 
             // pnlProyectos
             // 
-            this.pnlProyectos.Controls.Add(this.pnlImportacion);
-            this.pnlProyectos.Controls.Add(this.panelNombreProyecto);
+            this.pnlProyectos.Controls.Add(this.pnlImportacionDB);
             this.pnlProyectos.Controls.Add(this.imgBorrar);
             this.pnlProyectos.Controls.Add(this.imgEditar);
             this.pnlProyectos.Controls.Add(this.imgAgregar);
             this.pnlProyectos.Controls.Add(this.lbProyectosRecientes);
             this.pnlProyectos.Controls.Add(lblProyectosGuardados);
+            this.pnlProyectos.Controls.Add(this.pnlImportacion);
+            this.pnlProyectos.Controls.Add(this.panelNombreProyecto);
             this.pnlProyectos.Location = new System.Drawing.Point(210, 100);
             this.pnlProyectos.Name = "pnlProyectos";
             this.pnlProyectos.Size = new System.Drawing.Size(750, 485);
             this.pnlProyectos.TabIndex = 20;
+            // 
+            // pnlImportacionDB
+            // 
+            this.pnlImportacionDB.Controls.Add(this.btnCancelarImportacionDB);
+            this.pnlImportacionDB.Controls.Add(this.btnAceptarImportacionDB);
+            this.pnlImportacionDB.Controls.Add(this.chUsuarioYContrasenia);
+            this.pnlImportacionDB.Controls.Add(this.txtContrasenia);
+            this.pnlImportacionDB.Controls.Add(this.txtUsuario);
+            this.pnlImportacionDB.Controls.Add(this.txtNombreColumna);
+            this.pnlImportacionDB.Controls.Add(this.txtNombreTabla);
+            this.pnlImportacionDB.Controls.Add(this.txtNombreDB);
+            this.pnlImportacionDB.Controls.Add(this.label6);
+            this.pnlImportacionDB.Controls.Add(this.txtNombreServidor);
+            this.pnlImportacionDB.Controls.Add(this.label7);
+            this.pnlImportacionDB.Controls.Add(this.lblNombreDeColumna);
+            this.pnlImportacionDB.Controls.Add(this.lblNombreTabla);
+            this.pnlImportacionDB.Controls.Add(this.label8);
+            this.pnlImportacionDB.Controls.Add(this.lblNombreBaseDeDatos);
+            this.pnlImportacionDB.Controls.Add(this.label5);
+            this.pnlImportacionDB.Location = new System.Drawing.Point(403, 48);
+            this.pnlImportacionDB.Name = "pnlImportacionDB";
+            this.pnlImportacionDB.Size = new System.Drawing.Size(327, 344);
+            this.pnlImportacionDB.TabIndex = 31;
+            this.pnlImportacionDB.Visible = false;
+            // 
+            // btnCancelarImportacionDB
+            // 
+            this.btnCancelarImportacionDB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btnCancelarImportacionDB.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelarImportacionDB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(125)))), ((int)(((byte)(125)))));
+            this.btnCancelarImportacionDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelarImportacionDB.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelarImportacionDB.ForeColor = System.Drawing.Color.White;
+            this.btnCancelarImportacionDB.Location = new System.Drawing.Point(170, 297);
+            this.btnCancelarImportacionDB.Name = "btnCancelarImportacionDB";
+            this.btnCancelarImportacionDB.Size = new System.Drawing.Size(84, 30);
+            this.btnCancelarImportacionDB.TabIndex = 31;
+            this.btnCancelarImportacionDB.Text = "Cancelar";
+            this.btnCancelarImportacionDB.UseVisualStyleBackColor = false;
+            this.btnCancelarImportacionDB.Click += new System.EventHandler(this.btnCancelarImportacionDB_Click);
+            // 
+            // btnAceptarImportacionDB
+            // 
+            this.btnAceptarImportacionDB.BackColor = System.Drawing.Color.LightGray;
+            this.btnAceptarImportacionDB.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptarImportacionDB.Enabled = false;
+            this.btnAceptarImportacionDB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(125)))), ((int)(((byte)(125)))));
+            this.btnAceptarImportacionDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptarImportacionDB.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptarImportacionDB.ForeColor = System.Drawing.Color.White;
+            this.btnAceptarImportacionDB.Location = new System.Drawing.Point(64, 297);
+            this.btnAceptarImportacionDB.Name = "btnAceptarImportacionDB";
+            this.btnAceptarImportacionDB.Size = new System.Drawing.Size(84, 30);
+            this.btnAceptarImportacionDB.TabIndex = 31;
+            this.btnAceptarImportacionDB.Text = "Aceptar";
+            this.btnAceptarImportacionDB.UseVisualStyleBackColor = false;
+            this.btnAceptarImportacionDB.Click += new System.EventHandler(this.btnAceptarImportacionDB_Click);
+            // 
+            // chUsuarioYContrasenia
+            // 
+            this.chUsuarioYContrasenia.AutoSize = true;
+            this.chUsuarioYContrasenia.Font = new System.Drawing.Font("Book Antiqua", 9.25F);
+            this.chUsuarioYContrasenia.Location = new System.Drawing.Point(18, 158);
+            this.chUsuarioYContrasenia.Name = "chUsuarioYContrasenia";
+            this.chUsuarioYContrasenia.Size = new System.Drawing.Size(151, 21);
+            this.chUsuarioYContrasenia.TabIndex = 45;
+            this.chUsuarioYContrasenia.Text = "Usuario y contraseña";
+            this.chUsuarioYContrasenia.UseVisualStyleBackColor = true;
+            this.chUsuarioYContrasenia.CheckedChanged += new System.EventHandler(this.chUsuarioYContrasenia_CheckedChanged);
+            // 
+            // txtContrasenia
+            // 
+            this.txtContrasenia.BackColor = System.Drawing.Color.LightGray;
+            this.txtContrasenia.Enabled = false;
+            this.txtContrasenia.Location = new System.Drawing.Point(139, 218);
+            this.txtContrasenia.Name = "txtContrasenia";
+            this.txtContrasenia.Size = new System.Drawing.Size(166, 20);
+            this.txtContrasenia.TabIndex = 44;
+            this.txtContrasenia.TextChanged += new System.EventHandler(this.txtContrasenia_TextChanged);
+            // 
+            // txtUsuario
+            // 
+            this.txtUsuario.BackColor = System.Drawing.Color.LightGray;
+            this.txtUsuario.Enabled = false;
+            this.txtUsuario.Location = new System.Drawing.Point(139, 188);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(166, 20);
+            this.txtUsuario.TabIndex = 43;
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
+            // 
+            // txtNombreColumna
+            // 
+            this.txtNombreColumna.Location = new System.Drawing.Point(139, 129);
+            this.txtNombreColumna.Name = "txtNombreColumna";
+            this.txtNombreColumna.Size = new System.Drawing.Size(166, 20);
+            this.txtNombreColumna.TabIndex = 42;
+            this.txtNombreColumna.TextChanged += new System.EventHandler(this.txtNombreColumna_TextChanged);
+            // 
+            // txtNombreTabla
+            // 
+            this.txtNombreTabla.Location = new System.Drawing.Point(139, 99);
+            this.txtNombreTabla.Name = "txtNombreTabla";
+            this.txtNombreTabla.Size = new System.Drawing.Size(166, 20);
+            this.txtNombreTabla.TabIndex = 41;
+            this.txtNombreTabla.TextChanged += new System.EventHandler(this.txtNombreTabla_TextChanged);
+            // 
+            // txtNombreDB
+            // 
+            this.txtNombreDB.Location = new System.Drawing.Point(139, 69);
+            this.txtNombreDB.Name = "txtNombreDB";
+            this.txtNombreDB.Size = new System.Drawing.Size(166, 20);
+            this.txtNombreDB.TabIndex = 40;
+            this.txtNombreDB.TextChanged += new System.EventHandler(this.txtNombreDB_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(14, 218);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(86, 20);
+            this.label6.TabIndex = 39;
+            this.label6.Text = "Contraseña";
+            // 
+            // txtNombreServidor
+            // 
+            this.txtNombreServidor.Location = new System.Drawing.Point(139, 38);
+            this.txtNombreServidor.Name = "txtNombreServidor";
+            this.txtNombreServidor.Size = new System.Drawing.Size(166, 20);
+            this.txtNombreServidor.TabIndex = 38;
+            this.txtNombreServidor.TextChanged += new System.EventHandler(this.txtNombreServidor_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(14, 36);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(69, 20);
+            this.label7.TabIndex = 37;
+            this.label7.Text = "Servidor:";
+            // 
+            // lblNombreDeColumna
+            // 
+            this.lblNombreDeColumna.AutoSize = true;
+            this.lblNombreDeColumna.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreDeColumna.Location = new System.Drawing.Point(14, 129);
+            this.lblNombreDeColumna.Name = "lblNombreDeColumna";
+            this.lblNombreDeColumna.Size = new System.Drawing.Size(79, 20);
+            this.lblNombreDeColumna.TabIndex = 32;
+            this.lblNombreDeColumna.Text = "Columna: ";
+            // 
+            // lblNombreTabla
+            // 
+            this.lblNombreTabla.AutoSize = true;
+            this.lblNombreTabla.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreTabla.Location = new System.Drawing.Point(14, 99);
+            this.lblNombreTabla.Name = "lblNombreTabla";
+            this.lblNombreTabla.Size = new System.Drawing.Size(54, 20);
+            this.lblNombreTabla.TabIndex = 31;
+            this.lblNombreTabla.Text = "Tabla: ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(14, 186);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 20);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Usuario";
+            // 
+            // lblNombreBaseDeDatos
+            // 
+            this.lblNombreBaseDeDatos.AutoSize = true;
+            this.lblNombreBaseDeDatos.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreBaseDeDatos.Location = new System.Drawing.Point(14, 69);
+            this.lblNombreBaseDeDatos.Name = "lblNombreBaseDeDatos";
+            this.lblNombreBaseDeDatos.Size = new System.Drawing.Size(111, 20);
+            this.lblNombreBaseDeDatos.TabIndex = 30;
+            this.lblNombreBaseDeDatos.Text = "Base de datos:  ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(13, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(301, 23);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "Indique la ubicación de los datos";
+            // 
+            // imgBorrar
+            // 
+            this.imgBorrar.BackColor = System.Drawing.Color.Transparent;
+            this.imgBorrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.imgBorrar.Image = ((System.Drawing.Image)(resources.GetObject("imgBorrar.Image")));
+            this.imgBorrar.Location = new System.Drawing.Point(353, 0);
+            this.imgBorrar.Margin = new System.Windows.Forms.Padding(0);
+            this.imgBorrar.Name = "imgBorrar";
+            this.imgBorrar.Size = new System.Drawing.Size(37, 41);
+            this.imgBorrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imgBorrar.TabIndex = 29;
+            this.imgBorrar.TabStop = false;
+            this.imgBorrar.Click += new System.EventHandler(this.imgBorrar_Click);
+            // 
+            // imgEditar
+            // 
+            this.imgEditar.BackColor = System.Drawing.Color.Transparent;
+            this.imgEditar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.imgEditar.Image = ((System.Drawing.Image)(resources.GetObject("imgEditar.Image")));
+            this.imgEditar.Location = new System.Drawing.Point(316, 0);
+            this.imgEditar.Margin = new System.Windows.Forms.Padding(0);
+            this.imgEditar.Name = "imgEditar";
+            this.imgEditar.Size = new System.Drawing.Size(37, 41);
+            this.imgEditar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imgEditar.TabIndex = 28;
+            this.imgEditar.TabStop = false;
+            this.imgEditar.Click += new System.EventHandler(this.imgEditar_Click);
+            // 
+            // imgAgregar
+            // 
+            this.imgAgregar.BackColor = System.Drawing.Color.Transparent;
+            this.imgAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.imgAgregar.Image = ((System.Drawing.Image)(resources.GetObject("imgAgregar.Image")));
+            this.imgAgregar.Location = new System.Drawing.Point(279, 0);
+            this.imgAgregar.Margin = new System.Windows.Forms.Padding(0);
+            this.imgAgregar.Name = "imgAgregar";
+            this.imgAgregar.Size = new System.Drawing.Size(37, 41);
+            this.imgAgregar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imgAgregar.TabIndex = 27;
+            this.imgAgregar.TabStop = false;
+            this.imgAgregar.Click += new System.EventHandler(this.imgAgregar_Click);
+            // 
+            // lbProyectosRecientes
+            // 
+            this.lbProyectosRecientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(216)))));
+            this.lbProyectosRecientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbProyectosRecientes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbProyectosRecientes.Font = new System.Drawing.Font("Book Antiqua", 12F);
+            this.lbProyectosRecientes.ForeColor = System.Drawing.Color.Maroon;
+            this.lbProyectosRecientes.FormattingEnabled = true;
+            this.lbProyectosRecientes.ItemHeight = 20;
+            this.lbProyectosRecientes.Location = new System.Drawing.Point(2, 53);
+            this.lbProyectosRecientes.Margin = new System.Windows.Forms.Padding(0);
+            this.lbProyectosRecientes.Name = "lbProyectosRecientes";
+            this.lbProyectosRecientes.Size = new System.Drawing.Size(388, 420);
+            this.lbProyectosRecientes.TabIndex = 26;
+            this.lbProyectosRecientes.SelectedIndexChanged += new System.EventHandler(this.lbProyectosRecientes_SelectedIndexChanged);
             // 
             // pnlImportacion
             // 
@@ -279,9 +568,9 @@
             this.pnlImportacion.Controls.Add(this.pnlImportacionExcel);
             this.pnlImportacion.Controls.Add(this.btnAceptarImportacion);
             this.pnlImportacion.Controls.Add(this.lblTituloImportacion);
-            this.pnlImportacion.Location = new System.Drawing.Point(401, 48);
+            this.pnlImportacion.Location = new System.Drawing.Point(401, 51);
             this.pnlImportacion.Name = "pnlImportacion";
-            this.pnlImportacion.Size = new System.Drawing.Size(327, 272);
+            this.pnlImportacion.Size = new System.Drawing.Size(327, 391);
             this.pnlImportacion.TabIndex = 24;
             this.pnlImportacion.Visible = false;
             // 
@@ -499,10 +788,10 @@
             // lblTituloImportacion
             // 
             this.lblTituloImportacion.AutoSize = true;
-            this.lblTituloImportacion.Font = new System.Drawing.Font("Book Antiqua", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloImportacion.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTituloImportacion.Location = new System.Drawing.Point(3, 9);
             this.lblTituloImportacion.Name = "lblTituloImportacion";
-            this.lblTituloImportacion.Size = new System.Drawing.Size(320, 25);
+            this.lblTituloImportacion.Size = new System.Drawing.Size(301, 23);
             this.lblTituloImportacion.TabIndex = 27;
             this.lblTituloImportacion.Text = "Indique la ubicación de los datos";
             // 
@@ -536,11 +825,11 @@
             // 
             this.lblNombreProyecto.AutoSize = true;
             this.lblNombreProyecto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblNombreProyecto.Font = new System.Drawing.Font("Book Antiqua", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreProyecto.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreProyecto.ForeColor = System.Drawing.Color.Black;
             this.lblNombreProyecto.Location = new System.Drawing.Point(5, 1);
             this.lblNombreProyecto.Name = "lblNombreProyecto";
-            this.lblNombreProyecto.Size = new System.Drawing.Size(170, 24);
+            this.lblNombreProyecto.Size = new System.Drawing.Size(164, 23);
             this.lblNombreProyecto.TabIndex = 16;
             this.lblNombreProyecto.Text = "Nombre Proyecto";
             // 
@@ -581,85 +870,6 @@
             this.btnCancelarModificacion.UseVisualStyleBackColor = false;
             this.btnCancelarModificacion.Click += new System.EventHandler(this.btnCancelarModificacion_Click);
             // 
-            // imgBorrar
-            // 
-            this.imgBorrar.BackColor = System.Drawing.Color.Transparent;
-            this.imgBorrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.imgBorrar.Image = ((System.Drawing.Image)(resources.GetObject("imgBorrar.Image")));
-            this.imgBorrar.Location = new System.Drawing.Point(353, 0);
-            this.imgBorrar.Margin = new System.Windows.Forms.Padding(0);
-            this.imgBorrar.Name = "imgBorrar";
-            this.imgBorrar.Size = new System.Drawing.Size(37, 41);
-            this.imgBorrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.imgBorrar.TabIndex = 29;
-            this.imgBorrar.TabStop = false;
-            this.imgBorrar.Click += new System.EventHandler(this.imgBorrar_Click);
-            // 
-            // imgEditar
-            // 
-            this.imgEditar.BackColor = System.Drawing.Color.Transparent;
-            this.imgEditar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.imgEditar.Image = ((System.Drawing.Image)(resources.GetObject("imgEditar.Image")));
-            this.imgEditar.Location = new System.Drawing.Point(316, 0);
-            this.imgEditar.Margin = new System.Windows.Forms.Padding(0);
-            this.imgEditar.Name = "imgEditar";
-            this.imgEditar.Size = new System.Drawing.Size(37, 41);
-            this.imgEditar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.imgEditar.TabIndex = 28;
-            this.imgEditar.TabStop = false;
-            this.imgEditar.Click += new System.EventHandler(this.imgEditar_Click);
-            // 
-            // imgAgregar
-            // 
-            this.imgAgregar.BackColor = System.Drawing.Color.Transparent;
-            this.imgAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.imgAgregar.Image = ((System.Drawing.Image)(resources.GetObject("imgAgregar.Image")));
-            this.imgAgregar.Location = new System.Drawing.Point(279, 0);
-            this.imgAgregar.Margin = new System.Windows.Forms.Padding(0);
-            this.imgAgregar.Name = "imgAgregar";
-            this.imgAgregar.Size = new System.Drawing.Size(37, 41);
-            this.imgAgregar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.imgAgregar.TabIndex = 27;
-            this.imgAgregar.TabStop = false;
-            this.imgAgregar.Click += new System.EventHandler(this.imgAgregar_Click);
-            // 
-            // lbProyectosRecientes
-            // 
-            this.lbProyectosRecientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(216)))));
-            this.lbProyectosRecientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbProyectosRecientes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbProyectosRecientes.Font = new System.Drawing.Font("Book Antiqua", 12F);
-            this.lbProyectosRecientes.ForeColor = System.Drawing.Color.Maroon;
-            this.lbProyectosRecientes.FormattingEnabled = true;
-            this.lbProyectosRecientes.ItemHeight = 20;
-            this.lbProyectosRecientes.Location = new System.Drawing.Point(2, 53);
-            this.lbProyectosRecientes.Margin = new System.Windows.Forms.Padding(0);
-            this.lbProyectosRecientes.Name = "lbProyectosRecientes";
-            this.lbProyectosRecientes.Size = new System.Drawing.Size(388, 420);
-            this.lbProyectosRecientes.TabIndex = 26;
-            this.lbProyectosRecientes.SelectedIndexChanged += new System.EventHandler(this.lbProyectosRecientes_SelectedIndexChanged);
-            // 
-            // btnImportarDesdeDB
-            // 
-            this.btnImportarDesdeDB.BackColor = System.Drawing.Color.Transparent;
-            this.btnImportarDesdeDB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnImportarDesdeDB.Enabled = false;
-            this.btnImportarDesdeDB.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnImportarDesdeDB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnImportarDesdeDB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.btnImportarDesdeDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImportarDesdeDB.Font = new System.Drawing.Font("Book Antiqua", 13F, System.Drawing.FontStyle.Bold);
-            this.btnImportarDesdeDB.ForeColor = System.Drawing.Color.White;
-            this.btnImportarDesdeDB.Location = new System.Drawing.Point(0, 246);
-            this.btnImportarDesdeDB.Margin = new System.Windows.Forms.Padding(0);
-            this.btnImportarDesdeDB.Name = "btnImportarDesdeDB";
-            this.btnImportarDesdeDB.Padding = new System.Windows.Forms.Padding(38, 0, 38, 0);
-            this.btnImportarDesdeDB.Size = new System.Drawing.Size(210, 82);
-            this.btnImportarDesdeDB.TabIndex = 15;
-            this.btnImportarDesdeDB.Text = "Importar desde DB";
-            this.btnImportarDesdeDB.UseVisualStyleBackColor = false;
-            this.btnImportarDesdeDB.Click += new System.EventHandler(this.btnImportarDesdeDB_Click);
-            // 
             // FrmPantallaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -684,6 +894,11 @@
             this.panelNotificaciones.ResumeLayout(false);
             this.pnlProyectos.ResumeLayout(false);
             this.pnlProyectos.PerformLayout();
+            this.pnlImportacionDB.ResumeLayout(false);
+            this.pnlImportacionDB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).EndInit();
             this.pnlImportacion.ResumeLayout(false);
             this.pnlImportacion.PerformLayout();
             this.pnlImportacionTxt.ResumeLayout(false);
@@ -696,9 +911,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudHoja)).EndInit();
             this.panelNombreProyecto.ResumeLayout(false);
             this.panelNombreProyecto.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBorrar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgEditar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgAgregar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -746,5 +958,22 @@
         private System.Windows.Forms.Button btncancelarImportacion;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Button btnImportarDesdeDB;
+        private System.Windows.Forms.Panel pnlImportacionDB;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtNombreDB;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtNombreServidor;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblNombreDeColumna;
+        private System.Windows.Forms.Label lblNombreTabla;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblNombreBaseDeDatos;
+        private System.Windows.Forms.Button btnCancelarImportacionDB;
+        private System.Windows.Forms.Button btnAceptarImportacionDB;
+        private System.Windows.Forms.CheckBox chUsuarioYContrasenia;
+        private System.Windows.Forms.TextBox txtContrasenia;
+        private System.Windows.Forms.TextBox txtUsuario;
+        private System.Windows.Forms.TextBox txtNombreColumna;
+        private System.Windows.Forms.TextBox txtNombreTabla;
     }
 }
