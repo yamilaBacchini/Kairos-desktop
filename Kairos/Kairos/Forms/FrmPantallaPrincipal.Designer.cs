@@ -41,6 +41,7 @@
             this.btnArduino = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.panelNotificaciones = new System.Windows.Forms.Panel();
+            this.lblMensaje = new System.Windows.Forms.Label();
             this.pnlProyectos = new System.Windows.Forms.Panel();
             this.pnlImportacion = new System.Windows.Forms.Panel();
             this.pnlImportacionTxt = new System.Windows.Forms.Panel();
@@ -71,7 +72,7 @@
             this.imgAgregar = new System.Windows.Forms.PictureBox();
             this.lbProyectosRecientes = new System.Windows.Forms.ListBox();
             this.toolTipInformacion = new System.Windows.Forms.ToolTip(this.components);
-            this.lblMensaje = new System.Windows.Forms.Label();
+            this.btnImportarDesdeDB = new System.Windows.Forms.Button();
             lblProyectosGuardados = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -187,6 +188,7 @@
             this.flowPanelBotones.Controls.Add(this.btnProcesarDatos);
             this.flowPanelBotones.Controls.Add(this.btnImportarProyecto);
             this.flowPanelBotones.Controls.Add(this.btnArduino);
+            this.flowPanelBotones.Controls.Add(this.btnImportarDesdeDB);
             this.flowPanelBotones.Location = new System.Drawing.Point(0, 81);
             this.flowPanelBotones.Margin = new System.Windows.Forms.Padding(0);
             this.flowPanelBotones.Name = "flowPanelBotones";
@@ -243,6 +245,17 @@
             this.panelNotificaciones.Size = new System.Drawing.Size(750, 20);
             this.panelNotificaciones.TabIndex = 23;
             this.panelNotificaciones.Visible = false;
+            // 
+            // lblMensaje
+            // 
+            this.lblMensaje.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMensaje.Location = new System.Drawing.Point(0, 1);
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(750, 19);
+            this.lblMensaje.TabIndex = 23;
+            this.lblMensaje.Text = "Mensaje";
+            this.lblMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMensaje.Visible = false;
             // 
             // pnlProyectos
             // 
@@ -626,16 +639,26 @@
             this.lbProyectosRecientes.TabIndex = 26;
             this.lbProyectosRecientes.SelectedIndexChanged += new System.EventHandler(this.lbProyectosRecientes_SelectedIndexChanged);
             // 
-            // lblMensaje
+            // btnImportarDesdeDB
             // 
-            this.lblMensaje.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMensaje.Location = new System.Drawing.Point(0, 1);
-            this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(750, 19);
-            this.lblMensaje.TabIndex = 23;
-            this.lblMensaje.Text = "Mensaje";
-            this.lblMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblMensaje.Visible = false;
+            this.btnImportarDesdeDB.BackColor = System.Drawing.Color.Transparent;
+            this.btnImportarDesdeDB.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnImportarDesdeDB.Enabled = false;
+            this.btnImportarDesdeDB.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnImportarDesdeDB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnImportarDesdeDB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btnImportarDesdeDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImportarDesdeDB.Font = new System.Drawing.Font("Book Antiqua", 13F, System.Drawing.FontStyle.Bold);
+            this.btnImportarDesdeDB.ForeColor = System.Drawing.Color.White;
+            this.btnImportarDesdeDB.Location = new System.Drawing.Point(0, 246);
+            this.btnImportarDesdeDB.Margin = new System.Windows.Forms.Padding(0);
+            this.btnImportarDesdeDB.Name = "btnImportarDesdeDB";
+            this.btnImportarDesdeDB.Padding = new System.Windows.Forms.Padding(38, 0, 38, 0);
+            this.btnImportarDesdeDB.Size = new System.Drawing.Size(210, 82);
+            this.btnImportarDesdeDB.TabIndex = 15;
+            this.btnImportarDesdeDB.Text = "Importar desde DB";
+            this.btnImportarDesdeDB.UseVisualStyleBackColor = false;
+            this.btnImportarDesdeDB.Click += new System.EventHandler(this.btnImportarDesdeDB_Click);
             // 
             // FrmPantallaPrincipal
             // 
@@ -722,5 +745,6 @@
         private System.Windows.Forms.ToolTip toolTipInformacion;
         private System.Windows.Forms.Button btncancelarImportacion;
         private System.Windows.Forms.Label lblMensaje;
+        private System.Windows.Forms.Button btnImportarDesdeDB;
     }
 }

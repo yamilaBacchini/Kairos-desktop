@@ -1,17 +1,11 @@
-﻿using Kairos.Arduino;
-using Kairos.Entidades;
+﻿using Kairos.Entidades;
 using Kairos.Services;
 using Kairos.Services.Implementaciones;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kairos.Forms
@@ -35,10 +29,10 @@ namespace Kairos.Forms
         {
             try
             {
-            var resultado = (from o in new EventoContexto().Origenes select new { o.nombreOrigen, o.Id }).ToList();
-            lbProyectosRecientes.ValueMember = "nombreOrigen";
-            lbProyectosRecientes.Items.Clear();
-            lbProyectosRecientes.Items.AddRange(resultado.ToArray());
+                var resultado = (from o in new EventoContexto().Origenes select new { o.nombreOrigen, o.Id }).ToList();
+                lbProyectosRecientes.ValueMember = "nombreOrigen";
+                lbProyectosRecientes.Items.Clear();
+                lbProyectosRecientes.Items.AddRange(resultado.ToArray());
             }
             catch
             {
@@ -144,13 +138,13 @@ namespace Kairos.Forms
                     a = Cast(a, seleccionado);
                     ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text);
 
-                    mostrarMensaje("Se modificó el proyecto "+txtNombreProyecto.Text+" correctamente", Color.FromArgb(128, 255, 128));
+                    mostrarMensaje("Se modificó el proyecto " + txtNombreProyecto.Text + " correctamente", Color.FromArgb(128, 255, 128));
                 }
                 else
                 {
                     ProyectoService.nuevoProyecto(txtNombreProyecto.Text);
 
-                    mostrarMensaje("Se creó el proyecto "+txtNombreProyecto.Text+" correctamente", Color.FromArgb(128, 255, 128));
+                    mostrarMensaje("Se creó el proyecto " + txtNombreProyecto.Text + " correctamente", Color.FromArgb(128, 255, 128));
                 }
 
                 btnImportarProyecto.Enabled = false;
@@ -184,7 +178,7 @@ namespace Kairos.Forms
                     a = Cast(a, seleccionado);
                     ProyectoService.borrarProyecto(a.Id);
 
-                    mostrarMensaje("Se eliminó el proyecto "+a.nombreOrigen+" correctamente", Color.FromArgb(128, 255, 128));
+                    mostrarMensaje("Se eliminó el proyecto " + a.nombreOrigen + " correctamente", Color.FromArgb(128, 255, 128));
 
                     lbProyectosRecientes.ClearSelected();
 
@@ -195,7 +189,7 @@ namespace Kairos.Forms
             }
             catch
             {
-                mostrarMensaje("Error al eliminar el proyecto",Color.FromArgb(255,89,89));
+                mostrarMensaje("Error al eliminar el proyecto", Color.FromArgb(255, 89, 89));
             }
         }
 
@@ -219,7 +213,7 @@ namespace Kairos.Forms
             }
             catch
             {
-                mostrarMensaje("Error de edicion del proyecto", Color.FromArgb(255,89,89));
+                mostrarMensaje("Error de edicion del proyecto", Color.FromArgb(255, 89, 89));
             }
         }
 
@@ -259,14 +253,14 @@ namespace Kairos.Forms
             try
             {
                 var selectedItem = Cast(new { nombreOrigen = "", Id = 0 }, lbProyectosRecientes.SelectedItem);
-                FrmCapturaDatosArduino frm = new FrmCapturaDatosArduino(new Origen {nombreOrigen=selectedItem.nombreOrigen,Id=selectedItem.Id });
+                FrmCapturaDatosArduino frm = new FrmCapturaDatosArduino(new Origen { nombreOrigen = selectedItem.nombreOrigen, Id = selectedItem.Id });
                 Visible = false;
                 frm.ShowDialog();
                 Visible = true;
             }
             catch
             {
-                mostrarMensaje("Ërror del modulo de arduino",Color.FromArgb(255,89,89));
+                mostrarMensaje("Ërror del modulo de arduino", Color.FromArgb(255, 89, 89));
             }
         }
 
@@ -318,45 +312,48 @@ namespace Kairos.Forms
             try
             {
 
-            switch (extencion)
-            {
-                case "txt":
-                    string delimitador = BuscarSeleccionado();
-                    importador = new ImportarTxtFile(delimitador);
-                    break;
-                case "xls":
-                case "xlsx":
-                    int hoja = Convert.ToInt32(nudHoja.Value);
-                    int columna = Convert.ToInt32(nudColumna.Value);
-                    int filaIncial = Convert.ToInt32(nudFilaInicial.Value);
-                    importador = new ImportarExcelFile(hoja, columna, filaIncial);
-                    break;
-                default:
-                    break;
-            }
-            pnlImportacionTxt.Visible = false;
-            pnlImportacionExcel.Visible = false;
-            if (importador != null)
-            {
-                bool resultado = false;
-                string fileName = openFileDialog1.FileName;
-                var seleccionado = lbProyectosRecientes.SelectedItem;
-                var a = new { nombreOrigen = "", Id = 0 };
-                a = Cast(a, seleccionado);
-                resultado = importador.importarArchivoEnProyectoExistente(fileName, a.Id);
-                if (resultado) {
-                    mostrarMensaje("El archivo se importó correctamente", Color.FromArgb(128, 255, 128));
-                    cargarLista();
-                    lbProyectosRecientes.SelectedItem = seleccionado;
-                } else {
-                    mostrarMensaje("No se puede abrir el archivo", Color.FromArgb(255, 89, 89));
+                switch (extencion)
+                {
+                    case "txt":
+                        string delimitador = BuscarSeleccionado();
+                        importador = new ImportarTxtFile(delimitador);
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        int hoja = Convert.ToInt32(nudHoja.Value);
+                        int columna = Convert.ToInt32(nudColumna.Value);
+                        int filaIncial = Convert.ToInt32(nudFilaInicial.Value);
+                        importador = new ImportarExcelFile(hoja, columna, filaIncial);
+                        break;
+                    default:
+                        break;
                 }
-            }
-            pnlImportacion.Visible = false;
+                pnlImportacionTxt.Visible = false;
+                pnlImportacionExcel.Visible = false;
+                if (importador != null)
+                {
+                    bool resultado = false;
+                    string fileName = openFileDialog1.FileName;
+                    var seleccionado = lbProyectosRecientes.SelectedItem;
+                    var a = new { nombreOrigen = "", Id = 0 };
+                    a = Cast(a, seleccionado);
+                    resultado = importador.importarArchivoEnProyectoExistente(fileName, a.Id);
+                    if (resultado)
+                    {
+                        mostrarMensaje("El archivo se importó correctamente", Color.FromArgb(128, 255, 128));
+                        cargarLista();
+                        lbProyectosRecientes.SelectedItem = seleccionado;
+                    }
+                    else
+                    {
+                        mostrarMensaje("No se puede abrir el archivo", Color.FromArgb(255, 89, 89));
+                    }
+                }
+                pnlImportacion.Visible = false;
             }
             catch
             {
-                mostrarMensaje("Error al importar",Color.FromArgb(255,89,89));
+                mostrarMensaje("Error al importar", Color.FromArgb(255, 89, 89));
             }
         }
 
@@ -395,24 +392,27 @@ namespace Kairos.Forms
 
         private void lbProyectosRecientes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(lbProyectosRecientes.SelectedItem != null )
+            if (lbProyectosRecientes.SelectedItem != null)
             {
                 btnImportarProyecto.Enabled = true;
                 btnProcesarDatos.Enabled = true;
                 btnArduino.Enabled = true;
+                btnImportarDesdeDB.Enabled = true;
 
                 if (btnAceptarModificar.Text != "Crear")
                 {
                     var selectedItem = Cast(new { nombreOrigen = "", Id = 0 }, lbProyectosRecientes.SelectedItem);
                     txtNombreProyecto.Text = selectedItem.nombreOrigen;
                 }
-            } else
+            }
+            else
             {
                 btnImportarProyecto.Enabled = false;
                 btnProcesarDatos.Enabled = false;
                 btnArduino.Enabled = false;
+                btnImportarDesdeDB.Enabled = false;
             }
-            
+
         }
         private void mostrarMensaje(string mensaje, Color color)
         {
@@ -425,6 +425,14 @@ namespace Kairos.Forms
 
             timerMensaje.Start();
             this.timerActivo = true;
+        }
+
+        private void btnImportarDesdeDB_Click(object sender, EventArgs e)
+        {
+            var selectedItem = Cast(new { nombreOrigen = "", Id = 0 }, lbProyectosRecientes.SelectedItem);
+            Origen origen = ProyectoService.obtenerProyectoPorId(selectedItem.Id);
+            FrmImportarDesdeDB frmImportarDesdeDB = new FrmImportarDesdeDB(origen);
+            frmImportarDesdeDB.ShowDialog();
         }
     }
 }
