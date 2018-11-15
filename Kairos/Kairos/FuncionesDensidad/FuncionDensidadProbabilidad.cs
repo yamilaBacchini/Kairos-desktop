@@ -102,7 +102,7 @@ namespace Kairos.FuncionesDensidad
             }
             catch (Exception)
             {
-                return double.NaN;
+                return double.MaxValue;
             }
         }
 
