@@ -15,7 +15,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
         private readonly string A = "";
         private readonly string B = "";
 
-        public string StringFDP => string.Format("f(x)=1/({0}-{1})", B, A);
+        public string StringFDP => string.Format("f(x) = 1/({0}-{1})", B, A);
 
         public string StringInversa => string.Format("f(R) = R*({0}-{1})+{1}", B, A);
 

@@ -188,7 +188,7 @@ namespace Kairos.Forms
             {
                 this.chrtFuncion.Series.Clear();
                 this.chrtFuncion.Palette = ChartColorPalette.None;
-                this.chrtFuncion.Titles.Add("Funcion de Densidad de Probabilidad");
+                this.chrtFuncion.ChartAreas.First().AxisY2.Enabled = AxisEnabled.False;
                 Series series = this.chrtFuncion.Series.Add("Eventos");
                 series.XValueType = ChartValueType.Double;
                 series.XAxisType = AxisType.Primary;
@@ -196,6 +196,7 @@ namespace Kairos.Forms
                 series.ChartType = SeriesChartType.Column;
                 series.Color = Color.Red;
                 series.BorderColor = Color.Black;
+                series.IsVisibleInLegend = false;
                 foreach (var item in eventosSimplificados.OrderBy(x => Convert.ToDouble(x.Key)))
                 {
                     series.Points.AddXY(Convert.ToDouble(item.Key), item.Value);
@@ -217,6 +218,7 @@ namespace Kairos.Forms
                     series = this.chrtFuncion.Series.Add("FDP");
                     series.ChartType = SeriesChartType.Line;
                     series.BorderWidth = 5;
+                    series.IsVisibleInLegend = false;
                 }
                 else
                     series.Points.Clear();
@@ -242,6 +244,7 @@ namespace Kairos.Forms
                     series = this.chrtInversa.Series.Add("Inversa");
                     series.ChartType = SeriesChartType.Line;
                     series.BorderWidth = 2;
+                    series.IsVisibleInLegend = false;
                 }
                 else
                     series.Points.Clear();
@@ -272,7 +275,7 @@ namespace Kairos.Forms
 
         private void CambiarLblGraficoFuncion(string nombreFuncion)
         {
-            lblGraficoFuncion.Text = "Grafico funcion " + nombreFuncion;
+            lblGraficoFuncion.Text = "Función " + nombreFuncion;
         }
 
         private void CambiarRepresentacionFuncionEInversa(ResultadoAjuste fdp)
@@ -290,9 +293,9 @@ namespace Kairos.Forms
             GraficarLineaInversa(funcion.FDP);
             resultadoSeleccionado = funcion;
             if (nombreFuncion.Contains("Poisson") || nombreFuncion.Contains("Binomial"))
-                lblTituloFuncionInversa.Text = "Función Acumulada";
+                lblGraficoFuncionInversa.Text = "Función Acumulada";
             else
-                lblTituloFuncionInversa.Text = "Función Inversa";
+                lblGraficoFuncionInversa.Text = "Función Inversa";
         }
 
         private void btnFuncionWeibull0_5_Click(object sender, EventArgs e) => SetupPantallaSegunFDP(sender, "Weibull 0.5", resultadoFuncionWeibull0_5);
