@@ -24,7 +24,6 @@ namespace Kairos.Services.Implementaciones
             bool resultado = false;
             try
             {
-                //Origen nuevoOrigen = new Origen { fechaCreacion = DateTime.Now, nombreOrigen = nombreProyecto, activo = true };
                 Origen nuevoOrigen = ProyectoService.nuevoProyecto(nombreProyecto);
                 List<Evento> eventos = new List<Evento>();
                 using (var archivo = new XLWorkbook(pathArchivo))
@@ -40,15 +39,7 @@ namespace Kairos.Services.Implementaciones
                     }
                 }
                 EventoService.agregarTodos(eventos);
-                //using (var db = new EventoContexto())
-                //{
-                //    //el origen se debe encargar de esto
-                //    db.Origenes.Add(nuevoOrigen);
-                //    db.SaveChanges();
-                //    int idOrigenInsertado = nuevoOrigen.Id;
-                //    db.Eventos.AddRange(eventos);
-                //    db.SaveChanges();
-                //}
+
                 resultado = true;
             }
             catch (Exception ex)
@@ -65,9 +56,7 @@ namespace Kairos.Services.Implementaciones
             try
             {
                 Origen auxOrigen = ProyectoService.obtenerProyectoPorId(idProyecto);
-                //using (var db = new EventoContexto())
-                //{
-                //Origen auxOrigen = db.Origenes.Find(idProyecto);
+
                 if (auxOrigen != null)
                 {
                     List<Evento> eventos = new List<Evento>();
@@ -83,14 +72,12 @@ namespace Kairos.Services.Implementaciones
                             numeroFila++;
                         }
                     }
-                    //db.Eventos.AddRange(eventos);
-                    //db.SaveChanges();
+
                     EventoService.agregarTodos(eventos);
                     resultado = true; 
                 }
                 else
                     resultado = false;
-                //}
             }
             catch (Exception ex)
             {

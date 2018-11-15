@@ -560,7 +560,7 @@
             this.nudCantidadGenerados.Location = new System.Drawing.Point(140, 71);
             this.nudCantidadGenerados.Margin = new System.Windows.Forms.Padding(0);
             this.nudCantidadGenerados.Maximum = new decimal(new int[] {
-            1000,
+            7000,
             0,
             0,
             0});

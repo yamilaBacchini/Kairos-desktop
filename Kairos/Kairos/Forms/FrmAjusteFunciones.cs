@@ -292,6 +292,7 @@ namespace Kairos.Forms
             GraficarLineaFDP(funcion.FDP);
             GraficarLineaInversa(funcion.FDP);
             resultadoSeleccionado = funcion;
+            lbxGenerados.Items.Clear();
             if (nombreFuncion.Contains("Poisson") || nombreFuncion.Contains("Binomial"))
                 lblGraficoFuncionInversa.Text = "Función Acumulada";
             else
