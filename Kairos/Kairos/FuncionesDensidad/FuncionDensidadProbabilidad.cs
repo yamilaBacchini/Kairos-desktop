@@ -29,7 +29,7 @@ namespace Kairos.FuncionesDensidad
                 else
                     return DistribucionDiscreta.Generate(cantidad).Select(x => Convert.ToDouble(x)).ToArray();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Random r = new Random();
                 int min = Convert.ToInt32(eventos.Min());
@@ -69,13 +69,13 @@ namespace Kairos.FuncionesDensidad
         public Dictionary<double, double> ObtenerDensidadInversa(int cantidad)
         {
             Dictionary<double, double> densidades = new Dictionary<double, double>();
+            var rand = new Random();
+            double[] arr = new double[cantidad];
+            for (int i = 0; i < cantidad; i++)
+                arr[i] = rand.NextDouble();
+            arr = arr.Distinct().ToArray();
             try
             {
-                var rand = new Random();
-                double[] arr = new double[cantidad];
-                for (int i = 0; i < cantidad; i++)
-                    arr[i] = rand.NextDouble();
-                arr = arr.Distinct().ToArray();
                 if (DistribucionContinua != null)
                     foreach (var item in arr)
                         densidades.Add(item, DistribucionContinua.QuantileDensityFunction(item));
@@ -86,7 +86,8 @@ namespace Kairos.FuncionesDensidad
             }
             catch (Exception)
             {
-                return densidades;
+                FuncionDensidadProbabilidad aux = FactoryFuncionDensidad.Instancia(FuncionDensidad.LOG_LOGISTICA, arr);
+                return aux.ObtenerDensidadInversa(cantidad);
             }
         }
 
