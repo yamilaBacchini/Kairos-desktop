@@ -131,27 +131,35 @@ namespace Kairos.Forms
         {
             try
             {
-                if (btnAceptarModificar.Text != "Crear")
+                string nombreProyecto = txtNombreProyecto.Text;
+                if (!ProyectoService.existeProyectoPorNombre(nombreProyecto))
                 {
-                    var seleccionado = lbProyectosRecientes.SelectedItem;
-                    var a = new { nombreOrigen = "", Id = 0 };
-                    a = Cast(a, seleccionado);
-                    ProyectoService.modificarProyecto(a.Id, txtNombreProyecto.Text);
+                    if (btnAceptarModificar.Text != "Crear")
+                    {
+                        var seleccionado = lbProyectosRecientes.SelectedItem;
+                        var a = new { nombreOrigen = "", Id = 0 };
+                        a = Cast(a, seleccionado);
+                        ProyectoService.modificarProyecto(a.Id, nombreProyecto);
 
-                    mostrarMensaje("Se modificó el proyecto " + txtNombreProyecto.Text + " correctamente", Color.FromArgb(128, 255, 128));
+                        mostrarMensaje("Se modificó el proyecto " + nombreProyecto + " correctamente", Color.FromArgb(128, 255, 128));
+                    }
+                    else
+                    {
+                        ProyectoService.nuevoProyecto(nombreProyecto);
+
+                        mostrarMensaje("Se creó el proyecto " + nombreProyecto + " correctamente", Color.FromArgb(128, 255, 128));
+                    }
+
+                    btnImportarProyecto.Enabled = false;
+                    btnProcesarDatos.Enabled = false;
+                    btnArduino.Enabled = false;
+                    modificacionInvisible();
+                    cargarLista();
                 }
                 else
                 {
-                    ProyectoService.nuevoProyecto(txtNombreProyecto.Text);
-
-                    mostrarMensaje("Se creó el proyecto " + txtNombreProyecto.Text + " correctamente", Color.FromArgb(128, 255, 128));
+                    mostrarMensaje("Ya existe un proyecto con el mismo nombre", Color.FromArgb(255, 255, 0));
                 }
-
-                btnImportarProyecto.Enabled = false;
-                btnProcesarDatos.Enabled = false;
-                btnArduino.Enabled = false;
-                modificacionInvisible();
-                cargarLista();
             }
             catch
             {
@@ -470,14 +478,14 @@ namespace Kairos.Forms
                         aux.idOrigen = proyecto.Id;
                         return aux;
                     }).ToList());
-                    mostrarMensaje("Se importaron los datos correctamente",Color.FromArgb(128, 255, 128));
+                    mostrarMensaje("Se importaron los datos correctamente", Color.FromArgb(128, 255, 128));
                     pnlImportacionDB.Visible = false;
                     LimpiarTxtImportacionDB();
                 }
             }
             catch
             {
-                mostrarMensaje("No se ha podido extraer la informacion solicitada. Por favor revise los datos",Color.FromArgb(255,89,89));
+                mostrarMensaje("No se ha podido extraer la informacion solicitada. Por favor revise los datos", Color.FromArgb(255, 89, 89));
             }
         }
 
