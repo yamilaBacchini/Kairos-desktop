@@ -560,7 +560,7 @@
             // 
             this.nudCantidadGenerados.Location = new System.Drawing.Point(10, 53);
             this.nudCantidadGenerados.Maximum = new decimal(new int[] {
-            1000,
+            7000,
             0,
             0,
             0});
