@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Kairos.Entidades;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Kairos.Entidades;
 
 namespace Kairos.Services
 {
-    class ProyectoService
+    internal class ProyectoService
     {
+        public static bool existeProyectoPorNombre(string nombreProyecto)
+        {
+            using (var db = new EventoContexto())
+            {
+                return db.Origenes.FirstOrDefault(x => x.nombreOrigen == nombreProyecto) != null;
+            }
+        }
+
         public static Origen obtenerProyectoPorId(int idProyecto)
         {
             Origen aDevolver = null;

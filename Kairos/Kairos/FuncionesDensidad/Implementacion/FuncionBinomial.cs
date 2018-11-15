@@ -15,9 +15,9 @@ namespace Kairos.FuncionesDensidad.Implementacion
     {
         private readonly string n = "";
         private readonly string p = "";
-        public string StringFDP => string.Format("f(x)=({0}|x)({1}^x)*(1-{1})^({0}-x)", n,p);
+        public string StringFDP => string.Format("f(x) = ({0}|x)({1}^x)*(1-{1})^({0}-x)", n,p);
 
-        public string StringInversa => string.Format("F(x)= Σ(i=0;{0}) ({1}^i)*(1-{1})^({0}-i)",n,p);
+        public string StringInversa => string.Format("F(x) = Σ(i=0;{0}) ({1}^i)*(1-{1})^({0}-i)",n,p);
 
         public FuncionBinomial(double[] eventos) : base(eventos)
         {

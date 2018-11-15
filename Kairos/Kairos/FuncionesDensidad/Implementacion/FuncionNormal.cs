@@ -13,7 +13,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
     {
         private readonly string media = "";
         private readonly string sigma = "";
-        public string StringFDP => string.Format("f(x)=(e^((-1/2)*((x-{0})/{1})^2))/({1}*(6,2838)^(1/2))", media,sigma);
+        public string StringFDP => string.Format("f(x) = (e^((-1/2)*((x-{0})/{1})^2))/({1}*(6,2838)^(1/2))", media,sigma);
         public string StringInversa => string.Format("f(R) = {0}+{1}*(2^(1/2))*erf^(-1)(2*R-1)", media, sigma);
 
         public FuncionNormal(double[] eventos) : base(eventos)

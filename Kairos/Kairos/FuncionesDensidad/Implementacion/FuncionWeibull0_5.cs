@@ -16,7 +16,7 @@ namespace Kairos.FuncionesDensidad.Implementacion
 
         public string StringFDP => string.Format("f(x) = ({0}/{1})*(x/{1})^({0}-1)*e^(-(x/{1})^{0})", shape, scale);
 
-        public string StringInversa => string.Format("f(R)= {1}*(-ln(-R+1))^(1/{0})", shape, scale);
+        public string StringInversa => string.Format("f(R) = {1}*(-ln(-R+1))^(1/{0})", shape, scale);
 
         public FuncionWeibull0_5(double[] eventos) : base(eventos)
         {

@@ -12,9 +12,9 @@ namespace Kairos.FuncionesDensidad.Implementacion
     class FuncionPoisson : FuncionDensidadProbabilidad, IFuncionRepresentable
     {
         private readonly string lambda = "";
-        public string StringFDP => string.Format("f(x)=(({0}^x)*(e^(-{0})))/x!",lambda);
+        public string StringFDP => string.Format("f(x) = (({0}^x)*(e^(-{0})))/x!",lambda);
 
-        public string StringInversa => string.Format("F(x)= (e^(-{0}))*Σ(i=0;x) ({0}^i)/i!", lambda);
+        public string StringInversa => string.Format("F(x) = (e^(-{0}))*Σ(i=0;x) ({0}^i)/i!", lambda);
 
         public FuncionPoisson(double[] eventos) : base(eventos)
         {
